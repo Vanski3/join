@@ -46,10 +46,12 @@
   /* font */
   --font-fam: "Open Sans";
 
-
   --headline-1: 3rem;
   --headline-2: 4rem;
+  --headline-3: 1.5rem;
+  --headline-4: 1rem;
 
+  --button-txt: 1.5rem;
 
   --font-weight-bold: 700;
 
