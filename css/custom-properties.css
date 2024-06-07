@@ -1,0 +1,50 @@
+:root {
+  --identity-clr: #4589ff;
+
+  /* hover */
+  --hover-lightblue: #d2e3ff;
+  --hover-blue: #4589ff;
+  --hover-darkblue: #005dff;
+
+  /* background colours */
+  --bg-clr-1: #ffffff;
+
+  /* box shadows */
+  --bx-shadow-login: 0 0 10px 3px rgba(0, 0, 0, 0.8);
+  --bx-shadow-task: 0 0 4px 0 rgba(0, 0, 0, 0.16);
+
+  /* contact icon colours */
+  --contact-icon-red: #ff4646;
+
+  --contact-icon-pink-1: #ff5eb3;
+  --contact-icon-pink-2: #fc71ff;
+
+  --contact-icon-orage-1: #ff7a00;
+  --contact-icon-orange-2: #ff745e;
+  --contact-icon-orange-3: #ffa35e;
+  --contact-icon-orange-4: #ffbb2b;
+
+  --contact-icon-yellow-1: #ffc701;
+  --contact-icon-yellow-2: #ffe62b;
+
+  --contact-icon-neon-green: #c3ff2b;
+
+  --contact-icon-turquise-1: #00bee8;
+  --contact-icon-turquise-2: #1fd7c1;
+  --contact-icon-blue: #0038ff;
+
+  /* button colours */
+  --button-blue: #4589ff;
+  --button-darkblue: #005dff;
+  --button-blackblue: #091931;
+
+  /* priotity colurs */
+  --urgent: #FF3D00;
+  --medium: #FFA800;
+  --low: #7AE229;
+
+  /* font */
+  --font: "Open Sans";
+
+  --font-weight-bold: 700;
+}
