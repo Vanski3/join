@@ -44,7 +44,13 @@
   --low: #7AE229;
 
   /* font */
-  --font: "Open Sans";
+  --font-fam: "Open Sans";
+
+
+  --headline-1: 3rem;
+  --headline-2: 4rem;
+
 
   --font-weight-bold: 700;
+
 }
