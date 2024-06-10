@@ -22,10 +22,12 @@ body {
   margin: 0;
 }
 
-.headline-wrapper{
+.headline-wrapper {
   display: flex;
   align-items: center;
   text-align: center;
+  gap: 10px;
+  justify-content: center;
 }
 
 .headline {
@@ -37,18 +39,19 @@ body {
 #username {
   font-weight: 700;
   color: var(--identity-clr);
-  font-size: 64px;
+  font-size: var(--headline-2);
 }
 
 .summary-wrapper {
   display: grid;
   gap: 1rem;
   width: 80%;
+  margin: auto;
 }
 
 .row1 {
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 2fr 1fr;
   gap: 1rem;
 }
 
@@ -124,7 +127,100 @@ body {
 #todo,
 #in-progress,
 #feedback,
-#done
-{
+#done {
   color: black;
+}
+
+@media only screen and (max-width: 1200px) {
+  .summary-wrapper {
+    width: 90%;
+  }
+
+  .headline {
+    font-size: 2.5rem;
+  }
+
+  #username {
+    font-size: 3rem;
+  }
+
+  .img-amount-container img {
+    height: 50px;
+  }
+
+  .img-amount-container span {
+    font-size: 2.5rem;
+  }
+
+  .task p, .urgent-task p, .date p {
+    font-size: 1.25rem;
+  }
+
+  .date span {
+    font-size: 0.875rem;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .summary-wrapper {
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .headline {
+    font-size: 2rem;
+  }
+
+  #username {
+    font-size: 2.5rem;
+  }
+
+  .row1 {
+    grid-template-columns: 1fr;
+  }
+
+  .row2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+
+  .date-urgent-task, .task {
+    border-radius: 15px;
+    padding: 0.5rem;
+  }
+
+  .img-amount-container img {
+    height: 40px;
+  }
+
+  .img-amount-container span {
+    font-size: 2rem;
+  }
+
+  .task p, .urgent-task p, .date p {
+    font-size: 1rem;
+  }
+
+  .date span {
+    font-size: 0.75rem;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .headline-wrapper {
+    flex-direction: column;
+  }
+
+  .summary-wrapper {
+    width: 100%;
+  }
+
+  .row2 {
+    grid-template-columns: 1fr;
+  }
+
+  .img-amount-container {
+    flex-direction: column;
+    gap: 10px;
+  }
 }
