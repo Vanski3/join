@@ -1,56 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
-            rel="stylesheet" />
-        <link rel="stylesheet" href="/css/desktop-temp.css" />
-        <link rel="stylesheet" href="/css/custom-properties.css" />
-        <title>Document</title>
-    </head>
-    <body>
-        <div class="desktop-template-div">
-            <header>
-                <img class="header-logo" src="/assets/img/header-icons/join-logo.svg" alt="" />
-                <div class="header-right-side">
-                    <span class="header-headline">Kanban Project Management Tool</span>
-                    <img class="header-help-logo" src="/assets/img/header-icons/help-logo.svg" alt="" />
-                    <img class="user-logo" src="/assets/img/header-icons/user-logo.svg" alt="" />
-                </div>
-            </header>
-            <div class="atf-container">
-                <div class="sidebar">
-                    <div class="sidebar-menu">
-                        <div class="menu-row">
-                            <img src="/assets/img/sidebar-icons/summary.svg" alt="" />
-                            <div>Summary</div>
-                        </div>
-                        <div class="menu-row">
-                            <img src="/assets/img/sidebar-icons/add-task.svg" alt="" />
-                            <div>Add Task</div>
-                        </div>
-                        <div class="menu-row">
-                            <img src="/assets/img/sidebar-icons/board.svg" alt="" />
-                            <div>Board</div>
-                        </div>
-                        <div class="menu-row">
-                            <img src="/assets/img/sidebar-icons/contacts.svg" alt="" />
-                            <div>Contacts</div>
-                        </div>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="/css/desktop-temp.css" />
+    <link rel="stylesheet" href="/css/custom-properties.css" />
+    <link rel="stylesheet" href="/css/summary.css" />
+    <title>Document</title>
+</head>
+<body>
+    <div class="desktop-template-div">
+        <header>
+            <img class="header-logo" src="/assets/img/header-icons/join-logo.svg" alt="" />
+            <div class="header-right-side">
+                <span class="header-headline">Kanban Project Management Tool</span>
+                <img class="header-help-logo" src="/assets/img/header-icons/help-logo.svg" alt="" />
+                <img class="user-logo" src="/assets/img/header-icons/user-logo.svg" alt="" />
+            </div>
+        </header>
+        <div class="atf-container">
+            <div class="sidebar">
+                <div class="sidebar-menu">
+                    <div class="menu-row">
+                        <img src="/assets/img/sidebar-icons/summary.svg" alt="" />
+                        <div>Summary</div>
                     </div>
-                    <div class="lower-sidebar">
-                        <a href="#">Privacy Policy</a>
-                        <a href="#">Legal notice</a>
+                    <div class="menu-row">
+                        <img src="/assets/img/sidebar-icons/add-task.svg" alt="" />
+                        <div>Add Task</div>
+                    </div>
+                    <div class="menu-row">
+                        <img src="/assets/img/sidebar-icons/board.svg" alt="" />
+                        <div>Board</div>
+                    </div>
+                    <div class="menu-row">
+                        <img src="/assets/img/sidebar-icons/contacts.svg" alt="" />
+                        <div>Contacts</div>
                     </div>
                 </div>
-                <div class="main-content">
-                    <!-- Render Main Content in here !! -->
+                <div class="lower-sidebar">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Legal notice</a>
                 </div>
             </div>
+            <div class="main-content">
+                <main>
+                    <div class="headline-wrapper"><span class="headline">Good morning,</span><span id="username">Sofia Müller</span></div>
+                    <div class="summary-wrapper">
+                        <div class="row1">
+                            <div class="date-urgent-task">
+                                <div class="urgent-task">
+                                    <div class="img-amount-container">
+                                        <img src="./assets/img/summary/urgent-frame.svg" alt="urgent task" />
+                                        <span id="urgent">1</span>
+                                    </div>
+                                    <p>Tasks Urgent</p>
+                                </div>
+                                <div class="separator"></div>
+                                <div class="date">
+                                    <div>
+                                        <span id="date">October 16, 2022</span>
+                                        <p>Upcoming Deadline</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="task">
+                                <div class="img-amount-container">
+                                    <img src="./assets/img/summary/Board.svg" alt="Task in Board" />
+                                    <span id="task-in-board">5</span>
+                                </div>
+                                <p>Task in Board</p>
+                            </div>
+                        </div>
+                        <div class="row2">
+                            <div class="task">
+                                <div class="img-amount-container">
+                                    <img src="./assets/img/summary/todo.svg" alt="Task To-do" />
+                                    <span id="todo">1</span>
+                                </div>
+                                <p>Task To-do</p>
+                            </div>
+                            <div class="task">
+                                <div class="img-amount-container">
+                                    <img src="./assets/img/summary/In Progress.svg" alt="Task in Progress" />
+                                    <span id="in-progress">2</span>
+                                </div>
+                                <p>Task in Progress</p>
+                            </div>
+                            <div class="task">
+                                <div class="img-amount-container">
+                                    <img src="./assets/img/summary/Awaiting feedback.svg" alt="Awaiting feedback" />
+                                    <span id="feedback">2</span>
+                                </div>
+                                <p>Awaiting Feedback</p>
+                            </div>
+                            <div class="task">
+                                <div class="img-amount-container">
+                                    <img src="./assets/img/summary/done.svg" alt="Task done">
+                                    <span id="done">1</span>
+                                </div>
+                                <p>Tasks Done</p>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>
