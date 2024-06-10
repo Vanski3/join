@@ -10,8 +10,14 @@
   --bg-clr-1: #ffffff;
 
   /* box shadows */
-  --bx-shadow-login: 0 0 10px 3px rgba(0, 0, 0, 0.8);
+  --bx-shadow-login: 0px 0px 10px 3px #00000014;
   --bx-shadow-task: 0 0 4px 0 rgba(0, 0, 0, 0.16);
+
+  /* login form */
+  --login-clr: #d1d1d1;
+  --links: #42526e;
+  --btn-color-font: #647188;
+  --btn-hover-shadow: 0px 4px 8px 0px #00000033;
 
   /* contact icon colours */
   --contact-icon-red: #ff4646;
@@ -39,12 +45,12 @@
   --button-blackblue: #091931;
 
   /* priotity colurs */
-  --urgent: #FF3D00;
-  --medium: #FFA800;
-  --low: #7AE229;
+  --urgent: #ff3d00;
+  --medium: #ffa800;
+  --low: #7ae229;
 
   /* font */
-  --font-fam: "Open Sans";
+  --font-fam: 'Open Sans';
 
   --headline-1: 3rem;
   --headline-2: 4rem;
@@ -54,5 +60,29 @@
   --button-txt: 1.5rem;
 
   --font-weight-bold: 700;
+}
 
+/* open-sans-regular - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../assets/fonts/open-sans-v40-latin-regular.woff2') format('woff2');
+}
+/* open-sans-700 - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../assets/fonts/open-sans-v40-latin-700.woff2') format('woff2');
+}
+
+/* global */
+body {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: var(--font-fam);
+  scroll-behavior: smooth;
 }
