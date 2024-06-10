@@ -23,16 +23,23 @@ body {
   margin: 0;
 }
 
+.headline-wrapper{
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
 .headline {
-  font-size: var(--headline-3);
+  font-size: var(--headline-1);
   font-weight: 400;
   margin-bottom: 1rem;
+  margin-bottom: 0;
 }
 
 #username {
   font-weight: 700;
   color: var(--identity-clr);
-  font-size: var(--headline-2);
+  font-size: 64px;
 }
 
 .summary-wrapper {
@@ -43,7 +50,7 @@ body {
 
 .row1 {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 3fr 1fr;
   gap: 1rem;
 }
 
@@ -113,4 +120,13 @@ body {
 .date span {
   font-size: var(--headline-4);
   font-weight: var(--font-weight-bold);
+}
+
+#task-in-board,
+#todo,
+#in-progress,
+#feedback,
+#done
+{
+  color: black;
 }
