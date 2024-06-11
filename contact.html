@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet" />
+      <link rel="stylesheet" href="/css/index-main.css" />
+      <link rel="stylesheet" href="/css/custom-properties.css" />
+      <link rel="stylesheet" href="/css/privacy-legal-help.css" />
+      <link rel="stylesheet" href="/css/summary.css" />
+      <link rel="stylesheet" href="/css/contact.css" />
+      <script src="/scripts/summary.js" defer></script>
+      <script src="/scripts/contact.js" defer></script>
+      <title>Document</title>
+   </head>
+   <body>
+      <div class="desktop-template-div">
+         <header>
+            <a href="/index.html"><img class="header-logo" src="/assets/img/header-icons/join-logo.svg" alt="" /></a>
+            <div class="header-right-side">
+               <span class="header-headline">Kanban Project Management Tool</span>
+               <img onclick="loadHelpContent()" class="header-help-logo" src="/assets/img/header-icons/help-logo.svg" alt="" />
+               <img id="UserLogoHeader" class="user-logo-header" src="/assets/img/header-icons/user-logo.svg" alt="" />
+            </div>
+         </header>
+         <div id="UserHeaderPopup" class="user-icon-popup">
+            <a onclick="loadLegalNoticeContent()" id="legalNoticeLink">Legal Notice</a>
+            <a onclick="loadPrivacyPoliceContent()">Privacy Policy</a>
+            <a href="index.html">Log Out</a>
+         </div>
+         <div class="atf-container">
+            <div class="sidebar">
+               <div class="sidebar-menu">
+                  <div onclick="loadSummaryContent()" class="menu-row">
+                     <img src="/assets/img/sidebar-icons/summary.svg" alt="" />
+                     <div>Summary</div>
+                  </div>
+                  <div class="menu-row">
+                     <img src="/assets/img/sidebar-icons/add-task.svg" alt="" />
+                     <div>Add Task</div>
+                  </div>
+                  <div class="menu-row">
+                     <img src="/assets/img/sidebar-icons/board.svg" alt="" />
+                     <div>Board</div>
+                  </div>
+                  <div onclick="loadContactsContent()" class="menu-row">
+                     <img src="/assets/img/sidebar-icons/contacts.svg" alt="" />
+                     <div>Contacts</div>
+                  </div>
+               </div>
+               <div class="lower-sidebar">
+                  <a onclick="loadPrivacyPoliceContent()">Privacy Policy</a>
+                  <a onclick="loadLegalNoticeContent()">Legal notice</a>
+               </div>
+            </div>
+            <div id="mainContent" class="main-content">
+               <!-- Render Content in Here -->
+            </div>
+         </div>
+      </div>
+      <script src="/assets/scripts/index-main.js"></script>
+      <script src="/assets/scripts/header.js"></script>
+   </body>
+</html>
