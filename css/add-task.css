@@ -1,0 +1,68 @@
+.menu-row:nth-of-type(2) {
+  background-color: var(--hover-lightblue);
+  cursor: pointer;
+}
+
+.task-description {
+  border-right: 2px solid black;
+  width: 488px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 10px 0 10px;
+  gap: 20px;
+}
+
+.main-content {
+  display: unset;
+}
+
+.buttons {
+  position: absolute;
+  bottom: 70px;
+  right: 50px;
+  display: flex;
+  gap: 20px;
+}
+
+.blue-btn {
+  background-color: var(--button-blue);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 23px;
+  padding: 16px 10px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.blue-btn:hover {
+  background-color: var(--button-darkblue);
+  box-shadow: var(--btn-hover-shadow);
+  cursor: pointer;
+}
+
+.white-btn {
+  background-color: #fff;
+  color: var(--btn-color-font);
+  border: 1px solid var(--btn-color-font);
+  border-radius: 10px;
+  font-size: 22px;
+  padding: 16px 10px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.white-btn:hover {
+  border-color: var(--button-blue);
+  color: var(--button-blue);
+  box-shadow: var(--btn-hover-shadow);
+  cursor: pointer;
+}
+
+.white-btn:hover img {
+  filter: invert(48%) sepia(63%) saturate(3935%) hue-rotate(198deg) brightness(102%) contrast(98%);
+}
