@@ -11,46 +11,47 @@
 
   --font-weight-bold: 700;
   --bx-shadow-task: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --button-blue: #4589ff;
+  --bg-clr-1: white;
+  --hover-lightblue: #e6f4ff;
 }
 
 body {
   font-family: var(--font-fam);
   background-color: #f4f4f4;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
   margin: 0;
 }
 
-.headline-wrapper{
+.headline-wrapper {
   display: flex;
   align-items: center;
   text-align: center;
+  gap: 10px;
+  justify-content: center;
 }
 
 .headline {
   font-size: var(--headline-1);
   font-weight: 400;
-  margin-bottom: 1rem;
   margin-bottom: 0;
 }
 
 #username {
   font-weight: 700;
   color: var(--identity-clr);
-  font-size: 64px;
+  font-size: var(--headline-2);
 }
 
 .summary-wrapper {
   display: grid;
   gap: 1rem;
   width: 80%;
+  margin: auto;
 }
 
 .row1 {
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 2fr 1fr;
   gap: 1rem;
 }
 
@@ -69,7 +70,8 @@ body {
   color: white;
 }
 
-.urgent-task, .date {
+.urgent-task,
+.date {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -112,7 +114,9 @@ body {
   font-weight: var(--font-weight-bold);
 }
 
-.task p, .urgent-task p, .date p {
+.task p,
+.urgent-task p,
+.date p {
   font-size: var(--headline-3);
   margin: 0;
 }
@@ -126,7 +130,87 @@ body {
 #todo,
 #in-progress,
 #feedback,
-#done
-{
+#done {
   color: black;
+}
+
+@media only screen and (max-width: 1200px) {
+  .summary-wrapper {
+    width: 90%;
+  }
+
+  .headline {
+    font-size: 2.5rem;
+  }
+
+  #username {
+    font-size: 3rem;
+  }
+
+  .img-amount-container img {
+    height: 50px;
+  }
+
+  .img-amount-container span {
+    font-size: 2.5rem;
+  }
+
+  .task p,
+  .urgent-task p,
+  .date p {
+    font-size: 1.25rem;
+  }
+
+  .date span {
+    font-size: 0.875rem;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .summary-wrapper {
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .headline-wrapper {
+    display: none;
+  }
+
+  .row1 {
+    grid-template-columns: 1fr;
+  }
+
+  .row2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+
+  .task-mobile {
+    height: 152px;
+    width: 186px;
+  }
+
+  .date-urgent-task,
+  .task {
+    border-radius: 15px;
+    padding: 0.5rem;
+  }
+
+  .img-amount-container img {
+    height: 40px;
+  }
+
+  .img-amount-container span {
+    font-size: 2rem;
+  }
+
+  .task p,
+  .urgent-task p,
+  .date p {
+    font-size: 1rem;
+  }
+
+  .date span {
+    font-size: 0.75rem;
+  }
 }
