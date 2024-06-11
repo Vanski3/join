@@ -478,10 +478,10 @@
   #checkbox-container-signup img {
     margin-left: -180px;
   }
+}
 
-  @media (max-width: 380px) {
-    .header button {
-      margin-left: 10px;
-    }
+@media (max-width: 380px) {
+  .header button {
+    margin-left: 10px;
   }
 }

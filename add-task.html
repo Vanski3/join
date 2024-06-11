@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <link rel="stylesheet" href="/css/desktop-temp.css" />
+   <link rel="stylesheet" href="/css/custom-properties.css" />
+   <link rel="stylesheet" href="/css/add-task.css" />
+   <link rel="icon" href="./assets/img/logo-blue.svg">
+   <title>Join - Add Task</title>
+</head>
+
+<body>
+   <div class="desktop-template-div">
+      <header>
+         <img class="header-logo" src="/assets/img/header-icons/join-logo.svg" alt="" />
+         <div class="header-right-side">
+            <span class="header-headline">Kanban Project Management Tool</span>
+            <img class="header-help-logo" src="/assets/img/header-icons/help-logo.svg" alt="" />
+            <img class="user-logo" src="/assets/img/header-icons/user-logo.svg" alt="" />
+         </div>
+      </header>
+      <div class="atf-container">
+         <div class="sidebar">
+            <div class="sidebar-menu">
+               <div class="menu-row">
+                  <img src="/assets/img/sidebar-icons/summary.svg" alt="" />
+                  <div>Summary</div>
+               </div>
+               <div class="menu-row">
+                  <img src="/assets/img/sidebar-icons/add-task.svg" alt="" />
+                  <div>Add Task</div>
+               </div>
+               <div class="menu-row">
+                  <img src="/assets/img/sidebar-icons/board.svg" alt="" />
+                  <div>Board</div>
+               </div>
+               <div class="menu-row">
+                  <img src="/assets/img/sidebar-icons/contacts.svg" alt="" />
+                  <div>Contacts</div>
+               </div>
+            </div>
+            <div class="lower-sidebar">
+               <a href="#">Privacy Policy</a>
+               <a href="#">Legal notice</a>
+            </div>
+         </div>
+         <div class="main-content">
+            <form class="task-description">
+               <input type="text">
+
+               <label for="description"><b>Description</b> (optional)</label>
+               <textarea name="description" id="description"></textarea>
+               <div>
+                  <b>Due Date</b>
+                  <div>
+                     <input type="date">
+                  </div>
+               </div>
+               <div>
+                  <b>Priority</b>
+                  <div>
+                     <button>1</button>
+                     <button>2</button>
+                     <button>3</button>
+                  </div>
+               </div>
+
+               <div>
+                  <b>Assigned to</b> (optional)
+                  <div>
+                     <select name="contact-list" id="contacts">
+                        <option value="">Select contacts to assign</option>
+                     </select>
+                  </div>
+                  <div>Placeholder for selected Contacts</div>
+               </div>
+
+               <div>
+                  <b>Category</b>
+                  <div>
+                     <select name="task-list" id="category">
+                        <option value="">Select task category</option>
+                        <option value="technical">Technical Task</option>
+                        <option value="user">User Story</option>
+                     </select>
+                  </div>
+               </div>
+
+               <div>
+                  <b>Subtasks</b> (optional)
+                  <div>
+                     <select name="subtasks" id="subtasks">
+                        <option value="">Add new subtask</option>
+                        <option value="technical">Technical Task</option>
+                        <option value="user">User Story</option>
+                     </select>
+                  </div>
+               </div>
+
+               <div class="buttons">
+                  <button class="white-btn">Clear <img src="./assets/img/add-task/cancel.svg" alt=""></button>
+                  <button class="blue-btn">Create Task <img src="./assets/img/add-task/check.svg" alt=""></button>
+               </div>
+
+            </form>
+         </div>
+      </div>
+   </div>
+</body>
+
+</html>
