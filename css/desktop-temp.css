@@ -1,172 +1,179 @@
 body {
-    margin: 0;
-    height: 100vh;
-    font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      height: 100vh;
+      font-family: 'Open Sans', sans-serif;
 }
 
 header {
-    background-color: var(--button-blue);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 60px;
-    padding: 20px 39px 20px 39px;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
-    z-index: 1;
+      background-color: var(--button-blue);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 60px;
+      padding: 20px 39px 20px 39px;
+      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+      z-index: 1;
 }
 
 header span {
-    font-weight: 400;
-    font-size: 19px;
-    color: var(--bg-clr-1);
+      font-weight: 400;
+      font-size: 19px;
+      color: var(--bg-clr-1);
 }
 
 .desktop-template-div {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
 }
 
 .atf-container {
-    display: flex;
-    height: 100%;
+      display: flex;
+      flex: 1;
+      height: 80%;
 }
 
 .sidebar {
-    display: flex;
-    flex-direction: column;
-    min-width: 232px;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--bg-clr-1);
-    padding: 66px 0px 66px 0px;
-    align-items: center;
-    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+      display: flex;
+      flex-direction: column;
+      min-width: 232px;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--bg-clr-1);
+      padding: 66px 0px 66px 0px;
+      align-items: center;
+      box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
 }
 
 .header-right-side {
-    display: flex;
-    align-items: center;
-    gap: 22px;
-    justify-content: space-between;
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      justify-content: space-between;
 }
 
 .sidebar-menu {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    align-items: flex-start;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: flex-start;
 }
 
 .menu-row {
-    height: 24px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 30px 8px 30px;
-    border-radius: 8px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 30px 8px 30px;
+      border-radius: 8px;
 }
 
 .menu-row:hover {
-    background-color: var(--hover-lightblue);
-    cursor: pointer;
+      background-color: var(--hover-lightblue);
+      cursor: pointer;
 }
 
 .lower-sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    justify-content: center;
-    align-items: center;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      justify-content: center;
+      align-items: center;
 }
 
 .lower-sidebar a {
-    padding: 8px;
-    text-decoration: none;
-    color: black;
+      padding: 8px;
+      text-decoration: none;
+      color: black;
 }
 
 .lower-sidebar a:hover {
-    color: var(--button-blue);
+      color: var(--button-blue);
 }
 
 .main-content {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 }
 
 .header-help-logo {
-    transition: transform 0.2s;
+      transition: transform 0.2s;
 }
 
 .header-help-logo:hover {
-    transform: scale(1.2);
-    cursor: pointer;
+      transform: scale(1.2);
+      cursor: pointer;
 }
 
 .user-logo:hover {
-    opacity: 0.9;
-    cursor: pointer;
+      opacity: 0.9;
+      cursor: pointer;
 }
 
 .header-headline:hover {
-    cursor: pointer;
+      cursor: pointer;
 }
 
 @media only screen and (max-width: 800px) {
-    .header-headline {
-        display: none;
-    }
+      .header-headline {
+            display: none;
+      }
 
-    .header-help-logo {
-        display: none;
-    }
+      .header-help-logo {
+            display: none;
+      }
 
-    .header-right-side {
-        display: flex;
-        align-items: center;
-    }
+      .header-right-side {
+            display: flex;
+            align-items: center;
+      }
 
-    .user-logo {
-        height: 40px;
-    }
+      .user-logo {
+            height: 40px;
+      }
 
-    .header-logo {
-        height: 39px;
-    }
+      .header-logo {
+            height: 39px;
+      }
 
-    .atf-container {
-        flex-direction: column-reverse;
-    }
+      .atf-container {
+            flex-direction: column-reverse;
+      }
 
-    .lower-sidebar {
-        display: none;
-    }
+      .lower-sidebar {
+            display: none;
+      }
 
-    .sidebar-menu {
-        flex-direction: unset;
-        gap: unset;
-        width: 100%;
-        justify-content: space-around;
-        align-items: flex-end;
-    }
+      .sidebar-menu {
+            flex-direction: unset;
+            gap: unset;
+            width: 100%;
+            justify-content: space-around;
+            align-items: flex-end;
+      }
 
-    .sidebar {
-        height: 76px;
-        padding: 0px 16px 0px 16px;
-        box-shadow: 0px -1px 6px 0px rgba(0, 0, 0, 0.1);
-        flex-direction: unset;
-        align-items: center;
-        justify-content: center;
-    }
+      .sidebar {
+            height: 76px;
+            padding: 0px 16px 0px 16px;
+            box-shadow: 0px -1px 6px 0px rgba(0, 0, 0, 0.1);
+            flex-direction: unset;
+            align-items: center;
+            justify-content: center;
+      }
 
-    .menu-row {
-        flex-direction: column;
-        gap: 4px;
-        height: 100%;
-        padding: 0;
-        pointer-events: none;
-    }
+      .menu-row {
+            flex-direction: column;
+            gap: 4px;
+            height: 100%;
+            padding: 0;
+            pointer-events: none;
+      }
+
+      .main-content {
+            height: inherit;
+            flex: 1;
+      }
 }
