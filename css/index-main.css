@@ -1,6 +1,7 @@
 body {
    margin: 0;
    height: 100vh;
+   overflow: hidden;
 }
 
 header {
@@ -65,6 +66,7 @@ header span {
    gap: 8px;
    padding: 8px 30px 8px 30px;
    border-radius: 8px;
+   width: 126px;
 }
 
 .menu-row:hover {
