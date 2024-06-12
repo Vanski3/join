@@ -1,0 +1,72 @@
+.task-overlay {
+   width: 528px;
+   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+   border-radius: 30px;
+   padding: 48px 40px 48px 40px;
+   display: flex;
+   flex-direction: column;
+   gap: 24px;
+}
+
+.categorie-info {
+   display: flex;
+   justify-content: space-between;
+}
+
+.title-field {
+   font-size: 61px;
+   font-weight: 700;
+}
+
+.description-field {
+   font-size: 19px;
+   font-weight: 400;
+}
+
+.due-date-field {
+   display: flex;
+   gap: 25px;
+   align-items: center;
+}
+
+.priority-field {
+   display: flex;
+   gap: 10px;
+   align-items: center;
+}
+
+.assigned-to-field {
+   display: flex;
+   flex-direction: column;
+   gap: 8px;
+}
+
+.subtasks-field {
+   display: flex;
+   flex-direction: column;
+   gap: 8px;
+}
+
+.seperator-field {
+   border: 1px solid rgba(168, 168, 168, 1);
+   display: flex;
+   justify-content: end;
+   gap: 8px;
+}
+
+.task-overlay-categories {
+   font-size: 21px;
+   font-weight: 700;
+   color: rgba(66, 82, 110, 1);
+}
+
+.delete-edit-field {
+   display: flex;
+   justify-content: end;
+   gap: 8px;
+   cursor: pointer;
+}
+
+.close-overlay-task {
+   cursor: pointer;
+}
