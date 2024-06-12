@@ -15,19 +15,22 @@ function handleLowClick() {
   //   FUNCTION
 }
 
-document.getElementById('buttonUrgent').addEventListener('click', () => {
+document.getElementById('buttonUrgent').addEventListener('click', function (event) {
+  event.preventDefault();
   toggleColor('buttonUrgent', '#FF3D00', 'UrgentOne', 'UrgentTwo');
-  handleUrgentClick();
+  //   handleUrgentClick();
 });
 
-document.getElementById('buttonMedium').addEventListener('click', () => {
+document.getElementById('buttonMedium').addEventListener('click', function (event) {
+  event.preventDefault();
   toggleColor('buttonMedium', '#FFA800', 'MediumOne', 'MediumTwo');
-  handleMediumClick();
+  //   handleMediumClick();
 });
 
-document.getElementById('buttonLow').addEventListener('click', () => {
+document.getElementById('buttonLow').addEventListener('click', function (event) {
+  event.preventDefault();
   toggleColor('buttonLow', '#7AE229', 'LowOne', 'LowTwo');
-  handleLowClick();
+  //   handleLowClick();
 });
 
 function toggleColor(buttonId, color, idOne, idTwo) {
