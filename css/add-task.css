@@ -3,23 +3,108 @@
   cursor: pointer;
 }
 
-.task-description {
-  border-right: 2px solid black;
-  width: 488px;
+main {
+  height: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.task-description {
+  width: 980px;
+  height: 424px;
+  display: flex;
   padding: 10px 10px 0 10px;
+  margin-bottom: 200px;
+  font-size: 20px;
+}
+
+.prio-container button {
+  color: red;
+}
+
+.task-description input {
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  padding: 12px 21px;
+  font-size: 20px;
+}
+
+.substasks input {
+  background-image: url(../assets/img/add-task/plus.svg);
+  background-position: center right 15px;
+  background-repeat: no-repeat;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #d1d1d1;
+  font-family: var(--font-fam);
+  font-weight: 400;
+}
+
+.task-description textarea {
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  padding: 18px 16px;
+  font-size: 20px;
+}
+
+.task-description select {
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  padding: 12px 16px;
+  appearance: none;
+  background-image: url(../assets/img/add-task/arrow-drop-down.svg);
+  background-position: center right 15px;
+  background-repeat: no-repeat;
+  font-size: 20px;
+}
+
+.seperator {
+  width: 0;
+  height: 424px;
+  border: 1px solid #d1d1d1;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.first-row {
+  display: flex;
+  flex-direction: column;
+  width: 440px;
+  height: 426px;
   gap: 20px;
 }
 
-.main-content {
-  display: unset;
+.first-row div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.second-row {
+  display: flex;
+  flex-direction: column;
+  width: 440px;
+  height: 426px;
+  gap: 20px;
+}
+
+.second-row div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+input[type='date'] {
 }
 
 .buttons {
   position: absolute;
   bottom: 70px;
-  right: 50px;
+  right: 400px;
   display: flex;
   gap: 20px;
 }
@@ -61,6 +146,16 @@
   color: var(--button-blue);
   box-shadow: var(--btn-hover-shadow);
   cursor: pointer;
+}
+
+.required-container {
+  position: absolute;
+  bottom: 80px;
+  left: 400px;
+}
+
+.red-star {
+  color: red;
 }
 
 .white-btn:hover img {

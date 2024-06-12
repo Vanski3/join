@@ -8,6 +8,7 @@
    <link rel="stylesheet" href="/css/custom-properties.css" />
    <link rel="stylesheet" href="/css/add-task.css" />
    <link rel="icon" href="./assets/img/logo-blue.svg">
+   <script src="./scripts/add-task.js"></script>
    <title>Join - Add Task</title>
 </head>
 
@@ -47,65 +48,74 @@
             </div>
          </div>
          <div class="main-content">
-            <form class="task-description">
-               <input type="text">
+            <main>
+               <form class="task-description">
+                  <div class="first-row">
+                     <div>
+                        <span>Title<span class="red-star">*</span></span>
+                        <input required placeholder="Enter a title" type="text">
+                     </div>
+                     <div>
+                        Description
+                        <textarea placeholder="Enter a Description" name="description" id="description"></textarea>
+                     </div>
 
-               <label for="description"><b>Description</b> (optional)</label>
-               <textarea name="description" id="description"></textarea>
-               <div>
-                  <b>Due Date</b>
-                  <div>
-                     <input type="date">
+                     <div>
+                        <div>
+                           Assigned to
+                           <div>
+                              <select name="contact-list" id="contacts">
+                                 <option value="">Select contacts to assign</option>
+                              </select>
+                           </div>
+                           <div>Placeholder for selected Contacts</div>
+                        </div>
+                     </div>
                   </div>
-               </div>
-               <div>
-                  <b>Priority</b>
-                  <div>
-                     <button>1</button>
-                     <button>2</button>
-                     <button>3</button>
+
+                  <div class="seperator"></div>
+
+                  <div class="second-row">
+                     <div>
+                        <span>Due Date<span class="red-star">*</span></span>
+                        <input required type="date">
+                     </div>
+
+                     <div class="prio-container">
+                        Prio
+                        <div class="button-container">
+                           <button>1</button>
+                           <button>2</button>
+                           <button>3</button>
+                        </div>
+                     </div>
+
+                     <div>
+                        <span>Category<span class="red-star">*</span></span>
+                        <select required name="task-list" id="category">
+                           <option value="">Select task category</option>
+                           <option value="technical">Technical Task</option>
+                           <option value="user">User Story</option>
+                        </select>
+                     </div>
+
+                     <div class="substasks">
+                        Subtasks
+                        <input placeholder="Add new subtask" name="subtasks" id="subtasks">
+                     </div>
                   </div>
-               </div>
 
-               <div>
-                  <b>Assigned to</b> (optional)
-                  <div>
-                     <select name="contact-list" id="contacts">
-                        <option value="">Select contacts to assign</option>
-                     </select>
+                  <div class="buttons">
+                     <button class="white-btn">Clear <img src="./assets/img/add-task/cancel.svg" alt=""></button>
+                     <button class="blue-btn">Create Task <img src="./assets/img/add-task/check.svg" alt=""></button>
                   </div>
-                  <div>Placeholder for selected Contacts</div>
-               </div>
 
-               <div>
-                  <b>Category</b>
-                  <div>
-                     <select name="task-list" id="category">
-                        <option value="">Select task category</option>
-                        <option value="technical">Technical Task</option>
-                        <option value="user">User Story</option>
-                     </select>
-                  </div>
-               </div>
-
-               <div>
-                  <b>Subtasks</b> (optional)
-                  <div>
-                     <select name="subtasks" id="subtasks">
-                        <option value="">Add new subtask</option>
-                        <option value="technical">Technical Task</option>
-                        <option value="user">User Story</option>
-                     </select>
-                  </div>
-               </div>
-
-               <div class="buttons">
-                  <button class="white-btn">Clear <img src="./assets/img/add-task/cancel.svg" alt=""></button>
-                  <button class="blue-btn">Create Task <img src="./assets/img/add-task/check.svg" alt=""></button>
-               </div>
-
-            </form>
+               </form>
          </div>
+         <div class="required-container">
+            <span class="red-star">*</span><span>This field is required</span>
+         </div>
+         </main>
       </div>
    </div>
 </body>
