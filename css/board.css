@@ -1,0 +1,44 @@
+.search-input-div {
+   width: 279px;
+   display: flex;
+   height: 32px;
+   border: 1px solid rgba(168, 168, 168, 1);
+   border-radius: 10px;
+   padding: 8px 16px 8px 16px;
+}
+
+.search-input {
+   border: none;
+   width: 300px;
+   outline: none;
+   height: 32px;
+}
+
+.seperator-div {
+   border: 1px solid rgba(168, 168, 168, 1);
+   margin-right: 14px;
+}
+
+.add-task-button {
+   font-size: 23px;
+   cursor: pointer;
+   background-color: var(--button-blue);
+   color: #fff;
+   border: none;
+   width: 138px;
+   height: 51px;
+   border-radius: 10px;
+}
+
+.add-task-button:hover {
+   background-color: var(--button-darkblue);
+   box-shadow: var(--btn-hover-shadow);
+   /* Animation hinzufügen */
+}
+
+.search-addtask-div {
+   display: flex;
+   gap: 47px;
+   padding: 72px 0px 16px 100px;
+   align-items: center;
+}
