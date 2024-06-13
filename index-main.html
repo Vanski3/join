@@ -11,10 +11,14 @@
       <link rel="stylesheet" href="/css/board.css" />
       <script src="/scripts/summary.js" defer></script>
       <script src="/scripts/contact.js" defer></script>
+      <script src="./scripts/board.js"></script>
+      <script src="./scripts/help.js"></script>
+      <script src="./scripts/legal-notice.js"></script>
+      <script src="./scripts/privacy.js"></script>
       <link rel="stylesheet" href="/css/summary.css" />
       <title>Document</title>
    </head>
-   <body>
+   <body onload="renderSummary()">
       <div class="desktop-template-div">
          <header>
             <a href="/index.html"><img class="header-logo" src="/assets/img/header-icons/join-logo.svg" alt="" /></a>
@@ -32,7 +36,7 @@
          <div class="atf-container">
             <div class="sidebar">
                <div class="sidebar-menu">
-                  <div onclick="loadSummaryContent()" class="menu-row">
+                  <div onclick="renderSummary()" class="menu-row">
                      <img src="/assets/img/sidebar-icons/summary.svg" alt="" />
                      <div>Summary</div>
                   </div>

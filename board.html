@@ -7,8 +7,8 @@
       <link rel="stylesheet" href="./css/custom-properties.css" />
       <link rel="stylesheet" href="./css/privacy-legal-help.css" />
       <link rel="stylesheet" href="./css/board.css" />
-      <script src="/js/summary.js" defer></script>
-      <!-- <link rel="stylesheet" href="/css/summary.css" /> -->
+      <script src="/scripts/summary.js" defer></script>
+      <link rel="stylesheet" href="/css/summary.css" />
       <title>Document</title>
    </head>
    <body>
@@ -81,8 +81,26 @@
                               alt="" />
                         </div>
                         <div class="nothing-to-do-box">No Task To do</div>
+                        <div id="toDoColumn">
+                           <!-- Render Cards in Here -->
+                           <div class="board-card">
+                              <img class="card-label" src="./assets/img/task-overlay/user-story.svg" alt="" />
+                              <span class="card-title">Title</span>
+                              <span class="task-description">Content in here...</span>
+                              <div class="progress-field">
+                                 <div class="outer-progress-bar">
+                                    <div class="inner-progress-bar"></div>
+                                 </div>
+                                 <div class="subtasks-text">1/2 Subtasks</div>
+                              </div>
+                              <div class="user-field">
+                                 <div>User in here...</div>
+                                 <img src="./assets/img/board/Priority-low.svg" alt="" />
+                              </div>
+                           </div>
+                        </div>
                      </div>
-                     <div class="tasks-column">
+                     <div id="inProgressColumn" class="tasks-column">
                         <div class="board-headline">
                            <span>In Progress</span>
                            <img
@@ -91,8 +109,9 @@
                               src="./assets/img/board/add-button-default.svg"
                               alt="" />
                         </div>
+                        <!-- Render Cards in Here -->
                      </div>
-                     <div class="tasks-column">
+                     <div id="awaitFeedbackColumn" class="tasks-column">
                         <div class="board-headline">
                            <span>Await feedback</span>
                            <img
@@ -101,8 +120,9 @@
                               src="./assets/img/board/add-button-default.svg"
                               alt="" />
                         </div>
+                        <!-- Render Cards in Here -->
                      </div>
-                     <div class="tasks-column">
+                     <div id="doneColumn" class="tasks-column">
                         <div class="board-headline">
                            <span>Done</span>
                            <img
@@ -111,6 +131,7 @@
                               src="./assets/img/board/add-button-default.svg"
                               alt="" />
                         </div>
+                        <!-- Render Cards in Here -->
                      </div>
                   </div>
                </main>
