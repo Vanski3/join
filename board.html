@@ -1,124 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="stylesheet" href="./css/index-main.css" />
-      <link rel="stylesheet" href="./css/custom-properties.css" />
-      <link rel="stylesheet" href="./css/privacy-legal-help.css" />
-      <link rel="stylesheet" href="./css/board.css" />
-      <script src="/js/summary.js" defer></script>
-      <!-- <link rel="stylesheet" href="/css/summary.css" /> -->
-      <title>Document</title>
-   </head>
-   <body>
-      <div class="desktop-template-div">
-         <header>
-            <a href="/index.html"><img class="header-logo" src="/assets/img/header-icons/join-logo.svg" alt="" /></a>
-            <div class="header-right-side">
-               <span class="header-headline">Kanban Project Management Tool</span>
-               <img onclick="loadHelpContent()" class="header-help-logo" src="/assets/img/header-icons/help-logo.svg" alt="" />
-               <img id="UserLogoHeader" class="user-logo-header" src="/assets/img/header-icons/user-logo.svg" alt="" />
-            </div>
-         </header>
-         <div id="UserHeaderPopup" class="user-icon-popup">
-            <a onclick="loadLegalNoticeContent()" id="legalNoticeLink">Legal Notice</a>
-            <a onclick="loadPrivacyPoliceContent()">Privacy Police</a>
-            <a href="index.html">Log Out</a>
-         </div>
-         <div class="atf-container">
-            <div class="sidebar">
-               <div class="sidebar-menu">
-                  <div onclick="loadSummaryContent()" class="menu-row">
-                     <img src="/assets/img/sidebar-icons/summary.svg" alt="" />
-                     <div>Summary</div>
-                  </div>
-                  <div class="menu-row">
-                     <img src="/assets/img/sidebar-icons/add-task.svg" alt="" />
-                     <div>Add Task</div>
-                  </div>
-                  <div class="menu-row">
-                     <img src="/assets/img/sidebar-icons/board.svg" alt="" />
-                     <div>Board</div>
-                  </div>
-                  <div onclick="loadContactsContent()" class="menu-row">
-                     <img src="/assets/img/sidebar-icons/contacts.svg" alt="" />
-                     <div>Contacts</div>
-                  </div>
-               </div>
-               <div class="lower-sidebar">
-                  <a onclick="loadPrivacyPoliceContent()">Privacy Policy</a>
-                  <a onclick="loadLegalNoticeContent()">Legal notice</a>
-               </div>
-            </div>
-            <div id="mainContent" class="main-content">
-               <!-- Render Content in Here -->
-               <main class="main-board">
-                  <div class="search-addtask-div">
-                     <div class="search-input-div">
-                        <input class="search-input" type="text" />
-                        <div class="seperator-div"></div>
-                        <img
-                           onmouseover="this.src='./assets/img/board/search-symbol-variant2.svg'"
-                           onmouseout="this.src='./assets/img/board/search-image-default.svg'"
-                           src="assets/img/board/search-image-default.svg"
-                           alt="" />
-                     </div>
-                     <button class="add-task-button">
-                        Add Task
-                        <img src="assets/img/board/add-task-plus-icon.svg" alt="" />
-                     </button>
-                  </div>
 
-                  <div class="board">
-                     <div class="tasks-column">
-                        <div class="board-headline to-do-column">
-                           <span>To do</span>
-                           <img
-                              onmouseover="this.src='./assets/img/board/add-button-variant2.svg'"
-                              onmouseout="this.src='./assets/img/board/add-button-default.svg'"
-                              src="./assets/img/board/add-button-default.svg"
-                              alt="" />
-                        </div>
-                        <div class="nothing-to-do-box">No Task To do</div>
-                     </div>
-                     <div class="tasks-column">
-                        <div class="board-headline">
-                           <span>In Progress</span>
-                           <img
-                              onmouseover="this.src='./assets/img/board/add-button-variant2.svg'"
-                              onmouseout="this.src='./assets/img/board/add-button-default.svg'"
-                              src="./assets/img/board/add-button-default.svg"
-                              alt="" />
-                        </div>
-                     </div>
-                     <div class="tasks-column">
-                        <div class="board-headline">
-                           <span>Await feedback</span>
-                           <img
-                              onmouseover="this.src='./assets/img/board/add-button-variant2.svg'"
-                              onmouseout="this.src='./assets/img/board/add-button-default.svg'"
-                              src="./assets/img/board/add-button-default.svg"
-                              alt="" />
-                        </div>
-                     </div>
-                     <div class="tasks-column">
-                        <div class="board-headline">
-                           <span>Done</span>
-                           <img
-                              onmouseover="this.src='./assets/img/board/add-button-variant2.svg'"
-                              onmouseout="this.src='./assets/img/board/add-button-default.svg'"
-                              src="./assets/img/board/add-button-default.svg"
-                              alt="" />
-                        </div>
-                     </div>
-                  </div>
-               </main>
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <link rel="stylesheet" href="./css/index-main.css" />
+   <link rel="stylesheet" href="./css/custom-properties.css" />
+   <link rel="stylesheet" href="./css/privacy-legal-help.css" />
+   <link rel="stylesheet" href="./css/board.css" />
+   <script src="./scripts/board.js" defer></script>
+   <link rel="icon" href="./assets/img/logo-blue.svg">
+   <title>Join - Board</title>
+</head>
+
+<body>
+   <div class="desktop-template-div">
+      <header>
+         <a href="/index.html"><img class="header-logo" src="/assets/img/header-icons/join-logo.svg" alt="" /></a>
+         <div class="header-right-side">
+            <span class="header-headline">Kanban Project Management Tool</span>
+            <img onclick="loadHelpContent()" class="header-help-logo" src="/assets/img/header-icons/help-logo.svg"
+               alt="" />
+            <img id="UserLogoHeader" class="user-logo-header" src="/assets/img/header-icons/user-logo.svg" alt="" />
+         </div>
+      </header>
+      <div id="UserHeaderPopup" class="user-icon-popup">
+         <a onclick="loadLegalNoticeContent()" id="legalNoticeLink">Legal Notice</a>
+         <a onclick="loadPrivacyPoliceContent()">Privacy Police</a>
+         <a href="index.html">Log Out</a>
+      </div>
+      <div class="atf-container">
+         <div class="sidebar">
+            <div class="sidebar-menu">
+               <div onclick="loadSummaryContent()" class="menu-row">
+                  <img src="/assets/img/sidebar-icons/summary.svg" alt="" />
+                  <div>Summary</div>
+               </div>
+               <div class="menu-row">
+                  <img src="/assets/img/sidebar-icons/add-task.svg" alt="" />
+                  <div>Add Task</div>
+               </div>
+               <div class="menu-row">
+                  <img src="/assets/img/sidebar-icons/board.svg" alt="" />
+                  <div>Board</div>
+               </div>
+               <div onclick="loadContactsContent()" class="menu-row">
+                  <img src="/assets/img/sidebar-icons/contacts.svg" alt="" />
+                  <div>Contacts</div>
+               </div>
+            </div>
+            <div class="lower-sidebar">
+               <a onclick="loadPrivacyPoliceContent()">Privacy Policy</a>
+               <a onclick="loadLegalNoticeContent()">Legal notice</a>
             </div>
          </div>
+         <div id="mainContent" class="main-content">
+            <!-- Render Content in Here -->
+            <main class="main-board">
+               <div class="search-addtask-div">
+                  <div class="search-input-div">
+                     <input class="search-input" type="text" />
+                     <div class="seperator-div"></div>
+                     <img onmouseover="this.src='./assets/img/board/search-symbol-variant2.svg'"
+                        onmouseout="this.src='./assets/img/board/search-image-default.svg'"
+                        src="assets/img/board/search-image-default.svg" alt="" />
+                  </div>
+                  <button onclick="openTaskDialog()" class="add-task-button">
+                     Add Task
+                     <img src="assets/img/board/add-task-plus-icon.svg" alt="" />
+                  </button>
+               </div>
+
+               <div class="board">
+                  <div class="tasks-column">
+                     <div class="board-headline to-do-column">
+                        <span>To do</span>
+                        <img onmouseover="this.src='./assets/img/board/add-button-variant2.svg'"
+                           onmouseout="this.src='./assets/img/board/add-button-default.svg'"
+                           src="./assets/img/board/add-button-default.svg" alt="" />
+                     </div>
+                     <div class="nothing-to-do-box">No Task To do</div>
+                  </div>
+                  <div class="tasks-column">
+                     <div class="board-headline">
+                        <span>In Progress</span>
+                        <img onmouseover="this.src='./assets/img/board/add-button-variant2.svg'"
+                           onmouseout="this.src='./assets/img/board/add-button-default.svg'"
+                           src="./assets/img/board/add-button-default.svg" alt="" />
+                     </div>
+                  </div>
+                  <div class="tasks-column">
+                     <div class="board-headline">
+                        <span>Await feedback</span>
+                        <img onmouseover="this.src='./assets/img/board/add-button-variant2.svg'"
+                           onmouseout="this.src='./assets/img/board/add-button-default.svg'"
+                           src="./assets/img/board/add-button-default.svg" alt="" />
+                     </div>
+                  </div>
+                  <div class="tasks-column">
+                     <div class="board-headline">
+                        <span>Done</span>
+                        <img onmouseover="this.src='./assets/img/board/add-button-variant2.svg'"
+                           onmouseout="this.src='./assets/img/board/add-button-default.svg'"
+                           src="./assets/img/board/add-button-default.svg" alt="" />
+                     </div>
+                  </div>
+               </div>
+
+         </div>
+         <div id="dialog-container" class="dialog-container">
+            <div class="task-dialog" onclick="event.stopPropagation()">
+               <h1>Add Task</h1>
+               <svg onclick="closeTaskDialog()" class="close-button" width="32" height="32" viewBox="0 0 24 25"
+                  fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                     d="M12.0011 12.4998L17.2441 17.7428M6.75806 17.7428L12.0011 12.4998L6.75806 17.7428ZM17.2441 7.25684L12.0001 12.4998L17.2441 7.25684ZM12.0001 12.4998L6.75806 7.25684L12.0001 12.4998Z"
+                     stroke="#4589FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+               </svg>
+            </div>
+         </div>
+
+
+         </main>
       </div>
-      <script src="/scripts/index-main.js"></script>
-      <script src="/scripts/header.js"></script>
-      <script src="/scripts/contact.js"></script>
-   </body>
+   </div>
+   </div>
+   <script src="/scripts/index-main.js"></script>
+   <script src="/scripts/header.js"></script>
+   <script src="/scripts/contact.js"></script>
+</body>
+
 </html>
