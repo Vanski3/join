@@ -53,7 +53,7 @@
             </div>
             <div id="mainContent" class="main-content">
                <!-- Render Content in Here -->
-               <main class="main-board">
+               <main class="main-board-div">
                   <div class="search-addtask-div">
                      <div class="search-input-div">
                         <input class="search-input" type="text" />
@@ -81,8 +81,8 @@
                               alt="" />
                         </div>
                         <div class="nothing-to-do-box">No Task To do</div>
-                        <div id="toDoColumn">
-                           <!-- Render Cards in Here -->
+                        <div id="toDoTasksDiv" class="task-div">
+                           <!-- Render To-Do-Cards in Here -->
                            <div class="board-card">
                               <img class="card-label" src="./assets/img/task-overlay/user-story.svg" alt="" />
                               <span class="card-title">Title</span>
@@ -100,7 +100,7 @@
                            </div>
                         </div>
                      </div>
-                     <div id="inProgressColumn" class="tasks-column">
+                     <div class="tasks-column">
                         <div class="board-headline">
                            <span>In Progress</span>
                            <img
@@ -109,9 +109,11 @@
                               src="./assets/img/board/add-button-default.svg"
                               alt="" />
                         </div>
-                        <!-- Render Cards in Here -->
+                        <div id="inProgressTasksDiv" class="task-div">
+                           <!-- Render In-Progress-Cards in Here -->
+                        </div>
                      </div>
-                     <div id="awaitFeedbackColumn" class="tasks-column">
+                     <div class="tasks-column">
                         <div class="board-headline">
                            <span>Await feedback</span>
                            <img
@@ -120,9 +122,11 @@
                               src="./assets/img/board/add-button-default.svg"
                               alt="" />
                         </div>
-                        <!-- Render Cards in Here -->
+                        <div id="awaitFeedbackTasksDiv" class="task-div">
+                           <!-- Render Await-Feedback-Cards in Here -->
+                        </div>
                      </div>
-                     <div id="doneColumn" class="tasks-column">
+                     <div class="tasks-column">
                         <div class="board-headline">
                            <span>Done</span>
                            <img
@@ -131,7 +135,9 @@
                               src="./assets/img/board/add-button-default.svg"
                               alt="" />
                         </div>
-                        <!-- Render Cards in Here -->
+                        <div id="doneTasksDiv" class="task-div">
+                           <!-- Render Done-Cards in Here -->
+                        </div>
                      </div>
                   </div>
                </main>
