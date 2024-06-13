@@ -9,10 +9,21 @@
   justify-content: space-between;
   padding-left: 80px;
   padding-right: 80px;
+  margin-top: 80px;
 }
 
 .header img {
-  margin-top: 80px;
+  position: absolute;
+  top: 60px;
+  left: 77px;
+  width: 100px;
+  height: 120px;
+  animation: logoAnimation 2s 0s 1;
+  transition: all 1s ease-in-out;
+}
+
+.fade-in-animation {
+  animation: fadeInForm 3s 0s 1;
 }
 
 .header button {
@@ -28,7 +39,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 66px;
+  margin-top: 80px;
 }
 
 .login-form {
@@ -445,7 +456,8 @@
   }
 
   .header img {
-    margin-top: 37px;
+    top: 37px;
+    left: 38px;
     height: 78px;
     width: 64px;
   }
@@ -483,5 +495,39 @@
 @media (max-width: 380px) {
   .header button {
     margin-left: 10px;
+  }
+}
+
+/* keyframes */
+@keyframes fadeInForm {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes logoAnimation {
+  0% {
+    top: 30%;
+    left: 40%;
+    width: 274px;
+    height: 334px;
+  }
+  50% {
+    top: 30%;
+    left: 40%;
+    width: 274px;
+    height: 334px;
+  }
+  100% {
+    top: 60px;
+    left: 77px;
+    width: 100px;
+    height: 120px;
   }
 }
