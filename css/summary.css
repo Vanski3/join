@@ -13,12 +13,12 @@
    --bx-shadow-task: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-main{
+.summary-main {
    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
 }
 
 .headline-wrapper {
@@ -164,8 +164,7 @@ main{
 }
 
 @media only screen and (max-width: 800px) {
-
-   main{
+   .summary-main {
       margin: 20px;
    }
 

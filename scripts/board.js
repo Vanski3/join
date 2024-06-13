@@ -20,7 +20,6 @@ dialogContainer.addEventListener('click', function (event) {
     closeTaskDialog();
   }
 });
-
 function loadBoardContent(params) {
   let mainContent = document.getElementById('mainContent');
   mainContent.innerHTML = '';

@@ -4,7 +4,7 @@ function renderSummary() {
    const content = document.querySelector('.main-content');
    content.innerHTML = '';
    content.innerHTML += /*html*/ `
-     <main>
+     <main class="summary-main">
       <div class="headline-wrapper"><span class="headline">Good morning,</span><span id="username">Sofia Müller</span></div>
         <div class="summary-wrapper">
             <div class="row1">

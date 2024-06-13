@@ -194,6 +194,7 @@ header span {
       flex-direction: unset;
       align-items: center;
       justify-content: center;
+      padding: 0;
    }
 
    .menu-row {
