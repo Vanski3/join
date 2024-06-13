@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 let dialogContainer = document.getElementById('dialog-container');
 let taskDialog = document.querySelector('.task-dialog');
 
@@ -21,11 +20,11 @@ dialogContainer.addEventListener('click', function (event) {
     closeTaskDialog();
   }
 });
-=======
+
 function loadBoardContent(params) {
-   let mainContent = document.getElementById('mainContent');
-   mainContent.innerHTML = '';
-   mainContent.innerHTML += /*html*/ `
+  let mainContent = document.getElementById('mainContent');
+  mainContent.innerHTML = '';
+  mainContent.innerHTML += /*html*/ `
                       <main class="main-board">
                    <div class="search-addtask-div">
                       <div class="search-input-div">
@@ -89,4 +88,3 @@ function loadBoardContent(params) {
                 </main>
     `;
 }
->>>>>>> 6e96ab80ad0a7cd444a47162c988a82849bdb603
