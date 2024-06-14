@@ -1,37 +1,37 @@
 let selectedButtonId = null;
 
-function handleUrgentClick() {
-   console.log('Urgent button clicked');
-   //   FUNCTION
-}
+// function handleUrgentClick() {
+//    console.log('Urgent button clicked');
+//    //   FUNCTION
+// }
 
-function handleMediumClick() {
-   console.log('Medium button clicked');
-   //   FUNCTION
-}
+// function handleMediumClick() {
+//    console.log('Medium button clicked');
+//    //   FUNCTION
+// }
 
-function handleLowClick() {
-   console.log('Low button clicked');
-   //   FUNCTION
-}
+// function handleLowClick() {
+//    console.log('Low button clicked');
+//    //   FUNCTION
+// }
 
-document.getElementById('buttonUrgent').addEventListener('click', function (event) {
-   event.preventDefault();
-   toggleColor('buttonUrgent', '#FF3D00', 'UrgentOne', 'UrgentTwo');
-   //   handleUrgentClick();
-});
+// document.getElementById('buttonUrgent').addEventListener('click', function (event) {
+//    event.preventDefault();
+//    toggleColor('buttonUrgent', '#FF3D00', 'UrgentOne', 'UrgentTwo');
+//    //   handleUrgentClick();
+// });
 
-document.getElementById('buttonMedium').addEventListener('click', function (event) {
-   event.preventDefault();
-   toggleColor('buttonMedium', '#FFA800', 'MediumOne', 'MediumTwo');
-   //   handleMediumClick();
-});
+// document.getElementById('buttonMedium').addEventListener('click', function (event) {
+//    event.preventDefault();
+//    toggleColor('buttonMedium', '#FFA800', 'MediumOne', 'MediumTwo');
+//    //   handleMediumClick();
+// });
 
-document.getElementById('buttonLow').addEventListener('click', function (event) {
-   event.preventDefault();
-   toggleColor('buttonLow', '#7AE229', 'LowOne', 'LowTwo');
-   //   handleLowClick();
-});
+// document.getElementById('buttonLow').addEventListener('click', function (event) {
+//    event.preventDefault();
+//    toggleColor('buttonLow', '#7AE229', 'LowOne', 'LowTwo');
+//    //   handleLowClick();
+// });
 
 function toggleColor(buttonId, color, idOne, idTwo) {
    if (selectedButtonId) {
@@ -53,7 +53,7 @@ function loadAddTaskContent(params) {
    let mainContent = document.getElementById('mainContent');
    mainContent.innerHTML = '';
    mainContent.innerHTML += /*html*/ `
-       <div class="main-content">
+       <div class="add-task-main-content">
       <main>
          <form class="task-description">
             <div class="first-row">

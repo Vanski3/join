@@ -2,30 +2,30 @@ let popup = document.getElementById('dialog-container');
 let taskDialog = document.querySelector('.task-dialog');
 
 function openTaskDialog() {
-  popup.style.display = 'unset';
-  setTimeout(function () {
-    taskDialog.style.right = '0';
-  }, 50);
+   popup.style.display = 'unset';
+   setTimeout(function () {
+      taskDialog.style.right = '0';
+   }, 50);
 }
 
 function closeTaskDialog() {
-  taskDialog.style.right = '-600px';
-  setTimeout(function () {
-    popup.style.display = 'none';
-  }, 300);
+   taskDialog.style.right = '-600px';
+   setTimeout(function () {
+      popup.style.display = 'none';
+   }, 300);
 }
 
 popup.addEventListener('click', function (event) {
-  if (!taskDialog.contains(event.target)) {
-    closeTaskDialog();
-  }
+   if (!taskDialog.contains(event.target)) {
+      closeTaskDialog();
+   }
 });
 
 function loadBoardContent(params) {
-  let mainContent = document.getElementById('mainContent');
-  mainContent.innerHTML = '';
-  mainContent.innerHTML += /*html*/ `
-                 <main class="main-board-div">
+   let mainContent = document.getElementById('mainContent');
+   mainContent.innerHTML = '';
+   mainContent.innerHTML += /*html*/ `
+                              <main class="main-board-div">
                   <div class="search-addtask-div">
                      <div class="search-input-div">
                         <input class="search-input" type="text" />
@@ -36,7 +36,7 @@ function loadBoardContent(params) {
                            src="assets/img/board/search-image-default.svg"
                            alt="" />
                      </div>
-                     <button class="add-task-button">
+                     <button onclick="openTaskDialog()" class="add-task-button">
                         Add Task
                         <img src="assets/img/board/add-task-plus-icon.svg" alt="" />
                      </button>
@@ -58,7 +58,7 @@ function loadBoardContent(params) {
                            <div id="boardCard" class="board-card">
                               <img class="card-label" src="./assets/img/task-overlay/user-story.svg" alt="" />
                               <span class="card-title">Title</span>
-                              <span class="task-description">Content in here...</span>
+                              <span class="task-description-board">Content in here...</span>
                               <div class="progress-field">
                                  <div class="outer-progress-bar">
                                     <div class="inner-progress-bar"></div>
@@ -113,59 +113,25 @@ function loadBoardContent(params) {
                      </div>
                   </div>
                </main>
-               <dialog id="taskOverlay" class="dialog-overlay-board">
-         <div class="task-overlay">
-            <div class="categorie-info">
-               <img class="overlay-card-label" src="./assets/img/task-overlay/user-story.svg" alt="" />
-               <img
-                  id="closeTaskOverlay"
-                  class="close-overlay-task"
-                  onmouseover="this.src='./assets/img/task-overlay/close-icon-variant2.svg'"
-                  onmouseout="this.src='./assets/img/task-overlay/close-icon.svg'"
-                  src="./assets/img/task-overlay/close-icon.svg"
-                  alt="" />
-            </div>
-            <span class="title-field">Kochwelt Page & Recipe Recommender</span>
-            <span class="description-field">Build start page with recipe recommendation.</span>
-            <div class="due-date-field">
-               <span class="task-overlay-categories">Due date:</span>
-               <div>10/05/2023</div>
-            </div>
-            <div class="priority-field">
-               <span class="task-overlay-categories">Priority</span>
-               <img src="./assets/img/task-overlay/Medium-icon.svg" alt="" />
-            </div>
-            <div class="assigned-to-field">
-               <span class="task-overlay-categories">Assigned To:</span>
-               <div>RENDER CONTACTS IN HERE!</div>
-            </div>
-            <div class="subtasks-field">
-               <span class="task-overlay-categories">Subtasks</span>
-               <div>RENDER SUbtasks IN HERE!</div>
-            </div>
-            <div class="delete-edit-field">
-               <img
-                  onmouseover="this.src='./assets/img/task-overlay/delete-variant2.svg'"
-                  onmouseout="this.src='./assets/img/task-overlay/Delete.svg'"
-                  src="./assets/img/task-overlay/Delete.svg"
-                  alt="" />
-               <div class="seperator-field"></div>
-
-               <img
-                  onmouseover="this.src='./assets/img/task-overlay/edit-variant2.svg'"
-                  onmouseout="this.src='./assets/img/task-overlay/edit.svg'"
-                  src="./assets/img/task-overlay/edit.svg"
-                  alt="" />
-            </div>
-         </div>
-      </dialog>
+               
     `;
 }
 
-document.getElementById('boardCard').addEventListener('click', () => {
-  document.getElementById('taskOverlay').showModal();
-});
+document.addEventListener('DOMContentLoaded', () => {
+   const mainContent = document.getElementById('mainContent');
+   const taskOverlay = document.getElementById('taskOverlay');
 
-document.getElementById('closeTaskOverlay').addEventListener('click', () => {
-  document.getElementById('taskOverlay').close();
+   // Event Delegation für Klicks auf 'boardCard'
+   mainContent.addEventListener('click', (event) => {
+      if (event.target.closest('.board-card')) {
+         taskOverlay.showModal();
+      }
+   });
+
+   // Event Listener für Klicks auf 'closeTaskOverlay'
+   taskOverlay.addEventListener('click', (event) => {
+      if (event.target.closest('#closeTaskOverlay')) {
+         taskOverlay.close();
+      }
+   });
 });
