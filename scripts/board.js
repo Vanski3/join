@@ -1,30 +1,30 @@
-let affe = document.getElementById('dialog-container');
+let popup = document.getElementById('dialog-container');
 let taskDialog = document.querySelector('.task-dialog');
 
 function openTaskDialog() {
-   dialogContainer.style.display = 'unset';
-   setTimeout(function () {
-      taskDialog.style.right = '0';
-   }, 50);
+  popup.style.display = 'unset';
+  setTimeout(function () {
+    taskDialog.style.right = '0';
+  }, 50);
 }
 
 function closeTaskDialog() {
-   taskDialog.style.right = '-600px';
-   setTimeout(function () {
-      dialogContainer.style.display = 'none';
-   }, 300);
+  taskDialog.style.right = '-600px';
+  setTimeout(function () {
+    popup.style.display = 'none';
+  }, 300);
 }
 
-dialogContainer.addEventListener('click', function (event) {
-   if (!taskDialog.contains(event.target)) {
-      closeTaskDialog();
-   }
+popup.addEventListener('click', function (event) {
+  if (!taskDialog.contains(event.target)) {
+    closeTaskDialog();
+  }
 });
 
 function loadBoardContent(params) {
-   let mainContent = document.getElementById('mainContent');
-   mainContent.innerHTML = '';
-   mainContent.innerHTML += /*html*/ `
+  let mainContent = document.getElementById('mainContent');
+  mainContent.innerHTML = '';
+  mainContent.innerHTML += /*html*/ `
                  <main class="main-board-div">
                   <div class="search-addtask-div">
                      <div class="search-input-div">
@@ -163,9 +163,9 @@ function loadBoardContent(params) {
 }
 
 document.getElementById('boardCard').addEventListener('click', () => {
-   document.getElementById('taskOverlay').showModal();
+  document.getElementById('taskOverlay').showModal();
 });
 
 document.getElementById('closeTaskOverlay').addEventListener('click', () => {
-   document.getElementById('taskOverlay').close();
+  document.getElementById('taskOverlay').close();
 });
