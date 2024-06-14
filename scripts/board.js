@@ -2,7 +2,7 @@ let affe = document.getElementById('dialog-container');
 let taskDialog = document.querySelector('.task-dialog');
 
 function openTaskDialog() {
-   affe.style.display = 'unset';
+   dialogContainer.style.display = 'unset';
    setTimeout(function () {
       taskDialog.style.right = '0';
    }, 50);
@@ -11,11 +11,11 @@ function openTaskDialog() {
 function closeTaskDialog() {
    taskDialog.style.right = '-600px';
    setTimeout(function () {
-      affe.style.display = 'none';
+      dialogContainer.style.display = 'none';
    }, 300);
 }
 
-affe.addEventListener('click', function (event) {
+dialogContainer.addEventListener('click', function (event) {
    if (!taskDialog.contains(event.target)) {
       closeTaskDialog();
    }
