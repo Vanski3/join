@@ -30,10 +30,22 @@ function renderContacts(contacts) {
 
     const contactsList = document.querySelector('.contacts-list');
 
-    // Sortiert Kontakte nach Namen
+    // Sort contacts by name
     contacts.sort((a, b) => a.name.localeCompare(b.name));
 
+    let currentLetter = '';
+
     contacts.forEach(contact => {
+        const firstLetter = contact.name[0].toUpperCase();
+
+        if (firstLetter !== currentLetter) {
+            currentLetter = firstLetter;
+            const groupTitle = document.createElement('div');
+            groupTitle.classList.add('contact-group-title');
+            groupTitle.textContent = currentLetter;
+            contactsList.appendChild(groupTitle);
+        }
+
         const contactGroup = document.createElement('div');
         contactGroup.classList.add('contact-group');
 
