@@ -11,7 +11,7 @@
     <link rel="icon" href="./assets/img/logo-blue.svg">
 </head>
 
-<body>
+<body onload="onloadFunc()">
 
     <header class="header">
         <a href="./index.html"><img src="./assets/img/logo-blue.svg" alt="Join Logo"></a>
@@ -25,10 +25,10 @@
         <div class="login-form">
             <span>Log in</span>
             <form class="form-container">
-                <input class="input-email" type="email" placeholder="Email" required>
+                <input id="loginEmail" class="input-email" type="email" placeholder="Email" required>
                 <div class="form-container">
                     <div class="input-wrapper">
-                        <input type="password" placeholder="Password" id="password" />
+                        <input type="password" placeholder="Password" id="loginPassword" />
                         <img src="../assets/img/login/lock.svg" id="togglePassword" alt="Toggle Password Visibility" />
                     </div>
                 </div>
@@ -38,7 +38,7 @@
                     <span>Remember me</span>
                 </div>
                 <div class="btn-container">
-                    <button type="submit" class="blue-btn">Log in</button>
+                    <button onclick="loginUser(); return false" type="submit" class="blue-btn">Log in</button>
                     <a href="./index-main.html">
                         <button type="button" formnovalidate class="white-btn">Guest log in</button>
                     </a>
@@ -57,16 +57,16 @@
                         <span>Sign up</span>
                     </div>
                     <form>
-                        <input placeholder="Name" type="name" required>
-                        <input placeholder="Email" type="email" required>
-                        <input placeholder="Password" type="password" required>
-                        <input placeholder="Confirm Password" type="password" required>
+                        <input id="signupName" placeholder="Name" type="name" required>
+                        <input id="signupEmail" placeholder="Email" type="email" required>
+                        <input id="signupPassword" placeholder="Password" type="password" required>
+                        <input id="confirmSignupPassword" placeholder="Confirm Password" type="password" required>
                         <div class="checkbox-container" id="checkbox-container-signup">
                             <img id="checkboxSignup" src="./assets/img/login/checkbox.svg" alt="">
                             <span>I accept the </span><a href="./privacy.html">Privacy policy</a>
                         </div>
                         <div class="signup-btn">
-                            <button class="blue-btn">Sign up</button>
+                            <button class="blue-btn" onclick="createUser(); return false">Sign up</button>
                         </div>
                     </form>
                 </div>
