@@ -25,8 +25,14 @@
         <div class="login-form">
             <span>Log in</span>
             <form class="form-container">
-                <input type="email" placeholder="Email" required>
-                <input type="password" placeholder="Password" required>
+                <input class="input-email" type="email" placeholder="Email" required>
+                <div class="form-container">
+                    <div class="input-wrapper">
+                        <input type="password" placeholder="Password" id="password" />
+                        <img src="../assets/img/login/lock.svg" id="togglePassword" alt="Toggle Password Visibility" />
+                    </div>
+                </div>
+
                 <div class="checkbox-container">
                     <img id="checkbox" src="./assets/img/login/checkbox.svg" alt="">
                     <span>Remember me</span>

@@ -71,10 +71,13 @@
   gap: 39px;
 }
 
+.input-email {
+  background: url(../assets/img/login/mail.svg) no-repeat 7px 7px;
+}
+
 .form-container input {
   height: 48px;
   width: 420px;
-  background: url(../assets/img/login/mail.svg) no-repeat 7px 7px;
   background-position: right 20px center;
   padding-left: 20px;
   font-size: 19px;
@@ -87,15 +90,19 @@
   border-bottom: 1px solid var(--identity-clr);
 }
 
-.form-container input:nth-child(2) {
-  background: url(../assets/img/login/lock.svg) no-repeat 7px 7px;
-  background-position: right 24px center;
-  padding-left: 20px;
+.form-container .input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
-.form-container input:nth-child(2):focus {
-  background-image: url(../assets/img/login/visibility.svg);
-  background-position: right 20px center;
+.form-container #togglePassword {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  padding-right: 12px;
 }
 
 .checkbox-container {
@@ -412,6 +419,11 @@
   .form-container {
     width: 100%;
     align-items: center;
+  }
+
+  .input-wrapper {
+    width: 100%;
+    justify-content: center;
   }
 
   .login-form input {

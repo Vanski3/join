@@ -1,4 +1,6 @@
 let showSignup = document.getElementById('signup-dialog');
+// let passwordInput = document.getElementById('password');
+// let toggleIcon = document.getElementById('togglePassword');
 
 initializeCheckboxListeners('checkbox');
 initializeCheckboxListeners('checkboxSignup');
@@ -32,3 +34,24 @@ function showSignupPage() {
 function closeSignupPage() {
   showSignup.close();
 }
+
+// passwordInput.addEventListener('input', updateIcon);
+// passwordInput.addEventListener('focus', updateIcon);
+
+// toggleIcon.addEventListener('click', function () {
+//   if (passwordInput.type === 'password') {
+//     passwordInput.type = 'text';
+//     toggleIcon.src = '../assets/img/login/visibility.svg';
+//   } else {
+//     passwordInput.type = 'password';
+//     updateIcon();
+//   }
+// });
+
+// function updateIcon() {
+//   if (passwordInput.value.length > 0) {
+//     toggleIcon.src = '../assets/img/login/visibility_off.svg';
+//   } else {
+//     toggleIcon.src = '../assets/img/login/lock.svg';
+//   }
+// }
