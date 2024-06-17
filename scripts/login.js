@@ -59,23 +59,31 @@ function updateIcon() {
 }
 
 async function onloadFunc() {
-  let userResponse = await getAllUser('users');
-
-  let userKeyArray = Object.keys(userResponse.name);
-
-  for (let i = 0; i < userKeyArray.length; i++) {
-    user.push({
-      id: userKeyArray[i],
-      email: userResponse.email[i],
-      name: userResponse.name[i],
-      password: userResponse.password[i],
-    });
+  try {
+    let userResponse = await getAllUser('users');
+    if (Array.isArray(userResponse)) {
+      for (let i = 0; i < userResponse.length; i++) {
+        user.push({
+          id: userResponse[i].id,
+          email: userResponse[i].email,
+          name: userResponse[i].name,
+          password: userResponse[i].password,
+        });
+      }
+    } else {
+      console.error('userResponse is not in the expected array format');
+    }
+  } catch (error) {
+    console.error('Failed to load users:', error);
   }
 }
 
 async function getAllUser(path) {
   let response = await fetch(BASE_URL + path + '.json');
-  return (responseToJson = await response.json());
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  return await response.json();
 }
 
 function loginUser() {
@@ -99,25 +107,28 @@ function loginUser() {
   }
 }
 
-// function createUser() {
-//   let signupName = document.getElementById('signupName').value;
-//   let signupEmail = document.getElementById('signupEmail').value;
-//   let signupPassword = document.getElementById('signupPassword').value;
+async function createUser() {
+  let signupName = document.getElementById('signupName').value;
+  let signupEmail = document.getElementById('signupEmail').value;
+  let signupPassword = document.getElementById('signupPassword').value;
+  let newId = user.length.toString();
+  let newUser = {
+    id: newId,
+    email: signupEmail,
+    name: signupName,
+    password: signupPassword,
+  };
+  user.push(newUser);
+  await putData('/users', user);
+}
 
-//   putData((path = ''), signupName, signupEmail, signupPassword);
-// }
-
-// async function putData(
-//   path = 'users',
-//   data = {
-//     email: signupName,
-//   }
-// ) {
-//   let response = await fetch(BASE_URL + path + '.json', {
-//     method: 'PUT',
-//     header: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(data),
-//   });
-// }
+async function putData(path = '', data = {}) {
+  let response = await fetch(BASE_URL + path + '.json', {
+    method: 'PUT',
+    header: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+  return await response.json();
+}
