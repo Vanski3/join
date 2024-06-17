@@ -45,7 +45,9 @@ function handleLowClick(event) {
 function resetForm(event) {
   event.preventDefault();
   document.getElementById('addTask').reset();
-  document.getElementById(selectedButtonId).click();
+  if (selectedButtonId != null) {
+    document.getElementById(selectedButtonId).click();
+  }
 }
 
 function loadAddTaskContent(params) {

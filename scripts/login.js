@@ -99,11 +99,13 @@ function loginUser() {
       alert('Email or password does not match');
       loginEmail.value = '';
       loginPassword.value = '';
+      toggleIcon.src = '../assets/img/login/lock.svg';
     }
   } else {
     alert('Email or password does not match');
     loginEmail.value = '';
     loginPassword.value = '';
+    toggleIcon.src = '../assets/img/login/lock.svg';
   }
 }
 

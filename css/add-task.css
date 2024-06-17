@@ -11,6 +11,11 @@
   margin-left: 50px;
 }
 
+.task-dialog {
+  container-type: inline-size;
+  margin-left: -80px;
+}
+
 .add-task-main-content {
   width: unset;
 }
@@ -319,5 +324,27 @@ textarea::placeholder {
 
   #button-container {
     flex-direction: column;
+  }
+}
+
+@container (min-width: 500px) {
+  .task-description {
+    flex-direction: column;
+    max-height: 600px;
+    overflow-y: auto;
+    height: fit-content;
+    margin-left: -60px;
+  }
+
+  .task-description::-webkit-scrollbar {
+    display: none;
+  }
+
+  .required-container {
+    left: 20px;
+  }
+
+  .buttons {
+    left: 200px;
   }
 }
