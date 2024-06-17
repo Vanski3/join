@@ -24,12 +24,16 @@
     <section class="login-form-container fade-in-animation">
         <div class="login-form">
             <span>Log in</span>
-            <form class="form-container">
-                <input id="loginEmail" class="input-email" type="email" placeholder="Email" required>
+            <form onsubmit="loginUser(); return false" class="form-container">
+                <div class="input-wrapper">
+                    <input id="loginEmail" class="input-email" type="email" placeholder="Email" required>
+                    <img src="../assets/img/login/mail.svg" class="input-img" alt="Toggle Password Visibility" />
+                </div>
                 <div class="form-container">
                     <div class="input-wrapper">
-                        <input type="password" placeholder="Password" id="loginPassword" />
-                        <img src="../assets/img/login/lock.svg" id="togglePassword" alt="Toggle Password Visibility" />
+                        <input type="password" placeholder="Password" id="loginPassword" required />
+                        <img src="../assets/img/login/lock.svg" class="input-img" id="togglePassword"
+                            alt="Toggle Password Visibility" />
                     </div>
                 </div>
 
@@ -38,7 +42,8 @@
                     <span>Remember me</span>
                 </div>
                 <div class="btn-container">
-                    <button onclick="loginUser(); return false" type="submit" class="blue-btn">Log in</button>
+                    <button type="submit" class="blue-btn">Log
+                        in</button>
                     <a href="./index-main.html">
                         <button type="button" formnovalidate class="white-btn">Guest log in</button>
                     </a>
@@ -56,17 +61,44 @@
                                 alt=""></a>
                         <span>Sign up</span>
                     </div>
-                    <form>
-                        <input id="signupName" placeholder="Name" type="name" required>
-                        <input id="signupEmail" placeholder="Email" type="email" required>
-                        <input id="signupPassword" placeholder="Password" type="password" required>
-                        <input id="confirmSignupPassword" placeholder="Confirm Password" type="password" required>
-                        <div class="checkbox-container" id="checkbox-container-signup">
-                            <img id="checkboxSignup" src="./assets/img/login/checkbox.svg" alt="">
-                            <span>I accept the </span><a href="./privacy.html">Privacy policy</a>
-                        </div>
-                        <div class="signup-btn">
-                            <button class="blue-btn" onclick="createUser(); return false">Sign up</button>
+                    <form onsubmit="createUser(); return false" id="signup-form">
+                        <div class="form-container-signup">
+                            <div class="input-wrapper">
+                                <input id="signupName" placeholder="Name" type="name" required>
+                                <img src="../assets/img/login/person.svg" class="input-img-signup"
+                                    alt="Toggle Password Visibility" />
+                            </div>
+                            <div class="form-container-signup">
+                                <div class="input-wrapper">
+                                    <input id="signupEmail" placeholder="Email" type="email" required>
+                                    <img src="../assets/img/login/mail.svg" class="input-img-signup"
+                                        alt="Toggle Password Visibility" />
+                                </div>
+                            </div>
+                            <div class="form-container-signup">
+                                <div class="input-wrapper">
+                                    <input id="passwordSignup" placeholder="Password" type="password" required>
+                                    <img src="../assets/img/login/lock.svg" id="toggleSignupPassword"
+                                        class="input-img-signup input-img-signup-password "
+                                        alt="Toggle Password Visibility" />
+                                </div>
+                            </div>
+                            <div class="form-container-signup">
+                                <div class="input-wrapper">
+                                    <input id="confirmSignup" placeholder="Confirm Password" type="password" required>
+                                    <img src="../assets/img/login/lock.svg" id="confirmSignupPassword"
+                                        class="input-img-signup input-img-signup-password "
+                                        alt="Toggle Password Visibility" />
+                                </div>
+                            </div>
+                            <div class="checkbox-container" id="checkbox-container-signup">
+                                <img id="checkboxSignup" src="./assets/img/login/checkbox.svg" alt="">
+                                <span>I accept the </span><a href="./privacy.html">Privacy policy</a>
+                            </div>
+                            <div class="signup-btn">
+                                <button type="submit" disabled class="blue-btn" id="blue-btn">Sign
+                                    up</button>
+                            </div>
                         </div>
                     </form>
                 </div>

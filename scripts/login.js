@@ -1,32 +1,37 @@
 let showSignup = document.getElementById('signup-dialog');
-let passwordInput = document.getElementById('loginPassword');
-let toggleIcon = document.getElementById('togglePassword');
 const BASE_URL = 'https://join-2024-default-rtdb.europe-west1.firebasedatabase.app/';
 let user = [];
 
-initializeCheckboxListeners('checkbox');
-initializeCheckboxListeners('checkboxSignup');
+setupToggle('loginPassword', 'togglePassword');
+setupToggle('passwordSignup', 'toggleSignupPassword');
+setupToggle('confirmSignup', 'confirmSignupPassword');
+
+document.addEventListener('DOMContentLoaded', () => {
+  initializeCheckboxListeners('checkbox');
+  initializeCheckboxListeners('checkboxSignup');
+});
 
 function initializeCheckboxListeners(checkboxId) {
   const checkbox = document.getElementById(checkboxId);
-
-  checkbox.addEventListener('mouseover', () => {
-    checkbox.classList.add('hovering');
-  });
-
-  checkbox.addEventListener('mouseout', () => {
-    checkbox.classList.remove('hovering');
-  });
-
-  checkbox.addEventListener('click', () => {
-    if (checkbox.classList.contains('checked')) {
-      checkbox.classList.remove('checked');
-      checkbox.src = './assets/img/login/checkbox.svg';
+  const toggleCheckboxState = () => {
+    checkbox.classList.toggle('checked');
+    checkbox.src = checkbox.classList.contains('checked')
+      ? './assets/img/login/checkbox-checked.svg'
+      : './assets/img/login/checkbox.svg';
+    if (checkboxId === 'checkboxSignup' && checkbox.classList.contains('checked')) {
+      enableBtn();
     } else {
-      checkbox.classList.add('checked');
-      checkbox.src = './assets/img/login/checkbox-checked.svg';
+      enableBtn();
     }
-  });
+  };
+  checkbox.addEventListener('mouseover', () => checkbox.classList.add('hovering'));
+  checkbox.addEventListener('mouseout', () => checkbox.classList.remove('hovering'));
+  checkbox.addEventListener('click', toggleCheckboxState);
+}
+
+function enableBtn() {
+  let btn = document.getElementById('blue-btn');
+  btn.disabled = !btn.disabled;
 }
 
 function showSignupPage() {
@@ -35,27 +40,32 @@ function showSignupPage() {
 
 function closeSignupPage() {
   showSignup.close();
+  document.getElementById('signup-form').reset();
 }
 
-passwordInput.addEventListener('input', updateIcon);
-passwordInput.addEventListener('focus', updateIcon);
+function updateIcon(inputField, iconElement) {
+  iconElement.src =
+    inputField.value.length > 0
+      ? '../assets/img/login/visibility_off.svg'
+      : '../assets/img/login/lock.svg';
+}
 
-toggleIcon.addEventListener('click', function () {
-  if (passwordInput.type === 'password') {
-    passwordInput.type = 'text';
-    toggleIcon.src = '../assets/img/login/visibility.svg';
-  } else {
-    passwordInput.type = 'password';
-    updateIcon();
-  }
-});
+function setupToggle(inputFieldId, iconElementId) {
+  let inputField = document.getElementById(inputFieldId);
+  let iconElement = document.getElementById(iconElementId);
 
-function updateIcon() {
-  if (passwordInput.value.length > 0) {
-    toggleIcon.src = '../assets/img/login/visibility_off.svg';
-  } else {
-    toggleIcon.src = '../assets/img/login/lock.svg';
-  }
+  inputField.addEventListener('input', () => updateIcon(inputField, iconElement));
+  inputField.addEventListener('focus', () => updateIcon(inputField, iconElement));
+
+  iconElement.addEventListener('click', () => {
+    if (inputField.type === 'password') {
+      inputField.type = 'text';
+      iconElement.src = '../assets/img/login/visibility.svg';
+    } else {
+      inputField.type = 'password';
+      updateIcon(inputField, iconElement);
+    }
+  });
 }
 
 async function onloadFunc() {
@@ -112,7 +122,7 @@ function loginUser() {
 async function createUser() {
   let signupName = document.getElementById('signupName').value;
   let signupEmail = document.getElementById('signupEmail').value;
-  let signupPassword = document.getElementById('signupPassword').value;
+  let signupPassword = document.getElementById('passwordSignup').value;
   let newId = user.length.toString();
   let newUser = {
     id: newId,
