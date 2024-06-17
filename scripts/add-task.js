@@ -1,61 +1,60 @@
 let selectedButtonId = null;
 
-// function handleUrgentClick() {
-//    console.log('Urgent button clicked');
-//    //   FUNCTION
-// }
-
-// function handleMediumClick() {
-//    console.log('Medium button clicked');
-//    //   FUNCTION
-// }
-
-// function handleLowClick() {
-//    console.log('Low button clicked');
-//    //   FUNCTION
-// }
-
-// document.getElementById('buttonUrgent').addEventListener('click', function (event) {
-//    event.preventDefault();
-//    toggleColor('buttonUrgent', '#FF3D00', 'UrgentOne', 'UrgentTwo');
-//    //   handleUrgentClick();
-// });
-
-// document.getElementById('buttonMedium').addEventListener('click', function (event) {
-//    event.preventDefault();
-//    toggleColor('buttonMedium', '#FFA800', 'MediumOne', 'MediumTwo');
-//    //   handleMediumClick();
-// });
-
-// document.getElementById('buttonLow').addEventListener('click', function (event) {
-//    event.preventDefault();
-//    toggleColor('buttonLow', '#7AE229', 'LowOne', 'LowTwo');
-//    //   handleLowClick();
-// });
-
 function toggleColor(buttonId, color, idOne, idTwo) {
-   if (selectedButtonId) {
-      let prev = document.getElementById(selectedButtonId);
-      prev.style = '';
-      document.getElementById(prev.getAttribute('data-svg-one')).style.fill = prev.getAttribute('data-original-color');
-      document.getElementById(prev.getAttribute('data-svg-two')).style.fill = prev.getAttribute('data-original-color');
-   }
-   if (buttonId === selectedButtonId) return (selectedButtonId = null);
-   let button = document.getElementById(buttonId);
-   button.style = `background-color:${color};color:#fff;border-bottom:unset`;
-   document.getElementById(idOne).style.fill = document.getElementById(idTwo).style.fill = '#fff';
-   button.setAttribute('data-svg-one', idOne);
-   button.setAttribute('data-svg-two', idTwo);
-   selectedButtonId = buttonId;
+  if (selectedButtonId) {
+    let prev = document.getElementById(selectedButtonId);
+    prev.style = '';
+    document.getElementById(prev.getAttribute('data-svg-one')).style.fill =
+      prev.getAttribute('data-original-color');
+    document.getElementById(prev.getAttribute('data-svg-two')).style.fill =
+      prev.getAttribute('data-original-color');
+  }
+  if (buttonId === selectedButtonId) return (selectedButtonId = null);
+  let button = document.getElementById(buttonId);
+  button.style = `background-color:${color};color:#fff;border-bottom:unset`;
+  document.getElementById(idOne).style.fill = document.getElementById(idTwo).style.fill = '#fff';
+  button.setAttribute('data-svg-one', idOne);
+  button.setAttribute('data-svg-two', idTwo);
+  selectedButtonId = buttonId;
+}
+
+function handleUrgentClick(event) {
+  event.preventDefault();
+  toggleColor('buttonUrgent', '#FF3D00', 'UrgentOne', 'UrgentTwo');
+
+  console.log('Urgent button clicked');
+  //   FUNCTION
+}
+
+function handleMediumClick(event) {
+  event.preventDefault();
+  toggleColor('buttonMedium', '#FFA800', 'MediumOne', 'MediumTwo');
+
+  console.log('Medium button clicked');
+  //   FUNCTION
+}
+
+function handleLowClick(event) {
+  event.preventDefault();
+  toggleColor('buttonLow', '#7AE229', 'LowOne', 'LowTwo');
+
+  console.log('Low button clicked');
+  //   FUNCTION
+}
+
+function resetForm(event) {
+  event.preventDefault();
+  document.getElementById('addTask').reset();
+  document.getElementById(selectedButtonId).click();
 }
 
 function loadAddTaskContent(params) {
-   let mainContent = document.getElementById('mainContent');
-   mainContent.innerHTML = '';
-   mainContent.innerHTML += /*html*/ `
+  let mainContent = document.getElementById('mainContent');
+  mainContent.innerHTML = '';
+  mainContent.innerHTML += /*html*/ `
        <div class="add-task-main-content">
       <main>
-         <form class="task-description">
+         <form id="addTask" class="task-description">
             <div class="first-row">
                <div>
                   <span>Title<span class="red-star">*</span></span>
@@ -90,7 +89,7 @@ function loadAddTaskContent(params) {
                <div class="prio-container">
                   Prio
                   <div id="button-container">
-                     <button id="buttonUrgent">Urgent <svg width="21" height="16" viewBox="0 0 21 16" fill="none"
+                     <button onclick="handleUrgentClick(event)" id="buttonUrgent">Urgent <svg width="21" height="16" viewBox="0 0 21 16" fill="none"
                            xmlns="http://www.w3.org/2000/svg">
                            <path id="UrgentOne"
                               d="M19.6528 15.2547C19.4182 15.2551 19.1896 15.1803 19.0007 15.0412L10.7487 8.958L2.49663 15.0412C2.38078 15.1267 2.24919 15.1887 2.10939 15.2234C1.96959 15.2582 1.82431 15.2651 1.68184 15.2437C1.53937 15.2223 1.40251 15.1732 1.27906 15.099C1.15562 15.0247 1.04801 14.927 0.96238 14.8112C0.876751 14.6954 0.814779 14.5639 0.780002 14.4243C0.745226 14.2846 0.738325 14.1394 0.759696 13.997C0.802855 13.7095 0.958545 13.4509 1.19252 13.2781L10.0966 6.70761C10.2853 6.56802 10.5139 6.49268 10.7487 6.49268C10.9835 6.49268 11.212 6.56802 11.4007 6.70761L20.3048 13.2781C20.4908 13.415 20.6286 13.6071 20.6988 13.827C20.7689 14.0469 20.7678 14.2833 20.6955 14.5025C20.6232 14.7216 20.4834 14.9124 20.2962 15.0475C20.1089 15.1826 19.8837 15.2551 19.6528 15.2547Z"
@@ -100,7 +99,7 @@ function loadAddTaskContent(params) {
                               fill="#FF3D00" />
                         </svg>
                      </button>
-                     <button id="buttonMedium">Medium <svg width="21" height="8" viewBox="0 0 21 8" fill="none"
+                     <button onclick="handleMediumClick(event)" id="buttonMedium">Medium <svg width="21" height="8" viewBox="0 0 21 8" fill="none"
                            xmlns="http://www.w3.org/2000/svg">
                            <g clip-path="url(#clip0_187336_4295)">
                               <path id="MediumOne"
@@ -119,7 +118,7 @@ function loadAddTaskContent(params) {
                         </svg>
 
                      </button>
-                     <button id="buttonLow">Low <svg width="21" height="16" viewBox="0 0 21 16" fill="none"
+                     <button onclick="handleLowClick(event)" id="buttonLow">Low <svg width="21" height="16" viewBox="0 0 21 16" fill="none"
                            xmlns="http://www.w3.org/2000/svg">
                            <path id="LowOne"
                               d="M10.2485 9.50589C10.0139 9.5063 9.7854 9.43145 9.59655 9.29238L0.693448 2.72264C0.57761 2.63708 0.47977 2.52957 0.405515 2.40623C0.33126 2.28289 0.282043 2.14614 0.260675 2.00379C0.217521 1.71631 0.290421 1.42347 0.463337 1.1897C0.636253 0.955928 0.895022 0.800371 1.18272 0.757248C1.47041 0.714126 1.76347 0.786972 1.99741 0.95976L10.2485 7.04224L18.4997 0.95976C18.6155 0.874204 18.7471 0.812285 18.8869 0.777538C19.0266 0.742791 19.1719 0.735896 19.3144 0.757248C19.4568 0.7786 19.5937 0.82778 19.7171 0.901981C19.8405 0.976181 19.9481 1.07395 20.0337 1.1897C20.1194 1.30545 20.1813 1.43692 20.2161 1.57661C20.2509 1.71629 20.2578 1.86145 20.2364 2.00379C20.215 2.14614 20.1658 2.28289 20.0916 2.40623C20.0173 2.52957 19.9195 2.63708 19.8036 2.72264L10.9005 9.29238C10.7117 9.43145 10.4831 9.5063 10.2485 9.50589Z"
@@ -148,7 +147,7 @@ function loadAddTaskContent(params) {
             </div>
 
             <div class="buttons">
-               <button formnovalidate class="white-btn">Clear <img src="./assets/img/add-task/cancel.svg"
+               <button onclick="resetForm(event); return false" class="white-btn">Clear <img src="./assets/img/add-task/cancel.svg"
                      alt=""></button>
                <button class="blue-btn">Create Task <img src="./assets/img/add-task/check.svg" alt=""></button>
             </div>

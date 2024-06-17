@@ -2,29 +2,29 @@ let popup = document.getElementById('dialog-container');
 let taskDialog = document.querySelector('.task-dialog');
 
 function openTaskDialog() {
-   popup.style.display = 'unset';
-   setTimeout(function () {
-      taskDialog.style.right = '0';
-   }, 50);
+  popup.style.display = 'unset';
+  setTimeout(function () {
+    taskDialog.style.right = '0';
+  }, 50);
 }
 
 function closeTaskDialog() {
-   taskDialog.style.right = '-600px';
-   setTimeout(function () {
-      popup.style.display = 'none';
-   }, 300);
+  taskDialog.style.right = '-600px';
+  setTimeout(function () {
+    popup.style.display = 'none';
+  }, 300);
 }
 
 popup.addEventListener('click', function (event) {
-   if (!taskDialog.contains(event.target)) {
-      closeTaskDialog();
-   }
+  if (!taskDialog.contains(event.target)) {
+    closeTaskDialog();
+  }
 });
 
 function loadBoardContent(params) {
-   let mainContent = document.getElementById('mainContent');
-   mainContent.innerHTML = '';
-   mainContent.innerHTML += /*html*/ `
+  let mainContent = document.getElementById('mainContent');
+  mainContent.innerHTML = '';
+  mainContent.innerHTML += /*html*/ `
                               <main class="main-board-div">
                   <div class="search-addtask-div">
                      <div class="search-input-div">
@@ -36,7 +36,7 @@ function loadBoardContent(params) {
                            src="assets/img/board/search-image-default.svg"
                            alt="" />
                      </div>
-                     <button onclick="openTaskDialog()" class="add-task-button">
+                     <button onclick="openTaskDialog()" class="add-task-button" id="">
                         Add Task
                         <img src="assets/img/board/add-task-plus-icon.svg" alt="" />
                      </button>
@@ -116,22 +116,3 @@ function loadBoardContent(params) {
                
     `;
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-   const mainContent = document.getElementById('mainContent');
-   const taskOverlay = document.getElementById('taskOverlay');
-
-   // Event Delegation für Klicks auf 'boardCard'
-   mainContent.addEventListener('click', (event) => {
-      if (event.target.closest('.board-card')) {
-         taskOverlay.showModal();
-      }
-   });
-
-   // Event Listener für Klicks auf 'closeTaskOverlay'
-   taskOverlay.addEventListener('click', (event) => {
-      if (event.target.closest('#closeTaskOverlay')) {
-         taskOverlay.close();
-      }
-   });
-});
