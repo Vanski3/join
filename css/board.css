@@ -277,6 +277,39 @@ h1 {
    cursor: pointer;
 }
 
+.task-div {
+   display: flex;
+   flex-direction: column;
+   gap: 16px;
+}
+
+.contacts-task-overlay {
+   display: flex;
+   flex-direction: column;
+   gap: 8px;
+}
+
+.assigned-to-div {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+}
+
+.contacts-in-cards {
+   width: 32px;
+   height: 32px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border-radius: 50%;
+   margin-right: -5px;
+   border: 1px solid rgba(255, 255, 255, 1);
+}
+
+.contacts-in-cards-div {
+   display: flex;
+}
+
 @media only screen and (max-width: 1400px) {
    .board {
       flex-direction: column;

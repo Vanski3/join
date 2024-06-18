@@ -10,7 +10,8 @@
       <link rel="stylesheet" href="/css/privacy-legal-help.css" />
       <link rel="stylesheet" href="/css/board.css" />
       <link rel="stylesheet" href="./css/add-task.css" />
-      <link rel="stylesheet" href="css/contact.css">
+      <link rel="stylesheet" href="css/contact.css" />
+      <script src="./scripts/login.js" defer></script>
       <script src="/scripts/summary.js" defer></script>
       <script src="/scripts/contact.js" defer></script>
       <script src="./scripts/board.js" defer></script>
@@ -20,11 +21,12 @@
       <script src="./scripts/index-main.js" defer></script>
       <script src="./scripts/header.js" defer></script>
       <script src="./scripts/add-task.js" defer></script>
+      <script src="./scripts/task-overlay.js"></script>
 
       <link rel="stylesheet" href="/css/summary.css" />
       <title>Document</title>
    </head>
-   <body onload="renderSummary()">
+   <body onload="init()">
       <div class="desktop-template-div">
          <header>
             <a href="/index.html"><img class="header-logo" src="/assets/img/header-icons/join-logo.svg" alt="" /></a>
@@ -91,51 +93,6 @@
          </div>
       </div>
       <!-- Task Popup -->
-      <dialog id="taskOverlay" class="dialog-overlay-board">
-         <div class="task-overlay">
-            <div class="categorie-info">
-               <img class="overlay-card-label" src="./assets/img/task-overlay/user-story.svg" alt="" />
-               <img
-                  id="closeTaskOverlay"
-                  class="close-overlay-task"
-                  onmouseover="this.src='./assets/img/task-overlay/close-icon-variant2.svg'"
-                  onmouseout="this.src='./assets/img/task-overlay/close-icon.svg'"
-                  src="./assets/img/task-overlay/close-icon.svg"
-                  alt="" />
-            </div>
-            <span class="title-field">Kochwelt Page & Recipe Recommender</span>
-            <span class="description-field">Build start page with recipe recommendation.</span>
-            <div class="due-date-field">
-               <span class="task-overlay-categories">Due date:</span>
-               <div>10/05/2023</div>
-            </div>
-            <div class="priority-field">
-               <span class="task-overlay-categories">Priority</span>
-               <img src="./assets/img/task-overlay/Medium-icon.svg" alt="" />
-            </div>
-            <div class="assigned-to-field">
-               <span class="task-overlay-categories">Assigned To:</span>
-               <div>RENDER CONTACTS IN HERE!</div>
-            </div>
-            <div class="subtasks-field">
-               <span class="task-overlay-categories">Subtasks</span>
-               <div>RENDER SUbtasks IN HERE!</div>
-            </div>
-            <div class="delete-edit-field">
-               <img
-                  onmouseover="this.src='./assets/img/task-overlay/delete-variant2.svg'"
-                  onmouseout="this.src='./assets/img/task-overlay/Delete.svg'"
-                  src="./assets/img/task-overlay/Delete.svg"
-                  alt="" />
-               <div class="seperator-field"></div>
-
-               <img
-                  onmouseover="this.src='./assets/img/task-overlay/edit-variant2.svg'"
-                  onmouseout="this.src='./assets/img/task-overlay/edit.svg'"
-                  src="./assets/img/task-overlay/edit.svg"
-                  alt="" />
-            </div>
-         </div>
-      </dialog>
+      <dialog id="taskOverlay" class="dialog-overlay-board"></dialog>
    </body>
 </html>
