@@ -45,7 +45,7 @@ function loadBoardContent(params) {
                            src="assets/img/board/search-image-default.svg"
                            alt="" />
                      </div>
-                     <button onclick="openTaskDialog()" class="add-task-button">
+                     <button onclick="openTaskDialog()" class="add-task-button" id="">
                         Add Task
                         <img src="assets/img/board/add-task-plus-icon.svg" alt="" />
                      </button>
