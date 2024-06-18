@@ -1,4 +1,53 @@
 let selectedButtonId = null;
+let priority = '';
+let tasksAddTask = [];
+let contacts = [];
+
+function renderToList() {
+  let list = document.getElementById('contacts');
+  for (let i = 0; i < contacts.length; i++) {
+    const contact = contacts[i].name;
+    list.innerHTML += ` <option value="${contact}"><div style='background-color: "${contacts[i].contactImageBgColor}"'>${contacts[i].nameInitials}</div> ${contact}</option>`;
+  }
+}
+
+async function onloadContacts() {
+  contacts = [];
+  let userResponse = await getAllContacts('contacts');
+  for (let i = 0; i < userResponse.contactImageBgColor.length; i++) {
+    contacts.push({
+      contactImageBgColor: userResponse.contactImageBgColor[i],
+      email: userResponse.email[i],
+      name: userResponse.name[i],
+      nameInitials: userResponse.nameInitials[i],
+      phoneNumber: userResponse.phoneNumber[i],
+    });
+  }
+}
+
+async function getAllContacts(path) {
+  let response = await fetch(BASE_URL + path + '.json');
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  return await response.json();
+}
+
+function saveTasks() {
+  let data = document.getElementsByClassName('my-inputs');
+
+  let newTask = {
+    title: data[0].value,
+    description: data[1].value,
+    assignedTo: data[2].value,
+    dueDate: data[3].value,
+    priority: priority,
+    categoryName: data[4].value,
+    subtasks: data[5].value,
+  };
+
+  tasksAddTask.push(newTask);
+}
 
 function toggleColor(buttonId, color, idOne, idTwo) {
   if (selectedButtonId) {
@@ -21,7 +70,7 @@ function toggleColor(buttonId, color, idOne, idTwo) {
 function handleUrgentClick(event) {
   event.preventDefault();
   toggleColor('buttonUrgent', '#FF3D00', 'UrgentOne', 'UrgentTwo');
-
+  priority = 'urgent';
   console.log('Urgent button clicked');
   //   FUNCTION
 }
@@ -29,7 +78,7 @@ function handleUrgentClick(event) {
 function handleMediumClick(event) {
   event.preventDefault();
   toggleColor('buttonMedium', '#FFA800', 'MediumOne', 'MediumTwo');
-
+  priority = 'medium';
   console.log('Medium button clicked');
   //   FUNCTION
 }
@@ -37,7 +86,7 @@ function handleMediumClick(event) {
 function handleLowClick(event) {
   event.preventDefault();
   toggleColor('buttonLow', '#7AE229', 'LowOne', 'LowTwo');
-
+  priority = 'low';
   console.log('Low button clicked');
   //   FUNCTION
 }
@@ -60,18 +109,18 @@ function loadAddTaskContent(params) {
             <div class="first-row">
                <div>
                   <span>Title<span class="red-star">*</span></span>
-                  <input required placeholder="Enter a title" type="text">
+                  <input class="my-inputs" required placeholder="Enter a title" type="text">
                </div>
                <div>
                   Description
-                  <textarea placeholder="Enter a Description" name="description" id="description"></textarea>
+                  <textarea class="my-inputs" placeholder="Enter a Description" name="description" id="description"></textarea>
                </div>
 
                <div>
                   <div>
                      Assigned to
                      <div>
-                        <select name="contact-list" id="contacts">
+                        <select class="my-inputs" name="contact-list" id="contacts">
                            <option value="">Select contacts to assign</option>
                         </select>
                      </div>
@@ -85,7 +134,7 @@ function loadAddTaskContent(params) {
             <div class="second-row">
                <div>
                   <span>Due Date<span class="red-star">*</span></span>
-                  <input required type="date">
+                  <input class="my-inputs" required type="date">
                </div>
 
                <div class="prio-container">
@@ -135,16 +184,16 @@ function loadAddTaskContent(params) {
 
                <div>
                   <span>Category<span class="red-star">*</span></span>
-                  <select required name="task-list" id="category">
+                  <select class="my-inputs" required name="task-list" id="category">
                      <option value="">Select task category</option>
-                     <option value="technical">Technical Task</option>
-                     <option value="user">User Story</option>
+                     <option value="Technical Task">Technical Task</option>
+                     <option value="User Story">User Story</option>
                   </select>
                </div>
 
                <div class="substasks">
                   Subtasks
-                  <input placeholder="Add new subtask" name="subtasks" id="subtasks">
+                  <input class="my-inputs" placeholder="Add new subtask" name="subtasks" id="subtasks">
                </div>
             </div>
 

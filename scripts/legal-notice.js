@@ -1,7 +1,7 @@
 function loadLegalNoticeContent(params) {
-   let mainContent = document.getElementById('mainContent');
-   mainContent.innerHTML = '';
-   mainContent.innerHTML += /*html*/ `
+  let mainContent = document.getElementById('mainContent');
+  mainContent.innerHTML = '';
+  mainContent.innerHTML += /*html*/ `
        <div class="content-div">
        <div class="headline-row">
              <h1>Legal Notice</h1>
