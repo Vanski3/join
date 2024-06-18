@@ -275,21 +275,20 @@ function renderContactsInCards(i) {
 }
 
 function searchTask(params) {
-   // document.getElementById('taskStatus0').style.display = 'none';
-   // document.getElementById('taskStatus1').style.display = 'none';
-   // document.getElementById('taskStatus2').style.display = 'none';
-   // document.getElementById('taskStatus3').style.display = 'none';
    clearBoardContent();
-   let searchName = document.getElementById('searchInput').value.toLowerCase();
+   let searchTitle = document.getElementById('searchInput').value.toLowerCase();
    let searchDescription = document.getElementById('searchInput').value.toLowerCase();
-   if (searchName || searchDescription === '') {
+   if (searchTitle === '') {
       renderBoardCards();
       return;
    }
    for (let i = 0; i < tasks.taskStatus.length; i++) {
       let title = tasks.title[i].toLowerCase();
       let taskDescription = tasks.description[i].toLowerCase();
-      if ((searchName.length >= 3 && title.includes(searchName)) || taskDescription.includes(searchDescription)) {
+      if (
+         (searchTitle.length >= 3 && title.includes(searchTitle)) ||
+         (searchDescription.length >= 3 && taskDescription.includes(searchDescription))
+      ) {
          let taskStatus = tasks.taskStatus[i];
          let title = tasks.title[i];
          let description = tasks.description[i];
@@ -312,8 +311,8 @@ function searchTask(params) {
                                     </div>
                                  </div>
                `;
+         renderContactsInCards(i);
       }
-      // renderContactsInCards(i);
    }
    checkIfTaskIsEmpty();
 }
