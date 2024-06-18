@@ -23,6 +23,8 @@ async function onloadContacts() {
       phoneNumber: userResponse.phoneNumber[i],
     });
   }
+  renderToList();
+  //   contactSelect();
 }
 
 async function getAllContacts(path) {
@@ -33,13 +35,13 @@ async function getAllContacts(path) {
   return await response.json();
 }
 
-function saveTasks() {
+function saveTask() {
   let data = document.getElementsByClassName('my-inputs');
 
   let newTask = {
     title: data[0].value,
     description: data[1].value,
-    assignedTo: data[2].value,
+    assignedTo: data[2].innerHTML,
     dueDate: data[3].value,
     priority: priority,
     categoryName: data[4].value,
@@ -99,13 +101,36 @@ function resetForm(event) {
   }
 }
 
+// function contactSelect() {
+//   let contactsSelect = document.getElementById('contacts');
+//   let placeholderDiv = document.getElementById('placeholder');
+
+//   contactsSelect.addEventListener('change', () => {
+//     placeholderDiv.innerHTML = '';
+
+//     const selectedOptions = Array.from(contactsSelect.selectedOptions).map((option) => option.text);
+
+//     if (selectedOptions.length) {
+//       selectedOptions.forEach((contact) => {
+//         const contactDiv = document.createElement('div');
+//         contactDiv.classList.add('contact-div');
+//         contactDiv.classList.add('my-inputs');
+//         contactDiv.textContent = contact;
+//         placeholderDiv.appendChild(contactDiv);
+//       });
+//     } else {
+//       placeholderDiv.textContent = 'Placeholder for selected Contacts';
+//     }
+//   });
+// }
+
 function loadAddTaskContent(params) {
   let mainContent = document.getElementById('mainContent');
   mainContent.innerHTML = '';
   mainContent.innerHTML += /*html*/ `
        <div class="add-task-main-content">
       <main>
-         <form id="addTask" class="task-description">
+         <form onsubmit="saveTask()" id="addTask" class="task-description">
             <div class="first-row">
                <div>
                   <span>Title<span class="red-star">*</span></span>
@@ -120,11 +145,10 @@ function loadAddTaskContent(params) {
                   <div>
                      Assigned to
                      <div>
-                        <select class="my-inputs" name="contact-list" id="contacts">
-                           <option value="">Select contacts to assign</option>
+                        <select name="contact-list" id="contacts" multiple>
                         </select>
                      </div>
-                     <div>Placeholder for selected Contacts</div>
+                     <div id="placeholder"></div>
                   </div>
                </div>
             </div>
@@ -200,7 +224,7 @@ function loadAddTaskContent(params) {
             <div class="buttons">
                <button onclick="resetForm(event); return false" class="white-btn">Clear <img src="./assets/img/add-task/cancel.svg"
                      alt=""></button>
-               <button class="blue-btn">Create Task <img src="./assets/img/add-task/check.svg" alt=""></button>
+               <button type=submit class="blue-btn">Create Task <img src="./assets/img/add-task/check.svg" alt=""></button>
             </div>
 
          </form>
@@ -212,4 +236,5 @@ function loadAddTaskContent(params) {
    </div>
    </div>
   `;
+  onloadContacts();
 }

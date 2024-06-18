@@ -24,9 +24,9 @@
     <section class="login-form-container fade-in-animation">
         <div class="login-form">
             <span>Log in</span>
-            <form onsubmit="return false" class="form-container">
+            <form novalidate id="loginForm" onsubmit="return false" class="form-container">
                 <div class="input-wrapper">
-                    <input id="loginEmail" class="input-email" type="email" placeholder="Email" required>
+                    <input name="email" id="loginEmail" class="input-email" type="email" placeholder="Email" required>
                     <img src="../assets/img/login/mail.svg" class="input-img" alt="Toggle Password Visibility" />
                 </div>
                 <div class="form-container">

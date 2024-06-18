@@ -120,8 +120,6 @@ async function getAllUser(path) {
 }
 
 function loginUser() {
-  checkboxLogin.click();
-
   let loginEmail = document.getElementById('loginEmail');
   let loginPassword = document.getElementById('loginPassword');
 
