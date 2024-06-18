@@ -279,9 +279,10 @@ function searchTask(params) {
    // document.getElementById('taskStatus1').style.display = 'none';
    // document.getElementById('taskStatus2').style.display = 'none';
    // document.getElementById('taskStatus3').style.display = 'none';
+   clearBoardContent();
    let searchName = document.getElementById('searchInput').value.toLowerCase();
    let searchDescription = document.getElementById('searchInput').value.toLowerCase();
-   if (searchName === '') {
+   if (searchName || searchDescription === '') {
       renderBoardCards();
       return;
    }
@@ -312,7 +313,7 @@ function searchTask(params) {
                                  </div>
                `;
       }
-      renderContactsInCards(i);
+      // renderContactsInCards(i);
    }
    checkIfTaskIsEmpty();
 }
