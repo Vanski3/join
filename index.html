@@ -24,7 +24,7 @@
     <section class="login-form-container fade-in-animation">
         <div class="login-form">
             <span>Log in</span>
-            <form onsubmit="loginUser(); return false" class="form-container">
+            <form onsubmit="return false" class="form-container">
                 <div class="input-wrapper">
                     <input id="loginEmail" class="input-email" type="email" placeholder="Email" required>
                     <img src="../assets/img/login/mail.svg" class="input-img" alt="Toggle Password Visibility" />
@@ -42,7 +42,7 @@
                     <span>Remember me</span>
                 </div>
                 <div class="btn-container">
-                    <button type="submit" class="blue-btn">Log
+                    <button onclick="loginUser()" type="submit" class="blue-btn">Log
                         in</button>
                     <a href="./index-main.html">
                         <button type="button" formnovalidate class="white-btn">Guest log in</button>

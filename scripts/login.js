@@ -1,6 +1,16 @@
 let showSignup = document.getElementById('signup-dialog');
 const BASE_URL = 'https://join-2024-default-rtdb.europe-west1.firebasedatabase.app/';
 let user = [];
+let toggleIcon = document.getElementById('togglePassword');
+let loginName = document.getElementById('loginEmail');
+let loginPassword = document.getElementById('loginPassword');
+let checkboxLogin = document.getElementById('checkbox');
+
+let password = document.getElementById('passwordSignup');
+let confirm_password = document.getElementById('confirmSignup');
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
 
 setupToggle('loginPassword', 'togglePassword');
 setupToggle('passwordSignup', 'toggleSignupPassword');
@@ -22,6 +32,10 @@ function initializeCheckboxListeners(checkboxId) {
       enableBtn();
     } else {
       enableBtn();
+    }
+    if (checkboxId === 'checkbox' && checkbox.classList.contains('checked')) {
+      localStorage.setItem('login', loginName.value);
+      localStorage.setItem('password', loginPassword.value);
     }
   };
   checkbox.addEventListener('mouseover', () => checkbox.classList.add('hovering'));
@@ -68,7 +82,16 @@ function setupToggle(inputFieldId, iconElementId) {
   });
 }
 
+function getLocalStorage() {
+  let storageName = localStorage.getItem('login');
+  let storagePassword = localStorage.getItem('password');
+  loginName.value = storageName;
+  loginPassword.value = storagePassword;
+}
+
 async function onloadFunc() {
+  user = [];
+  getLocalStorage();
   try {
     let userResponse = await getAllUser('users');
     if (Array.isArray(userResponse)) {
@@ -97,6 +120,8 @@ async function getAllUser(path) {
 }
 
 function loginUser() {
+  checkboxLogin.click();
+
   let loginEmail = document.getElementById('loginEmail');
   let loginPassword = document.getElementById('loginPassword');
 
@@ -104,7 +129,7 @@ function loginUser() {
 
   if (result.length > 0) {
     if (result[0]['email'] === loginEmail.value && result[0]['password'] === loginPassword.value) {
-      alert('Login successful');
+      window.location.href = 'index-main.html';
     } else {
       alert('Email or password does not match');
       loginEmail.value = '';
@@ -132,6 +157,8 @@ async function createUser() {
   };
   user.push(newUser);
   await putData('/users', user);
+  document.getElementById('signup-form').reset();
+  window.location.href = 'index.html';
 }
 
 async function putData(path = '', data = {}) {
@@ -143,4 +170,12 @@ async function putData(path = '', data = {}) {
     body: JSON.stringify(data),
   });
   return await response.json();
+}
+
+function validatePassword() {
+  if (password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Passwords Don't Match");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
 }
