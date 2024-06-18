@@ -7,7 +7,15 @@ function renderToList() {
   let list = document.getElementById('contacts');
   for (let i = 0; i < contacts.length; i++) {
     const contact = contacts[i].name;
-    list.innerHTML += ` <option value="${contact}"><div style='background-color: "${contacts[i].contactImageBgColor}"'>${contacts[i].nameInitials}</div> ${contact}</option>`;
+    list.innerHTML += `          <li id="${contact}" onclick="selectContact()">
+                                 <label for="${contact}"> 
+                                    <div class="initials" style="background-color: ${contacts[i].contactImageBgColor}">${contacts[i].nameInitials}</div>
+                                    ${contact}
+                                 </label>
+                                 <div class="checkbox-container">
+                                    <img id="checkbox-name" src="./assets/img/login/checkbox.svg" alt="">
+                                 </div>                              
+                              </li>`;
   }
 }
 
@@ -124,6 +132,32 @@ function resetForm(event) {
 //   });
 // }
 
+function selectContact() {
+  let icon = document.getElementById('checkbox-name');
+  let input = document.getElementById('pascal');
+
+  if (icon.src.endsWith('checkbox-checked-white.svg')) {
+    input.style.background = '';
+    icon.src = './assets/img/login/checkbox.svg';
+  } else {
+    icon.src = './assets/img/login/checkbox-checked-white.svg';
+    input.style.background = '#4589FF';
+  }
+}
+
+// let dropdownMenu = document.getElementById('addTask');
+// let summary = document.getElementById('contact-summary');
+
+// dropdownMenu.addEventListener('click', function (event) {
+//   if (!summary.contains(event.target)) {
+//     closeDropdown();
+//   }
+// });
+
+// function closeDropdown() {
+//   summary.click();
+// }
+
 function loadAddTaskContent(params) {
   let mainContent = document.getElementById('mainContent');
   mainContent.innerHTML = '';
@@ -144,10 +178,13 @@ function loadAddTaskContent(params) {
                <div>
                   <div>
                      Assigned to
-                     <div>
-                        <select name="contact-list" id="contacts" multiple>
-                        </select>
-                     </div>
+                     <details>
+                        <summary id="contact-summary"><div class="summary-headline">Select contacts to assign</div></summary>
+                           <fieldset>
+                           <ul id="contacts">
+                           </ul>
+                           </fieldset>
+                     </details>
                      <div id="placeholder"></div>
                   </div>
                </div>

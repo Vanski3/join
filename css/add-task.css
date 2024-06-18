@@ -78,7 +78,7 @@ textarea::placeholder {
   display: flex;
   flex-direction: column;
   width: 440px;
-  height: 426px;
+  height: fit-content;
   gap: 20px;
 }
 
@@ -347,4 +347,115 @@ textarea::placeholder {
   .buttons {
     left: 200px;
   }
+}
+
+details {
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  padding: 12px 16px;
+  display: inline-flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+summary {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+details summary::after {
+  content: url(../assets/img/add-task/arrow-drop-down.svg);
+  display: inline-flex;
+  align-items: center;
+  line-height: 8px;
+  position: relative;
+  transition: transform 0.25s;
+}
+
+details[open] summary::after {
+  transform: rotate(180deg);
+}
+
+details[open] summary {
+  justify-content: flex-end;
+}
+
+details[open] .summary-headline {
+  display: none;
+}
+
+details[open] {
+  max-height: 200px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding-bottom: 0;
+}
+
+details[open]::-webkit-scrollbar {
+  width: 5px;
+}
+
+details[open]::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+details[open]::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+}
+
+fieldset {
+  border: 0;
+  padding: 0;
+  width: 100%;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  border-radius: 10px;
+  margin: 0;
+  padding: 10px 10px;
+  display: flex;
+}
+
+ul li:hover {
+  background: #d2e3ff;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+label:hover {
+  cursor: pointer;
+}
+
+ul li {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+  align-items: center;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+input:hover {
+  cursor: pointer;
+}
+
+.initials {
+  border-radius: 100px;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
 }
