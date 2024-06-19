@@ -60,6 +60,7 @@
    display: flex;
    gap: 16px;
    padding: 0px 64px 0px 64px;
+   overflow: auto;
 }
 
 .tasks-column {
@@ -72,6 +73,9 @@
    display: flex;
    justify-content: space-between;
    margin-bottom: 20px;
+   /* position: sticky;
+   top: 0;
+   left: 0; */
 }
 
 .board-headline span {
@@ -316,6 +320,10 @@ h1 {
    align-items: center;
    gap: 10px;
    justify-content: flex-end;
+}
+
+.menu-background {
+   background: rgba(210, 227, 255, 1);
 }
 
 @media only screen and (max-width: 1400px) {
