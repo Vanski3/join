@@ -37,7 +37,7 @@ function loadBoardContent(params) {
                <main class="main-board-div">
                   <div class="search-addtask-div">
                      <div class="search-input-div">
-                        <input id="searchInput" onkeyup="searchTask()" class="search-input" type="text" />
+                        <input id="searchInput" onkeyup="searchTask()" placeholder="Find Task (min. 3 Letters)" class="search-input" type="text" />
                         <div class="seperator-div"></div>
                         <img
                            onmouseover="this.src='./assets/img/board/search-symbol-variant2.svg'"
@@ -104,6 +104,12 @@ function loadBoardContent(params) {
                
     `;
    renderBoardCards();
+   // changeBoardButtonBackground();
+}
+
+function changeBoardButtonBackground(params) {
+   let boardButton = document.getElementById('boardButton');
+   boardButton.classList.add('menuBackground');
 }
 
 function renderBoardCards() {
@@ -119,11 +125,11 @@ function renderBoardCards() {
                               <img class="card-label" src="./assets/img/board/${categoryName}.svg" alt="" />
                               <span class="card-title">${title}</span>
                               <span class="task-description-board">${description}</span>
-                              <div class="progress-field">
+                              <div id="progressDiv${i}" class="progress-field">
                                  <div class="outer-progress-bar">
                                     <div class="inner-progress-bar"></div>
                                  </div>
-                                 <div class="subtasks-text">1/2 Subtasks</div>
+                                 <div id="subtaskBoardDiv${i}" class="subtasks-text"></div>
                               </div>
                               <div  class="user-field">
                                  <div id="boardCardsContacts${i}" class="contacts-in-cards-div"></div>
@@ -132,8 +138,29 @@ function renderBoardCards() {
                            </div>
          `;
       renderContactsInCards(i);
+      renderSubtasksInBoardCards(i);
    }
    checkIfTaskIsEmpty();
+}
+
+function renderSubtasksInBoardCards(i) {
+   let subtasks = tasks?.subtasksTest?.[i]?.subtask || [];
+   let finishedSubtasks = 0;
+   for (let j = 0; j < subtasks.length; j++) {
+      if (tasks.subtasksTest[i].subtaskStatus[j] === 'closed') {
+         finishedSubtasks++;
+      }
+   }
+   let subtasksLength = subtasks.length;
+   let progressDiv = document.getElementById(`progressDiv${i}`);
+   if (subtasksLength === 0) {
+      progressDiv.style.display = 'none';
+   } else {
+      progressDiv.style.display = 'flex';
+      progressDiv.innerHTML += /*html*/ `
+         ${finishedSubtasks}/${subtasksLength}
+      `;
+   }
 }
 
 function checkIfTaskIsEmpty() {
@@ -188,9 +215,9 @@ function renderTaskOverlay(i) {
                <span class="task-overlay-categories">Assigned To:</span>
                <div id="TaskOverlayContacts" class="contacts-task-overlay"></div>
             </div>
-            <div class="subtasks-field">
+            <div id="subtaskDiv" class="subtasks-field">
                <span class="task-overlay-categories">Subtasks</span>
-               <div>RENDER SUbtasks IN HERE!</div>
+               
             </div>
             <div class="delete-edit-field">
                <img
@@ -210,7 +237,32 @@ function renderTaskOverlay(i) {
          </div>
           `;
    renderContactsInTaskOverlay(i);
+   renderSubtasksinTaskOverlay(i);
    showOverlayTask();
+}
+
+function renderSubtasksinTaskOverlay(i) {
+   let subtasks = tasks?.subtasksTest?.[i]?.subtask || [];
+   document.getElementById('subtaskDiv').innerHTML = '';
+   for (let j = 0; j < subtasks.length; j++) {
+      let subtask = subtasks[j];
+      document.getElementById('subtaskDiv').innerHTML += /*html*/ `
+         <div id="subtaskRow${j}" class="subtask-row">${subtask}</div>
+      `;
+      changeImgBasedOnSubtaskStatus(i, j);
+   }
+}
+
+function changeImgBasedOnSubtaskStatus(i, j) {
+   if (tasks.subtasksTest[i].subtaskStatus[j] == 'open') {
+      document.getElementById(`subtaskRow${j}`).innerHTML += /*html*/ `
+         <img src="./assets/img/board/check-button-empty.svg" alt="">
+      `;
+   } else {
+      document.getElementById(`subtaskRow${j}`).innerHTML += /*html*/ `
+      <img src="./assets/img/board/check-button-checked.svg" alt="">
+   `;
+   }
 }
 
 function deleteCurrentTask(i) {
@@ -221,8 +273,6 @@ function deleteCurrentTask(i) {
       tasks.priority.splice(i, 1);
       tasks.dueDate.splice(i, 1);
       tasks.categoryName.splice(i, 1);
-      // tasks.categoryBgColor.splice(i, 1);
-      // tasks.subtasks.splice(i, 1);
       tasks.assignedTo.splice(i, 1);
       closeTaskOverlay();
       loadBoardContent();
