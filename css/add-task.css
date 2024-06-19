@@ -64,6 +64,7 @@ textarea::placeholder {
   background-position: center right 15px;
   background-repeat: no-repeat;
   font-size: 20px;
+  cursor: pointer;
 }
 
 .seperator {
@@ -458,4 +459,22 @@ input:hover {
   align-items: center;
   justify-content: center;
   color: white;
+}
+
+#placeholder {
+  display: flex;
+  flex-direction: row;
+}
+
+#placeholder div:not(:first-child) {
+  margin-left: -10px;
+}
+
+#placeholder div {
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+#subtask-placeholder li {
+  margin-left: 10px;
 }

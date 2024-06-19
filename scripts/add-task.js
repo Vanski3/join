@@ -2,18 +2,19 @@ let selectedButtonId = null;
 let priority = '';
 let tasksAddTask = [];
 let contacts = [];
+let selectedContacts = [];
 
 function renderToList() {
   let list = document.getElementById('contacts');
   for (let i = 0; i < contacts.length; i++) {
     const contact = contacts[i].name;
-    list.innerHTML += `          <li id="${contact}" onclick="selectContact()">
+    list.innerHTML += `          <li id="contact-${i}" onclick="selectContact(${i})">
                                  <label for="${contact}"> 
-                                    <div class="initials" style="background-color: ${contacts[i].contactImageBgColor}">${contacts[i].nameInitials}</div>
+                                    <div id="symbol-${i}" class="initials" style="background-color: ${contacts[i].contactImageBgColor}">${contacts[i].nameInitials}</div>
                                     ${contact}
                                  </label>
                                  <div class="checkbox-container">
-                                    <img id="checkbox-name" src="./assets/img/login/checkbox.svg" alt="">
+                                    <img id="checkbox-${i}" src="./assets/img/login/checkbox.svg" alt="">
                                  </div>                              
                               </li>`;
   }
@@ -32,7 +33,6 @@ async function onloadContacts() {
     });
   }
   renderToList();
-  //   contactSelect();
 }
 
 async function getAllContacts(path) {
@@ -43,13 +43,18 @@ async function getAllContacts(path) {
   return await response.json();
 }
 
+function getSelectedContacts() {
+  let placeholder = document.getElementById('placeholder');
+}
+
 function saveTask() {
   let data = document.getElementsByClassName('my-inputs');
+  let contacts = getSelectedContacts();
 
   let newTask = {
     title: data[0].value,
     description: data[1].value,
-    assignedTo: data[2].innerHTML,
+    assignedTo: contacts,
     dueDate: data[3].value,
     priority: priority,
     categoryName: data[4].value,
@@ -109,39 +114,61 @@ function resetForm(event) {
   }
 }
 
-// function contactSelect() {
-//   let contactsSelect = document.getElementById('contacts');
-//   let placeholderDiv = document.getElementById('placeholder');
+// function selectContact(i) {
+//   let icon = document.getElementById('checkbox-' + i);
+//   let input = document.getElementById('contact-' + i);
+//   let symbol = document.getElementById('symbol-' + i).cloneNode(true);
 
-//   contactsSelect.addEventListener('change', () => {
-//     placeholderDiv.innerHTML = '';
-
-//     const selectedOptions = Array.from(contactsSelect.selectedOptions).map((option) => option.text);
-
-//     if (selectedOptions.length) {
-//       selectedOptions.forEach((contact) => {
-//         const contactDiv = document.createElement('div');
-//         contactDiv.classList.add('contact-div');
-//         contactDiv.classList.add('my-inputs');
-//         contactDiv.textContent = contact;
-//         placeholderDiv.appendChild(contactDiv);
-//       });
-//     } else {
-//       placeholderDiv.textContent = 'Placeholder for selected Contacts';
-//     }
-//   });
+//   if (icon.src.endsWith('checkbox-checked-white.svg')) {
+//     input.style.background = '';
+//     icon.src = './assets/img/login/checkbox.svg';
+//   } else {
+//     icon.src = './assets/img/login/checkbox-checked-white.svg';
+//     input.style.background = '#4589FF';
+//     document.getElementById('placeholder').innerHTML += symbol;
+//   }
 // }
 
-function selectContact() {
-  let icon = document.getElementById('checkbox-name');
-  let input = document.getElementById('pascal');
+function selectContact(i) {
+  let icon = document.getElementById('checkbox-' + i);
+  let input = document.getElementById('contact-' + i);
+  let symbol = document.getElementById('symbol-' + i).cloneNode(true);
+  let placeholder = document.getElementById('placeholder');
+
+  function removeSymbol() {
+    let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}`);
+    if (symbolInPlaceholder) {
+      placeholder.removeChild(symbolInPlaceholder);
+      icon.src = './assets/img/login/checkbox.svg';
+      input.style.background = '';
+    }
+  }
 
   if (icon.src.endsWith('checkbox-checked-white.svg')) {
     input.style.background = '';
     icon.src = './assets/img/login/checkbox.svg';
+
+    let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}`);
+    if (symbolInPlaceholder) {
+      placeholder.removeChild(symbolInPlaceholder);
+    }
   } else {
     icon.src = './assets/img/login/checkbox-checked-white.svg';
     input.style.background = '#4589FF';
+    let label = input.textContent;
+    selectedContacts.push(label);
+    symbol.onclick = removeSymbol;
+    document.getElementById('placeholder').appendChild(symbol);
+  }
+}
+
+function addSubtasks() {
+  let subtasks = document.getElementById('subtasks');
+  let placeholder = document.getElementById('subtask-placeholder');
+
+  if (subtasks.value.length > 2) {
+    placeholder.innerHTML += `<li>${subtasks.value}</li>`;
+    subtasks.value = '';
   }
 }
 
@@ -254,8 +281,10 @@ function loadAddTaskContent(params) {
 
                <div class="substasks">
                   Subtasks
-                  <input class="my-inputs" placeholder="Add new subtask" name="subtasks" id="subtasks">
+                  <input onclick="addSubtasks()" class="my-inputs" placeholder="Add new subtask" name="subtasks" id="subtasks">
+                  <div id="subtask-placeholder"></div>
                </div>
+
             </div>
 
             <div class="buttons">
