@@ -1,6 +1,11 @@
+:root {
+  --headline-1: 3rem;
+}
+
 .contacts-container {
   display: flex;
-  height: calc(100vh - 60px); /* Ensure the container takes up the full available height */
+  height: calc(100vh - 60px);
+  /* Ensure the container takes up the full available height */
 }
 
 .contacts-list {
@@ -57,7 +62,12 @@
 }
 
 .contact-name {
-  font-size: 18px;
+  font-size: 19px;
+  flex-grow: 1;
+}
+
+.contact-name-detail {
+  font-size: var(--headline-1);
 }
 
 .contact-email {
@@ -70,6 +80,12 @@
   padding: 20px;
 }
 
+.contact-header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
 .contact-initials-large {
   width: 100px;
   height: 100px;
@@ -79,16 +95,46 @@
   justify-content: center;
   font-size: 36px;
   color: white;
-  margin-bottom: 20px;
+  margin-right: 20px;
+}
+
+.name-initial-container {
+  display: flex;
+  align-items: center;
+}
+
+.contact-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 1rem;
+}
+
+.contact-actions button {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  color: black;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: color 0.3s ease;
+}
+
+.contact-actions button img {
+  margin-right: 5px;
+  width: 20px;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+  color: var(--hover-darkblue);
+  font-weight: bold;
 }
 
 .contact-detail-info h2 {
-<<<<<<< Updated upstream
   margin-top: 0;
-=======
-    margin-top: 0;
-    color: black;
->>>>>>> Stashed changes
+  color: black;
 }
 
 .contact-detail-info p {
@@ -103,4 +149,13 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.contact-detail-info a {
+  color: var(--identity-clr);
+  text-decoration: none;
+}
+
+.contact-detail-info a:hover {
+  text-decoration: underline;
 }

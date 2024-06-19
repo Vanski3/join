@@ -2,6 +2,7 @@ let popup = document.getElementById('dialog-container');
 let taskDialog = document.querySelector('.task-dialog');
 const BASE_URL = 'https://join-2024-default-rtdb.europe-west1.firebasedatabase.app/';
 let tasks = [];
+// module.exports = tasks;
 let allDataFromFirebase = [];
 
 function init(params) {

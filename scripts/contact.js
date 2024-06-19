@@ -1,3 +1,5 @@
+let contactsData = [];
+
 function loadContactsContent() {
    fetch('/scripts/contact.json')
       .then((response) => {
@@ -8,7 +10,8 @@ function loadContactsContent() {
       })
       .then((data) => {
          console.log('Contacts loaded:', data);
-         renderContacts(data);
+         contactsData = data; // Store contacts data
+         renderContacts(contactsData);
       })
       .catch((error) => console.error('Error loading contacts:', error));
 }
@@ -77,14 +80,41 @@ function changeContactsButtonBackground(params) {
 
 function renderContactDetail(contact) {
    const contactDetail = document.querySelector('.contact-detail');
-   contactDetail.innerHTML = `
-        <div class="contact-initials-large" style="background-color: ${contact.color};">${contact.initials}</div>
+   contactDetail.innerHTML = /*html*/ `
+        <div class="contact-header">
+         <div class="name-initial-container">
+         <div class="contact-initials-large" style="background-color: ${contact.color};">${contact.initials}</div>
+         <div class="contact-name contact-name-detail">${contact.name}</div>
+         </div>
+            
+            <div class="contact-actions">
+                <button class="edit-btn">
+                    <img src="/assets/img/contact/edit.svg" alt="Edit" />
+                    Edit
+                </button>
+                <button class="delete-btn" onclick="deleteContact(${contact.id})">
+                    <img src="/assets/img/contact/delete.svg" alt="Delete" />
+                    Delete
+                </button>
+            </div>
+        </div>
         <div class="contact-detail-info">
-            <h2>${contact.name}</h2>
-            <p><strong>Email:</strong> ${contact.email}</p>
-            <p><strong>Phone:</strong> ${contact.phone}</p>
-            <button>Edit</button>
-            <button>Delete</button>
+            <h2>Contact Information</h2>
+            <p><strong>Email <br></strong> <a href="mailto:${contact.email}">${contact.email}</a></p><br>
+            <p><strong>Phone <br></strong> <a href="tel:${contact.phone}">${contact.phone}</a></p>
         </div>
     `;
+}
+
+function deleteContact(id) {
+   // Find the index of the contact with the given id
+   const index = contactsData.findIndex(contact => contact.id === id);
+   if (index !== -1) {
+      // Remove the contact from the array
+      contactsData.splice(index, 1);
+      // Re-render the contacts list
+      renderContacts(contactsData);
+      // Clear the contact detail view
+      document.querySelector('.contact-detail').innerHTML = '';
+   }
 }
