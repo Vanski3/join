@@ -37,7 +37,7 @@ function loadBoardContent(params) {
                <main class="main-board-div">
                   <div class="search-addtask-div">
                      <div class="search-input-div">
-                        <input id="searchInput" onkeyup="searchTask()" placeholder="Find Task (min. 3 Letters)" class="search-input" type="text" />
+                        <input id="searchInput" onkeyup="searchTask()" placeholder="Find Task" class="search-input" type="text" />
                         <div class="seperator-div"></div>
                         <img
                            onmouseover="this.src='./assets/img/board/search-symbol-variant2.svg'"
@@ -143,8 +143,6 @@ function renderBoardCards() {
    checkIfTaskIsEmpty();
 }
 
-function adjustProgressbar(params) {}
-
 function renderSubtasksInBoardCards(i) {
    let subtasks = tasks?.subtasksTest?.[i]?.subtask || [];
    let finishedSubtasks = 0;
@@ -189,7 +187,7 @@ function renderTaskOverlay(i) {
    document.getElementById('taskOverlay').innerHTML = '';
    let title = tasks.title[i];
    let description = tasks.description[i];
-   let priority = tasks.priority[i];
+   let priority = tasks.priority[i].charAt(0).toUpperCase() + tasks.priority[i].slice(1);
    let categoryName = tasks.categoryName[i];
    let dueDate = tasks.dueDate[i];
    document.getElementById('taskOverlay').innerHTML += /*html*/ `
@@ -197,7 +195,7 @@ function renderTaskOverlay(i) {
             <div class="categorie-info">
                <img class="overlay-card-label" src="./assets/img/board/${categoryName}.svg" alt="" />
                <img
-                  onclick="closeTaskOverlay()"
+                  onclick="closeTaskOverlay() "
                   id="closeTaskOverlay"
                   class="close-overlay-task"
                   onmouseover="this.src='./assets/img/task-overlay/close-icon-variant2.svg'"
@@ -220,8 +218,10 @@ function renderTaskOverlay(i) {
                <span class="task-overlay-categories">Assigned To:</span>
                <div id="TaskOverlayContacts" class="contacts-task-overlay"></div>
             </div>
-            <div id="subtaskDiv" class="subtasks-field">
-               <span class="task-overlay-categories">Subtasks</span>
+            <div id="subtasksField${i}"  class="subtasks-field">
+            <span class="task-overlay-categories">Subtasks</span>
+            <div id="subtaskDiv" class="subtasks-in-Overlay-Task"></div>
+               
                
             </div>
             <div class="delete-edit-field">
@@ -247,24 +247,43 @@ function renderTaskOverlay(i) {
 }
 
 function renderSubtasksinTaskOverlay(i) {
-   let subtasks = tasks?.subtasksTest?.[i]?.subtask || [];
+   let subtaskCheck = tasks.subtasksTest[i];
+   let subtasks = tasks?.subtasksTest?.[i]?.subtask;
+   if (!subtaskCheck) {
+      document.getElementById(`subtasksField${i}`).style.display = 'none';
+      return;
+   }
    document.getElementById('subtaskDiv').innerHTML = '';
    for (let j = 0; j < subtasks.length; j++) {
       let subtask = subtasks[j];
       document.getElementById('subtaskDiv').innerHTML += /*html*/ `
-         <div id="subtaskRow${j}" class="subtask-row">${subtask}</div>
+         <div id="subtaskRow${j}" onclick="changeSubtaskStatus(${j}, ${i})" class="subtask-row">
+         <span>${subtask}</span>
+         <div id="subtaskStatusImg${j}" class="subtask-status-img"></div>
+         </div>
+         
       `;
+
       changeImgBasedOnSubtaskStatus(i, j);
    }
 }
 
+function changeSubtaskStatus(j, i) {
+   if (tasks.subtasksTest[i].subtaskStatus[j] == 'open') {
+      tasks.subtasksTest[i].subtaskStatus.splice(j, 1, 'closed');
+   } else {
+      tasks.subtasksTest[i].subtaskStatus.splice(j, 1, 'open');
+   }
+   changeImgBasedOnSubtaskStatus(i, j);
+}
+
 function changeImgBasedOnSubtaskStatus(i, j) {
    if (tasks.subtasksTest[i].subtaskStatus[j] == 'open') {
-      document.getElementById(`subtaskRow${j}`).innerHTML += /*html*/ `
+      document.getElementById(`subtaskStatusImg${j}`).innerHTML = /*html*/ `
          <img src="./assets/img/board/check-button-empty.svg" alt="">
       `;
    } else {
-      document.getElementById(`subtaskRow${j}`).innerHTML += /*html*/ `
+      document.getElementById(`subtaskStatusImg${j}`).innerHTML = /*html*/ `
       <img src="./assets/img/board/check-button-checked.svg" alt="">
    `;
    }
@@ -302,6 +321,7 @@ function showOverlayTask() {
 
 function closeTaskOverlay(params) {
    document.getElementById('taskOverlay').close();
+   renderBoardCards();
 }
 
 function renderContactsInTaskOverlay(i) {
@@ -340,10 +360,7 @@ function searchTask(params) {
    for (let i = 0; i < tasks.taskStatus.length; i++) {
       let title = tasks.title[i].toLowerCase();
       let taskDescription = tasks.description[i].toLowerCase();
-      if (
-         (searchTitle.length >= 3 && title.includes(searchTitle)) ||
-         (searchDescription.length >= 3 && taskDescription.includes(searchDescription))
-      ) {
+      if (title.includes(searchTitle) || taskDescription.includes(searchDescription)) {
          let taskStatus = tasks.taskStatus[i];
          let title = tasks.title[i];
          let description = tasks.description[i];

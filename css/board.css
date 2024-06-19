@@ -152,6 +152,7 @@ h1 {
    box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
    border-radius: 24px;
    cursor: pointer;
+   margin-bottom: 16px;
 }
 
 .card-label {
@@ -206,6 +207,7 @@ h1 {
    padding: 0;
    border-radius: 30px;
    outline: none;
+   overflow: hidden;
 }
 
 .task-overlay {
@@ -284,13 +286,16 @@ h1 {
 .task-div {
    display: flex;
    flex-direction: column;
-   gap: 16px;
+   /* gap: 16px; */
 }
 
 .contacts-task-overlay {
    display: flex;
    flex-direction: column;
    gap: 8px;
+   max-height: 175px;
+   min-height: min-content;
+   overflow-y: auto;
 }
 
 .assigned-to-div {
@@ -320,10 +325,30 @@ h1 {
    align-items: center;
    gap: 10px;
    justify-content: flex-end;
+   cursor: pointer;
+   width: max-content;
+   border-radius: 10px;
+   padding: 0 8px 0 8px;
+}
+
+.subtask-row:hover {
+   background-color: var(--hover-lightblue);
 }
 
 .menu-background {
    background: rgba(210, 227, 255, 1);
+}
+
+.subtask-status-img {
+   display: flex;
+}
+
+.subtasks-in-Overlay-Task {
+   display: flex;
+   flex-direction: column;
+   gap: 4px;
+   height: 83px;
+   overflow-y: auto;
 }
 
 @media only screen and (max-width: 1400px) {
