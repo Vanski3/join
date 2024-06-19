@@ -127,10 +127,9 @@ function renderBoardCards() {
                               <span class="card-title">${title}</span>
                               <span class="task-description-board">${description}</span>
                               <div id="progressDiv${i}" class="progress-field">
-                                 <div class="outer-progress-bar">
+                                 <!-- <div class="outer-progress-bar">
                                     <div class="inner-progress-bar"></div>
-                                 </div>
-                                 <div id="subtaskBoardDiv${i}" class="subtasks-text"></div>
+                                 </div> -->
                               </div>
                               <div  class="user-field">
                                  <div id="boardCardsContacts${i}" class="contacts-in-cards-div"></div>
@@ -143,6 +142,8 @@ function renderBoardCards() {
    }
    checkIfTaskIsEmpty();
 }
+
+function adjustProgressbar(params) {}
 
 function renderSubtasksInBoardCards(i) {
    let subtasks = tasks?.subtasksTest?.[i]?.subtask || [];
@@ -159,7 +160,10 @@ function renderSubtasksInBoardCards(i) {
    } else {
       progressDiv.style.display = 'flex';
       progressDiv.innerHTML += /*html*/ `
-         ${finishedSubtasks}/${subtasksLength}
+               <div class="outer-progress-bar">
+                  <div class="inner-progress-bar" style="width:${(finishedSubtasks * 100) / subtasksLength}%;"></div>
+               </div>
+           <div>${finishedSubtasks}/${subtasksLength}</div>
       `;
    }
 }
