@@ -139,12 +139,13 @@
 
 .task:not(.task-todo):hover {
    background-color: var(--hover-blue);
-   transform: scale(1.03);
+   transform: scale(1.05);
+   box-shadow: var(--bx-shadow-task);
 }
 
 .task:not(.task-todo):hover p,
 .task:not(.task-todo):hover span {
-   color: var(--bg-clr-1);
+   color: var(--bg-clr-1) !important;
 }
 
 .img-amount-container {
