@@ -33,7 +33,7 @@ function renderSummary() {
                 </div>
             </div>
             <div class="row2">
-                <div class="task">
+                <div class="task task-todo">
                     <div class="img-amount-container">
                         <img src="./assets/img/summary/todo.svg" alt="Task To-do" />
                         <span id="todo">1</span>
