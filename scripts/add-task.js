@@ -5,10 +5,10 @@ let contacts = [];
 let selectedContacts = [];
 
 function renderToList() {
-  let list = document.getElementById('contacts');
-  for (let i = 0; i < contacts.length; i++) {
-    const contact = contacts[i].name;
-    list.innerHTML += `          <li id="contact-${i}" onclick="selectContact(${i})">
+   let list = document.getElementById('contacts');
+   for (let i = 0; i < contacts.length; i++) {
+      const contact = contacts[i].name;
+      list.innerHTML += `          <li id="contact-${i}" onclick="selectContact(${i})">
                                  <label for="${contact}"> 
                                     <div id="symbol-${i}" class="initials" style="background-color: ${contacts[i].contactImageBgColor}">${contacts[i].nameInitials}</div>
                                     ${contact}
@@ -17,101 +17,99 @@ function renderToList() {
                                     <img id="checkbox-${i}" src="./assets/img/login/checkbox.svg" alt="">
                                  </div>                              
                               </li>`;
-  }
+   }
 }
 
 async function onloadContacts() {
-  contacts = [];
-  let userResponse = await getAllContacts('contacts');
-  for (let i = 0; i < userResponse.contactImageBgColor.length; i++) {
-    contacts.push({
-      contactImageBgColor: userResponse.contactImageBgColor[i],
-      email: userResponse.email[i],
-      name: userResponse.name[i],
-      nameInitials: userResponse.nameInitials[i],
-      phoneNumber: userResponse.phoneNumber[i],
-    });
-  }
-  renderToList();
+   contacts = [];
+   let userResponse = await getAllContacts('contacts');
+   for (let i = 0; i < userResponse.contactImageBgColor.length; i++) {
+      contacts.push({
+         contactImageBgColor: userResponse.contactImageBgColor[i],
+         email: userResponse.email[i],
+         name: userResponse.name[i],
+         nameInitials: userResponse.nameInitials[i],
+         phoneNumber: userResponse.phoneNumber[i],
+      });
+   }
+   renderToList();
 }
 
 async function getAllContacts(path) {
-  let response = await fetch(BASE_URL + path + '.json');
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-  }
-  return await response.json();
+   let response = await fetch(BASE_URL + path + '.json');
+   if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+   }
+   return await response.json();
 }
 
 function getSelectedContacts() {
-  let placeholder = document.getElementById('placeholder');
+   let placeholder = document.getElementById('placeholder');
 }
 
 function saveTask() {
-  let data = document.getElementsByClassName('my-inputs');
-  let contacts = getSelectedContacts();
+   let data = document.getElementsByClassName('my-inputs');
+   let contacts = getSelectedContacts();
 
-  let newTask = {
-    title: data[0].value,
-    description: data[1].value,
-    assignedTo: contacts,
-    dueDate: data[3].value,
-    priority: priority,
-    categoryName: data[4].value,
-    subtasks: data[5].value,
-  };
+   let newTask = {
+      title: data[0].value,
+      description: data[1].value,
+      assignedTo: contacts,
+      dueDate: data[3].value,
+      priority: priority,
+      categoryName: data[4].value,
+      subtasks: data[5].value,
+   };
 
-  tasksAddTask.push(newTask);
+   tasksAddTask.push(newTask);
 }
 
 function toggleColor(buttonId, color, idOne, idTwo) {
-  if (selectedButtonId) {
-    let prev = document.getElementById(selectedButtonId);
-    prev.style = '';
-    document.getElementById(prev.getAttribute('data-svg-one')).style.fill =
-      prev.getAttribute('data-original-color');
-    document.getElementById(prev.getAttribute('data-svg-two')).style.fill =
-      prev.getAttribute('data-original-color');
-  }
-  if (buttonId === selectedButtonId) return (selectedButtonId = null);
-  let button = document.getElementById(buttonId);
-  button.style = `background-color:${color};color:#fff;border-bottom:unset`;
-  document.getElementById(idOne).style.fill = document.getElementById(idTwo).style.fill = '#fff';
-  button.setAttribute('data-svg-one', idOne);
-  button.setAttribute('data-svg-two', idTwo);
-  selectedButtonId = buttonId;
+   if (selectedButtonId) {
+      let prev = document.getElementById(selectedButtonId);
+      prev.style = '';
+      document.getElementById(prev.getAttribute('data-svg-one')).style.fill = prev.getAttribute('data-original-color');
+      document.getElementById(prev.getAttribute('data-svg-two')).style.fill = prev.getAttribute('data-original-color');
+   }
+   if (buttonId === selectedButtonId) return (selectedButtonId = null);
+   let button = document.getElementById(buttonId);
+   button.style = `background-color:${color};color:#fff;border-bottom:unset`;
+   document.getElementById(idOne).style.fill = document.getElementById(idTwo).style.fill = '#fff';
+   button.setAttribute('data-svg-one', idOne);
+   button.setAttribute('data-svg-two', idTwo);
+   selectedButtonId = buttonId;
 }
 
 function handleUrgentClick(event) {
-  event.preventDefault();
-  toggleColor('buttonUrgent', '#FF3D00', 'UrgentOne', 'UrgentTwo');
-  priority = 'urgent';
-  console.log('Urgent button clicked');
-  //   FUNCTION
+   event.preventDefault();
+   toggleColor('buttonUrgent', '#FF3D00', 'UrgentOne', 'UrgentTwo');
+   priority = 'urgent';
+   console.log('Urgent button clicked');
+   //   FUNCTION
 }
 
 function handleMediumClick(event) {
-  event.preventDefault();
-  toggleColor('buttonMedium', '#FFA800', 'MediumOne', 'MediumTwo');
-  priority = 'medium';
-  console.log('Medium button clicked');
-  //   FUNCTION
+   event.preventDefault();
+   toggleColor('buttonMedium', '#FFA800', 'MediumOne', 'MediumTwo');
+   priority = 'medium';
+   console.log('Medium button clicked');
+   //   FUNCTION
 }
 
 function handleLowClick(event) {
-  event.preventDefault();
-  toggleColor('buttonLow', '#7AE229', 'LowOne', 'LowTwo');
-  priority = 'low';
-  console.log('Low button clicked');
-  //   FUNCTION
+   event.preventDefault();
+   toggleColor('buttonLow', '#7AE229', 'LowOne', 'LowTwo');
+   priority = 'low';
+   console.log('Low button clicked');
+   //   FUNCTION
 }
 
 function resetForm(event) {
-  event.preventDefault();
-  document.getElementById('addTask').reset();
-  if (selectedButtonId != null) {
-    document.getElementById(selectedButtonId).click();
-  }
+   event.preventDefault();
+   document.getElementById('addTask').reset();
+   if (selectedButtonId != null) {
+      document.getElementById(selectedButtonId).click();
+   }
 }
 
 // function selectContact(i) {
@@ -130,46 +128,46 @@ function resetForm(event) {
 // }
 
 function selectContact(i) {
-  let icon = document.getElementById('checkbox-' + i);
-  let input = document.getElementById('contact-' + i);
-  let symbol = document.getElementById('symbol-' + i).cloneNode(true);
-  let placeholder = document.getElementById('placeholder');
+   let icon = document.getElementById('checkbox-' + i);
+   let input = document.getElementById('contact-' + i);
+   let symbol = document.getElementById('symbol-' + i).cloneNode(true);
+   let placeholder = document.getElementById('placeholder');
 
-  function removeSymbol() {
-    let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}`);
-    if (symbolInPlaceholder) {
-      placeholder.removeChild(symbolInPlaceholder);
-      icon.src = './assets/img/login/checkbox.svg';
+   function removeSymbol() {
+      let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}`);
+      if (symbolInPlaceholder) {
+         placeholder.removeChild(symbolInPlaceholder);
+         icon.src = './assets/img/login/checkbox.svg';
+         input.style.background = '';
+      }
+   }
+
+   if (icon.src.endsWith('checkbox-checked-white.svg')) {
       input.style.background = '';
-    }
-  }
+      icon.src = './assets/img/login/checkbox.svg';
 
-  if (icon.src.endsWith('checkbox-checked-white.svg')) {
-    input.style.background = '';
-    icon.src = './assets/img/login/checkbox.svg';
-
-    let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}`);
-    if (symbolInPlaceholder) {
-      placeholder.removeChild(symbolInPlaceholder);
-    }
-  } else {
-    icon.src = './assets/img/login/checkbox-checked-white.svg';
-    input.style.background = '#4589FF';
-    let label = input.textContent;
-    selectedContacts.push(label);
-    symbol.onclick = removeSymbol;
-    document.getElementById('placeholder').appendChild(symbol);
-  }
+      let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}`);
+      if (symbolInPlaceholder) {
+         placeholder.removeChild(symbolInPlaceholder);
+      }
+   } else {
+      icon.src = './assets/img/login/checkbox-checked-white.svg';
+      input.style.background = '#4589FF';
+      let label = input.textContent;
+      selectedContacts.push(label);
+      symbol.onclick = removeSymbol;
+      document.getElementById('placeholder').appendChild(symbol);
+   }
 }
 
 function addSubtasks() {
-  let subtasks = document.getElementById('subtasks');
-  let placeholder = document.getElementById('subtask-placeholder');
+   let subtasks = document.getElementById('subtasks');
+   let placeholder = document.getElementById('subtask-placeholder');
 
-  if (subtasks.value.length > 2) {
-    placeholder.innerHTML += `<li>${subtasks.value}</li>`;
-    subtasks.value = '';
-  }
+   if (subtasks.value.length > 2) {
+      placeholder.innerHTML += `<li>${subtasks.value}</li>`;
+      subtasks.value = '';
+   }
 }
 
 // let dropdownMenu = document.getElementById('addTask');
@@ -186,9 +184,9 @@ function addSubtasks() {
 // }
 
 function loadAddTaskContent(params) {
-  let mainContent = document.getElementById('mainContent');
-  mainContent.innerHTML = '';
-  mainContent.innerHTML += /*html*/ `
+   let mainContent = document.getElementById('mainContent');
+   mainContent.innerHTML = '';
+   mainContent.innerHTML += /*html*/ `
        <div class="add-task-main-content">
       <main>
          <form onsubmit="saveTask()" id="addTask" class="task-description">
@@ -302,5 +300,12 @@ function loadAddTaskContent(params) {
    </div>
    </div>
   `;
-  onloadContacts();
+   onloadContacts();
+   removeButtonBackground();
+   changeAddTaskButtonBackground();
+}
+
+function changeAddTaskButtonBackground(params) {
+   let addTaskButton = document.getElementById('addTaskButton');
+   addTaskButton.classList.add('menu-background');
 }

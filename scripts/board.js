@@ -104,12 +104,13 @@ function loadBoardContent(params) {
                
     `;
    renderBoardCards();
-   // changeBoardButtonBackground();
+   removeButtonBackground();
+   changeBoardButtonBackground();
 }
 
 function changeBoardButtonBackground(params) {
    let boardButton = document.getElementById('boardButton');
-   boardButton.classList.add('menuBackground');
+   boardButton.classList.add('menu-background');
 }
 
 function renderBoardCards() {

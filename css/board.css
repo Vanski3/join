@@ -318,6 +318,10 @@ h1 {
    justify-content: flex-end;
 }
 
+.menu-background {
+   background: rgba(210, 227, 255, 1);
+}
+
 @media only screen and (max-width: 1400px) {
    .board {
       flex-direction: column;

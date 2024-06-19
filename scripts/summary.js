@@ -64,4 +64,11 @@ function renderSummary() {
             </div>
         </div>
     </main>`;
+   removeButtonBackground();
+   changeSummaryButtonBackground();
+}
+
+function changeSummaryButtonBackground(params) {
+   let summaryButton = document.getElementById('summaryButton');
+   summaryButton.classList.add('menu-background');
 }
