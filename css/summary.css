@@ -121,11 +121,11 @@
    padding: 1rem;
    background-color: var(--bg-clr-1);
    color: var(--identity-clr);
+   transition: all 0.3s ease;
 }
 
 .task-todo {
    background-color: var(--bg-clr-2);
-   transition: all 0.3s ease;
 }
 
 .task-todo:hover {
@@ -135,6 +135,16 @@
 
 .task-todo:hover span {
    color: var(--identity-clr);
+}
+
+.task:not(.task-todo):hover {
+   background-color: var(--hover-blue);
+   transform: scale(1.03);
+}
+
+.task:not(.task-todo):hover p,
+.task:not(.task-todo):hover span {
+   color: var(--bg-clr-1);
 }
 
 .img-amount-container {
