@@ -2,7 +2,20 @@ let selectedButtonId = null;
 let priority = '';
 let tasksAddTask = [];
 let contacts = [];
-let selectedContacts = [];
+// let tasks = require('./board.js');
+let assignedTo = [
+  {
+    contactImageBgColor: [],
+    name: [],
+    nameInitials: [],
+  },
+];
+let subtasks = [
+  {
+    subtask: [],
+    subtaskStatus: [],
+  },
+];
 
 function renderToList() {
   let list = document.getElementById('contacts');
@@ -10,7 +23,7 @@ function renderToList() {
     const contact = contacts[i].name;
     list.innerHTML += `          <li id="contact-${i}" onclick="selectContact(${i})">
                                  <label for="${contact}"> 
-                                    <div id="symbol-${i}" class="initials" style="background-color: ${contacts[i].contactImageBgColor}">${contacts[i].nameInitials}</div>
+                                    <div id="symbol-${i}" name="${contact}" class="initials" style="background-color: ${contacts[i].contactImageBgColor}">${contacts[i].nameInitials}</div>
                                     ${contact}
                                  </label>
                                  <div class="checkbox-container">
@@ -44,24 +57,49 @@ async function getAllContacts(path) {
 }
 
 function getSelectedContacts() {
-  let placeholder = document.getElementById('placeholder');
+  let placeholder = document.getElementById('placeholder').childNodes;
+  for (let i = 0; i < placeholder.length; i++) {
+    let initials = placeholder[i].innerHTML;
+    let inlineStyle = placeholder[i].style.backgroundColor;
+    let fullName = placeholder[i].getAttribute('name');
+    assignedTo[0].nameInitials.push(initials);
+    assignedTo[0].contactImageBgColor.push(inlineStyle);
+    assignedTo[0].name.push(fullName);
+  }
 }
 
-function saveTask() {
-  let data = document.getElementsByClassName('my-inputs');
-  let contacts = getSelectedContacts();
+function getSelectedSubtasks() {
+  let placeholder = document.getElementById('subtask-placeholder').childNodes;
+  for (let i = 0; i < placeholder.length; i++) {
+    let subtask = placeholder[i].innerHTML;
+    let status = placeholder[i].getAttribute('status');
+    subtasks[0].subtask.push(subtask);
+    subtasks[0].subtaskStatus.push(status);
+  }
+}
+
+function saveTask(event) {
+  event.preventDefault();
+  getSelectedContacts();
+  getSelectedSubtasks();
+  let bgColor = document.getElementById('category');
+  let selectedIndex = bgColor.selectedIndex;
+  let selectedOption = (bgColor = bgColor.options[selectedIndex]);
+  let result = selectedOption.getAttribute('bgColor');
+  let inputFields = document.getElementsByClassName('my-inputs');
 
   let newTask = {
-    title: data[0].value,
-    description: data[1].value,
-    assignedTo: contacts,
-    dueDate: data[3].value,
+    title: inputFields[0].value,
+    description: inputFields[1].value,
+    assignedTo: assignedTo,
+    dueDate: inputFields[2].value,
     priority: priority,
-    categoryName: data[4].value,
-    subtasks: data[5].value,
+    categoryName: inputFields[3].value,
+    subtasksTest: subtasks,
+    taskStatus: '0',
+    categoryBGColor: result,
   };
-
-  tasksAddTask.push(newTask);
+  tasks.push(newTask);
 }
 
 function toggleColor(buttonId, color, idOne, idTwo) {
@@ -155,8 +193,6 @@ function selectContact(i) {
   } else {
     icon.src = './assets/img/login/checkbox-checked-white.svg';
     input.style.background = '#4589FF';
-    let label = input.textContent;
-    selectedContacts.push(label);
     symbol.onclick = removeSymbol;
     document.getElementById('placeholder').appendChild(symbol);
   }
@@ -167,7 +203,7 @@ function addSubtasks() {
   let placeholder = document.getElementById('subtask-placeholder');
 
   if (subtasks.value.length > 2) {
-    placeholder.innerHTML += `<li>${subtasks.value}</li>`;
+    placeholder.innerHTML += `<li status="open">${subtasks.value}</li>`;
     subtasks.value = '';
   }
 }
@@ -191,7 +227,7 @@ function loadAddTaskContent(params) {
   mainContent.innerHTML += /*html*/ `
        <div class="add-task-main-content">
       <main>
-         <form onsubmit="saveTask()" id="addTask" class="task-description">
+         <form onsubmit="saveTask(event)" id="addTask" class="task-description">
             <div class="first-row">
                <div>
                   <span>Title<span class="red-star">*</span></span>
@@ -274,8 +310,8 @@ function loadAddTaskContent(params) {
                   <span>Category<span class="red-star">*</span></span>
                   <select class="my-inputs" required name="task-list" id="category">
                      <option value="">Select task category</option>
-                     <option value="Technical Task">Technical Task</option>
-                     <option value="User Story">User Story</option>
+                     <option bgColor="#0038FF" value="Technical Task">Technical Task</option>
+                     <option bgColor="#FF7A00" value="User Story">User Story</option>
                   </select>
                </div>
 
