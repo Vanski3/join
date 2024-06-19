@@ -2,114 +2,154 @@ let selectedButtonId = null;
 let priority = '';
 let tasksAddTask = [];
 let contacts = [];
-let selectedContacts = [];
+// let tasks = require('./board.js');
+let assignedTo = [
+  {
+    contactImageBgColor: [],
+    name: [],
+    nameInitials: [],
+  },
+];
+let subtasks = [
+  {
+    subtask: [],
+    subtaskStatus: [],
+  },
+];
 
 function renderToList() {
-   let list = document.getElementById('contacts');
-   for (let i = 0; i < contacts.length; i++) {
-      const contact = contacts[i].name;
-      list.innerHTML += `          <li id="contact-${i}" onclick="selectContact(${i})">
+  let list = document.getElementById('contacts');
+  for (let i = 0; i < contacts.length; i++) {
+    const contact = contacts[i].name;
+    list.innerHTML += `          <li id="contact-${i}" onclick="selectContact(${i})">
                                  <label for="${contact}"> 
-                                    <div id="symbol-${i}" class="initials" style="background-color: ${contacts[i].contactImageBgColor}">${contacts[i].nameInitials}</div>
+                                    <div id="symbol-${i}" name="${contact}" class="initials" style="background-color: ${contacts[i].contactImageBgColor}">${contacts[i].nameInitials}</div>
                                     ${contact}
                                  </label>
                                  <div class="checkbox-container">
                                     <img id="checkbox-${i}" src="./assets/img/login/checkbox.svg" alt="">
                                  </div>                              
                               </li>`;
-   }
+  }
 }
 
 async function onloadContacts() {
-   contacts = [];
-   let userResponse = await getAllContacts('contacts');
-   for (let i = 0; i < userResponse.contactImageBgColor.length; i++) {
-      contacts.push({
-         contactImageBgColor: userResponse.contactImageBgColor[i],
-         email: userResponse.email[i],
-         name: userResponse.name[i],
-         nameInitials: userResponse.nameInitials[i],
-         phoneNumber: userResponse.phoneNumber[i],
-      });
-   }
-   renderToList();
+  contacts = [];
+  let userResponse = await getAllContacts('contacts');
+  for (let i = 0; i < userResponse.contactImageBgColor.length; i++) {
+    contacts.push({
+      contactImageBgColor: userResponse.contactImageBgColor[i],
+      email: userResponse.email[i],
+      name: userResponse.name[i],
+      nameInitials: userResponse.nameInitials[i],
+      phoneNumber: userResponse.phoneNumber[i],
+    });
+  }
+  renderToList();
 }
 
 async function getAllContacts(path) {
-   let response = await fetch(BASE_URL + path + '.json');
-   if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-   }
-   return await response.json();
+  let response = await fetch(BASE_URL + path + '.json');
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  return await response.json();
 }
 
 function getSelectedContacts() {
-   let placeholder = document.getElementById('placeholder');
+  let placeholder = document.getElementById('placeholder').childNodes;
+  for (let i = 0; i < placeholder.length; i++) {
+    let initials = placeholder[i].innerHTML;
+    let inlineStyle = placeholder[i].style.backgroundColor;
+    let fullName = placeholder[i].getAttribute('name');
+    assignedTo[0].nameInitials.push(initials);
+    assignedTo[0].contactImageBgColor.push(inlineStyle);
+    assignedTo[0].name.push(fullName);
+  }
 }
 
-function saveTask() {
-   let data = document.getElementsByClassName('my-inputs');
-   let contacts = getSelectedContacts();
+function getSelectedSubtasks() {
+  let placeholder = document.getElementById('subtask-placeholder').childNodes;
+  for (let i = 0; i < placeholder.length; i++) {
+    let subtask = placeholder[i].innerHTML;
+    let status = placeholder[i].getAttribute('status');
+    subtasks[0].subtask.push(subtask);
+    subtasks[0].subtaskStatus.push(status);
+  }
+}
 
-   let newTask = {
-      title: data[0].value,
-      description: data[1].value,
-      assignedTo: contacts,
-      dueDate: data[3].value,
-      priority: priority,
-      categoryName: data[4].value,
-      subtasks: data[5].value,
-   };
+function saveTask(event) {
+  event.preventDefault();
+  getSelectedContacts();
+  getSelectedSubtasks();
+  let bgColor = document.getElementById('category');
+  let selectedIndex = bgColor.selectedIndex;
+  let selectedOption = (bgColor = bgColor.options[selectedIndex]);
+  let result = selectedOption.getAttribute('bgColor');
+  let inputFields = document.getElementsByClassName('my-inputs');
 
-   tasksAddTask.push(newTask);
+  let newTask = {
+    title: inputFields[0].value,
+    description: inputFields[1].value,
+    assignedTo: assignedTo,
+    dueDate: inputFields[2].value,
+    priority: priority,
+    categoryName: inputFields[3].value,
+    subtasksTest: subtasks,
+    taskStatus: '0',
+    categoryBGColor: result,
+  };
+  tasks.push(newTask);
 }
 
 function toggleColor(buttonId, color, idOne, idTwo) {
-   if (selectedButtonId) {
-      let prev = document.getElementById(selectedButtonId);
-      prev.style = '';
-      document.getElementById(prev.getAttribute('data-svg-one')).style.fill = prev.getAttribute('data-original-color');
-      document.getElementById(prev.getAttribute('data-svg-two')).style.fill = prev.getAttribute('data-original-color');
-   }
-   if (buttonId === selectedButtonId) return (selectedButtonId = null);
-   let button = document.getElementById(buttonId);
-   button.style = `background-color:${color};color:#fff;border-bottom:unset`;
-   document.getElementById(idOne).style.fill = document.getElementById(idTwo).style.fill = '#fff';
-   button.setAttribute('data-svg-one', idOne);
-   button.setAttribute('data-svg-two', idTwo);
-   selectedButtonId = buttonId;
+  if (selectedButtonId) {
+    let prev = document.getElementById(selectedButtonId);
+    prev.style = '';
+    document.getElementById(prev.getAttribute('data-svg-one')).style.fill =
+      prev.getAttribute('data-original-color');
+    document.getElementById(prev.getAttribute('data-svg-two')).style.fill =
+      prev.getAttribute('data-original-color');
+  }
+  if (buttonId === selectedButtonId) return (selectedButtonId = null);
+  let button = document.getElementById(buttonId);
+  button.style = `background-color:${color};color:#fff;border-bottom:unset`;
+  document.getElementById(idOne).style.fill = document.getElementById(idTwo).style.fill = '#fff';
+  button.setAttribute('data-svg-one', idOne);
+  button.setAttribute('data-svg-two', idTwo);
+  selectedButtonId = buttonId;
 }
 
 function handleUrgentClick(event) {
-   event.preventDefault();
-   toggleColor('buttonUrgent', '#FF3D00', 'UrgentOne', 'UrgentTwo');
-   priority = 'urgent';
-   console.log('Urgent button clicked');
-   //   FUNCTION
+  event.preventDefault();
+  toggleColor('buttonUrgent', '#FF3D00', 'UrgentOne', 'UrgentTwo');
+  priority = 'urgent';
+  console.log('Urgent button clicked');
+  //   FUNCTION
 }
 
 function handleMediumClick(event) {
-   event.preventDefault();
-   toggleColor('buttonMedium', '#FFA800', 'MediumOne', 'MediumTwo');
-   priority = 'medium';
-   console.log('Medium button clicked');
-   //   FUNCTION
+  event.preventDefault();
+  toggleColor('buttonMedium', '#FFA800', 'MediumOne', 'MediumTwo');
+  priority = 'medium';
+  console.log('Medium button clicked');
+  //   FUNCTION
 }
 
 function handleLowClick(event) {
-   event.preventDefault();
-   toggleColor('buttonLow', '#7AE229', 'LowOne', 'LowTwo');
-   priority = 'low';
-   console.log('Low button clicked');
-   //   FUNCTION
+  event.preventDefault();
+  toggleColor('buttonLow', '#7AE229', 'LowOne', 'LowTwo');
+  priority = 'low';
+  console.log('Low button clicked');
+  //   FUNCTION
 }
 
 function resetForm(event) {
-   event.preventDefault();
-   document.getElementById('addTask').reset();
-   if (selectedButtonId != null) {
-      document.getElementById(selectedButtonId).click();
-   }
+  event.preventDefault();
+  document.getElementById('addTask').reset();
+  if (selectedButtonId != null) {
+    document.getElementById(selectedButtonId).click();
+  }
 }
 
 // function selectContact(i) {
@@ -128,46 +168,44 @@ function resetForm(event) {
 // }
 
 function selectContact(i) {
-   let icon = document.getElementById('checkbox-' + i);
-   let input = document.getElementById('contact-' + i);
-   let symbol = document.getElementById('symbol-' + i).cloneNode(true);
-   let placeholder = document.getElementById('placeholder');
+  let icon = document.getElementById('checkbox-' + i);
+  let input = document.getElementById('contact-' + i);
+  let symbol = document.getElementById('symbol-' + i).cloneNode(true);
+  let placeholder = document.getElementById('placeholder');
 
-   function removeSymbol() {
-      let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}`);
-      if (symbolInPlaceholder) {
-         placeholder.removeChild(symbolInPlaceholder);
-         icon.src = './assets/img/login/checkbox.svg';
-         input.style.background = '';
-      }
-   }
-
-   if (icon.src.endsWith('checkbox-checked-white.svg')) {
-      input.style.background = '';
+  function removeSymbol() {
+    let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}`);
+    if (symbolInPlaceholder) {
+      placeholder.removeChild(symbolInPlaceholder);
       icon.src = './assets/img/login/checkbox.svg';
+      input.style.background = '';
+    }
+  }
 
-      let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}`);
-      if (symbolInPlaceholder) {
-         placeholder.removeChild(symbolInPlaceholder);
-      }
-   } else {
-      icon.src = './assets/img/login/checkbox-checked-white.svg';
-      input.style.background = '#4589FF';
-      let label = input.textContent;
-      selectedContacts.push(label);
-      symbol.onclick = removeSymbol;
-      document.getElementById('placeholder').appendChild(symbol);
-   }
+  if (icon.src.endsWith('checkbox-checked-white.svg')) {
+    input.style.background = '';
+    icon.src = './assets/img/login/checkbox.svg';
+
+    let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}`);
+    if (symbolInPlaceholder) {
+      placeholder.removeChild(symbolInPlaceholder);
+    }
+  } else {
+    icon.src = './assets/img/login/checkbox-checked-white.svg';
+    input.style.background = '#4589FF';
+    symbol.onclick = removeSymbol;
+    document.getElementById('placeholder').appendChild(symbol);
+  }
 }
 
 function addSubtasks() {
-   let subtasks = document.getElementById('subtasks');
-   let placeholder = document.getElementById('subtask-placeholder');
+  let subtasks = document.getElementById('subtasks');
+  let placeholder = document.getElementById('subtask-placeholder');
 
-   if (subtasks.value.length > 2) {
-      placeholder.innerHTML += `<li>${subtasks.value}</li>`;
-      subtasks.value = '';
-   }
+  if (subtasks.value.length > 2) {
+    placeholder.innerHTML += `<li status="open">${subtasks.value}</li>`;
+    subtasks.value = '';
+  }
 }
 
 // let dropdownMenu = document.getElementById('addTask');
@@ -184,12 +222,12 @@ function addSubtasks() {
 // }
 
 function loadAddTaskContent(params) {
-   let mainContent = document.getElementById('mainContent');
-   mainContent.innerHTML = '';
-   mainContent.innerHTML += /*html*/ `
+  let mainContent = document.getElementById('mainContent');
+  mainContent.innerHTML = '';
+  mainContent.innerHTML += /*html*/ `
        <div class="add-task-main-content">
       <main>
-         <form onsubmit="saveTask()" id="addTask" class="task-description">
+         <form onsubmit="saveTask(event)" id="addTask" class="task-description">
             <div class="first-row">
                <div>
                   <span>Title<span class="red-star">*</span></span>
@@ -272,8 +310,8 @@ function loadAddTaskContent(params) {
                   <span>Category<span class="red-star">*</span></span>
                   <select class="my-inputs" required name="task-list" id="category">
                      <option value="">Select task category</option>
-                     <option value="Technical Task">Technical Task</option>
-                     <option value="User Story">User Story</option>
+                     <option bgColor="#0038FF" value="Technical Task">Technical Task</option>
+                     <option bgColor="#FF7A00" value="User Story">User Story</option>
                   </select>
                </div>
 
@@ -300,12 +338,5 @@ function loadAddTaskContent(params) {
    </div>
    </div>
   `;
-   onloadContacts();
-   removeButtonBackground();
-   changeAddTaskButtonBackground();
-}
-
-function changeAddTaskButtonBackground(params) {
-   let addTaskButton = document.getElementById('addTaskButton');
-   addTaskButton.classList.add('menu-background');
+  onloadContacts();
 }

@@ -2,38 +2,39 @@ let popup = document.getElementById('dialog-container');
 let taskDialog = document.querySelector('.task-dialog');
 const BASE_URL = 'https://join-2024-default-rtdb.europe-west1.firebasedatabase.app/';
 let tasks = [];
+// module.exports = tasks;
 let allDataFromFirebase = [];
 
 function init(params) {
-   renderSummary();
-   loadTasksData();
-   loadallDataFromFirebase();
+  renderSummary();
+  loadTasksData();
+  loadallDataFromFirebase();
 }
 
 function openTaskDialog() {
-   popup.style.display = 'unset';
-   setTimeout(function () {
-      taskDialog.style.right = '0';
-   }, 50);
+  popup.style.display = 'unset';
+  setTimeout(function () {
+    taskDialog.style.right = '0';
+  }, 50);
 }
 
 function closeTaskDialog() {
-   taskDialog.style.right = '-600px';
-   setTimeout(function () {
-      popup.style.display = 'none';
-   }, 300);
+  taskDialog.style.right = '-600px';
+  setTimeout(function () {
+    popup.style.display = 'none';
+  }, 300);
 }
 
 popup.addEventListener('click', function (event) {
-   if (!taskDialog.contains(event.target)) {
-      closeTaskDialog();
-   }
+  if (!taskDialog.contains(event.target)) {
+    closeTaskDialog();
+  }
 });
 
 function loadBoardContent(params) {
-   let mainContent = document.getElementById('mainContent');
-   mainContent.innerHTML = '';
-   mainContent.innerHTML += /*html*/ `
+  let mainContent = document.getElementById('mainContent');
+  mainContent.innerHTML = '';
+  mainContent.innerHTML += /*html*/ `
                <main class="main-board-div">
                   <div class="search-addtask-div">
                      <div class="search-input-div">
@@ -103,25 +104,25 @@ function loadBoardContent(params) {
                </main>
                
     `;
-   renderBoardCards();
-   removeButtonBackground();
-   changeBoardButtonBackground();
+  renderBoardCards();
+  removeButtonBackground();
+  changeBoardButtonBackground();
 }
 
 function changeBoardButtonBackground(params) {
-   let boardButton = document.getElementById('boardButton');
-   boardButton.classList.add('menu-background');
+  let boardButton = document.getElementById('boardButton');
+  boardButton.classList.add('menu-background');
 }
 
 function renderBoardCards() {
-   clearBoardContent();
-   for (let i = 0; i < tasks.taskStatus.length; i++) {
-      let taskStatus = tasks.taskStatus[i];
-      let title = tasks.title[i];
-      let description = tasks.description[i];
-      let priority = tasks.priority[i];
-      let categoryName = tasks.categoryName[i];
-      document.getElementById(`taskStatus${taskStatus}`).innerHTML += /*html*/ `
+  clearBoardContent();
+  for (let i = 0; i < tasks.taskStatus.length; i++) {
+    let taskStatus = tasks.taskStatus[i];
+    let title = tasks.title[i];
+    let description = tasks.description[i];
+    let priority = tasks.priority[i];
+    let categoryName = tasks.categoryName[i];
+    document.getElementById(`taskStatus${taskStatus}`).innerHTML += /*html*/ `
                                        <div id="boardCard${i}" class="board-card" onclick="renderTaskOverlay(${i})">
                               <img class="card-label" src="./assets/img/board/${categoryName}.svg" alt="" />
                               <span class="card-title">${title}</span>
@@ -137,62 +138,64 @@ function renderBoardCards() {
                               </div>
                            </div>
          `;
-      renderContactsInCards(i);
-      renderSubtasksInBoardCards(i);
-   }
-   checkIfTaskIsEmpty();
+    renderContactsInCards(i);
+    renderSubtasksInBoardCards(i);
+  }
+  checkIfTaskIsEmpty();
 }
 
 function adjustProgressbar(params) {}
 
 function renderSubtasksInBoardCards(i) {
-   let subtasks = tasks?.subtasksTest?.[i]?.subtask || [];
-   let finishedSubtasks = 0;
-   for (let j = 0; j < subtasks.length; j++) {
-      if (tasks.subtasksTest[i].subtaskStatus[j] === 'closed') {
-         finishedSubtasks++;
-      }
-   }
-   let subtasksLength = subtasks.length;
-   let progressDiv = document.getElementById(`progressDiv${i}`);
-   if (subtasksLength === 0) {
-      progressDiv.style.display = 'none';
-   } else {
-      progressDiv.style.display = 'flex';
-      progressDiv.innerHTML += /*html*/ `
+  let subtasks = tasks?.subtasksTest?.[i]?.subtask || [];
+  let finishedSubtasks = 0;
+  for (let j = 0; j < subtasks.length; j++) {
+    if (tasks.subtasksTest[i].subtaskStatus[j] === 'closed') {
+      finishedSubtasks++;
+    }
+  }
+  let subtasksLength = subtasks.length;
+  let progressDiv = document.getElementById(`progressDiv${i}`);
+  if (subtasksLength === 0) {
+    progressDiv.style.display = 'none';
+  } else {
+    progressDiv.style.display = 'flex';
+    progressDiv.innerHTML += /*html*/ `
                <div class="outer-progress-bar">
-                  <div class="inner-progress-bar" style="width:${(finishedSubtasks * 100) / subtasksLength}%;"></div>
+                  <div class="inner-progress-bar" style="width:${
+                    (finishedSubtasks * 100) / subtasksLength
+                  }%;"></div>
                </div>
            <div>${finishedSubtasks}/${subtasksLength}</div>
       `;
-   }
+  }
 }
 
 function checkIfTaskIsEmpty() {
-   const taskContents = [
-      document.getElementById('taskStatus0'),
-      document.getElementById('taskStatus1'),
-      document.getElementById('taskStatus2'),
-      document.getElementById('taskStatus3'),
-   ];
+  const taskContents = [
+    document.getElementById('taskStatus0'),
+    document.getElementById('taskStatus1'),
+    document.getElementById('taskStatus2'),
+    document.getElementById('taskStatus3'),
+  ];
 
-   taskContents.forEach((taskContent) => {
-      if (taskContent && taskContent.innerHTML.trim() === '') {
-         taskContent.innerHTML += `
+  taskContents.forEach((taskContent) => {
+    if (taskContent && taskContent.innerHTML.trim() === '') {
+      taskContent.innerHTML += `
             <div class="nothing-to-do-box">No Task To do</div>
          `;
-      }
-   });
+    }
+  });
 }
 
 function renderTaskOverlay(i) {
-   document.getElementById('taskOverlay').innerHTML = '';
-   let title = tasks.title[i];
-   let description = tasks.description[i];
-   let priority = tasks.priority[i];
-   let categoryName = tasks.categoryName[i];
-   let dueDate = tasks.dueDate[i];
-   document.getElementById('taskOverlay').innerHTML += /*html*/ `
+  document.getElementById('taskOverlay').innerHTML = '';
+  let title = tasks.title[i];
+  let description = tasks.description[i];
+  let priority = tasks.priority[i];
+  let categoryName = tasks.categoryName[i];
+  let dueDate = tasks.dueDate[i];
+  document.getElementById('taskOverlay').innerHTML += /*html*/ `
          <div class="task-overlay">
             <div class="categorie-info">
                <img class="overlay-card-label" src="./assets/img/board/${categoryName}.svg" alt="" />
@@ -241,115 +244,115 @@ function renderTaskOverlay(i) {
             </div>
          </div>
           `;
-   renderContactsInTaskOverlay(i);
-   renderSubtasksinTaskOverlay(i);
-   showOverlayTask();
+  renderContactsInTaskOverlay(i);
+  renderSubtasksinTaskOverlay(i);
+  showOverlayTask();
 }
 
 function renderSubtasksinTaskOverlay(i) {
-   let subtasks = tasks?.subtasksTest?.[i]?.subtask || [];
-   document.getElementById('subtaskDiv').innerHTML = '';
-   for (let j = 0; j < subtasks.length; j++) {
-      let subtask = subtasks[j];
-      document.getElementById('subtaskDiv').innerHTML += /*html*/ `
+  let subtasks = tasks?.subtasksTest?.[i]?.subtask || [];
+  document.getElementById('subtaskDiv').innerHTML = '';
+  for (let j = 0; j < subtasks.length; j++) {
+    let subtask = subtasks[j];
+    document.getElementById('subtaskDiv').innerHTML += /*html*/ `
          <div id="subtaskRow${j}" class="subtask-row">${subtask}</div>
       `;
-      changeImgBasedOnSubtaskStatus(i, j);
-   }
+    changeImgBasedOnSubtaskStatus(i, j);
+  }
 }
 
 function changeImgBasedOnSubtaskStatus(i, j) {
-   if (tasks.subtasksTest[i].subtaskStatus[j] == 'open') {
-      document.getElementById(`subtaskRow${j}`).innerHTML += /*html*/ `
+  if (tasks.subtasksTest[i].subtaskStatus[j] == 'open') {
+    document.getElementById(`subtaskRow${j}`).innerHTML += /*html*/ `
          <img src="./assets/img/board/check-button-empty.svg" alt="">
       `;
-   } else {
-      document.getElementById(`subtaskRow${j}`).innerHTML += /*html*/ `
+  } else {
+    document.getElementById(`subtaskRow${j}`).innerHTML += /*html*/ `
       <img src="./assets/img/board/check-button-checked.svg" alt="">
    `;
-   }
+  }
 }
 
 function deleteCurrentTask(i) {
-   if (confirm('Delete This Task?') == true) {
-      tasks.taskStatus.splice(i, 1);
-      tasks.title.splice(i, 1);
-      tasks.description.splice(i, 1);
-      tasks.priority.splice(i, 1);
-      tasks.dueDate.splice(i, 1);
-      tasks.categoryName.splice(i, 1);
-      tasks.assignedTo.splice(i, 1);
-      closeTaskOverlay();
-      loadBoardContent();
-   }
+  if (confirm('Delete This Task?') == true) {
+    tasks.taskStatus.splice(i, 1);
+    tasks.title.splice(i, 1);
+    tasks.description.splice(i, 1);
+    tasks.priority.splice(i, 1);
+    tasks.dueDate.splice(i, 1);
+    tasks.categoryName.splice(i, 1);
+    tasks.assignedTo.splice(i, 1);
+    closeTaskOverlay();
+    loadBoardContent();
+  }
 }
 
 async function loadTasksData(path = '/tasks') {
-   let fetchTasks = await fetch(BASE_URL + path + '.json');
-   tasks = await fetchTasks.json();
-   console.log(tasks);
+  let fetchTasks = await fetch(BASE_URL + path + '.json');
+  tasks = await fetchTasks.json();
+  console.log(tasks);
 }
 
 async function loadallDataFromFirebase() {
-   let fetchData = await fetch(BASE_URL + '.json');
-   allDataFromFirebase = await fetchData.json();
-   console.log(allDataFromFirebase);
+  let fetchData = await fetch(BASE_URL + '.json');
+  allDataFromFirebase = await fetchData.json();
+  console.log(allDataFromFirebase);
 }
 
 function showOverlayTask() {
-   document.getElementById('taskOverlay').showModal();
+  document.getElementById('taskOverlay').showModal();
 }
 
 function closeTaskOverlay(params) {
-   document.getElementById('taskOverlay').close();
+  document.getElementById('taskOverlay').close();
 }
 
 function renderContactsInTaskOverlay(i) {
-   for (let j = 0; j < tasks.assignedTo[i].contactImageBgColor.length; j++) {
-      let imageByColor = tasks.assignedTo[i].contactImageBgColor[j];
-      let initials = tasks.assignedTo[i].nameInitials[j];
-      let name = tasks.assignedTo[i].name[j];
-      document.getElementById('TaskOverlayContacts').innerHTML += /*html*/ `
+  for (let j = 0; j < tasks.assignedTo[i].contactImageBgColor.length; j++) {
+    let imageByColor = tasks.assignedTo[i].contactImageBgColor[j];
+    let initials = tasks.assignedTo[i].nameInitials[j];
+    let name = tasks.assignedTo[i].name[j];
+    document.getElementById('TaskOverlayContacts').innerHTML += /*html*/ `
         <div class="assigned-to-div">
             <div class="contact-initials" style="background-color: ${imageByColor};">${initials}</div>
             <span>${name}</span>
         </div>
       `;
-   }
+  }
 }
 
 function renderContactsInCards(i) {
-   for (let j = 0; j < tasks.assignedTo[i].contactImageBgColor.length; j++) {
-      let imageByColor = tasks.assignedTo[i].contactImageBgColor[j];
-      let initials = tasks.assignedTo[i].nameInitials[j];
-      document.getElementById(`boardCardsContacts${i}`).innerHTML += /*html*/ `
+  for (let j = 0; j < tasks.assignedTo[i].contactImageBgColor.length; j++) {
+    let imageByColor = tasks.assignedTo[i].contactImageBgColor[j];
+    let initials = tasks.assignedTo[i].nameInitials[j];
+    document.getElementById(`boardCardsContacts${i}`).innerHTML += /*html*/ `
             <div class="contacts-in-cards" style="background-color: ${imageByColor};">${initials}</div>
        
       `;
-   }
+  }
 }
 
 function searchTask(params) {
-   clearBoardContent();
-   let searchTitle = document.getElementById('searchInput').value.toLowerCase();
-   let searchDescription = document.getElementById('searchInput').value.toLowerCase();
-   if (searchTitle === '') {
-      renderBoardCards();
-      return;
-   }
-   for (let i = 0; i < tasks.taskStatus.length; i++) {
-      let title = tasks.title[i].toLowerCase();
-      let taskDescription = tasks.description[i].toLowerCase();
-      if (
-         (searchTitle.length >= 3 && title.includes(searchTitle)) ||
-         (searchDescription.length >= 3 && taskDescription.includes(searchDescription))
-      ) {
-         let taskStatus = tasks.taskStatus[i];
-         let title = tasks.title[i];
-         let description = tasks.description[i];
-         let priority = tasks.priority[i];
-         let categoryName = tasks.categoryName[i];
-         document.getElementById(`taskStatus${taskStatus}`).innerHTML += /*html*/ `
+  clearBoardContent();
+  let searchTitle = document.getElementById('searchInput').value.toLowerCase();
+  let searchDescription = document.getElementById('searchInput').value.toLowerCase();
+  if (searchTitle === '') {
+    renderBoardCards();
+    return;
+  }
+  for (let i = 0; i < tasks.taskStatus.length; i++) {
+    let title = tasks.title[i].toLowerCase();
+    let taskDescription = tasks.description[i].toLowerCase();
+    if (
+      (searchTitle.length >= 3 && title.includes(searchTitle)) ||
+      (searchDescription.length >= 3 && taskDescription.includes(searchDescription))
+    ) {
+      let taskStatus = tasks.taskStatus[i];
+      let title = tasks.title[i];
+      let description = tasks.description[i];
+      let priority = tasks.priority[i];
+      let categoryName = tasks.categoryName[i];
+      document.getElementById(`taskStatus${taskStatus}`).innerHTML += /*html*/ `
                                              <div id="boardCard${i}" class="board-card" onclick="renderTaskOverlay(${i})">
                                     <img class="card-label" src="./assets/img/board/${categoryName}.svg" alt="" />
                                     <span class="card-title">${title}</span>
@@ -366,15 +369,15 @@ function searchTask(params) {
                                     </div>
                                  </div>
                `;
-         renderContactsInCards(i);
-      }
-   }
-   checkIfTaskIsEmpty();
+      renderContactsInCards(i);
+    }
+  }
+  checkIfTaskIsEmpty();
 }
 
 function clearBoardContent(params) {
-   document.getElementById('taskStatus0').innerHTML = '';
-   document.getElementById('taskStatus1').innerHTML = '';
-   document.getElementById('taskStatus2').innerHTML = '';
-   document.getElementById('taskStatus3').innerHTML = '';
+  document.getElementById('taskStatus0').innerHTML = '';
+  document.getElementById('taskStatus1').innerHTML = '';
+  document.getElementById('taskStatus2').innerHTML = '';
+  document.getElementById('taskStatus3').innerHTML = '';
 }
