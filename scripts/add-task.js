@@ -165,21 +165,6 @@ function resetForm(event) {
   }
 }
 
-// function selectContact(i) {
-//   let icon = document.getElementById('checkbox-' + i);
-//   let input = document.getElementById('contact-' + i);
-//   let symbol = document.getElementById('symbol-' + i).cloneNode(true);
-
-//   if (icon.src.endsWith('checkbox-checked-white.svg')) {
-//     input.style.background = '';
-//     icon.src = './assets/img/login/checkbox.svg';
-//   } else {
-//     icon.src = './assets/img/login/checkbox-checked-white.svg';
-//     input.style.background = '#4589FF';
-//     document.getElementById('placeholder').innerHTML += symbol;
-//   }
-// }
-
 function selectContact(i) {
   let icon = document.getElementById('checkbox-' + i);
   let input = document.getElementById('contact-' + i);
