@@ -2,7 +2,6 @@ let selectedButtonId = null;
 let priority = '';
 let tasksAddTask = [];
 let contacts = [];
-// let tasks = require('./board.js');
 let assignedTo = [
   {
     contactImageBgColor: [],
