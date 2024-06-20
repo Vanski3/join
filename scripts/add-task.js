@@ -155,14 +155,17 @@ function resetForm(event) {
   document.getElementById('addTask').reset();
   document.getElementById('placeholder').innerHTML = '';
   document.getElementById('subtask-placeholder').innerHTML = '';
+  let elements = document.getElementById('placeholder');
+  let details = document.getElementById('details');
   document.querySelectorAll('.change-bg').forEach(function (contact) {
     contact.style.background = '';
   });
   document.querySelectorAll('.change-src').forEach(function (img) {
     img.src = './assets/img/login/checkbox.svg';
   });
-  if (selectedButtonId != null) {
-    document.getElementById(selectedButtonId).click();
+
+  if (elements.childNodes.length < 1) {
+    details.removeAttribute('open');
   }
 }
 
@@ -240,7 +243,7 @@ function loadAddTaskContent(params) {
                <div>
                   <div>
                      Assigned to
-                     <details>
+                     <details id="details">
                         <summary id="contact-summary"><div class="summary-headline">Select contacts to assign</div></summary>
                            <fieldset>
                            <ul id="contacts">
