@@ -159,3 +159,38 @@
 .contact-detail-info a:hover {
   text-decoration: underline;
 }
+
+.dialog-container {
+  position: absolute;
+  display: none;
+  height: 100vh;
+  top: 0;
+  width: 100%;
+  z-index: 998;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.task-dialog {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  padding-left: 36px;
+  width: 518px;
+  box-shadow: 0px 0px 4px 0px #00000029;
+  z-index: 999;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  background-color: #fff;
+  right: -600px;
+  transition: right 0.3s ease;
+}
+
+.close-button {
+  position: absolute;
+  top: 24px;
+  right: 30px;
+  cursor: pointer;
+}

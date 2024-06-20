@@ -20,57 +20,63 @@ function renderContacts(contacts) {
    const content = document.getElementById('mainContent');
    content.innerHTML = '';
    content.innerHTML += `
-        <div class="contacts-container">
-            <div class="contacts-list">
-                <button class="add-contact-btn">Add new contact</button>
-                <!-- Dynamically loaded contacts -->
-            </div>
-            <div class="contact-detail">
-                <!-- Dynamically loaded contact details -->
-            </div>
-        </div>
-    `;
+       <div class="contacts-container">
+           <div class="contacts-list">
+               <button class="add-contact-btn">Add new contact</button>
+               <!-- Dynamisch geladene Kontakte -->
+           </div>
+           <div class="contact-detail">
+               <!-- Dynamisch geladene Kontaktdetails -->
+           </div>
+       </div>
+   `;
 
    const contactsList = document.querySelector('.contacts-list');
 
-   // Sort contacts by name
+   // Sortiere Kontakte nach Namen
    contacts.sort((a, b) => a.name.localeCompare(b.name));
 
    let currentLetter = '';
 
    contacts.forEach((contact) => {
-      const firstLetter = contact.name[0].toUpperCase();
+       const firstLetter = contact.name[0].toUpperCase();
 
-      if (firstLetter !== currentLetter) {
-         currentLetter = firstLetter;
-         const groupTitle = document.createElement('div');
-         groupTitle.classList.add('contact-group-title');
-         groupTitle.textContent = currentLetter;
-         contactsList.appendChild(groupTitle);
-      }
+       if (firstLetter !== currentLetter) {
+           currentLetter = firstLetter;
+           const groupTitle = document.createElement('div');
+           groupTitle.classList.add('contact-group-title');
+           groupTitle.textContent = currentLetter;
+           contactsList.appendChild(groupTitle);
+       }
 
-      const contactGroup = document.createElement('div');
-      contactGroup.classList.add('contact-group');
+       const contactGroup = document.createElement('div');
+       contactGroup.classList.add('contact-group');
 
-      const contactElement = document.createElement('div');
-      contactElement.classList.add('contact');
-      contactElement.innerHTML = `
-            <div class="contact-initials" style="background-color: ${contact.color};">${contact.initials}</div>
-            <div class="contact-info">
-                <div class="contact-name">${contact.name}</div>
-                <div class="contact-email">${contact.email}</div>
-            </div>
-        `;
+       const contactElement = document.createElement('div');
+       contactElement.classList.add('contact');
+       contactElement.innerHTML = `
+           <div class="contact-initials" style="background-color: ${contact.color};">${contact.initials}</div>
+           <div class="contact-info">
+               <div class="contact-name">${contact.name}</div>
+               <div class="contact-email">${contact.email}</div>
+           </div>
+       `;
 
-      contactElement.addEventListener('click', () => {
-         renderContactDetail(contact);
-      });
+       contactElement.addEventListener('click', () => {
+           renderContactDetail(contact);
+       });
 
-      contactGroup.appendChild(contactElement);
-      contactsList.appendChild(contactGroup);
+       contactGroup.appendChild(contactElement);
+       contactsList.appendChild(contactGroup);
    });
    removeButtonBackground();
    changeContactsButtonBackground();
+
+   // Add the event listener for the add-contact-btn after rendering the content
+   let addContactButton = document.querySelector('.add-contact-btn');
+   if (addContactButton) {
+       addContactButton.addEventListener('click', openContactDialog);
+   }
 }
 
 function changeContactsButtonBackground(params) {
@@ -107,14 +113,45 @@ function renderContactDetail(contact) {
 }
 
 function deleteContact(id) {
-   // Find the index of the contact with the given id
    const index = contactsData.findIndex(contact => contact.id === id);
    if (index !== -1) {
-      // Remove the contact from the array
       contactsData.splice(index, 1);
-      // Re-render the contacts list
       renderContacts(contactsData);
-      // Clear the contact detail view
       document.querySelector('.contact-detail').innerHTML = '';
    }
 }
+
+function openContactDialog() {
+    let contactPopup = document.getElementById('contact-dialog-container');
+    let contactDialog = document.querySelector('#contact-dialog-container .task-dialog');
+
+    contactPopup.style.display = 'unset';
+    setTimeout(function () {
+        contactDialog.style.right = '0';
+    }, 50);
+}
+
+function closeContactDialog() {
+    let contactDialog = document.querySelector('#contact-dialog-container .task-dialog');
+
+    contactDialog.style.right = '-600px';
+    setTimeout(function () {
+        document.getElementById('contact-dialog-container').style.display = 'none';
+    }, 300);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    let addContactButton = document.querySelector('.add-contact-btn');
+
+    if (addContactButton) {
+        addContactButton.addEventListener('click', openContactDialog);
+    }
+
+    document.getElementById('contact-dialog-container').addEventListener('click', function (event) {
+        let contactDialog = document.querySelector('#contact-dialog-container .task-dialog');
+
+        if (!contactDialog.contains(event.target)) {
+            closeContactDialog();
+        }
+    });
+});

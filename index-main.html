@@ -205,6 +205,24 @@
 
    <!-- Task Popup -->
    <dialog id="taskOverlay" class="dialog-overlay-board"></dialog>
+
+   
+<!-- Create Contact Popup -->
+<div id="contact-dialog-container" class="dialog-container">
+   <div class="task-dialog" onclick="event.stopPropagation()">
+       <h1>Add Contact</h1>
+       <svg onclick="closeContactDialog()" class="close-button" width="32" height="32" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+           <path d="M12.0011 12.4998L17.2441 17.7428M6.75806 17.7428L12.0011 12.4998L6.75806 17.7428ZM17.2441 7.25684L12.0001 12.4998L17.2441 7.25684ZM12.0001 12.4998L6.75806 7.25684L12.0001 12.4998Z" stroke="#4589FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+       </svg>
+       <div class="add-task-main-content">
+           <main>
+               <form onsubmit="saveContact(event)" id="addContact" class="task-description">
+                   <!-- Hier kannst du deinen eigenen Inhalt einfügen -->
+               </form>
+           </main>
+       </div>
+   </div>
+</div>
 </body>
 
 </html>
