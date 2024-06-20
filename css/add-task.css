@@ -383,15 +383,19 @@ details[open] summary::after {
   transform: rotate(180deg);
 }
 
-details[open] summary {
+details[open] #contact-summary {
   justify-content: flex-end;
+}
+
+details[open] #categoy-headline {
+  padding-left: 10px;
 }
 
 details[open] .summary-headline {
   display: none;
 }
 
-details[open] {
+details[open]:not(:last-child) {
   max-height: 200px;
   overflow-y: scroll;
   overflow-x: hidden;

@@ -85,7 +85,6 @@ function saveTask(event) {
   let selectedOption = (bgColor = bgColor.options[selectedIndex]);
   let result = selectedOption.getAttribute('bgColor');
   let inputFields = document.getElementsByClassName('my-inputs');
-
   let newTask = {
     title: inputFields[0].value,
     description: inputFields[1].value,
@@ -117,19 +116,27 @@ function mergeObjects(tasks, newTask) {
 function toggleColor(buttonId, color, idOne, idTwo) {
   if (selectedButtonId) {
     let prev = document.getElementById(selectedButtonId);
-    prev.style = '';
-    document.getElementById(prev.getAttribute('data-svg-one')).style.fill =
-      prev.getAttribute('data-original-color');
-    document.getElementById(prev.getAttribute('data-svg-two')).style.fill =
-      prev.getAttribute('data-original-color');
+    if (prev) {
+      prev.style = '';
+      let prevSvgOne = document.getElementById(prev.getAttribute('data-svg-one'));
+      let prevSvgTwo = document.getElementById(prev.getAttribute('data-svg-two'));
+      if (prevSvgOne) prevSvgOne.style.fill = prev.getAttribute('data-original-color');
+      if (prevSvgTwo) prevSvgTwo.style.fill = prev.getAttribute('data-original-color');
+    }
   }
   if (buttonId === selectedButtonId) return (selectedButtonId = null);
   let button = document.getElementById(buttonId);
-  button.style = `background-color:${color};color:#fff;border-bottom:unset`;
-  document.getElementById(idOne).style.fill = document.getElementById(idTwo).style.fill = '#fff';
-  button.setAttribute('data-svg-one', idOne);
-  button.setAttribute('data-svg-two', idTwo);
-  selectedButtonId = buttonId;
+  if (button) {
+    button.style = `background-color:${color};color:#fff;border-bottom:unset`;
+    let svgOne = document.getElementById(idOne);
+    let svgTwo = document.getElementById(idTwo);
+    if (svgOne && svgTwo) {
+      svgOne.style.fill = svgTwo.style.fill = '#fff';
+      button.setAttribute('data-svg-one', idOne);
+      button.setAttribute('data-svg-two', idTwo);
+    }
+    selectedButtonId = buttonId;
+  }
 }
 
 function handleUrgentClick(event) {
@@ -180,6 +187,27 @@ function resetForm(event) {
   if (elements.childNodes.length < 1) {
     details.removeAttribute('open');
   }
+  resetButtons();
+}
+
+function resetButtons() {
+  document.getElementById('UrgentOne').style.fill = '#FF3D00';
+  document.getElementById('UrgentTwo').style.fill = '#FF3D00';
+  document.getElementById('buttonUrgent').style.backgroundColor = '';
+  document.getElementById('buttonUrgent').style.color = '#000';
+
+  document.getElementById('MediumOne').style.fill = '#FFA800';
+  document.getElementById('MediumTwo').style.fill = '#FFA800';
+  document.getElementById('buttonMedium').style.backgroundColor = '';
+  document.getElementById('buttonMedium').style.color = '#000';
+
+  document.getElementById('LowOne').style.fill = '#7AE229';
+  document.getElementById('LowTwo').style.fill = '#7AE229';
+  document.getElementById('buttonLow').style.backgroundColor = '';
+  document.getElementById('buttonLow').style.color = '#000';
+
+  selectedButtonId = '';
+  priority = '';
 }
 
 function selectContact(i) {
@@ -223,18 +251,19 @@ function addSubtasks() {
   }
 }
 
-// let dropdownMenu = document.getElementById('addTask');
-// let summary = document.getElementById('contact-summary');
+function selectCategory(category) {
+  let summaryHeadline = document.getElementById('categoy-headline');
+  summaryHeadline.textContent = category;
+  summaryHeadline.closest('details').removeAttribute('open');
+}
 
-// dropdownMenu.addEventListener('click', function (event) {
-//   if (!summary.contains(event.target)) {
-//     closeDropdown();
-//   }
-// });
+document.addEventListener('click', function (event) {
+  let details = document.getElementById('details');
 
-// function closeDropdown() {
-//   summary.click();
-// }
+  if (!details.contains(event.target) && details.open) {
+    details.open = false;
+  }
+});
 
 function loadAddTaskContent(params) {
   let mainContent = document.getElementById('mainContent');
@@ -355,4 +384,6 @@ function loadAddTaskContent(params) {
   `;
   onloadContacts();
   removeButtonBackground();
+  selectedButtonId = '';
+  priority = '';
 }
