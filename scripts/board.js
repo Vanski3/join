@@ -124,7 +124,7 @@ function renderBoardCards() {
       let categoryName = tasks.categoryName[i];
       document.getElementById(`taskStatus${taskStatus}`).innerHTML += /*html*/ `
                                        <div id="boardCard${i}" class="board-card" onclick="renderTaskOverlay(${i})">
-                              <img class="card-label" src="./assets/img/board/${categoryName}.svg" alt="" />
+                              <img id="categorieImg${i}" class="card-label" src="./assets/img/board/${categoryName}.svg" alt="" />
                               <span class="card-title">${title}</span>
                               <span class="task-description-board">${description}</span>
                               <div id="progressDiv${i}" class="progress-field">
@@ -135,6 +135,9 @@ function renderBoardCards() {
                               </div>
                            </div>
          `;
+      if (categoryName == 'Technical Task') {
+         document.getElementById(`categorieImg${i}`).style.width = '140px';
+      }
       renderContactsInCards(i);
       renderSubtasksInBoardCards(i);
    }
