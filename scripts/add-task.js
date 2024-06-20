@@ -1,6 +1,5 @@
 let selectedButtonId = null;
 let priority = '';
-let tasksAddTask = [];
 let contacts = [];
 let assignedTo = [
   {
@@ -100,7 +99,7 @@ function saveTask(event) {
   };
   mergeObjects(tasks, newTask);
   loadBoardContent();
-  // closeTaskDialog();
+  closeTaskDialog();
 }
 
 function mergeObjects(tasks, newTask) {
