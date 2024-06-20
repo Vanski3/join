@@ -99,7 +99,20 @@ function saveTask(event) {
     taskStatus: '0',
     categoryBGColor: result,
   };
-  tasks.push(newTask);
+  mergeObjects(tasks, newTask);
+  loadBoardContent();
+}
+
+function mergeObjects(tasks, newTask) {
+  newTask.assignedTo.forEach((item) => tasks.assignedTo.push(item));
+  tasks.categoryBgColor.push(newTask.categoryBGColor);
+  tasks.categoryName.push(newTask.categoryName);
+  tasks.description.push(newTask.description);
+  tasks.dueDate.push(newTask.dueDate);
+  tasks.priority.push(newTask.priority);
+  tasks.taskStatus.push(newTask.taskStatus);
+  tasks.title.push(newTask.title);
+  newTask.subtasksTest.forEach((item) => tasks.subtasksTest.push(item));
 }
 
 function toggleColor(buttonId, color, idOne, idTwo) {
