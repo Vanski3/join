@@ -183,6 +183,11 @@ function allowDrop(ev) {
 
 function drag(ev) {
    ev.dataTransfer.setData('text', ev.target.id);
+   ev.target.classList.add('rotate-45');
+}
+
+function dragend(ev) {
+   ev.target.classList.remove('rotate-45');
 }
 
 function renderSubtasksInBoardCards(i) {

@@ -352,6 +352,11 @@ h1 {
    overflow-y: auto;
 }
 
+.rotate-45 {
+   transform: rotate(5deg);
+   transition: transform 0.2s;
+}
+
 @media only screen and (max-width: 1400px) {
    .board {
       flex-direction: column;
