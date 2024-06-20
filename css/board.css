@@ -286,7 +286,7 @@ h1 {
 .task-div {
    display: flex;
    flex-direction: column;
-   /* gap: 16px; */
+   height: 100%;
 }
 
 .contacts-task-overlay {

@@ -62,7 +62,7 @@ function loadBoardContent(params) {
                               src="./assets/img/board/add-button-default.svg"
                               alt="" />
                         </div>
-                        <div id="taskStatus0" class="task-div">
+                        <div id="taskStatus0" class="task-div" ondrop="drop(event)" ondragover="allowDrop(event)">
                         </div>
                      </div>
                      <div class="tasks-column">
@@ -74,7 +74,7 @@ function loadBoardContent(params) {
                               src="./assets/img/board/add-button-default.svg"
                               alt="" />
                         </div>
-                        <div id="taskStatus1" class="task-div">
+                        <div id="taskStatus1" class="task-div" ondrop="drop(event)" ondragover="allowDrop(event)">
                         </div>
                      </div>
                      <div class="tasks-column">
@@ -86,7 +86,7 @@ function loadBoardContent(params) {
                               src="./assets/img/board/add-button-default.svg"
                               alt="" />
                         </div>
-                        <div id="taskStatus2" class="task-div">
+                        <div id="taskStatus2" class="task-div" ondrop="drop(event)" ondragover="allowDrop(event)">
                         </div>
                      </div>
                      <div class="tasks-column">
@@ -98,7 +98,7 @@ function loadBoardContent(params) {
                               src="./assets/img/board/add-button-default.svg"
                               alt="" />
                         </div>
-                        <div id="taskStatus3" class="task-div"></div>
+                        <div id="taskStatus3" class="task-div" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
                      </div>
                   </div>
                </main>
@@ -123,7 +123,7 @@ function renderBoardCards() {
       let priority = tasks.priority[i];
       let categoryName = tasks.categoryName[i];
       document.getElementById(`taskStatus${taskStatus}`).innerHTML += /*html*/ `
-                                       <div id="boardCard${i}" class="board-card" onclick="renderTaskOverlay(${i})">
+                                       <div id="boardCard${i}" draggable="true" ondragstart="drag(event)" class="board-card" onclick="renderTaskOverlay(${i})">
                               <img id="categorieImg${i}" class="card-label" src="./assets/img/board/${categoryName}.svg" alt="" />
                               <span class="card-title">${title}</span>
                               <span class="task-description-board">${description}</span>
@@ -142,6 +142,47 @@ function renderBoardCards() {
       renderSubtasksInBoardCards(i);
    }
    checkIfTaskIsEmpty();
+}
+
+function drop(ev) {
+   ev.preventDefault();
+   var data = ev.dataTransfer.getData('text');
+   var card = document.getElementById(data);
+
+   // Ensure the drop target is one of the allowed task status containers
+   var allowedIds = ['taskStatus0', 'taskStatus1', 'taskStatus2', 'taskStatus3'];
+   var dropTarget = ev.target;
+
+   // Traverse up the DOM to find the valid drop target
+   while (dropTarget && !allowedIds.includes(dropTarget.id)) {
+      dropTarget = dropTarget.parentElement;
+   }
+
+   if (dropTarget && allowedIds.includes(dropTarget.id)) {
+      // Get the new task status from the drop target's ID
+      var newStatus = dropTarget.id.replace('taskStatus', '');
+
+      // Update the task's status in the tasks array
+      var taskId = data.replace('boardCard', '');
+      tasks.taskStatus[taskId] = newStatus;
+
+      // Append the card to the new column if it's not already a parent
+      if (!dropTarget.contains(card)) {
+         dropTarget.appendChild(card);
+      }
+
+      // Re-render the board to reflect the changes
+      renderBoardCards();
+   }
+}
+
+// Ensure the drop target is a valid task-div and one of the allowed IDs
+function allowDrop(ev) {
+   ev.preventDefault();
+}
+
+function drag(ev) {
+   ev.dataTransfer.setData('text', ev.target.id);
 }
 
 function renderSubtasksInBoardCards(i) {
