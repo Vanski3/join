@@ -1,6 +1,5 @@
 let selectedButtonId = null;
 let priority = '';
-let tasksAddTask = [];
 let contacts = [];
 let assignedTo = [
   {
@@ -100,6 +99,7 @@ function saveTask(event) {
   };
   mergeObjects(tasks, newTask);
   loadBoardContent();
+  closeTaskDialog();
 }
 
 function mergeObjects(tasks, newTask) {
@@ -135,19 +135,32 @@ function toggleColor(buttonId, color, idOne, idTwo) {
 function handleUrgentClick(event) {
   event.preventDefault();
   toggleColor('buttonUrgent', '#FF3D00', 'UrgentOne', 'UrgentTwo');
-  priority = 'urgent';
+  if (selectedButtonId == null) {
+    priority = '';
+  } else {
+    priority = 'urgent';
+  }
 }
 
 function handleMediumClick(event) {
   event.preventDefault();
   toggleColor('buttonMedium', '#FFA800', 'MediumOne', 'MediumTwo');
-  priority = 'medium';
+  if (selectedButtonId == null) {
+    priority = '';
+  } else {
+    priority = 'medium';
+  }
 }
 
 function handleLowClick(event) {
   event.preventDefault();
   toggleColor('buttonLow', '#7AE229', 'LowOne', 'LowTwo');
   priority = 'low';
+  if (selectedButtonId == null) {
+    priority = '';
+  } else {
+    priority = 'low';
+  }
 }
 
 function resetForm(event) {
@@ -204,7 +217,7 @@ function addSubtasks() {
   let subtasks = document.getElementById('subtasks');
   let placeholder = document.getElementById('subtask-placeholder');
 
-  if (subtasks.value.length > 2) {
+  if (subtasks.value.length >= 1) {
     placeholder.innerHTML += `<li status="open">${subtasks.value}</li>`;
     subtasks.value = '';
   }
