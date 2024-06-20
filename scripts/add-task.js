@@ -20,13 +20,13 @@ function renderToList() {
   let list = document.getElementById('contacts');
   for (let i = 0; i < contacts.length; i++) {
     const contact = contacts[i].name;
-    list.innerHTML += `          <li id="contact-${i}" onclick="selectContact(${i})">
+    list.innerHTML += `          <li class="change-bg" id="contact-${i}" onclick="selectContact(${i})">
                                  <label for="${contact}"> 
                                     <div id="symbol-${i}" name="${contact}" class="initials" style="background-color: ${contacts[i].contactImageBgColor}">${contacts[i].nameInitials}</div>
                                     ${contact}
                                  </label>
                                  <div class="checkbox-container">
-                                    <img id="checkbox-${i}" src="./assets/img/login/checkbox.svg" alt="">
+                                    <img class="change-src" id="checkbox-${i}" src="./assets/img/login/checkbox.svg" alt="">
                                  </div>                              
                               </li>`;
   }
@@ -136,29 +136,31 @@ function handleUrgentClick(event) {
   event.preventDefault();
   toggleColor('buttonUrgent', '#FF3D00', 'UrgentOne', 'UrgentTwo');
   priority = 'urgent';
-  console.log('Urgent button clicked');
-  //   FUNCTION
 }
 
 function handleMediumClick(event) {
   event.preventDefault();
   toggleColor('buttonMedium', '#FFA800', 'MediumOne', 'MediumTwo');
   priority = 'medium';
-  console.log('Medium button clicked');
-  //   FUNCTION
 }
 
 function handleLowClick(event) {
   event.preventDefault();
   toggleColor('buttonLow', '#7AE229', 'LowOne', 'LowTwo');
   priority = 'low';
-  console.log('Low button clicked');
-  //   FUNCTION
 }
 
 function resetForm(event) {
   event.preventDefault();
   document.getElementById('addTask').reset();
+  document.getElementById('placeholder').innerHTML = '';
+  document.getElementById('subtask-placeholder').innerHTML = '';
+  document.querySelectorAll('.change-bg').forEach(function (contact) {
+    contact.style.background = '';
+  });
+  document.querySelectorAll('.change-src').forEach(function (img) {
+    img.src = './assets/img/login/checkbox.svg';
+  });
   if (selectedButtonId != null) {
     document.getElementById(selectedButtonId).click();
   }
