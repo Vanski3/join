@@ -317,6 +317,7 @@ h1 {
 
 .contacts-in-cards-div {
    display: flex;
+   flex-wrap: wrap;
 }
 
 .subtask-row {

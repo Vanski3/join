@@ -338,4 +338,5 @@ function loadAddTaskContent(params) {
    </div>
   `;
   onloadContacts();
+  removeButtonBackground();
 }
