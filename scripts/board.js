@@ -128,9 +128,6 @@ function renderBoardCards() {
                               <span class="card-title">${title}</span>
                               <span class="task-description-board">${description}</span>
                               <div id="progressDiv${i}" class="progress-field">
-                                 <!-- <div class="outer-progress-bar">
-                                    <div class="inner-progress-bar"></div>
-                                 </div> -->
                               </div>
                               <div  class="user-field">
                                  <div id="boardCardsContacts${i}" class="contacts-in-cards-div"></div>
@@ -248,9 +245,8 @@ function renderTaskOverlay(i) {
 }
 
 function renderSubtasksinTaskOverlay(i) {
-   let subtaskCheck = tasks.subtasksTest[i];
    let subtasks = tasks?.subtasksTest?.[i]?.subtask;
-   if (!subtaskCheck) {
+   if (subtasks.length === 0) {
       document.getElementById(`subtasksField${i}`).style.display = 'none';
       return;
    }
@@ -293,6 +289,7 @@ function changeImgBasedOnSubtaskStatus(i, j) {
 function deleteCurrentTask(i) {
    if (confirm('Delete This Task?') == true) {
       tasks.taskStatus.splice(i, 1);
+      tasks.subtasksTest.splice(i, 1);
       tasks.title.splice(i, 1);
       tasks.description.splice(i, 1);
       tasks.priority.splice(i, 1);
