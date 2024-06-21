@@ -95,6 +95,20 @@ textarea::placeholder {
   gap: 4px;
 }
 
+.first-row-popup {
+  display: flex;
+  flex-direction: column;
+  width: 440px;
+  height: fit-content;
+  gap: 20px;
+}
+
+.first-row-popup div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 .second-row {
   display: flex;
   flex-direction: column;
@@ -104,6 +118,20 @@ textarea::placeholder {
 }
 
 .second-row div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.second-row-popup {
+  display: flex;
+  flex-direction: column;
+  width: 440px;
+  height: 426px;
+  gap: 20px;
+}
+
+.second-row-popup div {
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -199,8 +227,7 @@ textarea::placeholder {
 }
 
 .white-btn:hover img {
-  filter: invert(48%) sepia(63%) saturate(3935%) hue-rotate(198deg)
-    brightness(102%) contrast(98%);
+  filter: invert(48%) sepia(63%) saturate(3935%) hue-rotate(198deg) brightness(102%) contrast(98%);
 }
 
 /* media queries */

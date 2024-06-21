@@ -21,7 +21,7 @@
    <script src="./scripts/privacy.js" defer></script>
    <script src="./scripts/index-main.js" defer></script>
    <script src="./scripts/header.js" defer></script>
-   <script src="./scripts/add-task.js" defer></script>
+   <script src="./scripts/add-task.js"></script>
    <script src="./scripts/task-overlay.js"></script>
 
    <link rel="stylesheet" href="/css/summary.css" />
@@ -74,6 +74,7 @@
          </div>
       </div>
    </div>
+
    <!-- Create Task Popup -->
    <div id="dialog-container" class="dialog-container">
       <div class="task-dialog" onclick="event.stopPropagation()">
@@ -87,7 +88,7 @@
          <div class="add-task-main-content">
             <main>
                <form onsubmit="saveTask(event)" id="addTask" class="task-description">
-                  <div class="first-row">
+                  <div class="first-row-popup">
                      <div>
                         <span>Title<span class="red-star">*</span></span>
                         <input class="my-inputs" required placeholder="Enter a title" type="text">
@@ -117,7 +118,7 @@
 
                   <div class="seperator"></div>
 
-                  <div class="second-row">
+                  <div class="second-row-popup">
                      <div>
                         <span>Due Date<span class="red-star">*</span></span>
                         <input class="my-inputs" required type="date">
