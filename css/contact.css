@@ -44,6 +44,22 @@
   align-items: center;
   padding: 10px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.contact:hover {
+  background-color: var(--hover-lightblue);
+  border-radius: 5px;
+}
+
+.contact.selected {
+  background-color: var(--hover-blue);
+  color: white; 
+  border-radius: 5px;
+}
+
+.contact.selected .contact-email {
+  color: white;
 }
 
 .contact-initials {
