@@ -1,5 +1,6 @@
 let showSignup = document.getElementById('signup-dialog');
-const BASE_URL = 'https://join-2024-default-rtdb.europe-west1.firebasedatabase.app/';
+const BASE_URL =
+  'https://join-2024-default-rtdb.europe-west1.firebasedatabase.app/';
 let user = [];
 let toggleIcon = document.getElementById('togglePassword');
 let loginName = document.getElementById('loginEmail');
@@ -28,7 +29,10 @@ function initializeCheckboxListeners(checkboxId) {
     checkbox.src = checkbox.classList.contains('checked')
       ? './assets/img/login/checkbox-checked.svg'
       : './assets/img/login/checkbox.svg';
-    if (checkboxId === 'checkboxSignup' && checkbox.classList.contains('checked')) {
+    if (
+      checkboxId === 'checkboxSignup' &&
+      checkbox.classList.contains('checked')
+    ) {
       enableBtn();
     } else {
       enableBtn();
@@ -36,10 +40,15 @@ function initializeCheckboxListeners(checkboxId) {
     if (checkboxId === 'checkbox' && checkbox.classList.contains('checked')) {
       localStorage.setItem('login', loginName.value);
       localStorage.setItem('password', loginPassword.value);
+      localStorage.setItem('rememberBtn', checkboxLogin.src);
     }
   };
-  checkbox.addEventListener('mouseover', () => checkbox.classList.add('hovering'));
-  checkbox.addEventListener('mouseout', () => checkbox.classList.remove('hovering'));
+  checkbox.addEventListener('mouseover', () =>
+    checkbox.classList.add('hovering')
+  );
+  checkbox.addEventListener('mouseout', () =>
+    checkbox.classList.remove('hovering')
+  );
   checkbox.addEventListener('click', toggleCheckboxState);
 }
 
@@ -68,8 +77,12 @@ function setupToggle(inputFieldId, iconElementId) {
   let inputField = document.getElementById(inputFieldId);
   let iconElement = document.getElementById(iconElementId);
 
-  inputField.addEventListener('input', () => updateIcon(inputField, iconElement));
-  inputField.addEventListener('focus', () => updateIcon(inputField, iconElement));
+  inputField.addEventListener('input', () =>
+    updateIcon(inputField, iconElement)
+  );
+  inputField.addEventListener('focus', () =>
+    updateIcon(inputField, iconElement)
+  );
 
   iconElement.addEventListener('click', () => {
     if (inputField.type === 'password') {
@@ -85,8 +98,11 @@ function setupToggle(inputFieldId, iconElementId) {
 function getLocalStorage() {
   let storageName = localStorage.getItem('login');
   let storagePassword = localStorage.getItem('password');
+  let loginBtn = localStorage.getItem('rememberBtn');
+
   loginName.value = storageName;
   loginPassword.value = storagePassword;
+  // checkboxLogin.src = loginBtn;
 }
 
 async function onloadFunc() {
@@ -126,7 +142,10 @@ function loginUser() {
   let result = user.filter((user) => user.email === loginEmail.value);
 
   if (result.length > 0) {
-    if (result[0]['email'] === loginEmail.value && result[0]['password'] === loginPassword.value) {
+    if (
+      result[0]['email'] === loginEmail.value &&
+      result[0]['password'] === loginPassword.value
+    ) {
       window.location.href = 'index-main.html';
     } else {
       alert('Email or password does not match');
