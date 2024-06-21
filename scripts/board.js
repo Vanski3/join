@@ -92,11 +92,6 @@ function loadBoardContent(params) {
                      <div class="tasks-column">
                         <div class="board-headline">
                            <span>Done</span>
-                           <img
-                              onmouseover="this.src='./assets/img/board/add-button-variant2.svg'"
-                              onmouseout="this.src='./assets/img/board/add-button-default.svg'"
-                              src="./assets/img/board/add-button-default.svg"
-                              alt="" />
                         </div>
                         <div id="taskStatus3" class="task-div" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
                      </div>
@@ -191,6 +186,9 @@ function allowDrop(ev) {
 }
 
 function drag(ev) {
+   if (window.matchMedia('(max-width: 1400px)').matches) {
+      ev.preventDefault();
+   }
    ev.dataTransfer.setData('text', ev.target.id);
    ev.target.classList.add('rotate-45');
 }
@@ -382,12 +380,16 @@ async function loadallDataFromFirebase() {
 }
 
 function showOverlayTask() {
-   document.getElementById('taskOverlay').showModal();
+   const overlay = document.getElementById('taskOverlay');
+   overlay.showModal();
+   overlay.classList.add('fade-in-right');
 }
 
-function closeTaskOverlay(params) {
-   document.getElementById('taskOverlay').close();
+function closeTaskOverlay() {
+   const overlay = document.getElementById('taskOverlay');
+   overlay.close();
    renderBoardCards();
+   overlay.classList.remove('fade-in-right');
 }
 
 function renderContactsInTaskOverlay(i) {
