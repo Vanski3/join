@@ -1,0 +1,218 @@
+.task-description-edit {
+  height: 800px;
+  max-height: max-content;
+  display: flex;
+  padding: 10px 10px 0 0;
+  margin-bottom: 200px;
+  font-size: 20px;
+  flex-direction: column;
+  margin-top: -40px;
+  align-items: center;
+  width: 100%;
+  overflow: auto;
+}
+
+.task-description-edit::-webkit-scrollbar {
+  display: none;
+}
+
+#placeholder-edit {
+  display: flex;
+  flex-direction: row;
+}
+
+#placeholder-edit div:not(:first-child) {
+  margin-left: -10px;
+}
+
+#placeholder-edit div {
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+#subtask-placeholder-edit li {
+  margin-left: 10px;
+}
+
+.task-description-edit input {
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  padding: 12px 21px;
+  font-size: 20px;
+}
+
+.substasks-edit input {
+  background-image: url(../assets/img/add-task/plus.svg);
+  background-position: center right 15px;
+  background-repeat: no-repeat;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #d1d1d1;
+  font-family: var(--font-fam);
+  font-weight: 400;
+}
+
+.task-description-edit textarea {
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  padding: 18px 16px;
+  font-size: 20px;
+  resize: none;
+}
+
+.task-description-edit select {
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  padding: 12px 16px;
+  appearance: none;
+  background-image: url(../assets/img/add-task/arrow-drop-down.svg);
+  background-position: center right 15px;
+  background-repeat: no-repeat;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-image 1ms ease-in-out;
+}
+
+.task-description-edit select:focus {
+  background-image: url(../assets/img/add-task/arrow-up.svg);
+}
+
+.first-row-edit {
+  display: flex;
+  flex-direction: column;
+  width: 440px;
+  height: fit-content;
+  gap: 20px;
+}
+
+.first-row-edit div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.first-row-popup-edit {
+  display: flex;
+  flex-direction: column;
+  width: 440px;
+  height: fit-content;
+  gap: 20px;
+}
+
+.first-row-popup-edit div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.second-row-edit {
+  display: flex;
+  flex-direction: column;
+  width: 440px;
+  height: 426px;
+  gap: 20px;
+}
+
+.second-row-edit div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.second-row-popup-edit {
+  display: flex;
+  flex-direction: column;
+  width: 440px;
+  height: 426px;
+  gap: 20px;
+}
+
+.second-row-popup-edit div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.buttons-edit {
+  width: 100%;
+  margin-top: 20px;
+  justify-content: center;
+  display: flex;
+  gap: 20px;
+  position: absolute;
+  bottom: 10px;
+}
+
+.close-button-edit {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+#button-container-edit {
+  flex-direction: row;
+  gap: 20px;
+  width: 100%;
+  padding-left: 1px;
+}
+
+#button-container-edit button {
+  box-shadow: 0px 0px 4px 0px #00000029;
+  height: 56px;
+  background-color: #fff;
+  border-radius: 10px;
+  border: unset;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  flex: 1;
+}
+
+#button-container-edit button:first-of-type:hover {
+  border-bottom: 2px solid #ff3d00;
+}
+
+#button-container-edit button:nth-of-type(2):hover {
+  border-bottom: 2px solid #ffa800;
+}
+
+#button-container-edit button:last-of-type:hover {
+  border-bottom: 2px solid #7ae229;
+}
+
+/* media queries */
+@media (max-width: 500px) {
+  #button-container-edit {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 400px) {
+  .buttons-edit button {
+    padding: 10px 5px;
+  }
+}
+
+@media (max-width: 360px) {
+  .buttons-edit {
+    gap: 5px;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 200px) {
+  .first-row-edit {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .second-row-edit {
+    width: 100%;
+  }
+}

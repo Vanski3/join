@@ -325,6 +325,10 @@ textarea::placeholder {
     bottom: 110px;
   }
 
+  #button-container button {
+    flex: 1;
+  }
+
   .required-container {
     width: 100%;
     display: flex;
@@ -377,7 +381,11 @@ textarea::placeholder {
   }
 }
 
-@container (min-width: 500px) {
+@container (min-width: 200px) {
+  #add-task {
+    align-items: center;
+  }
+
   .task-description {
     flex-direction: column;
     max-height: 600px;
@@ -395,18 +403,34 @@ textarea::placeholder {
     left: 20px;
   }
 
+  #button-container button {
+    flex: 1;
+  }
+
   .buttons {
     left: 200px;
     bottom: 70px;
     justify-content: left;
   }
 
-  #button-container button {
-    width: 136px;
+  .first-row-popup {
+    width: 100%;
+  }
+
+  .second-row-popup {
+    width: 100%;
+  }
+
+  .buttons {
+    width: 100%;
+    left: 0;
+    margin-left: 60px;
   }
 
   .required-container {
-    bottom: 80px;
+    bottom: 10px;
+    justify-content: left;
+    margin-left: 40px;
     width: unset;
   }
 }
@@ -485,7 +509,8 @@ ul {
 ul li {
   border-radius: 10px;
   margin: 0;
-  padding: 10px 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   display: flex;
 }
 
