@@ -51,6 +51,8 @@ function closeTaskOverlayEdit() {
   overlay.close();
   renderBoardCards();
   overlay.classList.remove('fade-in-right');
+  priority = '';
+  selectedButtonId = null;
 }
 
 function editTask(i) {
@@ -165,37 +167,109 @@ function editTask(i) {
  
                    <div class="buttons-edit">
 
-                      <button type=submit class="blue-btn">Create Task <img src="./assets/img/add-task/check.svg"
+                      <button type=submit class="blue-btn">Ok <img src="./assets/img/add-task/check.svg"
                             alt=""></button>
                    </div>
  
                 </form>`;
-  onloadContactsEdit();
+  onloadContactsEdit(i);
   onloadFormValue(i);
 }
 
-function onloadFormValue(i) {
-  let descrip = document.getElementById('description-edit');
-  descrip.value = tasks.description[i];
+function getSelectedContactsEdit(i) {
+  let contactPlaceholder = document.getElementById('placeholder-edit');
+  contactPlaceholder.innerHTML = '';
+  let array = tasks.assignedTo[i].name;
+  for (let j = 0; j < array.length; j++) {
+    const contact = tasks.assignedTo[i].name[j];
+    contactPlaceholder.innerHTML += `
+                                     <div id="symbol-${j}-edit" name="${contact}" class="initials" style="background-color: ${tasks.assignedTo[i].contactImageBgColor[j]}">${tasks.assignedTo[i].nameInitials[j]}</div>
+                                  `;
+  }
 }
 
-function renderToListEdit() {
+function getSubtasksEdit(i) {
+  let subtaskPlaceholder = document.getElementById('subtask-placeholder-edit');
+  subtaskPlaceholder.innerHTML = '';
+  let array = tasks.subtasksTest[i].subtask;
+  for (let j = 0; j < array.length; j++) {
+    const subtask = tasks.subtasksTest[i].subtask[j];
+    subtaskPlaceholder.innerHTML += `
+                                     <li status="${tasks.subtasksTest[i].subtaskStatus[j]}">${subtask}</li>
+                                  `;
+  }
+}
+
+function onloadFormValue(i) {
+  let inputFields = document.getElementsByClassName('my-inputs-edit');
+  inputFields[0].value = tasks.title[i];
+  inputFields[1].value = tasks.description[i];
+  inputFields[2].value = tasks.dueDate[i];
+  inputFields[3].value = tasks.categoryName[i];
+  getSelectedContactsEdit(i);
+  getSubtasksEdit(i);
+  getProBtnClick(i);
+}
+
+function getProBtnClick(i) {
+  let prio = tasks.priority[i];
+  let capitalizedPrio = prio.charAt(0).toUpperCase() + prio.slice(1);
+  if (prio == '') {
+    return;
+  } else {
+    let functionName = `handle${capitalizedPrio}ClickEdit`;
+    window[functionName](event);
+  }
+}
+
+function selectContactEdit(i) {
+  let icon = document.getElementById('checkbox-' + i + '-edit');
+  let input = document.getElementById('contact-' + i + '-edit');
+  let symbol = document.getElementById('symbol-' + i + '-edit').cloneNode(true);
+  let placeholder = document.getElementById('placeholder-edit');
+
+  function removeSymbol() {
+    let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}-edit`);
+    if (symbolInPlaceholder) {
+      placeholder.removeChild(symbolInPlaceholder);
+      icon.src = './assets/img/login/checkbox.svg';
+      input.style.background = '';
+    }
+  }
+
+  if (icon.src.endsWith('checkbox-checked-white.svg')) {
+    input.style.background = '';
+    icon.src = './assets/img/login/checkbox.svg';
+
+    let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}-edit`);
+    if (symbolInPlaceholder) {
+      placeholder.removeChild(symbolInPlaceholder);
+    }
+  } else {
+    icon.src = './assets/img/login/checkbox-checked-white.svg';
+    input.style.background = '#4589FF';
+    symbol.onclick = removeSymbol;
+    document.getElementById('placeholder-edit').appendChild(symbol);
+  }
+}
+
+function renderToListEdit(i) {
   let list = document.getElementById('contacts-edit');
-  for (let i = 0; i < contacts.length; i++) {
-    const contact = contacts[i].name;
-    list.innerHTML += `          <li class="change-bg-edit" id="contact-${i}-edit" onclick="selectContactEdit(${i})">
+  for (let j = 0; j < contacts.length; j++) {
+    const contact = contacts[j].name;
+    list.innerHTML += `          <li class="change-bg-edit" id="contact-${j}-edit" onclick="selectContactEdit(${j})">
                                   <label for="${contact}"> 
-                                     <div id="symbol-${i}-edit" name="${contact}" class="initials" style="background-color: ${contacts[i].contactImageBgColor}">${contacts[i].nameInitials}</div>
+                                     <div id="symbol-${j}-edit" name="${contact}" class="initials edit-contact-form" style="background-color: ${contacts[j].contactImageBgColor}">${contacts[j].nameInitials}</div>
                                      ${contact}
                                   </label>
                                   <div class="checkbox-container">
-                                     <img class="change-src-edit" id="checkbox-${i}-edit" src="./assets/img/login/checkbox.svg" alt="">
+                                     <img class="change-src-edit" id="checkbox-${j}-edit" src="./assets/img/login/checkbox.svg" alt="">
                                   </div>                              
                                </li>`;
   }
 }
 
-async function onloadContactsEdit() {
+async function onloadContactsEdit(j) {
   contacts = [];
   let userResponse = await getAllContacts('contacts');
   for (let i = 0; i < userResponse.contactImageBgColor.length; i++) {
@@ -207,7 +281,7 @@ async function onloadContactsEdit() {
       phoneNumber: userResponse.phoneNumber[i],
     });
   }
-  renderToListEdit();
+  renderToListEdit(j);
 }
 
 async function getAllContacts(path) {
