@@ -866,6 +866,7 @@ function loadAddTaskContent(params) {
   changeAddTaskButtonBackground();
   selectedButtonId = '';
   priority = '';
+  handleMediumClick(event);
 }
 
 function changeAddTaskButtonBackground() {

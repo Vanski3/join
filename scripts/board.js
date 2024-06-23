@@ -16,6 +16,7 @@ function openTaskDialog() {
   setTimeout(function () {
     taskDialog.style.right = '0';
   }, 50);
+  handleMediumClick(event);
 }
 
 function closeTaskDialog() {
