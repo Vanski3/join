@@ -40,9 +40,6 @@
   align-items: center;
 }
 
-.edit-btn {
-}
-
 .task-description-edit input {
   border: 1px solid #d1d1d1;
   border-radius: 10px;
