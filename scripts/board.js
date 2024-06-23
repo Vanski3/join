@@ -299,6 +299,10 @@ function renderTaskOverlay(i) {
   showOverlayTask();
 }
 
+function closePopup() {
+  document.getElementById('edit-task').style.display = 'none';
+}
+
 function renderPriorityInTaskOverlay(i) {
   let priority = tasks.priority[i].charAt(0).toUpperCase() + tasks.priority[i].slice(1);
   if (priority == '') {

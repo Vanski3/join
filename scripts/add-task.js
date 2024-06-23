@@ -1,6 +1,7 @@
 let selectedButtonId = null;
 let priority = '';
 let contacts = [];
+let tasksNumber = '';
 let assignedTo = [
   {
     contactImageBgColor: [],
@@ -9,6 +10,19 @@ let assignedTo = [
   },
 ];
 let subtasks = [
+  {
+    subtask: [],
+    subtaskStatus: [],
+  },
+];
+let assignedToEdit = [
+  {
+    contactImageBgColor: [],
+    name: [],
+    nameInitials: [],
+  },
+];
+let subtasksEdit = [
   {
     subtask: [],
     subtaskStatus: [],
@@ -59,7 +73,7 @@ function editTask(i) {
   let editTask = document.getElementById('edit-task');
   editTask.innerHTML = '';
   editTask.innerHTML += /*html*/ `
-     <form onsubmit="saveTask(event)" id="addTask-edit" class="task-description-edit">
+     <form onsubmit="saveTaskEdit(event)" id="addTask-edit" class="task-description-edit">
      <img
                   onclick="closeTaskOverlayEdit()"
                   id="closeTaskOverlay"
@@ -82,7 +96,7 @@ function editTask(i) {
                       <div>
                          <div>
                             Assigned to
-                            <details id="details-edit">
+                            <details id="details-edit" onclick="markSelectedContacts()">
                                <summary id="contact-summary">
                                   <div class="summary-headline">Select contacts to assign</div>
                                </summary>
@@ -176,26 +190,15 @@ function editTask(i) {
   onloadFormValue(i);
 }
 
-function getSelectedContactsEdit(i) {
-  let contactPlaceholder = document.getElementById('placeholder-edit');
-  contactPlaceholder.innerHTML = '';
-  let array = tasks.assignedTo[i].name;
-  for (let j = 0; j < array.length; j++) {
-    const contact = tasks.assignedTo[i].name[j];
-    contactPlaceholder.innerHTML += `
-                                     <div id="symbol-${j}-edit" name="${contact}" class="initials" style="background-color: ${tasks.assignedTo[i].contactImageBgColor[j]}">${tasks.assignedTo[i].nameInitials[j]}</div>
-                                  `;
-  }
-}
-
 function getSubtasksEdit(i) {
   let subtaskPlaceholder = document.getElementById('subtask-placeholder-edit');
   subtaskPlaceholder.innerHTML = '';
+  tasksNumber = i;
   let array = tasks.subtasksTest[i].subtask;
   for (let j = 0; j < array.length; j++) {
     const subtask = tasks.subtasksTest[i].subtask[j];
     subtaskPlaceholder.innerHTML += `
-                                     <li status="${tasks.subtasksTest[i].subtaskStatus[j]}">${subtask}</li>
+                                     <li id="subtask${j}" status="${tasks.subtasksTest[i].subtaskStatus[j]}">${subtask}</li>
                                   `;
   }
 }
@@ -223,43 +226,41 @@ function getProBtnClick(i) {
 }
 
 function selectContactEdit(i) {
-  let icon = document.getElementById('checkbox-' + i + '-edit');
-  let input = document.getElementById('contact-' + i + '-edit');
-  let symbol = document.getElementById('symbol-' + i + '-edit').cloneNode(true);
+  let icon = document.getElementById(`checkbox-${i}-edit`);
+  let input = document.getElementById(`contact-${i}-edit`);
+  let symbol = document.getElementById(`symbol-${i}-edit`).cloneNode(true);
   let placeholder = document.getElementById('placeholder-edit');
 
-  function removeSymbol() {
-    let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}-edit`);
-    if (symbolInPlaceholder) {
-      placeholder.removeChild(symbolInPlaceholder);
-      icon.src = './assets/img/login/checkbox.svg';
-      input.style.background = '';
-    }
-  }
-
   if (icon.src.endsWith('checkbox-checked-white.svg')) {
+    // Checkbox ist bereits ausgewählt, daher entfernen wir das Symbol aus dem Placeholder
     input.style.background = '';
     icon.src = './assets/img/login/checkbox.svg';
 
-    let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}-edit`);
-    if (symbolInPlaceholder) {
-      placeholder.removeChild(symbolInPlaceholder);
-    }
+    removeSymbol(i); // Symbol entfernen
   } else {
+    // Checkbox wird ausgewählt, daher fügen wir das Symbol zum Placeholder hinzu
     icon.src = './assets/img/login/checkbox-checked-white.svg';
     input.style.background = '#4589FF';
-    symbol.onclick = removeSymbol;
-    document.getElementById('placeholder-edit').appendChild(symbol);
+
+    let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}-edit`);
+    if (!symbolInPlaceholder) {
+      // Nur hinzufügen, wenn es noch nicht vorhanden ist
+      symbol.onclick = function () {
+        removeSymbol(i); // Bei Klick das Symbol entfernen
+      };
+      symbol.id = `symbol-${i}-edit`; // Setze eine eindeutige ID für das Symbol
+      placeholder.appendChild(symbol);
+    }
   }
 }
 
-function renderToListEdit(i) {
+function renderToListEdit() {
   let list = document.getElementById('contacts-edit');
   for (let j = 0; j < contacts.length; j++) {
     const contact = contacts[j].name;
     list.innerHTML += `          <li class="change-bg-edit" id="contact-${j}-edit" onclick="selectContactEdit(${j})">
                                   <label for="${contact}"> 
-                                     <div id="symbol-${j}-edit" name="${contact}" class="initials edit-contact-form" style="background-color: ${contacts[j].contactImageBgColor}">${contacts[j].nameInitials}</div>
+                                     <div id="symbol-${j}-edit" name="${contact}" class="initials edit-contact-form savedContacts" style="background-color: ${contacts[j].contactImageBgColor}">${contacts[j].nameInitials}</div>
                                      ${contact}
                                   </label>
                                   <div class="checkbox-container">
@@ -269,8 +270,47 @@ function renderToListEdit(i) {
   }
 }
 
-async function onloadContactsEdit(j) {
+function getSelectedContactsEdit(i) {
+  let contactPlaceholder = document.getElementById('placeholder-edit');
+  contactPlaceholder.innerHTML = '';
+  let assignedContacts = tasks.assignedTo[i].name;
+
+  for (let j = 0; j < assignedContacts.length; j++) {
+    const contactName = assignedContacts[j];
+    const contactIndex = contacts.findIndex((contact) => contact.name === contactName);
+
+    if (contactIndex !== -1) {
+      const contact = contacts[contactIndex];
+      contactPlaceholder.innerHTML += `
+        <div id="symbol-${contactIndex}-edit" name="${contact.name}" class="initials savedContacts" style="background-color: ${contact.contactImageBgColor}">${contact.nameInitials}</div>
+      `;
+    }
+  }
   contacts = [];
+}
+
+function markSelectedContacts() {
+  const placeholderEditDivs = document.querySelectorAll('#placeholder-edit .initials');
+  const placeholderNames = Array.from(placeholderEditDivs).map((div) =>
+    div.getAttribute('name').trim()
+  );
+  const contactListItems = document.querySelectorAll('#contacts-edit .change-bg-edit');
+  contactListItems.forEach((item) => {
+    const label = item.querySelector('label');
+    const nameText = label ? label.textContent.trim() : '';
+    const nameParts = nameText.split('\n').map((part) => part.trim());
+    const name = nameParts.length > 1 ? nameParts[1] : nameParts[0];
+    if (placeholderNames.includes(name)) {
+      item.style.backgroundColor = '#4589FF';
+      const checkboxImg = item.querySelector('.checkbox-container img');
+      if (checkboxImg) {
+        checkboxImg.src = './assets/img/login/checkbox-checked-white.svg';
+      }
+    }
+  });
+}
+
+async function onloadContactsEdit(j) {
   let userResponse = await getAllContacts('contacts');
   for (let i = 0; i < userResponse.contactImageBgColor.length; i++) {
     contacts.push({
@@ -304,6 +344,30 @@ function getSelectedContacts() {
   }
 }
 
+function getSavedContactsEdit() {
+  const placeholderContainer = document.getElementById('placeholder-edit');
+  const placeholder = placeholderContainer.querySelectorAll('div.savedContacts');
+  for (let i = 0; i < placeholder.length; i++) {
+    let initials = placeholder[i].innerHTML;
+    let inlineStyle = placeholder[i].style.backgroundColor;
+    let fullName = placeholder[i].getAttribute('name');
+    assignedToEdit[0].nameInitials.push(initials);
+    assignedToEdit[0].contactImageBgColor.push(inlineStyle);
+    assignedToEdit[0].name.push(fullName);
+  }
+}
+
+function getSavedSubtasksEdit() {
+  const placeholderContainer = document.getElementById('subtask-placeholder-edit');
+  const li = placeholderContainer.querySelectorAll('li');
+  for (let i = 0; i < li.length; i++) {
+    let subtask = li[i].innerHTML;
+    let status = li[i].getAttribute('status');
+    subtasksEdit[0].subtask.push(subtask);
+    subtasksEdit[0].subtaskStatus.push(status);
+  }
+}
+
 function getSelectedSubtasks() {
   let placeholder = document.getElementById('subtask-placeholder').childNodes;
   for (let i = 0; i < placeholder.length; i++) {
@@ -312,6 +376,32 @@ function getSelectedSubtasks() {
     subtasks[0].subtask.push(subtask);
     subtasks[0].subtaskStatus.push(status);
   }
+}
+
+function saveTaskEdit(event) {
+  event.preventDefault();
+  getSavedContactsEdit();
+  getSavedSubtasksEdit();
+  let bgColor = document.getElementById('category-edit');
+  let selectedIndex = bgColor.selectedIndex;
+  let selectedOption = (bgColor = bgColor.options[selectedIndex]);
+  let result = selectedOption.getAttribute('bgColor');
+  let inputFields = document.getElementsByClassName('my-inputs-edit');
+  let statusNumber = tasks.taskStatus[tasksNumber];
+  let newTaskEdit = {
+    title: inputFields[0].value,
+    description: inputFields[1].value,
+    assignedTo: assignedToEdit,
+    dueDate: inputFields[2].value,
+    priority: priority,
+    categoryName: inputFields[3].value,
+    subtasksTest: subtasksEdit,
+    taskStatus: statusNumber,
+    categoryBGColor: result,
+  };
+  mergeObjectsEdit(tasks, newTaskEdit);
+  loadBoardContent();
+  closeTaskOverlayEdit();
 }
 
 function saveTask(event) {
@@ -336,7 +426,36 @@ function saveTask(event) {
   };
   mergeObjects(tasks, newTask);
   loadBoardContent();
-  closeTaskDialog();
+  closeTaskOverlay();
+}
+
+function mergeObjectsEdit(tasks, newTaskEdit) {
+  tasks.assignedTo.splice(tasksNumber, 1, ...newTaskEdit.assignedTo);
+  tasks.categoryBgColor.splice(tasksNumber, 1, newTaskEdit.categoryBGColor);
+  tasks.categoryName.splice(tasksNumber, 1, newTaskEdit.categoryName);
+  tasks.description.splice(tasksNumber, 1, newTaskEdit.description);
+  tasks.dueDate.splice(tasksNumber, 1, newTaskEdit.dueDate);
+  tasks.priority.splice(tasksNumber, 1, newTaskEdit.priority);
+  tasks.taskStatus.splice(tasksNumber, 1, newTaskEdit.taskStatus);
+  tasks.title.splice(tasksNumber, 1, newTaskEdit.title);
+  tasks.subtasksTest.splice(tasksNumber, 1, ...newTaskEdit.subtasksTest);
+  clearEditObjects();
+}
+
+function clearEditObjects() {
+  assignedToEdit = [
+    {
+      contactImageBgColor: [],
+      name: [],
+      nameInitials: [],
+    },
+  ];
+  subtasksEdit = [
+    {
+      subtask: [],
+      subtaskStatus: [],
+    },
+  ];
 }
 
 function mergeObjects(tasks, newTask) {
@@ -550,7 +669,6 @@ function selectContactEdit(i) {
       input.style.background = '';
     }
   }
-
   if (icon.src.endsWith('checkbox-checked-white.svg')) {
     input.style.background = '';
     icon.src = './assets/img/login/checkbox.svg';
@@ -564,6 +682,16 @@ function selectContactEdit(i) {
     input.style.background = '#4589FF';
     symbol.onclick = removeSymbol;
     document.getElementById('placeholder-edit').appendChild(symbol);
+  }
+}
+
+function addLoadedContact(i) {
+  let symbol = document.getElementById('symbol-' + i + '-edit');
+  if (symbol) {
+    symbol.onclick = function () {
+      let placeholder = document.getElementById('placeholder-edit');
+      placeholder.removeChild(symbol);
+    };
   }
 }
 
@@ -584,6 +712,21 @@ function addSubtasksEdit() {
   if (subtasks.value.length >= 1) {
     placeholder.innerHTML += `<li status="open">${subtasks.value}</li>`;
     subtasks.value = '';
+  }
+}
+
+function editSubtask() {
+  var subtaskElement = document.getElementById('subtask');
+  var newText = prompt('Neuer Text für den Subtask:', subtaskElement.textContent);
+  if (newText !== null && newText !== '') {
+    subtaskElement.textContent = newText;
+  }
+}
+
+function deleteSubtask() {
+  var subtaskElement = document.getElementById('subtask');
+  if (confirm('Möchtest du diesen Subtask wirklich löschen?')) {
+    subtaskElement.parentNode.removeChild(subtaskElement);
   }
 }
 

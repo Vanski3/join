@@ -424,7 +424,7 @@ textarea::placeholder {
   .buttons {
     width: 100%;
     left: 0;
-    margin-left: 60px;
+    margin-left: 45px;
   }
 
   .required-container {
