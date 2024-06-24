@@ -141,7 +141,7 @@ function toggleContactView() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  loadContactsContent(); // Lädt die Kontakte beim Laden der Seite
+//   loadContactsContent(); // Lädt die Kontakte beim Laden der Seite
 
   document.getElementById('contact-dialog-container').addEventListener('click', event => {
     const contactDialog = document.querySelector('#contact-dialog-container .task-dialog');
