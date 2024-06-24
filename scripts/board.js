@@ -122,8 +122,12 @@ function renderBoardCards() {
     let description = tasks.description[i];
     let categoryName = tasks.categoryName[i];
     document.getElementById(`taskStatus${taskStatus}`).innerHTML += /*html*/ `
-                                       <div id="boardCard${i}" draggable="true" ondragstart="drag(event)" class="board-card" onclick="renderTaskOverlay(${i})">
-                              <img id="categorieImg${i}" class="card-label" src="./assets/img/board/${categoryName}.svg" alt="" />
+                            <div id="boardCard${i}" draggable="true" ondragstart="drag(event)" class="board-card" onclick="renderTaskOverlay(${i})">
+                              <div class="header-row-board-card">
+                                <img id="categorieImg${i}" class="card-label" src="./assets/img/board/${categoryName}.svg" alt="" />
+                                <img onclick="showMoveToPopup(${i})" class="move-to-img" src="./assets/img/board/Move-to.svg" alt="">
+                              </div>
+                              
                               <span class="card-title">${title}</span>
                               <span class="task-description-board">${description}</span>
                               <div id="progressDiv${i}" class="progress-field">
@@ -474,5 +478,16 @@ function closeTaskOverlay() {
   overlay.close();
   renderBoardCards();
   overlay.classList.remove('fade-in-right');
-  taskSelection = 0;
+}
+
+function showMoveToPopup(i) {
+  document.getElementById(`boardCard${i}`).innerHTML += /*html*/ `
+    <div class="popup-board-card">
+      <span>Move to:</span>
+      <a href="">To Do</a>
+      <a href="">In Progress</a>
+      <a href="">Awaiting Feedback</a>
+      <a href="">Done</a>
+    </div>
+  `;
 }
