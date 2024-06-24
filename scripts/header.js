@@ -29,6 +29,6 @@ sessionStorageToHeader();
 
 function sessionStorageToHeader() {
   let logo = document.getElementById('logoInitials');
-  let initials = sessionStorage.getItem('initials');
+  let initials = sessionStorage.getItem('initials') ?? 'G';
   logo.innerHTML += `${initials}`;
 }
