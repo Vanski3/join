@@ -152,6 +152,7 @@ function setSessionStorage(loginEmail) {
     .map((word) => word[0])
     .join('');
   sessionStorage.setItem('initials', initials);
+  sessionStorage.setItem('name', name);
 }
 
 async function createUser() {
