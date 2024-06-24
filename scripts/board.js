@@ -11,12 +11,13 @@ function init(params) {
    loadallDataFromFirebase();
 }
 
-function openTaskDialog() {
+function openTaskDialog(parameter = null) {
    popup.style.display = 'unset';
    setTimeout(function () {
       taskDialog.style.right = '0';
    }, 50);
    handleMediumClick(event);
+   taskCategory(parameter);
 }
 
 function closeTaskDialog() {
@@ -24,6 +25,8 @@ function closeTaskDialog() {
    setTimeout(function () {
       popup.style.display = 'none';
    }, 300);
+   taskSelection = 0;
+   resetForm(event);
 }
 
 popup.addEventListener('click', function (event) {
@@ -58,6 +61,7 @@ function loadBoardContent(params) {
                         <div class="board-headline to-do-column">
                            <span>To do</span>
                            <img
+                           onclick="openTaskDialog(0)"
                               onmouseover="this.src='./assets/img/board/add-button-variant2.svg'"
                               onmouseout="this.src='./assets/img/board/add-button-default.svg'"
                               src="./assets/img/board/add-button-default.svg"
@@ -69,7 +73,7 @@ function loadBoardContent(params) {
                      <div class="tasks-column">
                         <div class="board-headline">
                            <span>In Progress</span>
-                           <img
+                           <img onclick="openTaskDialog(1)"
                               onmouseover="this.src='./assets/img/board/add-button-variant2.svg'"
                               onmouseout="this.src='./assets/img/board/add-button-default.svg'"
                               src="./assets/img/board/add-button-default.svg"
@@ -81,7 +85,7 @@ function loadBoardContent(params) {
                      <div class="tasks-column">
                         <div class="board-headline">
                            <span>Await feedback</span>
-                           <img
+                           <img onclick="openTaskDialog(2)"
                               onmouseover="this.src='./assets/img/board/add-button-variant2.svg'"
                               onmouseout="this.src='./assets/img/board/add-button-default.svg'"
                               src="./assets/img/board/add-button-default.svg"
@@ -252,7 +256,7 @@ function renderTaskOverlay(i) {
             <div class="categorie-info">
                <img class="overlay-card-label" src="./assets/img/board/${categoryName}.svg" alt="" />
                <img
-                  onclick="closeTaskOverlay() "
+                  onclick="closeTaskOverlay(0) "
                   id="closeTaskOverlay"
                   class="close-overlay-task"
                   onmouseover="this.src='./assets/img/task-overlay/close-icon-variant2.svg'"

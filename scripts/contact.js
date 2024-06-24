@@ -18,14 +18,12 @@ function loadContactsContent() {
 
 function renderContacts(contacts) {
    const content = document.getElementById('mainContent');
-   content.innerHTML = '';
-   content.innerHTML += `
+   content.innerHTML = /*html*/ `
     <div class="contacts-container">
       <div class="contacts-list">
         <button class="add-contact-btn">Add new contact</button>
       </div>
-      <div class="contact-detail">
-      </div>
+      <div class="contact-detail"></div>
     </div>
   `;
 
@@ -49,7 +47,7 @@ function renderContacts(contacts) {
 
       const contactElement = document.createElement('div');
       contactElement.classList.add('contact');
-      contactElement.innerHTML = `
+      contactElement.innerHTML = /*html*/ `
       <div class="contact-initials" style="background-color: ${contact.color};">${contact.initials}</div>
       <div class="contact-info">
         <div class="contact-name">${contact.name}</div>
@@ -59,6 +57,7 @@ function renderContacts(contacts) {
 
       contactElement.addEventListener('click', () => {
          renderContactDetail(contactElement, contact);
+         toggleContactView();
       });
 
       contactsList.appendChild(contactElement);
@@ -78,7 +77,7 @@ function renderContactDetail(contactElement, contact) {
    contactElement.classList.add('selected');
 
    const contactDetail = document.querySelector('.contact-detail');
-   contactDetail.innerHTML = `
+   contactDetail.innerHTML = /*html*/ `
     <div class="contact-header">
       <div class="name-initial-container">
         <div class="contact-initials-large" style="background-color: ${contact.color};">${contact.initials}</div>
@@ -131,18 +130,34 @@ function closeContactDialog() {
    }, 300);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-   const addContactButton = document.querySelector('.add-contact-btn');
+function toggleContactView() {
+   const contactsList = document.querySelector('.contacts-list');
+   const contactDetail = document.querySelector('.contact-detail');
 
-   if (addContactButton) {
-      addContactButton.addEventListener('click', openContactDialog);
+   if (window.innerWidth <= 800) {
+      contactsList.classList.toggle('hidden');
+      contactDetail.classList.toggle('visible');
    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+   //   loadContactsContent(); // Lädt die Kontakte beim Laden der Seite
 
    document.getElementById('contact-dialog-container').addEventListener('click', (event) => {
       const contactDialog = document.querySelector('#contact-dialog-container .task-dialog');
 
       if (!contactDialog.contains(event.target)) {
          closeContactDialog();
+      }
+   });
+
+   window.addEventListener('resize', () => {
+      const contactsList = document.querySelector('.contacts-list');
+      const contactDetail = document.querySelector('.contact-detail');
+
+      if (window.innerWidth > 800) {
+         contactsList.classList.remove('hidden');
+         contactDetail.classList.remove('visible');
       }
    });
 });
