@@ -522,4 +522,5 @@ function moveCardToDone(event, i) {
 
 function changeColorSidebarBoard() {
    document.getElementById('sidebarImgBoard').classList.add('color-img-sidebar');
+   document.getElementById('fontBoardSidebar').classList.add('menu-row-font');
 }

@@ -1,21 +1,19 @@
-function removeButtonBackground(params) {
-   let summaryButton = document.getElementById('summaryButton');
-   summaryButton.classList.remove('menu-background');
-   let addTaskButton = document.getElementById('addTaskButton');
-   addTaskButton.classList.remove('menu-background');
-   let boardButton = document.getElementById('boardButton');
-   boardButton.classList.remove('menu-background');
-   let contactButton = document.getElementById('contactButton');
-   contactButton.classList.remove('menu-background');
+function removeButtonBackground() {
+   const buttons = ['summaryButton', 'addTaskButton', 'boardButton', 'contactButton'];
+   buttons.forEach((buttonId) => {
+      document.getElementById(buttonId).classList.remove('menu-background');
+   });
 }
 
-function removeColorSideBar(params) {
-   let sidebarImgSummary = document.getElementById('sidebarImgSummary');
-   sidebarImgSummary.classList.remove('color-img-sidebar');
-   let sidebarImgAddTask = document.getElementById('sidebarImgAddTask');
-   sidebarImgAddTask.classList.remove('color-img-sidebar');
-   let sidebarImgBoard = document.getElementById('sidebarImgBoard');
-   sidebarImgBoard.classList.remove('color-img-sidebar');
-   let sidebarImgContact = document.getElementById('sidebarImgContact');
-   sidebarImgContact.classList.remove('color-img-sidebar');
+function removeColorSideBar() {
+   const sidebarImgIds = ['sidebarImgSummary', 'sidebarImgAddTask', 'sidebarImgBoard', 'sidebarImgContact'];
+   const fontIds = ['fontContactsSidebar', 'fontBoardSidebar', 'fontAddTaskSidebar', 'fontSummarySidebar'];
+
+   sidebarImgIds.forEach((id) => {
+      document.getElementById(id).classList.remove('color-img-sidebar');
+   });
+
+   fontIds.forEach((id) => {
+      document.getElementById(id).classList.remove('menu-row-font');
+   });
 }

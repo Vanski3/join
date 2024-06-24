@@ -168,6 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function changeColorSidebarContacts() {
    document.getElementById('sidebarImgContact').classList.add('color-img-sidebar');
+   document.getElementById('fontContactsSidebar').classList.add('menu-row-font');
 }
 
 function changeContactsButtonBackground(params) {

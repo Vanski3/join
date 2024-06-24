@@ -902,4 +902,5 @@ function changeAddTaskButtonBackground() {
 
 function changeColorSideAddTask() {
    document.getElementById('sidebarImgAddTask').classList.add('color-img-sidebar');
+   document.getElementById('fontAddTaskSidebar').classList.add('menu-row-font');
 }

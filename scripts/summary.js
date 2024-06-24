@@ -77,4 +77,5 @@ function changeSummaryButtonBackground(params) {
 
 function changeColorSideSummary(params) {
    document.getElementById('sidebarImgSummary').classList.add('color-img-sidebar');
+   document.getElementById('fontSummarySidebar').classList.add('menu-row-font');
 }
