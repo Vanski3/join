@@ -97,7 +97,7 @@ function editTask(i) {
                       <div>
                       <div>
                            Assigned to
-                           <details onclick="markSelectedContacts()"  id="details-edit">
+                           <details onclick="markSelectedContacts()" tabindex="0"  id="details-edit">
                               <summary id="contact-summary">
                                  <div class="summary-headline">Select contacts to assign</div>
                                  <input type="text" id="contact-search-edit" onkeyup="filterContactsEdit()" placeholder="Search contacts">

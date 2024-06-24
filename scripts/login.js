@@ -131,13 +131,11 @@ function loginUser() {
       setSessionStorage(loginEmail, loginPassword);
       window.location.href = 'index-main.html';
     } else {
-      alert('Email or password does not match');
       loginEmail.value = '';
       loginPassword.value = '';
       toggleIcon.src = '../assets/img/login/lock.svg';
     }
   } else {
-    alert('Email or password does not match');
     loginEmail.value = '';
     loginPassword.value = '';
     toggleIcon.src = '../assets/img/login/lock.svg';
@@ -196,3 +194,127 @@ function guestLogin() {
   sessionStorage.setItem('name', 'Guest');
   window.location.href = 'index-main.html';
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Login Form Validation
+  const loginForm = document.getElementById('loginForm');
+  const loginEmailInput = document.getElementById('loginEmail');
+  const loginPasswordInput = document.getElementById('loginPassword');
+
+  loginEmailInput.addEventListener('blur', () => validateInput(loginEmailInput, 'email'));
+  loginEmailInput.addEventListener('input', () => clearError(loginEmailInput));
+  loginPasswordInput.addEventListener('blur', () => validateInput(loginPasswordInput, 'password'));
+  loginPasswordInput.addEventListener('input', () => clearError(loginPasswordInput));
+
+  loginForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    validateInput(loginEmailInput, 'email');
+    validateInput(loginPasswordInput, 'password');
+    // Additional logic for login form submission if needed
+  });
+
+  // Signup Form Validation
+  const signupForm = document.getElementById('signup-form');
+  const signupNameInput = document.getElementById('signupName');
+  const signupEmailInput = document.getElementById('signupEmail');
+  const signupPasswordInput = document.getElementById('passwordSignup');
+  const confirmSignupInput = document.getElementById('confirmSignup');
+  const signupCheckboxInput = document.getElementById('checkboxSignup');
+
+  signupNameInput.addEventListener('blur', () => validateInput(signupNameInput, 'name'));
+  signupNameInput.addEventListener('input', () => clearError(signupNameInput));
+  signupEmailInput.addEventListener('blur', () => validateInput(signupEmailInput, 'email'));
+  signupEmailInput.addEventListener('input', () => clearError(signupEmailInput));
+  signupPasswordInput.addEventListener('blur', () =>
+    validateInput(signupPasswordInput, 'password')
+  );
+  signupPasswordInput.addEventListener('input', () => clearError(signupPasswordInput));
+  confirmSignupInput.addEventListener('blur', () =>
+    validateConfirmPassword(confirmSignupInput, signupPasswordInput)
+  );
+  confirmSignupInput.addEventListener('input', () => clearError(confirmSignupInput.parentNode));
+  signupCheckboxInput.addEventListener('change', () => validateCheckbox(signupCheckboxInput));
+
+  signupForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    validateInput(signupNameInput, 'name');
+    validateInput(signupEmailInput, 'email');
+    validateInput(signupPasswordInput, 'password');
+    validateConfirmPassword(confirmSignupInput, signupPasswordInput);
+    validateCheckbox(signupCheckboxInput);
+    // Additional logic for signup form submission if needed
+  });
+
+  // Generic functions
+  function validateInput(inputField, type) {
+    const value = inputField.value.trim();
+    const parentNode = inputField.parentNode;
+    const errorClass = 'error';
+
+    if (
+      value === '' ||
+      (type === 'email' && !isValidEmail(value)) ||
+      (type === 'password' && value.length < 8)
+    ) {
+      inputField.classList.add(errorClass);
+      showErrorMessage(parentNode, 'This field is required');
+    } else {
+      inputField.classList.remove(errorClass);
+      hideErrorMessage(parentNode);
+    }
+  }
+
+  function validateConfirmPassword(confirmInput, passwordInput) {
+    const confirmValue = confirmInput.value.trim();
+    const parent = confirmInput.parentNode;
+    const errorClass = 'error';
+
+    if (confirmValue === '') {
+      confirmInput.classList.add(errorClass);
+      showErrorMessage(parent, 'This field is required');
+    } else if (confirmValue !== passwordInput.value.trim()) {
+      confirmInput.classList.add(errorClass);
+      showErrorMessage(parent, 'Passwords do not match');
+    } else {
+      confirmInput.classList.remove(errorClass);
+      hideErrorMessage(parent);
+    }
+  }
+
+  function validateCheckbox(checkboxInput) {
+    const parent = checkboxInput.parentNode.parentNode;
+    const errorClass = 'error';
+
+    if (!checkboxInput.checked) {
+      showErrorMessage(parent, 'You must accept the Privacy policy');
+    } else {
+      hideErrorMessage(parent);
+    }
+  }
+
+  function showErrorMessage(parentNode, message) {
+    let errorMessage = parentNode.querySelector('.error-message');
+    if (!errorMessage) {
+      errorMessage = document.createElement('div');
+      errorMessage.classList.add('error-message');
+      parentNode.appendChild(errorMessage);
+    }
+    errorMessage.textContent = message;
+  }
+
+  function hideErrorMessage(parentNode) {
+    const errorMessage = parentNode.querySelector('.error-message');
+    if (errorMessage) {
+      errorMessage.remove();
+    }
+  }
+
+  function clearError(inputField) {
+    inputField.classList.remove('error');
+    hideErrorMessage(inputField.parentNode);
+  }
+
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+});

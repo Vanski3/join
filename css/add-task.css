@@ -43,6 +43,30 @@
   font-size: 20px;
 }
 
+input[type='text'],
+input[type='password'],
+textarea,
+input,
+select {
+  outline: none;
+}
+
+details[open]:focus {
+  border: 1px solid #005dff;
+}
+
+.my-inputs:focus,
+.my-inputs-edit:focus,
+#description-edit:focus,
+#description:focus,
+#category-edit:focus,
+#category:focus,
+#subtasks:focus,
+#subtasks-edit:focus {
+  border: 1px solid #005dff;
+  outline: none;
+}
+
 .substasks input {
   background-image: url(../assets/img/add-task/plus.svg);
   background-position: center right 15px;
