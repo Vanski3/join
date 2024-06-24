@@ -153,9 +153,8 @@ header span {
   justify-content: center;
   align-items: center;
   color: #005dff;
-  border-radius: 5px; /* Optional für abgerundete Ecken */
-  pointer-events: none; /* Wichtig: Damit der Span nicht auf Hover reagiert */
-
+  border-radius: 5px;
+  pointer-events: none;
   z-index: 999;
 }
 

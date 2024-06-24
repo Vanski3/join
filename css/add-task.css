@@ -485,7 +485,17 @@ details[open] #contact-search {
   border: unset;
 }
 
+details[open] #contact-search-edit {
+  display: inline-block; /* Eingabefeld anzeigen, wenn geöffnet */
+  flex-grow: 1;
+  border: unset;
+}
+
 #contact-search:focus {
+  outline: none;
+}
+
+#contact-search-edit:focus {
   outline: none;
 }
 
@@ -562,7 +572,18 @@ input#contact-search {
   margin-bottom: 5px;
 }
 
+input#contact-search-edit {
+  padding: 5px;
+  border-radius: 5px;
+  display: none;
+  margin-bottom: 5px;
+}
+
 details[open] input#contact-search {
+  display: block; /* Eingabefeld anzeigen, wenn geöffnet */
+}
+
+details[open] input#contact-search-edit {
   display: block; /* Eingabefeld anzeigen, wenn geöffnet */
 }
 
