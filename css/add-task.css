@@ -448,6 +448,7 @@ summary {
   display: flex;
   justify-content: space-between;
   cursor: pointer;
+  position: relative; /* Hinzugefügt für die Positionierung des input-Feldes */
 }
 
 details summary::after {
@@ -465,14 +466,27 @@ details[open] summary::after {
 
 details[open] #contact-summary {
   justify-content: flex-end;
+  border-bottom: 1px solid #005dff;
+  margin-bottom: 5px;
 }
 
-details[open] #categoy-headline {
-  padding-left: 10px;
+.details-headline {
+  flex-grow: 1; /* Hinzugefügt, damit das input-Feld den gesamten verfügbaren Platz einnimmt */
+  margin-right: 10px;
 }
 
 details[open] .summary-headline {
-  display: none;
+  display: none; /* Angepasst: Überschrift ausblenden, wenn geöffnet */
+}
+
+details[open] #contact-search {
+  display: inline-block; /* Eingabefeld anzeigen, wenn geöffnet */
+  flex-grow: 1;
+  border: unset;
+}
+
+#contact-search:focus {
+  outline: none;
 }
 
 details[open]:not(:last-child) {
@@ -539,6 +553,17 @@ label {
 
 input:hover {
   cursor: pointer;
+}
+
+input#contact-search {
+  padding: 5px;
+  border-radius: 5px;
+  display: none;
+  margin-bottom: 5px;
+}
+
+details[open] input#contact-search {
+  display: block; /* Eingabefeld anzeigen, wenn geöffnet */
 }
 
 .initials {

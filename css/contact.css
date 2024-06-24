@@ -176,7 +176,9 @@
   text-decoration: underline;
 }
 
-.dialog-container {
+/* dialog */
+
+/* .dialog-container {
   position: absolute;
   display: none;
   height: 100vh;
@@ -186,7 +188,17 @@
   background-color: rgba(255, 255, 255, 0.7);
 }
 
-.task-dialog {
+#contact-dialog-container{
+  position: absolute;
+  /* display: none; */
+  /* height: 100vh;
+  top: 0;
+  width: 100%;
+  z-index: 998;
+  background-color: rgba(255, 255, 255, 0.7); 
+} */
+
+/* .task-dialog {
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -202,14 +214,14 @@
   background-color: #fff;
   right: -600px;
   transition: right 0.3s ease;
-}
+}*/
 
 .close-button {
   position: absolute;
   top: 24px;
   right: 30px;
   cursor: pointer;
-}
+} 
 
 @media (max-width: 1170px) {
   .contact-detail .contact-name-detail {

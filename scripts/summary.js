@@ -1,11 +1,12 @@
 // renderSummary()
 
 function renderSummary() {
+   const name = sessionStorage.getItem('name') ?? 'Guest';
    const content = document.querySelector('.main-content');
    content.innerHTML = '';
    content.innerHTML += /*html*/ `
      <main class="summary-main">
-      <div class="headline-wrapper"><span class="headline">Good morning,</span><span id="username"> Sofia Müller</span></div>
+      <div class="headline-wrapper"><span class="headline">Good morning,</span><span id="username"> ${name}</span></div>
         <div class="summary-wrapper">
             <div class="row1">
                 <div class="date-urgent-task" onclick="loadBoardContent()">

@@ -36,7 +36,7 @@ function renderToList() {
       const contact = contacts[i].name;
       list.innerHTML += `          <li class="change-bg" id="contact-${i}" onclick="selectContact(${i})">
                                  <label for="${contact}"> 
-                                    <div id="symbol-${i}" name="${contact}" class="initials" style="background-color: ${contacts[i].contactImageBgColor}">${contacts[i].nameInitials}</div>
+                                    <div id="symbol-${i}" name="${contact}" class="contactShow initials" style="background-color: ${contacts[i].contactImageBgColor}">${contacts[i].nameInitials}</div>
                                     ${contact}
                                  </label>
                                  <div class="checkbox-container">
@@ -765,8 +765,19 @@ document.addEventListener('click', function (event) {
 
    if (!details.contains(event.target) && details.open) {
       details.open = false;
+      resetSearch();
    }
 });
+
+function resetSearch() {
+   document.getElementById('contact-search').value = ''; // Setze den Wert des Suchfelds zurück
+   let contactElements = document.querySelectorAll('.contactShow');
+
+   contactElements.forEach((contact) => {
+      let container = contact.parentNode;
+      container.parentNode.style.display = ''; // Zeige alle übergeordneten Container wieder an
+   });
+}
 
 function loadAddTaskContent(params) {
    let mainContent = document.getElementById('mainContent');
@@ -786,17 +797,20 @@ function loadAddTaskContent(params) {
                </div>
 
                <div>
-                  <div>
-                     Assigned to
-                     <details id="details">
-                        <summary id="contact-summary"><div class="summary-headline">Select contacts to assign</div></summary>
-                           <fieldset>
-                           <ul id="contacts">
-                           </ul>
-                           </fieldset>
-                     </details>
-                     <div id="placeholder"></div>
-                  </div>
+               <div>
+                           Assigned to
+                           <details id="details">
+                              <summary id="contact-summary">
+                                 <div class="summary-headline">Select contacts to assign</div>
+                                 <input type="text" id="contact-search" onkeyup="filterContacts()" placeholder="Search contacts">
+                              </summary>
+                              <fieldset>
+                                 <ul id="contacts">
+                                 </ul>
+                              </fieldset>
+                           </details>
+                           <div id="placeholder"></div>
+                        </div>
                </div>
             </div>
 
@@ -903,4 +917,20 @@ function changeAddTaskButtonBackground() {
 function changeColorSideAddTask() {
    document.getElementById('sidebarImgAddTask').classList.add('color-img-sidebar');
    document.getElementById('fontAddTaskSidebar').classList.add('menu-row-font');
+}
+
+function filterContacts() {
+   let input = document.getElementById('contact-search').value.toLowerCase();
+   let contactElements = document.querySelectorAll('.contactShow');
+
+   contactElements.forEach((contact) => {
+      let name = contact.getAttribute('name');
+      if (name.toLowerCase().includes(input)) {
+         let container = contact.parentNode;
+         container.parentNode.style.display = '';
+      } else {
+         let container = contact.parentNode;
+         container.parentNode.style.display = 'none';
+      }
+   });
 }

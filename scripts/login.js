@@ -152,6 +152,7 @@ function setSessionStorage(loginEmail) {
     .map((word) => word[0])
     .join('');
   sessionStorage.setItem('initials', initials);
+  sessionStorage.setItem('name', name);
 }
 
 async function createUser() {
@@ -192,5 +193,6 @@ function validatePassword() {
 
 function guestLogin() {
   sessionStorage.setItem('initials', 'G');
+  sessionStorage.setItem('name', 'Guest');
   window.location.href = 'index-main.html';
 }
