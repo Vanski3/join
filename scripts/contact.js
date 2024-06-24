@@ -14,6 +14,10 @@ function loadContactsContent() {
          renderContacts(contactsData);
       })
       .catch((error) => console.error('Error loading contacts:', error));
+   removeButtonBackground();
+   changeContactsButtonBackground();
+   removeColorSideBar();
+   changeColorSidebarContacts();
 }
 
 function renderContacts(contacts) {
@@ -161,3 +165,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
    });
 });
+
+function changeColorSidebarContacts() {
+   document.getElementById('sidebarImgContact').classList.add('color-img-sidebar');
+}
+
+function changeContactsButtonBackground(params) {
+   let contactButton = document.getElementById('contactButton');
+   contactButton.classList.add('menu-background');
+}

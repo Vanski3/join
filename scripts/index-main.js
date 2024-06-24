@@ -8,3 +8,14 @@ function removeButtonBackground(params) {
    let contactButton = document.getElementById('contactButton');
    contactButton.classList.remove('menu-background');
 }
+
+function removeColorSideBar(params) {
+   let sidebarImgSummary = document.getElementById('sidebarImgSummary');
+   sidebarImgSummary.classList.remove('color-img-sidebar');
+   let sidebarImgAddTask = document.getElementById('sidebarImgAddTask');
+   sidebarImgAddTask.classList.remove('color-img-sidebar');
+   let sidebarImgBoard = document.getElementById('sidebarImgBoard');
+   sidebarImgBoard.classList.remove('color-img-sidebar');
+   let sidebarImgContact = document.getElementById('sidebarImgContact');
+   sidebarImgContact.classList.remove('color-img-sidebar');
+}

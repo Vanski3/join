@@ -106,6 +106,8 @@ function loadBoardContent(params) {
    renderBoardCards();
    removeButtonBackground();
    changeBoardButtonBackground();
+   removeColorSideBar();
+   changeColorSidebarBoard();
 }
 
 function changeBoardButtonBackground(params) {
@@ -122,11 +124,17 @@ function renderBoardCards() {
       let categoryName = tasks.categoryName[i];
       document.getElementById(`taskStatus${taskStatus}`).innerHTML += /*html*/ `
                             <div id="boardCard${i}" draggable="true" ondragstart="drag(event)" class="board-card" onclick="renderTaskOverlay(${i})">
-                              <div class="header-row-board-card">
+                              <div class="header-row-board-card" id="headerRowBoardCard${i}">
                                 <img id="categorieImg${i}" class="card-label" src="./assets/img/board/${categoryName}.svg" alt="" />
-                                <img onclick="showMoveToPopup(${i})" class="move-to-img" src="./assets/img/board/Move-to.svg" alt="">
+                                <img onclick="showMoveToPopup(event, ${i})" class="move-to-img" src="./assets/img/board/Move-to.svg" alt="">
+                                <div id="popupBoardCard${i}" class="popup-board-card">
+                                    <span class="move-to-header">Move to:</span>
+                                    <span onclick="moveCardToToDo(event, ${i})" href="">To Do</span>
+                                    <span onclick="moveCardToInProgress(event, ${i})" href="">In Progress</span>
+                                    <span onclick="moveCardToAwaitingFeedback(event, ${i})" href="">Awaiting Feedback</span>
+                                    <span onclick="moveCardToDone(event, ${i})" href="">Done</span>
+                                 </div>
                               </div>
-                              
                               <span class="card-title">${title}</span>
                               <span class="task-description-board">${description}</span>
                               <div id="progressDiv${i}" class="progress-field">
@@ -477,14 +485,40 @@ function closeTaskOverlay() {
    overlay.classList.remove('fade-in-right');
 }
 
-function showMoveToPopup(i) {
-   document.getElementById(`boardCard${i}`).innerHTML += /*html*/ `
-    <div class="popup-board-card">
-      <span>Move to:</span>
-      <a href="">To Do</a>
-      <a href="">In Progress</a>
-      <a href="">Awaiting Feedback</a>
-      <a href="">Done</a>
-    </div>
-  `;
+function showMoveToPopup(event, i) {
+   event.stopPropagation();
+   const popup = document.getElementById(`popupBoardCard${i}`);
+   if (popup.style.display === 'none' || popup.style.display === '') {
+      popup.style.display = 'flex';
+   } else {
+      popup.style.display = 'none';
+   }
+}
+
+function moveCardToToDo(event, i) {
+   event.stopPropagation();
+   tasks.taskStatus.splice(i, 1, '0');
+   renderBoardCards();
+}
+
+function moveCardToInProgress(event, i) {
+   event.stopPropagation();
+   tasks.taskStatus.splice(i, 1, '1');
+   renderBoardCards();
+}
+
+function moveCardToAwaitingFeedback(event, i) {
+   event.stopPropagation();
+   tasks.taskStatus.splice(i, 1, '2');
+   renderBoardCards();
+}
+
+function moveCardToDone(event, i) {
+   event.stopPropagation();
+   tasks.taskStatus.splice(i, 1, '3');
+   renderBoardCards();
+}
+
+function changeColorSidebarBoard() {
+   document.getElementById('sidebarImgBoard').classList.add('color-img-sidebar');
 }

@@ -202,11 +202,22 @@ header span {
       gap: 4px;
       height: 100%;
       padding: 0;
-      /* pointer-events: none; */
    }
 
    .main-content {
       height: inherit;
       flex: 1;
+   }
+
+   .color-img-sidebar path {
+      fill: rgb(69, 137, 255);
+   }
+
+   .menu-row-color {
+      color: rgb(69, 137, 255);
+   }
+
+   .menu-row:hover {
+      background-color: unset;
    }
 }

@@ -66,9 +66,15 @@ function renderSummary() {
     </main>`;
    removeButtonBackground();
    changeSummaryButtonBackground();
+   removeColorSideBar();
+   changeColorSideSummary();
 }
 
 function changeSummaryButtonBackground(params) {
    let summaryButton = document.getElementById('summaryButton');
    summaryButton.classList.add('menu-background');
+}
+
+function changeColorSideSummary(params) {
+   document.getElementById('sidebarImgSummary').classList.add('color-img-sidebar');
 }

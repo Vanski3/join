@@ -153,6 +153,7 @@ h1 {
    box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
    border-radius: 24px;
    cursor: pointer;
+   position: relative;
 }
 
 .card-label {
@@ -392,18 +393,26 @@ h1 {
 }
 
 .popup-board-card {
-   height: 137px;
+   height: 160px;
    width: 172px;
    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
    border-radius: 20px 0px 20px 20px;
-   display: flex;
    flex-direction: column;
    align-items: center;
    justify-content: center;
-   padding: 10px;
-   position: relative;
-   top: 10px;
-   right: 7px;
+   padding: 14px;
+   position: absolute;
+   top: 48px;
+   right: 48px;
+   gap: 12px;
+   background-color: rgb(69, 137, 255);
+   color: white;
+   font-size: 19px;
+   display: none;
+}
+
+.move-to-header {
+   font-weight: bold;
 }
 
 @media only screen and (max-width: 1400px) {
@@ -470,6 +479,10 @@ h1 {
 
    .board {
       width: 94%;
+   }
+
+   .menu-background {
+      background: unset;
    }
 }
 
