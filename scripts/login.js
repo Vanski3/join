@@ -193,5 +193,6 @@ function validatePassword() {
 
 function guestLogin() {
   sessionStorage.setItem('initials', 'G');
+  sessionStorage.setItem('name', 'Guest');
   window.location.href = 'index-main.html';
 }
