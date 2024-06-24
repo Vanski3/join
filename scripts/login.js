@@ -128,6 +128,7 @@ function loginUser() {
 
   if (result.length > 0) {
     if (result[0]['email'] === loginEmail.value && result[0]['password'] === loginPassword.value) {
+      setSessionStorage(loginEmail, loginPassword);
       window.location.href = 'index-main.html';
     } else {
       alert('Email or password does not match');
@@ -141,6 +142,16 @@ function loginUser() {
     loginPassword.value = '';
     toggleIcon.src = '../assets/img/login/lock.svg';
   }
+}
+
+function setSessionStorage(loginEmail) {
+  let result = user.filter((user) => user.email === loginEmail.value);
+  let name = result[0].name;
+  let initials = name
+    .split(' ')
+    .map((word) => word[0])
+    .join('');
+  sessionStorage.setItem('initials', initials);
 }
 
 async function createUser() {
@@ -177,4 +188,9 @@ function validatePassword() {
   } else {
     confirm_password.setCustomValidity('');
   }
+}
+
+function guestLogin() {
+  sessionStorage.setItem('initials', 'G');
+  window.location.href = 'index-main.html';
 }

@@ -16,6 +16,7 @@ function openTaskDialog(parameter = null) {
    setTimeout(function () {
       taskDialog.style.right = '0';
    }, 50);
+   resetButtons();
    handleMediumClick(event);
    taskCategory(parameter);
 }
