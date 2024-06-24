@@ -2,6 +2,7 @@ let selectedButtonId = null;
 let priority = '';
 let contacts = [];
 let tasksNumber = '';
+let taskSelection = '0';
 let assignedTo = [
   {
     contactImageBgColor: [],
@@ -404,6 +405,14 @@ function saveTaskEdit(event) {
   closeTaskOverlayEdit();
 }
 
+function taskCategory(parameter) {
+  if (parameter == null) {
+    return;
+  } else {
+    taskSelection = parameter;
+  }
+}
+
 function saveTask(event) {
   event.preventDefault();
   getSelectedContacts();
@@ -421,12 +430,12 @@ function saveTask(event) {
     priority: priority,
     categoryName: inputFields[3].value,
     subtasksTest: subtasks,
-    taskStatus: '0',
+    taskStatus: taskSelection,
     categoryBGColor: result,
   };
   mergeObjects(tasks, newTask);
   loadBoardContent();
-  closeTaskOverlay();
+  closeTaskDialog();
 }
 
 function mergeObjectsEdit(tasks, newTaskEdit) {
@@ -458,6 +467,22 @@ function clearEditObjects() {
   ];
 }
 
+function clearObjects() {
+  assignedTo = [
+    {
+      contactImageBgColor: [],
+      name: [],
+      nameInitials: [],
+    },
+  ];
+  subtasks = [
+    {
+      subtask: [],
+      subtaskStatus: [],
+    },
+  ];
+}
+
 function mergeObjects(tasks, newTask) {
   newTask.assignedTo.forEach((item) => tasks.assignedTo.push(item));
   tasks.categoryBgColor.push(newTask.categoryBGColor);
@@ -468,6 +493,7 @@ function mergeObjects(tasks, newTask) {
   tasks.taskStatus.push(newTask.taskStatus);
   tasks.title.push(newTask.title);
   newTask.subtasksTest.forEach((item) => tasks.subtasksTest.push(item));
+  clearObjects();
 }
 
 function toggleColor(buttonId, color, idOne, idTwo) {
