@@ -559,6 +559,12 @@
   .signup-form-container input {
     padding-left: unset;
   }
+
+  .form-failed-container img {
+    height: auto;
+    width: 250px;
+    margin-top: 580px;
+  }
 }
 
 @media (max-width: 380px) {
