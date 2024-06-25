@@ -159,11 +159,3 @@ function changeColorSideSummary(params) {
   document.getElementById('sidebarImgSummary').classList.add('color-img-sidebar');
   document.getElementById('fontSummarySidebar').classList.add('menu-row-font');
 }
-
-function scrollToSection(sectionId) {
-  let targetElement = document.getElementById(sectionId);
-
-  if (targetElement) {
-    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-}

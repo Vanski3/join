@@ -67,7 +67,7 @@ function loadBoardContent(sectionId) {
                         <div class="board-headline to-do-column">
                            <span id="board-todo">To do</span>
                            <img
-                           onclick="openTaskDialog(0)"
+                           onclick="openTaskDialog('0')"
                               onmouseover="this.src='./assets/img/board/add-button-variant2.svg'"
                               onmouseout="this.src='./assets/img/board/add-button-default.svg'"
                               src="./assets/img/board/add-button-default.svg"
@@ -79,7 +79,7 @@ function loadBoardContent(sectionId) {
                      <div class="tasks-column">
                         <div class="board-headline">
                            <span id="board-progress">In Progress</span>
-                           <img onclick="openTaskDialog(1)"
+                           <img onclick="openTaskDialog('1')"
                               onmouseover="this.src='./assets/img/board/add-button-variant2.svg'"
                               onmouseout="this.src='./assets/img/board/add-button-default.svg'"
                               src="./assets/img/board/add-button-default.svg"
@@ -91,7 +91,7 @@ function loadBoardContent(sectionId) {
                      <div class="tasks-column">
                         <div class="board-headline">
                            <span id="board-feedback">Await feedback</span>
-                           <img onclick="openTaskDialog(2)"
+                           <img onclick="openTaskDialog('2')"
                               onmouseover="this.src='./assets/img/board/add-button-variant2.svg'"
                               onmouseout="this.src='./assets/img/board/add-button-default.svg'"
                               src="./assets/img/board/add-button-default.svg"
