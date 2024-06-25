@@ -1,10 +1,9 @@
 // renderSummary()
-
 function renderSummary() {
-   const name = sessionStorage.getItem('name') ?? 'Guest';
-   const content = document.querySelector('.main-content');
-   content.innerHTML = '';
-   content.innerHTML += /*html*/ `
+  const name = sessionStorage.getItem('name') ?? 'Guest';
+  const content = document.querySelector('.main-content');
+  content.innerHTML = '';
+  content.innerHTML += /*html*/ `
      <main class="summary-main">
       <div class="headline-wrapper"><span class="headline">Good morning,</span><span id="username"> ${name}</span></div>
         <div class="summary-wrapper">
@@ -65,18 +64,18 @@ function renderSummary() {
             </div>
         </div>
     </main>`;
-   removeButtonBackground();
-   changeSummaryButtonBackground();
-   removeColorSideBar();
-   changeColorSideSummary();
+  removeButtonBackground();
+  changeSummaryButtonBackground();
+  removeColorSideBar();
+  changeColorSideSummary();
 }
 
 function changeSummaryButtonBackground(params) {
-   let summaryButton = document.getElementById('summaryButton');
-   summaryButton.classList.add('menu-background');
+  let summaryButton = document.getElementById('summaryButton');
+  summaryButton.classList.add('menu-background');
 }
 
 function changeColorSideSummary(params) {
-   document.getElementById('sidebarImgSummary').classList.add('color-img-sidebar');
-   document.getElementById('fontSummarySidebar').classList.add('menu-row-font');
+  document.getElementById('sidebarImgSummary').classList.add('color-img-sidebar');
+  document.getElementById('fontSummarySidebar').classList.add('menu-row-font');
 }
