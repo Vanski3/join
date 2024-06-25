@@ -15,12 +15,12 @@
    <link rel="stylesheet" href="./css/add-task-edit.css" />
    <script src="./scripts/add-task.js"></script>
    <script src="/scripts/contact.js" defer></script>
-   <script src="./scripts/board.js" defer></script>
    <script src="./scripts/help.js" defer></script>
    <script src="./scripts/legal-notice.js" defer></script>
    <script src="./scripts/privacy.js" defer></script>
    <script src="./scripts/index-main.js" defer></script>
-   <script src="/scripts/summary.js"></script>
+   <script src="/scripts/summary.js" defer></script>
+   <script src="./scripts/board.js" defer></script>
    <script src="./scripts/header.js" defer></script>
    <script src="./scripts/task-overlay.js"></script>
    <link rel="icon" href="./assets/img/logo-blue.svg">
@@ -28,7 +28,7 @@
    <title>Join - Kanban Board</title>
 </head>
 
-<body onload="init(), renderSummary(), onloadContacts();">
+<body onload="init(), onloadContacts();">
    <div class="desktop-template-div">
       <header>
          <a href="/index.html"><img class="header-logo" src="/assets/img/header-icons/join-logo.svg" alt="" /></a>
@@ -44,8 +44,8 @@
          </div>
       </header>
       <div id="userHeaderPopup" class="user-icon-popup">
-         <a  onclick="loadLegalNoticeContent()" id="legalNoticeLink">Legal Notice</a>
-         <a  onclick="loadPrivacyPoliceContent()">Privacy Police</a>
+         <a onclick="loadLegalNoticeContent()" id="legalNoticeLink">Legal Notice</a>
+         <a onclick="loadPrivacyPoliceContent()">Privacy Police</a>
          <a onclick="logOut()">Log Out</a>
       </div>
       <div class="atf-container">
@@ -90,7 +90,7 @@
                   </svg>
                   <div id="fontContactsSidebar">Contacts</div>
                </div>
-            </div> 
+            </div>
             <div class="lower-sidebar">
                <a id="privacePoliceButton" onclick="loadPrivacyPoliceContent()">Privacy Policy</a>
                <a id="legalNoticeButton" onclick="loadLegalNoticeContent()">Legal notice</a>
