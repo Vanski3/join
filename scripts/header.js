@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-  let userLogoHeader = document.getElementById('logoInitials');
+  let userLogoHeader = document.getElementById('userLogoHeader');
   let userHeaderPopup = document.getElementById('userHeaderPopup');
 
   userLogoHeader.addEventListener('click', function (event) {

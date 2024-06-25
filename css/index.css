@@ -65,6 +65,18 @@
   text-decoration-color: var(--identity-clr);
 }
 
+.error {
+  border-bottom: 1px solid #ff8190 !important;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  position: absolute;
+  top: 55px;
+  left: 5px;
+}
+
 .form-container {
   display: flex;
   flex-direction: column;

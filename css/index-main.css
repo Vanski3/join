@@ -161,24 +161,27 @@ header span {
    background-color: white;
 }
 
-#logoInitials {
+.sessionStorageInitials {
    position: relative;
-   height: 100px;
-   width: 500px;
-   z-index: 1000;
-   color: #005dff;
-   font-size: 25px;
-   position: absolute;
-   right: -376px;
-   top: 28px;
-   font-weight: 500;
+   display: inline-block;
    cursor: pointer;
 }
 
-.sessionStorageInitials {
-   height: 64px;
-   width: 96px;
-   display: inline-block;
+.sessionStorageInitials img {
+   display: block;
+}
+.sessionStorageInitials .logoInitials {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   color: #005dff;
+   border-radius: 5px;
+   pointer-events: none;
+   z-index: 999;
 }
 
 .user-icon-popup a {
@@ -202,6 +205,10 @@ header span {
 
    .header-help-logo {
       display: none;
+   }
+
+   .sessionStorageInitials .logoInitials {
+      font-size: 16px;
    }
 
    .header-right-side {
