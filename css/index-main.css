@@ -33,11 +33,29 @@ header span {
    height: 80%;
 }
 
+.atf-container-guest {
+   display: flex;
+   flex: 1;
+   height: 80%;
+}
+
 .sidebar {
    display: flex;
    flex-direction: column;
    min-width: 232px;
    justify-content: space-between;
+   align-items: center;
+   background-color: var(--bg-clr-1);
+   padding: 66px 0px 66px 0px;
+   align-items: center;
+   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+}
+
+.sidebar-guest {
+   display: flex;
+   flex-direction: column;
+   min-width: 232px;
+   justify-content: flex-end;
    align-items: center;
    background-color: var(--bg-clr-1);
    padding: 66px 0px 66px 0px;
@@ -80,6 +98,9 @@ header span {
    gap: 8px;
    justify-content: center;
    align-items: center;
+   width: 112px;
+   display: flex;
+   justify-content: center;
 }
 
 .lower-sidebar a {
@@ -87,6 +108,10 @@ header span {
    text-decoration: none;
    color: black;
    cursor: pointer;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 116px;
 }
 
 .lower-sidebar a:hover {
@@ -115,9 +140,9 @@ header span {
    cursor: pointer;
 }
 
-.header-headline:hover {
+/* .header-headline:hover {
    cursor: pointer;
-}
+} */
 
 .user-icon-popup {
    height: 137px;
@@ -133,6 +158,7 @@ header span {
    top: 107px;
    right: 7px;
    display: none;
+   background-color: white;
 }
 
 #logoInitials {
@@ -216,6 +242,10 @@ header span {
       justify-content: center;
       padding: 0;
       z-index: 1;
+   }
+
+   .sidebar-guest {
+      display: none;
    }
 
    .menu-row {
