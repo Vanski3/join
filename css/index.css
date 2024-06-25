@@ -439,6 +439,10 @@
   .input-img {
     right: 100px;
   }
+
+  .error-message {
+    left: unset;
+  }
 }
 
 @media (max-width: 650px) {

@@ -115,7 +115,7 @@ function editTask(i) {
                    <div class="second-row-edit">
                       <div>
                          <span>Due Date<span class="red-star">*</span></span>
-                         <input class="my-inputs-edit" required type="date">
+                         <input class="my-inputs-edit" id="custom-date" required type="date">
                       </div>
  
                       <div class="prio-container">
@@ -182,11 +182,10 @@ function editTask(i) {
                    </div>
  
                    <div class="buttons-edit">
-
                       <button type=submit class="blue-btn">Ok <img src="./assets/img/add-task/check.svg"
                             alt=""></button>
                    </div>
- 
+
                 </form>`;
   onloadContactsEdit(i);
   onloadFormValue(i);
@@ -726,35 +725,9 @@ function addLoadedContact(i) {
 function addSubtasks() {
   let subtasks = document.getElementById('subtasks');
   let placeholder = document.getElementById('subtask-placeholder');
-
   if (subtasks.value.length >= 1) {
     placeholder.innerHTML += `<li status="open">${subtasks.value}</li>`;
     subtasks.value = '';
-  }
-}
-
-function addSubtasksEdit() {
-  let subtasks = document.getElementById('subtasks-edit');
-  let placeholder = document.getElementById('subtask-placeholder-edit');
-
-  if (subtasks.value.length >= 1) {
-    placeholder.innerHTML += `<li status="open">${subtasks.value}</li>`;
-    subtasks.value = '';
-  }
-}
-
-function editSubtask() {
-  var subtaskElement = document.getElementById('subtask');
-  var newText = prompt('Neuer Text für den Subtask:', subtaskElement.textContent);
-  if (newText !== null && newText !== '') {
-    subtaskElement.textContent = newText;
-  }
-}
-
-function deleteSubtask() {
-  var subtaskElement = document.getElementById('subtask');
-  if (confirm('Möchtest du diesen Subtask wirklich löschen?')) {
-    subtaskElement.parentNode.removeChild(subtaskElement);
   }
 }
 
@@ -823,7 +796,7 @@ function loadAddTaskContent(params) {
             <div class="second-row">
                <div>
                   <span>Due Date<span class="red-star">*</span></span>
-                  <input class="my-inputs" required type="date">
+                  <input class="my-inputs" id="custom-date" required type="date">
                </div>
 
                <div class="prio-container">
@@ -911,6 +884,7 @@ function loadAddTaskContent(params) {
   selectedButtonId = '';
   priority = '';
   handleMediumClick(event);
+  // addValidationAddTask();
 }
 
 function changeAddTaskButtonBackground() {
@@ -974,3 +948,30 @@ function removeSymbol(i) {
     document.getElementById('contact-' + i + '-edit').style.background = '';
   }
 }
+
+// function addValidationAddTask() {
+//   const addTask = document.getElementById('addTask');
+//   const description = document.getElementById('description');
+//   const signupEmailInput = document.getElementById('signupEmail');
+//   const signupPasswordInput = document.getElementById('passwordSignup');
+//   const confirmSignupInput = document.getElementById('confirmSignup');
+//   const signupCheckboxInput = document.getElementById('checkboxSignup');
+
+//   addValidationListeners(description, 'text');
+//   addValidationListeners(signupEmailInput, 'email');
+//   addValidationListeners(signupPasswordInput, 'password');
+//   addValidationListeners(confirmSignupInput, 'confirmPassword', signupPasswordInput);
+//   signupCheckboxInput.addEventListener('change', () => validateCheckbox(signupCheckboxInput));
+
+//   signupForm.addEventListener('submit', function (event) {
+//     event.preventDefault();
+//     validateInput(description, 'text');
+//     validateInput(signupEmailInput, 'email');
+//     validateInput(signupPasswordInput, 'password');
+//     validateConfirmPassword(confirmSignupInput, signupPasswordInput);
+//     validateCheckbox(signupCheckboxInput);
+//     // Additional logic for signup form submission if needed
+//   });
+// }
+
+var simple = new Datepicker('#simple');
