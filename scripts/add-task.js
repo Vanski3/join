@@ -4,37 +4,37 @@ let contacts = [];
 let tasksNumber = '';
 let taskSelection = '0';
 let assignedTo = [
-  {
-    contactImageBgColor: [],
-    name: [],
-    nameInitials: [],
-  },
+   {
+      contactImageBgColor: [],
+      name: [],
+      nameInitials: [],
+   },
 ];
 let subtasks = [
-  {
-    subtask: [],
-    subtaskStatus: [],
-  },
+   {
+      subtask: [],
+      subtaskStatus: [],
+   },
 ];
 let assignedToEdit = [
-  {
-    contactImageBgColor: [],
-    name: [],
-    nameInitials: [],
-  },
+   {
+      contactImageBgColor: [],
+      name: [],
+      nameInitials: [],
+   },
 ];
 let subtasksEdit = [
-  {
-    subtask: [],
-    subtaskStatus: [],
-  },
+   {
+      subtask: [],
+      subtaskStatus: [],
+   },
 ];
 
 function renderToList() {
-  let list = document.getElementById('contacts');
-  for (let i = 0; i < contacts.length; i++) {
-    const contact = contacts[i].name;
-    list.innerHTML += `          <li class="change-bg" id="contact-${i}" onclick="selectContact(${i})">
+   let list = document.getElementById('contacts');
+   for (let i = 0; i < contacts.length; i++) {
+      const contact = contacts[i].name;
+      list.innerHTML += `          <li class="change-bg" id="contact-${i}" onclick="selectContact(${i})">
                                  <label for="${contact}"> 
                                     <div id="symbol-${i}" name="${contact}" class="contactShow initials" style="background-color: ${contacts[i].contactImageBgColor}">${contacts[i].nameInitials}</div>
                                     ${contact}
@@ -43,37 +43,37 @@ function renderToList() {
                                     <img class="change-src" id="checkbox-${i}" src="./assets/img/login/checkbox.svg" alt="">
                                  </div>                              
                               </li>`;
-  }
+   }
 }
 
 async function onloadContacts() {
-  contacts = [];
-  let userResponse = await getAllContacts('contacts');
-  for (let i = 0; i < userResponse.contactImageBgColor.length; i++) {
-    contacts.push({
-      contactImageBgColor: userResponse.contactImageBgColor[i],
-      email: userResponse.email[i],
-      name: userResponse.name[i],
-      nameInitials: userResponse.nameInitials[i],
-      phoneNumber: userResponse.phoneNumber[i],
-    });
-  }
-  renderToList();
+   contacts = [];
+   let userResponse = await getAllContacts('contacts');
+   for (let i = 0; i < userResponse.contactImageBgColor.length; i++) {
+      contacts.push({
+         contactImageBgColor: userResponse.contactImageBgColor[i],
+         email: userResponse.email[i],
+         name: userResponse.name[i],
+         nameInitials: userResponse.nameInitials[i],
+         phoneNumber: userResponse.phoneNumber[i],
+      });
+   }
+   renderToList();
 }
 
 function closeTaskOverlayEdit() {
-  const overlay = document.getElementById('taskOverlay');
-  overlay.close();
-  renderBoardCards();
-  overlay.classList.remove('fade-in-right');
-  priority = '';
-  selectedButtonId = null;
+   const overlay = document.getElementById('taskOverlay');
+   overlay.close();
+   renderBoardCards();
+   overlay.classList.remove('fade-in-right');
+   priority = '';
+   selectedButtonId = null;
 }
 
 function editTask(i) {
-  let editTask = document.getElementById('edit-task');
-  editTask.innerHTML = '';
-  editTask.innerHTML += /*html*/ `
+   let editTask = document.getElementById('edit-task');
+   editTask.innerHTML = '';
+   editTask.innerHTML += /*html*/ `
      <form onsubmit="saveTaskEdit(event)" id="addTask-edit" class="task-description-edit">
      <img
                   onclick="closeTaskOverlayEdit()"
@@ -188,80 +188,80 @@ function editTask(i) {
                    </div>
  
                 </form>`;
-  onloadContactsEdit(i);
-  onloadFormValue(i);
-  onclickRender();
+   onloadContactsEdit(i);
+   onloadFormValue(i);
+   onclickRender();
 }
 
 function getSubtasksEdit(i) {
-  let subtaskPlaceholder = document.getElementById('subtask-placeholder-edit');
-  subtaskPlaceholder.innerHTML = '';
-  tasksNumber = i;
-  let array = tasks.subtasksTest[i].subtask;
-  for (let j = 0; j < array.length; j++) {
-    const subtask = tasks.subtasksTest[i].subtask[j];
-    subtaskPlaceholder.innerHTML += `
+   let subtaskPlaceholder = document.getElementById('subtask-placeholder-edit');
+   subtaskPlaceholder.innerHTML = '';
+   tasksNumber = i;
+   let array = tasks.subtasksTest[i].subtask;
+   for (let j = 0; j < array.length; j++) {
+      const subtask = tasks.subtasksTest[i].subtask[j];
+      subtaskPlaceholder.innerHTML += `
                                      <li id="subtask${j}" status="${tasks.subtasksTest[i].subtaskStatus[j]}">${subtask}</li>
                                   `;
-  }
+   }
 }
 
 function onloadFormValue(i) {
-  let inputFields = document.getElementsByClassName('my-inputs-edit');
-  inputFields[0].value = tasks.title[i];
-  inputFields[1].value = tasks.description[i];
-  inputFields[2].value = tasks.dueDate[i];
-  inputFields[3].value = tasks.categoryName[i];
-  getSelectedContactsEdit(i);
-  getSubtasksEdit(i);
-  getProBtnClick(i);
+   let inputFields = document.getElementsByClassName('my-inputs-edit');
+   inputFields[0].value = tasks.title[i];
+   inputFields[1].value = tasks.description[i];
+   inputFields[2].value = tasks.dueDate[i];
+   inputFields[3].value = tasks.categoryName[i];
+   getSelectedContactsEdit(i);
+   getSubtasksEdit(i);
+   getProBtnClick(i);
 }
 
 function getProBtnClick(i) {
-  let prio = tasks.priority[i];
-  let capitalizedPrio = prio.charAt(0).toUpperCase() + prio.slice(1);
-  if (prio == '') {
-    return;
-  } else {
-    let functionName = `handle${capitalizedPrio}ClickEdit`;
-    window[functionName](event);
-  }
+   let prio = tasks.priority[i];
+   let capitalizedPrio = prio.charAt(0).toUpperCase() + prio.slice(1);
+   if (prio == '') {
+      return;
+   } else {
+      let functionName = `handle${capitalizedPrio}ClickEdit`;
+      window[functionName](event);
+   }
 }
 
 function selectContactEdit(i) {
-  let icon = document.getElementById(`checkbox-${i}-edit`);
-  let input = document.getElementById(`contact-${i}-edit`);
-  let symbol = document.getElementById(`symbol-${i}-edit`).cloneNode(true);
-  let placeholder = document.getElementById('placeholder-edit');
+   let icon = document.getElementById(`checkbox-${i}-edit`);
+   let input = document.getElementById(`contact-${i}-edit`);
+   let symbol = document.getElementById(`symbol-${i}-edit`).cloneNode(true);
+   let placeholder = document.getElementById('placeholder-edit');
 
-  if (icon.src.endsWith('checkbox-checked-white.svg')) {
-    // Checkbox ist bereits ausgewählt, daher entfernen wir das Symbol aus dem Placeholder
-    input.style.background = '';
-    icon.src = './assets/img/login/checkbox.svg';
+   if (icon.src.endsWith('checkbox-checked-white.svg')) {
+      // Checkbox ist bereits ausgewählt, daher entfernen wir das Symbol aus dem Placeholder
+      input.style.background = '';
+      icon.src = './assets/img/login/checkbox.svg';
 
-    removeSymbol(i); // Symbol entfernen
-  } else {
-    // Checkbox wird ausgewählt, daher fügen wir das Symbol zum Placeholder hinzu
-    icon.src = './assets/img/login/checkbox-checked-white.svg';
-    input.style.background = '#4589FF';
+      removeSymbol(i); // Symbol entfernen
+   } else {
+      // Checkbox wird ausgewählt, daher fügen wir das Symbol zum Placeholder hinzu
+      icon.src = './assets/img/login/checkbox-checked-white.svg';
+      input.style.background = '#4589FF';
 
-    let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}-edit`);
-    if (!symbolInPlaceholder) {
-      // Nur hinzufügen, wenn es noch nicht vorhanden ist
-      symbol.onclick = function () {
-        removeSymbol(i); // Bei Klick das Symbol entfernen
-      };
-      symbol.id = `symbol-${i}-edit`; // Setze eine eindeutige ID für das Symbol
-      placeholder.appendChild(symbol);
-    }
-  }
+      let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}-edit`);
+      if (!symbolInPlaceholder) {
+         // Nur hinzufügen, wenn es noch nicht vorhanden ist
+         symbol.onclick = function () {
+            removeSymbol(i); // Bei Klick das Symbol entfernen
+         };
+         symbol.id = `symbol-${i}-edit`; // Setze eine eindeutige ID für das Symbol
+         placeholder.appendChild(symbol);
+      }
+   }
 }
 
 function renderToListEdit() {
-  let list = document.getElementById('contacts-edit');
-  for (let j = 0; j < contacts.length; j++) {
-    const contact = contacts[j].name;
-    list.innerHTML += `          <li class="change-bg-edit" id="contact-${j}-edit" onclick="selectContactEdit(${j})">
+   let list = document.getElementById('contacts-edit');
+   for (let j = 0; j < contacts.length; j++) {
+      const contact = contacts[j].name;
+      list.innerHTML += `          <li class="change-bg-edit" id="contact-${j}-edit" onclick="selectContactEdit(${j})">
                                   <label for="${contact}"> 
                                      <div id="symbol-${j}-edit" name="${contact}" class="initials edit-contact-form savedContacts" style="background-color: ${contacts[j].contactImageBgColor}">${contacts[j].nameInitials}</div>
                                      ${contact}
@@ -270,523 +270,521 @@ function renderToListEdit() {
                                      <img class="change-src-edit" id="checkbox-${j}-edit" src="./assets/img/login/checkbox.svg" alt="">
                                   </div>                              
                                </li>`;
-  }
+   }
 }
 
 function getSelectedContactsEdit(i) {
-  let contactPlaceholder = document.getElementById('placeholder-edit');
-  contactPlaceholder.innerHTML = '';
-  let assignedContacts = tasks.assignedTo[i].name;
+   let contactPlaceholder = document.getElementById('placeholder-edit');
+   contactPlaceholder.innerHTML = '';
+   let assignedContacts = tasks.assignedTo[i].name;
 
-  for (let j = 0; j < assignedContacts.length; j++) {
-    const contactName = assignedContacts[j];
-    const contactIndex = contacts.findIndex((contact) => contact.name === contactName);
+   for (let j = 0; j < assignedContacts.length; j++) {
+      const contactName = assignedContacts[j];
+      const contactIndex = contacts.findIndex((contact) => contact.name === contactName);
 
-    if (contactIndex !== -1) {
-      const contact = contacts[contactIndex];
-      contactPlaceholder.innerHTML += `
+      if (contactIndex !== -1) {
+         const contact = contacts[contactIndex];
+         contactPlaceholder.innerHTML += `
         <div id="symbol-${contactIndex}-edit" name="${contact.name}" class="initials savedContacts" style="background-color: ${contact.contactImageBgColor}">${contact.nameInitials}</div>
       `;
-    }
-  }
-  contacts = [];
+      }
+   }
+   contacts = [];
 }
 
 function markSelectedContacts() {
-  const placeholderEditDivs = document.querySelectorAll('#placeholder-edit .initials');
-  const placeholderNames = Array.from(placeholderEditDivs).map((div) =>
-    div.getAttribute('name').trim()
-  );
-  const contactListItems = document.querySelectorAll('#contacts-edit .change-bg-edit');
-  contactListItems.forEach((item) => {
-    const label = item.querySelector('label');
-    const nameText = label ? label.textContent.trim() : '';
-    const nameParts = nameText.split('\n').map((part) => part.trim());
-    const name = nameParts.length > 1 ? nameParts[1] : nameParts[0];
-    if (placeholderNames.includes(name)) {
-      item.style.backgroundColor = '#4589FF';
-      const checkboxImg = item.querySelector('.checkbox-container img');
-      if (checkboxImg) {
-        checkboxImg.src = './assets/img/login/checkbox-checked-white.svg';
+   const placeholderEditDivs = document.querySelectorAll('#placeholder-edit .initials');
+   const placeholderNames = Array.from(placeholderEditDivs).map((div) => div.getAttribute('name').trim());
+   const contactListItems = document.querySelectorAll('#contacts-edit .change-bg-edit');
+   contactListItems.forEach((item) => {
+      const label = item.querySelector('label');
+      const nameText = label ? label.textContent.trim() : '';
+      const nameParts = nameText.split('\n').map((part) => part.trim());
+      const name = nameParts.length > 1 ? nameParts[1] : nameParts[0];
+      if (placeholderNames.includes(name)) {
+         item.style.backgroundColor = '#4589FF';
+         const checkboxImg = item.querySelector('.checkbox-container img');
+         if (checkboxImg) {
+            checkboxImg.src = './assets/img/login/checkbox-checked-white.svg';
+         }
       }
-    }
-  });
+   });
 }
 
 async function onloadContactsEdit(j) {
-  let userResponse = await getAllContacts('contacts');
-  for (let i = 0; i < userResponse.contactImageBgColor.length; i++) {
-    contacts.push({
-      contactImageBgColor: userResponse.contactImageBgColor[i],
-      email: userResponse.email[i],
-      name: userResponse.name[i],
-      nameInitials: userResponse.nameInitials[i],
-      phoneNumber: userResponse.phoneNumber[i],
-    });
-  }
-  renderToListEdit(j);
+   let userResponse = await getAllContacts('contacts');
+   for (let i = 0; i < userResponse.contactImageBgColor.length; i++) {
+      contacts.push({
+         contactImageBgColor: userResponse.contactImageBgColor[i],
+         email: userResponse.email[i],
+         name: userResponse.name[i],
+         nameInitials: userResponse.nameInitials[i],
+         phoneNumber: userResponse.phoneNumber[i],
+      });
+   }
+   renderToListEdit(j);
 }
 
 async function getAllContacts(path) {
-  let response = await fetch(BASE_URL + path + '.json');
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-  }
-  return await response.json();
+   let response = await fetch(BASE_URL + path + '.json');
+   if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+   }
+   return await response.json();
 }
 
 function getSelectedContacts() {
-  let placeholder = document.getElementById('placeholder').childNodes;
-  for (let i = 0; i < placeholder.length; i++) {
-    let initials = placeholder[i].innerHTML;
-    let inlineStyle = placeholder[i].style.backgroundColor;
-    let fullName = placeholder[i].getAttribute('name');
-    assignedTo[0].nameInitials.push(initials);
-    assignedTo[0].contactImageBgColor.push(inlineStyle);
-    assignedTo[0].name.push(fullName);
-  }
+   let placeholder = document.getElementById('placeholder').childNodes;
+   for (let i = 0; i < placeholder.length; i++) {
+      let initials = placeholder[i].innerHTML;
+      let inlineStyle = placeholder[i].style.backgroundColor;
+      let fullName = placeholder[i].getAttribute('name');
+      assignedTo[0].nameInitials.push(initials);
+      assignedTo[0].contactImageBgColor.push(inlineStyle);
+      assignedTo[0].name.push(fullName);
+   }
 }
 
 function getSavedContactsEdit() {
-  const placeholderContainer = document.getElementById('placeholder-edit');
-  const placeholder = placeholderContainer.querySelectorAll('div.savedContacts');
-  for (let i = 0; i < placeholder.length; i++) {
-    let initials = placeholder[i].innerHTML;
-    let inlineStyle = placeholder[i].style.backgroundColor;
-    let fullName = placeholder[i].getAttribute('name');
-    assignedToEdit[0].nameInitials.push(initials);
-    assignedToEdit[0].contactImageBgColor.push(inlineStyle);
-    assignedToEdit[0].name.push(fullName);
-  }
+   const placeholderContainer = document.getElementById('placeholder-edit');
+   const placeholder = placeholderContainer.querySelectorAll('div.savedContacts');
+   for (let i = 0; i < placeholder.length; i++) {
+      let initials = placeholder[i].innerHTML;
+      let inlineStyle = placeholder[i].style.backgroundColor;
+      let fullName = placeholder[i].getAttribute('name');
+      assignedToEdit[0].nameInitials.push(initials);
+      assignedToEdit[0].contactImageBgColor.push(inlineStyle);
+      assignedToEdit[0].name.push(fullName);
+   }
 }
 
 function getSavedSubtasksEdit() {
-  const placeholderContainer = document.getElementById('subtask-placeholder-edit');
-  const li = placeholderContainer.querySelectorAll('li');
-  for (let i = 0; i < li.length; i++) {
-    let subtask = li[i].innerHTML;
-    let status = li[i].getAttribute('status');
-    subtasksEdit[0].subtask.push(subtask);
-    subtasksEdit[0].subtaskStatus.push(status);
-  }
+   const placeholderContainer = document.getElementById('subtask-placeholder-edit');
+   const li = placeholderContainer.querySelectorAll('li');
+   for (let i = 0; i < li.length; i++) {
+      let subtask = li[i].innerHTML;
+      let status = li[i].getAttribute('status');
+      subtasksEdit[0].subtask.push(subtask);
+      subtasksEdit[0].subtaskStatus.push(status);
+   }
 }
 
 function getSelectedSubtasks() {
-  let placeholder = document.getElementById('subtask-placeholder').childNodes;
-  for (let i = 0; i < placeholder.length; i++) {
-    let subtask = placeholder[i].innerHTML;
-    let status = placeholder[i].getAttribute('status');
-    subtasks[0].subtask.push(subtask);
-    subtasks[0].subtaskStatus.push(status);
-  }
+   let placeholder = document.getElementById('subtask-placeholder').childNodes;
+   for (let i = 0; i < placeholder.length; i++) {
+      let subtask = placeholder[i].innerHTML;
+      let status = placeholder[i].getAttribute('status');
+      subtasks[0].subtask.push(subtask);
+      subtasks[0].subtaskStatus.push(status);
+   }
 }
 
 function saveTaskEdit(event) {
-  event.preventDefault();
-  getSavedContactsEdit();
-  getSavedSubtasksEdit();
-  let bgColor = document.getElementById('category-edit');
-  let selectedIndex = bgColor.selectedIndex;
-  let selectedOption = (bgColor = bgColor.options[selectedIndex]);
-  let result = selectedOption.getAttribute('bgColor');
-  let inputFields = document.getElementsByClassName('my-inputs-edit');
-  let statusNumber = tasks.taskStatus[tasksNumber];
-  let newTaskEdit = {
-    title: inputFields[0].value,
-    description: inputFields[1].value,
-    assignedTo: assignedToEdit,
-    dueDate: inputFields[2].value,
-    priority: priority,
-    categoryName: inputFields[3].value,
-    subtasksTest: subtasksEdit,
-    taskStatus: statusNumber,
-    categoryBGColor: result,
-  };
-  mergeObjectsEdit(tasks, newTaskEdit);
-  loadBoardContent();
-  closeTaskOverlayEdit();
+   event.preventDefault();
+   getSavedContactsEdit();
+   getSavedSubtasksEdit();
+   let bgColor = document.getElementById('category-edit');
+   let selectedIndex = bgColor.selectedIndex;
+   let selectedOption = (bgColor = bgColor.options[selectedIndex]);
+   let result = selectedOption.getAttribute('bgColor');
+   let inputFields = document.getElementsByClassName('my-inputs-edit');
+   let statusNumber = tasks.taskStatus[tasksNumber];
+   let newTaskEdit = {
+      title: inputFields[0].value,
+      description: inputFields[1].value,
+      assignedTo: assignedToEdit,
+      dueDate: inputFields[2].value,
+      priority: priority,
+      categoryName: inputFields[3].value,
+      subtasksTest: subtasksEdit,
+      taskStatus: statusNumber,
+      categoryBGColor: result,
+   };
+   mergeObjectsEdit(tasks, newTaskEdit);
+   loadBoardContent();
+   closeTaskOverlayEdit();
 }
 
 function taskCategory(parameter) {
-  if (parameter == null) {
-    return;
-  } else {
-    taskSelection = parameter;
-  }
+   if (parameter == null) {
+      return;
+   } else {
+      taskSelection = parameter;
+   }
 }
 
 function saveTask(event) {
-  event.preventDefault();
-  getSelectedContacts();
-  getSelectedSubtasks();
-  let bgColor = document.getElementById('category');
-  let selectedIndex = bgColor.selectedIndex;
-  let selectedOption = (bgColor = bgColor.options[selectedIndex]);
-  let result = selectedOption.getAttribute('bgColor');
-  let inputFields = document.getElementsByClassName('my-inputs');
-  let newTask = {
-    title: inputFields[0].value,
-    description: inputFields[1].value,
-    assignedTo: assignedTo,
-    dueDate: inputFields[2].value,
-    priority: priority,
-    categoryName: inputFields[3].value,
-    subtasksTest: subtasks,
-    taskStatus: taskSelection,
-    categoryBGColor: result,
-  };
-  mergeObjects(tasks, newTask);
-  loadBoardContent();
-  closeTaskDialog();
+   event.preventDefault();
+   getSelectedContacts();
+   getSelectedSubtasks();
+   let bgColor = document.getElementById('category');
+   let selectedIndex = bgColor.selectedIndex;
+   let selectedOption = (bgColor = bgColor.options[selectedIndex]);
+   let result = selectedOption.getAttribute('bgColor');
+   let inputFields = document.getElementsByClassName('my-inputs');
+   let newTask = {
+      title: inputFields[0].value,
+      description: inputFields[1].value,
+      assignedTo: assignedTo,
+      dueDate: inputFields[2].value,
+      priority: priority,
+      categoryName: inputFields[3].value,
+      subtasksTest: subtasks,
+      taskStatus: taskSelection,
+      categoryBGColor: result,
+   };
+   mergeObjects(tasks, newTask);
+   loadBoardContent();
+   closeTaskDialog();
 }
 
 function mergeObjectsEdit(tasks, newTaskEdit) {
-  tasks.assignedTo.splice(tasksNumber, 1, ...newTaskEdit.assignedTo);
-  tasks.categoryBgColor.splice(tasksNumber, 1, newTaskEdit.categoryBGColor);
-  tasks.categoryName.splice(tasksNumber, 1, newTaskEdit.categoryName);
-  tasks.description.splice(tasksNumber, 1, newTaskEdit.description);
-  tasks.dueDate.splice(tasksNumber, 1, newTaskEdit.dueDate);
-  tasks.priority.splice(tasksNumber, 1, newTaskEdit.priority);
-  tasks.taskStatus.splice(tasksNumber, 1, newTaskEdit.taskStatus);
-  tasks.title.splice(tasksNumber, 1, newTaskEdit.title);
-  tasks.subtasksTest.splice(tasksNumber, 1, ...newTaskEdit.subtasksTest);
-  clearEditObjects();
+   tasks.assignedTo.splice(tasksNumber, 1, ...newTaskEdit.assignedTo);
+   tasks.categoryBgColor.splice(tasksNumber, 1, newTaskEdit.categoryBGColor);
+   tasks.categoryName.splice(tasksNumber, 1, newTaskEdit.categoryName);
+   tasks.description.splice(tasksNumber, 1, newTaskEdit.description);
+   tasks.dueDate.splice(tasksNumber, 1, newTaskEdit.dueDate);
+   tasks.priority.splice(tasksNumber, 1, newTaskEdit.priority);
+   tasks.taskStatus.splice(tasksNumber, 1, newTaskEdit.taskStatus);
+   tasks.title.splice(tasksNumber, 1, newTaskEdit.title);
+   tasks.subtasksTest.splice(tasksNumber, 1, ...newTaskEdit.subtasksTest);
+   clearEditObjects();
 }
 
 function clearEditObjects() {
-  assignedToEdit = [
-    {
-      contactImageBgColor: [],
-      name: [],
-      nameInitials: [],
-    },
-  ];
-  subtasksEdit = [
-    {
-      subtask: [],
-      subtaskStatus: [],
-    },
-  ];
+   assignedToEdit = [
+      {
+         contactImageBgColor: [],
+         name: [],
+         nameInitials: [],
+      },
+   ];
+   subtasksEdit = [
+      {
+         subtask: [],
+         subtaskStatus: [],
+      },
+   ];
 }
 
 function clearObjects() {
-  assignedTo = [
-    {
-      contactImageBgColor: [],
-      name: [],
-      nameInitials: [],
-    },
-  ];
-  subtasks = [
-    {
-      subtask: [],
-      subtaskStatus: [],
-    },
-  ];
+   assignedTo = [
+      {
+         contactImageBgColor: [],
+         name: [],
+         nameInitials: [],
+      },
+   ];
+   subtasks = [
+      {
+         subtask: [],
+         subtaskStatus: [],
+      },
+   ];
 }
 
 function mergeObjects(tasks, newTask) {
-  newTask.assignedTo.forEach((item) => tasks.assignedTo.push(item));
-  tasks.categoryBgColor.push(newTask.categoryBGColor);
-  tasks.categoryName.push(newTask.categoryName);
-  tasks.description.push(newTask.description);
-  tasks.dueDate.push(newTask.dueDate);
-  tasks.priority.push(newTask.priority);
-  tasks.taskStatus.push(newTask.taskStatus);
-  tasks.title.push(newTask.title);
-  newTask.subtasksTest.forEach((item) => tasks.subtasksTest.push(item));
-  clearObjects();
+   newTask.assignedTo.forEach((item) => tasks.assignedTo.push(item));
+   tasks.categoryBgColor.push(newTask.categoryBGColor);
+   tasks.categoryName.push(newTask.categoryName);
+   tasks.description.push(newTask.description);
+   tasks.dueDate.push(newTask.dueDate);
+   tasks.priority.push(newTask.priority);
+   tasks.taskStatus.push(newTask.taskStatus);
+   tasks.title.push(newTask.title);
+   newTask.subtasksTest.forEach((item) => tasks.subtasksTest.push(item));
+   clearObjects();
 }
 
 function toggleColor(buttonId, color, idOne, idTwo) {
-  if (selectedButtonId) {
-    let prev = document.getElementById(selectedButtonId);
-    if (prev) {
-      prev.style = '';
-      let prevSvgOne = document.getElementById(prev.getAttribute('data-svg-one'));
-      let prevSvgTwo = document.getElementById(prev.getAttribute('data-svg-two'));
-      if (prevSvgOne) prevSvgOne.style.fill = prev.getAttribute('data-original-color');
-      if (prevSvgTwo) prevSvgTwo.style.fill = prev.getAttribute('data-original-color');
-    }
-  }
-  if (buttonId === selectedButtonId) return (selectedButtonId = null);
-  let button = document.getElementById(buttonId);
-  if (button) {
-    button.style = `background-color:${color};color:#fff;border-bottom:unset`;
-    let svgOne = document.getElementById(idOne);
-    let svgTwo = document.getElementById(idTwo);
-    if (svgOne && svgTwo) {
-      svgOne.style.fill = svgTwo.style.fill = '#fff';
-      button.setAttribute('data-svg-one', idOne);
-      button.setAttribute('data-svg-two', idTwo);
-    }
-    selectedButtonId = buttonId;
-  }
+   if (selectedButtonId) {
+      let prev = document.getElementById(selectedButtonId);
+      if (prev) {
+         prev.style = '';
+         let prevSvgOne = document.getElementById(prev.getAttribute('data-svg-one'));
+         let prevSvgTwo = document.getElementById(prev.getAttribute('data-svg-two'));
+         if (prevSvgOne) prevSvgOne.style.fill = prev.getAttribute('data-original-color');
+         if (prevSvgTwo) prevSvgTwo.style.fill = prev.getAttribute('data-original-color');
+      }
+   }
+   if (buttonId === selectedButtonId) return (selectedButtonId = null);
+   let button = document.getElementById(buttonId);
+   if (button) {
+      button.style = `background-color:${color};color:#fff;border-bottom:unset`;
+      let svgOne = document.getElementById(idOne);
+      let svgTwo = document.getElementById(idTwo);
+      if (svgOne && svgTwo) {
+         svgOne.style.fill = svgTwo.style.fill = '#fff';
+         button.setAttribute('data-svg-one', idOne);
+         button.setAttribute('data-svg-two', idTwo);
+      }
+      selectedButtonId = buttonId;
+   }
 }
 
 function toggleColorEdit(buttonId, color, idOne, idTwo) {
-  if (selectedButtonId) {
-    let prev = document.getElementById(selectedButtonId);
-    if (prev) {
-      prev.style = '';
-      let prevSvgOne = document.getElementById(prev.getAttribute('data-svg-one'));
-      let prevSvgTwo = document.getElementById(prev.getAttribute('data-svg-two'));
-      if (prevSvgOne) prevSvgOne.style.fill = prev.getAttribute('data-original-color');
-      if (prevSvgTwo) prevSvgTwo.style.fill = prev.getAttribute('data-original-color');
-    }
-  }
-  if (buttonId === selectedButtonId) return (selectedButtonId = null);
-  let button = document.getElementById(buttonId);
-  if (button) {
-    button.style = `background-color:${color};color:#fff;border-bottom:unset`;
-    let svgOne = document.getElementById(idOne);
-    let svgTwo = document.getElementById(idTwo);
-    if (svgOne && svgTwo) {
-      svgOne.style.fill = svgTwo.style.fill = '#fff';
-      button.setAttribute('data-svg-one', idOne);
-      button.setAttribute('data-svg-two', idTwo);
-    }
-    selectedButtonId = buttonId;
-  }
+   if (selectedButtonId) {
+      let prev = document.getElementById(selectedButtonId);
+      if (prev) {
+         prev.style = '';
+         let prevSvgOne = document.getElementById(prev.getAttribute('data-svg-one'));
+         let prevSvgTwo = document.getElementById(prev.getAttribute('data-svg-two'));
+         if (prevSvgOne) prevSvgOne.style.fill = prev.getAttribute('data-original-color');
+         if (prevSvgTwo) prevSvgTwo.style.fill = prev.getAttribute('data-original-color');
+      }
+   }
+   if (buttonId === selectedButtonId) return (selectedButtonId = null);
+   let button = document.getElementById(buttonId);
+   if (button) {
+      button.style = `background-color:${color};color:#fff;border-bottom:unset`;
+      let svgOne = document.getElementById(idOne);
+      let svgTwo = document.getElementById(idTwo);
+      if (svgOne && svgTwo) {
+         svgOne.style.fill = svgTwo.style.fill = '#fff';
+         button.setAttribute('data-svg-one', idOne);
+         button.setAttribute('data-svg-two', idTwo);
+      }
+      selectedButtonId = buttonId;
+   }
 }
 
 function handleUrgentClick(event) {
-  event.preventDefault();
-  toggleColor('buttonUrgent', '#FF3D00', 'UrgentOne', 'UrgentTwo');
-  if (selectedButtonId == null) {
-    priority = '';
-  } else {
-    priority = 'urgent';
-  }
+   event.preventDefault();
+   toggleColor('buttonUrgent', '#FF3D00', 'UrgentOne', 'UrgentTwo');
+   if (selectedButtonId == null) {
+      priority = '';
+   } else {
+      priority = 'urgent';
+   }
 }
 
 function handleMediumClick(event) {
-  event.preventDefault();
-  toggleColor('buttonMedium', '#FFA800', 'MediumOne', 'MediumTwo');
-  if (selectedButtonId == null) {
-    priority = '';
-  } else {
-    priority = 'medium';
-  }
+   event.preventDefault();
+   toggleColor('buttonMedium', '#FFA800', 'MediumOne', 'MediumTwo');
+   if (selectedButtonId == null) {
+      priority = '';
+   } else {
+      priority = 'medium';
+   }
 }
 
 function handleLowClick(event) {
-  event.preventDefault();
-  toggleColor('buttonLow', '#7AE229', 'LowOne', 'LowTwo');
-  priority = 'low';
-  if (selectedButtonId == null) {
-    priority = '';
-  } else {
-    priority = 'low';
-  }
+   event.preventDefault();
+   toggleColor('buttonLow', '#7AE229', 'LowOne', 'LowTwo');
+   priority = 'low';
+   if (selectedButtonId == null) {
+      priority = '';
+   } else {
+      priority = 'low';
+   }
 }
 
 function handleUrgentClickEdit(event) {
-  event.preventDefault();
-  toggleColorEdit('buttonUrgent-edit', '#FF3D00', 'UrgentOne-edit', 'UrgentTwo-edit');
-  if (selectedButtonId == null) {
-    priority = '';
-  } else {
-    priority = 'urgent';
-  }
+   event.preventDefault();
+   toggleColorEdit('buttonUrgent-edit', '#FF3D00', 'UrgentOne-edit', 'UrgentTwo-edit');
+   if (selectedButtonId == null) {
+      priority = '';
+   } else {
+      priority = 'urgent';
+   }
 }
 
 function handleMediumClickEdit(event) {
-  event.preventDefault();
-  toggleColorEdit('buttonMedium-edit', '#FFA800', 'MediumOne-edit', 'MediumTwo-edit');
-  if (selectedButtonId == null) {
-    priority = '';
-  } else {
-    priority = 'medium';
-  }
+   event.preventDefault();
+   toggleColorEdit('buttonMedium-edit', '#FFA800', 'MediumOne-edit', 'MediumTwo-edit');
+   if (selectedButtonId == null) {
+      priority = '';
+   } else {
+      priority = 'medium';
+   }
 }
 
 function handleLowClickEdit(event) {
-  event.preventDefault();
-  toggleColorEdit('buttonLow-edit', '#7AE229', 'LowOne-edit', 'LowTwo-edit');
-  priority = 'low';
-  if (selectedButtonId == null) {
-    priority = '';
-  } else {
-    priority = 'low';
-  }
+   event.preventDefault();
+   toggleColorEdit('buttonLow-edit', '#7AE229', 'LowOne-edit', 'LowTwo-edit');
+   priority = 'low';
+   if (selectedButtonId == null) {
+      priority = '';
+   } else {
+      priority = 'low';
+   }
 }
 
 function resetForm(event) {
-  event.preventDefault();
-  document.getElementById('addTask').reset();
-  document.getElementById('placeholder').innerHTML = '';
-  document.getElementById('subtask-placeholder').innerHTML = '';
-  let elements = document.getElementById('placeholder');
-  let details = document.getElementById('details');
-  document.querySelectorAll('.change-bg').forEach(function (contact) {
-    contact.style.background = '';
-  });
-  document.querySelectorAll('.change-src').forEach(function (img) {
-    img.src = './assets/img/login/checkbox.svg';
-  });
+   event.preventDefault();
+   document.getElementById('addTask').reset();
+   document.getElementById('placeholder').innerHTML = '';
+   document.getElementById('subtask-placeholder').innerHTML = '';
+   let elements = document.getElementById('placeholder');
+   let details = document.getElementById('details');
+   document.querySelectorAll('.change-bg').forEach(function (contact) {
+      contact.style.background = '';
+   });
+   document.querySelectorAll('.change-src').forEach(function (img) {
+      img.src = './assets/img/login/checkbox.svg';
+   });
 
-  if (elements.childNodes.length < 1) {
-    details.removeAttribute('open');
-  }
-  resetButtons();
+   if (elements.childNodes.length < 1) {
+      details.removeAttribute('open');
+   }
+   resetButtons();
 }
 
 function resetButtons() {
-  document.getElementById('UrgentOne').style.fill = '#FF3D00';
-  document.getElementById('UrgentTwo').style.fill = '#FF3D00';
-  document.getElementById('buttonUrgent').style.backgroundColor = '';
-  document.getElementById('buttonUrgent').style.color = '#000';
+   document.getElementById('UrgentOne').style.fill = '#FF3D00';
+   document.getElementById('UrgentTwo').style.fill = '#FF3D00';
+   document.getElementById('buttonUrgent').style.backgroundColor = '';
+   document.getElementById('buttonUrgent').style.color = '#000';
 
-  document.getElementById('MediumOne').style.fill = '#FFA800';
-  document.getElementById('MediumTwo').style.fill = '#FFA800';
-  document.getElementById('buttonMedium').style.backgroundColor = '';
-  document.getElementById('buttonMedium').style.color = '#000';
+   document.getElementById('MediumOne').style.fill = '#FFA800';
+   document.getElementById('MediumTwo').style.fill = '#FFA800';
+   document.getElementById('buttonMedium').style.backgroundColor = '';
+   document.getElementById('buttonMedium').style.color = '#000';
 
-  document.getElementById('LowOne').style.fill = '#7AE229';
-  document.getElementById('LowTwo').style.fill = '#7AE229';
-  document.getElementById('buttonLow').style.backgroundColor = '';
-  document.getElementById('buttonLow').style.color = '#000';
+   document.getElementById('LowOne').style.fill = '#7AE229';
+   document.getElementById('LowTwo').style.fill = '#7AE229';
+   document.getElementById('buttonLow').style.backgroundColor = '';
+   document.getElementById('buttonLow').style.color = '#000';
 
-  selectedButtonId = '';
-  priority = '';
+   selectedButtonId = '';
+   priority = '';
 }
 
 function selectContact(i) {
-  let icon = document.getElementById('checkbox-' + i);
-  let input = document.getElementById('contact-' + i);
-  let symbol = document.getElementById('symbol-' + i).cloneNode(true);
-  let placeholder = document.getElementById('placeholder');
+   let icon = document.getElementById('checkbox-' + i);
+   let input = document.getElementById('contact-' + i);
+   let symbol = document.getElementById('symbol-' + i).cloneNode(true);
+   let placeholder = document.getElementById('placeholder');
 
-  function removeSymbol() {
-    let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}`);
-    if (symbolInPlaceholder) {
-      placeholder.removeChild(symbolInPlaceholder);
-      icon.src = './assets/img/login/checkbox.svg';
+   function removeSymbol() {
+      let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}`);
+      if (symbolInPlaceholder) {
+         placeholder.removeChild(symbolInPlaceholder);
+         icon.src = './assets/img/login/checkbox.svg';
+         input.style.background = '';
+      }
+   }
+
+   if (icon.src.endsWith('checkbox-checked-white.svg')) {
       input.style.background = '';
-    }
-  }
+      icon.src = './assets/img/login/checkbox.svg';
 
-  if (icon.src.endsWith('checkbox-checked-white.svg')) {
-    input.style.background = '';
-    icon.src = './assets/img/login/checkbox.svg';
-
-    let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}`);
-    if (symbolInPlaceholder) {
-      placeholder.removeChild(symbolInPlaceholder);
-    }
-  } else {
-    icon.src = './assets/img/login/checkbox-checked-white.svg';
-    input.style.background = '#4589FF';
-    symbol.onclick = removeSymbol;
-    document.getElementById('placeholder').appendChild(symbol);
-  }
+      let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}`);
+      if (symbolInPlaceholder) {
+         placeholder.removeChild(symbolInPlaceholder);
+      }
+   } else {
+      icon.src = './assets/img/login/checkbox-checked-white.svg';
+      input.style.background = '#4589FF';
+      symbol.onclick = removeSymbol;
+      document.getElementById('placeholder').appendChild(symbol);
+   }
 }
 
 function selectContactEdit(i) {
-  let icon = document.getElementById('checkbox-' + i + '-edit');
-  let input = document.getElementById('contact-' + i + '-edit');
-  let symbol = document.getElementById('symbol-' + i + '-edit').cloneNode(true);
-  let placeholder = document.getElementById('placeholder-edit');
+   let icon = document.getElementById('checkbox-' + i + '-edit');
+   let input = document.getElementById('contact-' + i + '-edit');
+   let symbol = document.getElementById('symbol-' + i + '-edit').cloneNode(true);
+   let placeholder = document.getElementById('placeholder-edit');
 
-  function removeSymbol() {
-    let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}-edit`);
-    if (symbolInPlaceholder) {
-      placeholder.removeChild(symbolInPlaceholder);
-      icon.src = './assets/img/login/checkbox.svg';
+   function removeSymbol() {
+      let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}-edit`);
+      if (symbolInPlaceholder) {
+         placeholder.removeChild(symbolInPlaceholder);
+         icon.src = './assets/img/login/checkbox.svg';
+         input.style.background = '';
+      }
+   }
+   if (icon.src.endsWith('checkbox-checked-white.svg')) {
       input.style.background = '';
-    }
-  }
-  if (icon.src.endsWith('checkbox-checked-white.svg')) {
-    input.style.background = '';
-    icon.src = './assets/img/login/checkbox.svg';
+      icon.src = './assets/img/login/checkbox.svg';
 
-    let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}-edit`);
-    if (symbolInPlaceholder) {
-      placeholder.removeChild(symbolInPlaceholder);
-    }
-  } else {
-    icon.src = './assets/img/login/checkbox-checked-white.svg';
-    input.style.background = '#4589FF';
-    symbol.onclick = removeSymbol;
-    document.getElementById('placeholder-edit').appendChild(symbol);
-  }
+      let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}-edit`);
+      if (symbolInPlaceholder) {
+         placeholder.removeChild(symbolInPlaceholder);
+      }
+   } else {
+      icon.src = './assets/img/login/checkbox-checked-white.svg';
+      input.style.background = '#4589FF';
+      symbol.onclick = removeSymbol;
+      document.getElementById('placeholder-edit').appendChild(symbol);
+   }
 }
 
 function addLoadedContact(i) {
-  let symbol = document.getElementById('symbol-' + i + '-edit');
-  if (symbol) {
-    symbol.onclick = function () {
-      let placeholder = document.getElementById('placeholder-edit');
-      placeholder.removeChild(symbol);
-    };
-  }
+   let symbol = document.getElementById('symbol-' + i + '-edit');
+   if (symbol) {
+      symbol.onclick = function () {
+         let placeholder = document.getElementById('placeholder-edit');
+         placeholder.removeChild(symbol);
+      };
+   }
 }
 
 function addSubtasks() {
-  let subtasks = document.getElementById('subtasks');
-  let placeholder = document.getElementById('subtask-placeholder');
+   let subtasks = document.getElementById('subtasks');
+   let placeholder = document.getElementById('subtask-placeholder');
 
-  if (subtasks.value.length >= 1) {
-    placeholder.innerHTML += `<li status="open">${subtasks.value}</li>`;
-    subtasks.value = '';
-  }
+   if (subtasks.value.length >= 1) {
+      placeholder.innerHTML += `<li status="open">${subtasks.value}</li>`;
+      subtasks.value = '';
+   }
 }
 
 function addSubtasksEdit() {
-  let subtasks = document.getElementById('subtasks-edit');
-  let placeholder = document.getElementById('subtask-placeholder-edit');
+   let subtasks = document.getElementById('subtasks-edit');
+   let placeholder = document.getElementById('subtask-placeholder-edit');
 
-  if (subtasks.value.length >= 1) {
-    placeholder.innerHTML += `<li status="open">${subtasks.value}</li>`;
-    subtasks.value = '';
-  }
+   if (subtasks.value.length >= 1) {
+      placeholder.innerHTML += `<li status="open">${subtasks.value}</li>`;
+      subtasks.value = '';
+   }
 }
 
 function editSubtask() {
-  var subtaskElement = document.getElementById('subtask');
-  var newText = prompt('Neuer Text für den Subtask:', subtaskElement.textContent);
-  if (newText !== null && newText !== '') {
-    subtaskElement.textContent = newText;
-  }
+   var subtaskElement = document.getElementById('subtask');
+   var newText = prompt('Neuer Text für den Subtask:', subtaskElement.textContent);
+   if (newText !== null && newText !== '') {
+      subtaskElement.textContent = newText;
+   }
 }
 
 function deleteSubtask() {
-  var subtaskElement = document.getElementById('subtask');
-  if (confirm('Möchtest du diesen Subtask wirklich löschen?')) {
-    subtaskElement.parentNode.removeChild(subtaskElement);
-  }
+   var subtaskElement = document.getElementById('subtask');
+   if (confirm('Möchtest du diesen Subtask wirklich löschen?')) {
+      subtaskElement.parentNode.removeChild(subtaskElement);
+   }
 }
 
 function selectCategory(category) {
-  let summaryHeadline = document.getElementById('categoy-headline');
-  summaryHeadline.textContent = category;
-  summaryHeadline.closest('details').removeAttribute('open');
+   let summaryHeadline = document.getElementById('categoy-headline');
+   summaryHeadline.textContent = category;
+   summaryHeadline.closest('details').removeAttribute('open');
 }
 
 document.addEventListener('click', function (event) {
-  let details = document.getElementById('details');
+   let details = document.getElementById('details');
 
-  if (!details.contains(event.target) && details.open) {
-    details.open = false;
-    resetSearch();
-  }
+   if (!details.contains(event.target) && details.open) {
+      details.open = false;
+      resetSearch();
+   }
 });
 
 function resetSearch() {
-  document.getElementById('contact-search').value = ''; // Setze den Wert des Suchfelds zurück
-  let contactElements = document.querySelectorAll('.contactShow');
+   document.getElementById('contact-search').value = ''; // Setze den Wert des Suchfelds zurück
+   let contactElements = document.querySelectorAll('.contactShow');
 
-  contactElements.forEach((contact) => {
-    let container = contact.parentNode;
-    container.parentNode.style.display = ''; // Zeige alle übergeordneten Container wieder an
-  });
+   contactElements.forEach((contact) => {
+      let container = contact.parentNode;
+      container.parentNode.style.display = ''; // Zeige alle übergeordneten Container wieder an
+   });
 }
 
 function loadAddTaskContent(params) {
-  let mainContent = document.getElementById('mainContent');
-  mainContent.innerHTML = '';
-  mainContent.innerHTML += /*html*/ `
+   let mainContent = document.getElementById('mainContent');
+   mainContent.innerHTML = '';
+   mainContent.innerHTML += /*html*/ `
        <div class="add-task-main-content">
       <main>
          <form onsubmit="saveTask(event)" id="addTask" class="task-description">
@@ -903,74 +901,75 @@ function loadAddTaskContent(params) {
    </div>
    </div>
   `;
-  onloadContacts();
-  removeButtonBackground();
-  changeAddTaskButtonBackground();
-  removeColorSideBar();
-  changeColorSideAddTask();
-  selectedButtonId = '';
-  priority = '';
-  handleMediumClick(event);
+   removeBackgroundLowerSidebar();
+   onloadContacts();
+   removeButtonBackground();
+   changeAddTaskButtonBackground();
+   removeColorSideBar();
+   changeColorSideAddTask();
+   selectedButtonId = '';
+   priority = '';
+   handleMediumClick(event);
 }
 
 function changeAddTaskButtonBackground() {
-  let addTaskButton = document.getElementById('addTaskButton');
-  addTaskButton.classList.add('menu-background');
+   let addTaskButton = document.getElementById('addTaskButton');
+   addTaskButton.classList.add('menu-background');
 }
 
 function changeColorSideAddTask() {
-  document.getElementById('sidebarImgAddTask').classList.add('color-img-sidebar');
-  document.getElementById('fontAddTaskSidebar').classList.add('menu-row-font');
+   document.getElementById('sidebarImgAddTask').classList.add('color-img-sidebar');
+   document.getElementById('fontAddTaskSidebar').classList.add('menu-row-font');
 }
 
 function filterContacts() {
-  let input = document.getElementById('contact-search').value.toLowerCase();
-  let contactElements = document.querySelectorAll('.contactShow');
+   let input = document.getElementById('contact-search').value.toLowerCase();
+   let contactElements = document.querySelectorAll('.contactShow');
 
-  contactElements.forEach((contact) => {
-    let name = contact.getAttribute('name');
-    if (name.toLowerCase().includes(input)) {
-      let container = contact.parentNode;
-      container.parentNode.style.display = '';
-    } else {
-      let container = contact.parentNode;
-      container.parentNode.style.display = 'none';
-    }
-  });
+   contactElements.forEach((contact) => {
+      let name = contact.getAttribute('name');
+      if (name.toLowerCase().includes(input)) {
+         let container = contact.parentNode;
+         container.parentNode.style.display = '';
+      } else {
+         let container = contact.parentNode;
+         container.parentNode.style.display = 'none';
+      }
+   });
 }
 
 function filterContactsEdit() {
-  let input = document.getElementById('contact-search-edit').value.toLowerCase();
-  let contactElements = document.querySelectorAll('.edit-contact-form');
+   let input = document.getElementById('contact-search-edit').value.toLowerCase();
+   let contactElements = document.querySelectorAll('.edit-contact-form');
 
-  contactElements.forEach((contact) => {
-    let name = contact.getAttribute('name');
-    if (name.toLowerCase().includes(input)) {
-      let container = contact.parentNode;
-      container.parentNode.style.display = '';
-    } else {
-      let container = contact.parentNode;
-      container.parentNode.style.display = 'none';
-    }
-  });
+   contactElements.forEach((contact) => {
+      let name = contact.getAttribute('name');
+      if (name.toLowerCase().includes(input)) {
+         let container = contact.parentNode;
+         container.parentNode.style.display = '';
+      } else {
+         let container = contact.parentNode;
+         container.parentNode.style.display = 'none';
+      }
+   });
 }
 
 function onclickRender() {
-  let symbols = document.querySelectorAll('[id^=symbol-][id$=-edit]');
-  symbols.forEach((symbol) => {
-    let i = symbol.id.match(/\d+/)[0]; // Extrahiert die Nummer aus der ID
-    symbol.onclick = function () {
-      removeSymbol(i);
-    };
-  });
+   let symbols = document.querySelectorAll('[id^=symbol-][id$=-edit]');
+   symbols.forEach((symbol) => {
+      let i = symbol.id.match(/\d+/)[0]; // Extrahiert die Nummer aus der ID
+      symbol.onclick = function () {
+         removeSymbol(i);
+      };
+   });
 }
 
 function removeSymbol(i) {
-  let placeholder = document.getElementById('placeholder-edit');
-  let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}-edit`);
-  if (symbolInPlaceholder) {
-    placeholder.removeChild(symbolInPlaceholder);
-    document.getElementById('checkbox-' + i + '-edit').src = './assets/img/login/checkbox.svg';
-    document.getElementById('contact-' + i + '-edit').style.background = '';
-  }
+   let placeholder = document.getElementById('placeholder-edit');
+   let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}-edit`);
+   if (symbolInPlaceholder) {
+      placeholder.removeChild(symbolInPlaceholder);
+      document.getElementById('checkbox-' + i + '-edit').src = './assets/img/login/checkbox.svg';
+      document.getElementById('contact-' + i + '-edit').style.background = '';
+   }
 }

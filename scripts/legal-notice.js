@@ -54,4 +54,11 @@ function loadLegalNoticeContent(params) {
        </p>
  </div>
     `;
+   removeBackgroundLowerSidebar();
+   addBackgroundLegalNotice();
+}
+
+function addBackgroundLegalNotice() {
+   let legalNoticeButton = document.getElementById('legalNoticeButton');
+   legalNoticeButton.classList.add('active-link');
 }

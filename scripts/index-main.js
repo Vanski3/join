@@ -34,13 +34,9 @@ function returnToPreviousContent(params) {
    }
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-   const currentUrl = window.location.pathname;
-   const privacyLink = document.querySelector('a[href="./privacy.html"]');
-   const legalNoticeLink = document.querySelector('a[href="./legal-notice.html"]');
-   if (currentUrl.includes('privacy.html')) {
-      privacyLink.classList.add('active-link');
-   } else if (currentUrl.includes('legal-notice.html')) {
-      legalNoticeLink.classList.add('active-link');
-   }
-});
+function removeBackgroundLowerSidebar(params) {
+   let legalNoticeButton = document.getElementById('legalNoticeButton');
+   legalNoticeButton.classList.remove('active-link');
+   let privacePoliceButton = document.getElementById('privacePoliceButton');
+   privacePoliceButton.classList.remove('active-link');
+}

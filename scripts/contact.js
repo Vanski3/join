@@ -14,6 +14,7 @@ function loadContactsContent() {
          renderContacts(contactsData);
       })
       .catch((error) => console.error('Error loading contacts:', error));
+   removeBackgroundLowerSidebar();
    removeButtonBackground();
    changeContactsButtonBackground();
    removeColorSideBar();

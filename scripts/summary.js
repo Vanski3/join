@@ -65,6 +65,7 @@ function renderSummary() {
             </div>
         </div>
     </main>`;
+   removeBackgroundLowerSidebar();
    removeButtonBackground();
    changeSummaryButtonBackground();
    removeColorSideBar();
