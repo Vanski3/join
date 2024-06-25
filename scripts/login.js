@@ -201,10 +201,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const loginEmailInput = document.getElementById('loginEmail');
   const loginPasswordInput = document.getElementById('loginPassword');
 
-  loginEmailInput.addEventListener('blur', () => validateInput(loginEmailInput, 'email'));
-  loginEmailInput.addEventListener('input', () => clearError(loginEmailInput));
-  loginPasswordInput.addEventListener('blur', () => validateInput(loginPasswordInput, 'password'));
-  loginPasswordInput.addEventListener('input', () => clearError(loginPasswordInput));
+  addValidationListeners(loginEmailInput, 'email');
+  addValidationListeners(loginPasswordInput, 'password');
 
   loginForm.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -221,18 +219,10 @@ document.addEventListener('DOMContentLoaded', function () {
   const confirmSignupInput = document.getElementById('confirmSignup');
   const signupCheckboxInput = document.getElementById('checkboxSignup');
 
-  signupNameInput.addEventListener('blur', () => validateInput(signupNameInput, 'name'));
-  signupNameInput.addEventListener('input', () => clearError(signupNameInput));
-  signupEmailInput.addEventListener('blur', () => validateInput(signupEmailInput, 'email'));
-  signupEmailInput.addEventListener('input', () => clearError(signupEmailInput));
-  signupPasswordInput.addEventListener('blur', () =>
-    validateInput(signupPasswordInput, 'password')
-  );
-  signupPasswordInput.addEventListener('input', () => clearError(signupPasswordInput));
-  confirmSignupInput.addEventListener('blur', () =>
-    validateConfirmPassword(confirmSignupInput, signupPasswordInput)
-  );
-  confirmSignupInput.addEventListener('input', () => clearError(confirmSignupInput.parentNode));
+  addValidationListeners(signupNameInput, 'name');
+  addValidationListeners(signupEmailInput, 'email');
+  addValidationListeners(signupPasswordInput, 'password');
+  addValidationListeners(confirmSignupInput, 'confirmPassword', signupPasswordInput);
   signupCheckboxInput.addEventListener('change', () => validateCheckbox(signupCheckboxInput));
 
   signupForm.addEventListener('submit', function (event) {
@@ -245,19 +235,38 @@ document.addEventListener('DOMContentLoaded', function () {
     // Additional logic for signup form submission if needed
   });
 
-  // Generic functions
-  function validateInput(inputField, type) {
+  // Helper functions
+  function addValidationListeners(inputField, type, passwordField) {
+    inputField.addEventListener('blur', () => validateInput(inputField, type, passwordField));
+    inputField.addEventListener('input', () => clearError(inputField));
+  }
+
+  function validateInput(inputField, type, passwordField) {
     const value = inputField.value.trim();
     const parentNode = inputField.parentNode;
     const errorClass = 'error';
+    let errorMessage = '';
 
-    if (
-      value === '' ||
-      (type === 'email' && !isValidEmail(value)) ||
-      (type === 'password' && value.length < 8)
-    ) {
+    if (type === 'confirmPassword') {
+      validateConfirmPassword(inputField, passwordField);
+      return;
+    }
+
+    if (type === 'name') {
+      if (value === '') {
+        errorMessage = 'This field is required';
+      } else if (!value.includes(' ')) {
+        errorMessage = 'Please enter both first name and last name';
+      }
+    } else if (type === 'email' && !isValidEmail(value)) {
+      errorMessage = 'Please enter a valid email address';
+    } else if (type === 'password' && value.length < 8) {
+      errorMessage = 'Password must be at least 8 characters';
+    }
+
+    if (errorMessage) {
       inputField.classList.add(errorClass);
-      showErrorMessage(parentNode, 'This field is required');
+      showErrorMessage(parentNode, errorMessage);
     } else {
       inputField.classList.remove(errorClass);
       hideErrorMessage(parentNode);
@@ -268,13 +277,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const confirmValue = confirmInput.value.trim();
     const parent = confirmInput.parentNode;
     const errorClass = 'error';
+    let errorMessage = '';
 
     if (confirmValue === '') {
-      confirmInput.classList.add(errorClass);
-      showErrorMessage(parent, 'This field is required');
+      errorMessage = 'This field is required';
     } else if (confirmValue !== passwordInput.value.trim()) {
+      errorMessage = 'Passwords do not match';
+    }
+
+    if (errorMessage) {
       confirmInput.classList.add(errorClass);
-      showErrorMessage(parent, 'Passwords do not match');
+      showErrorMessage(parent, errorMessage);
     } else {
       confirmInput.classList.remove(errorClass);
       hideErrorMessage(parent);
