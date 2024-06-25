@@ -722,13 +722,97 @@ function addLoadedContact(i) {
   }
 }
 
+function newSubtaskInput() {
+  document.getElementById('cancel-button').classList.remove('d-none');
+  document.getElementById('check-blue').classList.remove('d-none');
+  document.getElementById('mini-seperator').style.display = 'unset';
+  document.getElementById('subtasks').style.backgroundImage = 'unset';
+}
+
+function resetSubtaskInput() {
+  document.getElementById('cancel-button').classList.add('d-none');
+  document.getElementById('check-blue').classList.add('d-none');
+  document.getElementById('mini-seperator').style.display = 'none';
+  document.getElementById('subtasks').style.backgroundImage =
+    'url(../assets/img/add-task/plus.svg)';
+}
+
+function changeSubtask(element) {
+  let imgElements = element.querySelectorAll('img');
+  imgElements.forEach(function (img) {
+    img.classList.remove('d-none');
+  });
+  let innerDivContainer = element.querySelector('div');
+  if (innerDivContainer) {
+    innerDivContainer.style.display = 'unset';
+  }
+  element.style.backgroundColor = '#E3EEFF';
+}
+
+function resetSubtask(element) {
+  element.style.backgroundColor = '';
+  let editElements = element.querySelectorAll('.edit-subtask');
+  let trashElements = element.querySelectorAll('.trash-subtask');
+  let separatorElements = element.querySelectorAll('.mini-seperator-subtask');
+
+  editElements.forEach(function (edit) {
+    edit.classList.add('d-none');
+  });
+  trashElements.forEach(function (trash) {
+    trash.classList.add('d-none');
+  });
+  separatorElements.forEach(function (separator) {
+    separator.style.display = 'none';
+  });
+}
+
+function deleteSubtask(element) {
+  let subtaskTextElement = element.closest('li');
+  subtaskTextElement.remove();
+}
+
 function addSubtasks() {
+  newSubtaskInput();
   let subtasks = document.getElementById('subtasks');
+
   let placeholder = document.getElementById('subtask-placeholder');
   if (subtasks.value.length >= 1) {
-    placeholder.innerHTML += `<li status="open">${subtasks.value}</li>`;
+    placeholder.innerHTML += /*html*/ `
+    <li onmouseover="changeSubtask(this)" onmouseout="resetSubtask(this)" class="subtask-link" status="open">
+    <span>&#10625 <span class="subtask-text">${subtasks.value}</span></span>
+      <span>
+        <img onclick="editSubtask(this)" class="edit-subtask d-none" id="edit-subtask" src="./assets/img/add-task/edit-subtask.svg" alt="">
+        <div class="mini-seperator-subtask" id="mini-seperator-subtask" style="display: none"></div>
+        <img onclick="deleteSubtask(this)" class="trash-subtask d-none" id="trash-subtask" src="./assets/img/add-task/trash.svg" alt="">
+      </span>
+    </li>`;
     subtasks.value = '';
+    resetSubtaskInput();
   }
+}
+
+function editSubtask(element) {
+  let subtaskTextElement = element.closest('li').querySelector('.subtask-text');
+
+  let input = document.createElement('input');
+  input.type = 'text';
+  input.value = subtaskTextElement.textContent;
+  input.id = 'subtask-input';
+  subtaskTextElement.replaceWith(input);
+  input.focus();
+
+  input.onblur = function () {
+    let span = document.createElement('span');
+    span.className = 'subtask-text';
+    span.textContent = input.value;
+    input.replaceWith(span);
+  };
+
+  input.onkeypress = function (e) {
+    if (e.key === 'Enter') {
+      input.blur();
+    }
+  };
 }
 
 function selectCategory(category) {
@@ -855,7 +939,12 @@ function loadAddTaskContent(params) {
 
                <div class="substasks">
                   Subtasks
+                  <div id="subtask-container">
                   <input onclick="addSubtasks()" class="my-inputs" placeholder="Add new subtask" name="subtasks" id="subtasks">
+                  <img onclick="resetSubtaskInput()" class="cancel-button d-none" id="cancel-button" src="./assets/img/add-task/cancel-blue.svg" alt="">
+                  <div class="mini-seperator" id="mini-seperator" style="display: none"></div>
+                  <img onclick="addSubtasks()" class="check-blue d-none" id="check-blue" src="./assets/img/add-task/check-blue.svg" alt="">
+                  </div>
                   <div id="subtask-placeholder"></div>
                </div>
 
@@ -948,30 +1037,3 @@ function removeSymbol(i) {
     document.getElementById('contact-' + i + '-edit').style.background = '';
   }
 }
-
-// function addValidationAddTask() {
-//   const addTask = document.getElementById('addTask');
-//   const description = document.getElementById('description');
-//   const signupEmailInput = document.getElementById('signupEmail');
-//   const signupPasswordInput = document.getElementById('passwordSignup');
-//   const confirmSignupInput = document.getElementById('confirmSignup');
-//   const signupCheckboxInput = document.getElementById('checkboxSignup');
-
-//   addValidationListeners(description, 'text');
-//   addValidationListeners(signupEmailInput, 'email');
-//   addValidationListeners(signupPasswordInput, 'password');
-//   addValidationListeners(confirmSignupInput, 'confirmPassword', signupPasswordInput);
-//   signupCheckboxInput.addEventListener('change', () => validateCheckbox(signupCheckboxInput));
-
-//   signupForm.addEventListener('submit', function (event) {
-//     event.preventDefault();
-//     validateInput(description, 'text');
-//     validateInput(signupEmailInput, 'email');
-//     validateInput(signupPasswordInput, 'password');
-//     validateConfirmPassword(confirmSignupInput, signupPasswordInput);
-//     validateCheckbox(signupCheckboxInput);
-//     // Additional logic for signup form submission if needed
-//   });
-// }
-
-var simple = new Datepicker('#simple');
