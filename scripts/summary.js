@@ -1,5 +1,4 @@
 // renderSummary()
-
 function renderSummary() {
    const name = sessionStorage.getItem('name') ?? 'Guest';
    const content = document.querySelector('.main-content');
