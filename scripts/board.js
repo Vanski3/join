@@ -6,7 +6,6 @@ let tasks = [];
 let allDataFromFirebase = [];
 
 function init(params) {
-   renderSummary();
    loadTasksData();
    loadallDataFromFirebase();
 }
@@ -36,7 +35,13 @@ popup.addEventListener('click', function (event) {
    }
 });
 
-function loadBoardContent(params) {
+async function loadallDataFromFirebase() {
+   let fetchData = await fetch(BASE_URL + '.json');
+   allDataFromFirebase = await fetchData.json();
+   console.log(allDataFromFirebase);
+}
+
+function loadBoardContent(sectionId) {
    let mainContent = document.getElementById('mainContent');
    mainContent.innerHTML = '';
    mainContent.innerHTML += /*html*/ `
@@ -60,9 +65,9 @@ function loadBoardContent(params) {
                   <div class="board">
                      <div class="tasks-column">
                         <div class="board-headline to-do-column">
-                           <span>To do</span>
+                           <span id="board-todo">To do</span>
                            <img
-                           onclick="openTaskDialog(0)"
+                           onclick="openTaskDialog('0')"
                               onmouseover="this.src='./assets/img/board/add-button-variant2.svg'"
                               onmouseout="this.src='./assets/img/board/add-button-default.svg'"
                               src="./assets/img/board/add-button-default.svg"
@@ -73,8 +78,8 @@ function loadBoardContent(params) {
                      </div>
                      <div class="tasks-column">
                         <div class="board-headline">
-                           <span>In Progress</span>
-                           <img onclick="openTaskDialog(1)"
+                           <span id="board-progress">In Progress</span>
+                           <img onclick="openTaskDialog('1')"
                               onmouseover="this.src='./assets/img/board/add-button-variant2.svg'"
                               onmouseout="this.src='./assets/img/board/add-button-default.svg'"
                               src="./assets/img/board/add-button-default.svg"
@@ -85,8 +90,8 @@ function loadBoardContent(params) {
                      </div>
                      <div class="tasks-column">
                         <div class="board-headline">
-                           <span>Await feedback</span>
-                           <img onclick="openTaskDialog(2)"
+                           <span id="board-feedback">Await feedback</span>
+                           <img onclick="openTaskDialog('2')"
                               onmouseover="this.src='./assets/img/board/add-button-variant2.svg'"
                               onmouseout="this.src='./assets/img/board/add-button-default.svg'"
                               src="./assets/img/board/add-button-default.svg"
@@ -97,7 +102,7 @@ function loadBoardContent(params) {
                      </div>
                      <div class="tasks-column">
                         <div class="board-headline">
-                           <span>Done</span>
+                           <span id="board-done">Done</span>
                         </div>
                         <div id="taskStatus3" class="task-div" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
                      </div>
@@ -110,6 +115,7 @@ function loadBoardContent(params) {
    changeBoardButtonBackground();
    removeColorSideBar();
    changeColorSidebarBoard();
+   scrollToSection(sectionId);
 }
 
 function changeBoardButtonBackground(params) {
@@ -380,7 +386,7 @@ function deleteCurrentTask(i) {
 async function loadTasksData(path = '/tasks') {
    let fetchTasks = await fetch(BASE_URL + path + '.json');
    tasks = await fetchTasks.json();
-   console.log(tasks);
+   renderSummary();
 }
 
 async function loadallDataFromFirebase() {
@@ -511,4 +517,12 @@ function moveCardToDone(event, i) {
 function changeColorSidebarBoard() {
    document.getElementById('sidebarImgBoard').classList.add('color-img-sidebar');
    document.getElementById('fontBoardSidebar').classList.add('menu-row-font');
+}
+
+function scrollToSection(sectionId) {
+   let targetElement = document.getElementById(sectionId);
+
+   if (targetElement) {
+      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+   }
 }

@@ -157,17 +157,36 @@ async function createUser() {
   let signupName = document.getElementById('signupName').value;
   let signupEmail = document.getElementById('signupEmail').value;
   let signupPassword = document.getElementById('passwordSignup').value;
-  let newId = user.length.toString();
-  let newUser = {
-    id: newId,
-    email: signupEmail,
-    name: signupName,
-    password: signupPassword,
-  };
-  user.push(newUser);
-  await putData('/users', user);
-  document.getElementById('signup-form').reset();
-  window.location.href = 'index.html';
+  let form = document.getElementById('formvalidation');
+  form.querySelectorAll('*').forEach((element) => {
+    if (element.classList.contains('error')) {
+      formHasError = true;
+      return;
+    }
+  });
+  if (formHasError) {
+    showLogo();
+  } else {
+    let newId = user.length.toString();
+    let newUser = {
+      id: newId,
+      email: signupEmail,
+      name: signupName,
+      password: signupPassword,
+    };
+    user.push(newUser);
+    await putData('/users', user);
+    document.getElementById('signup-form').reset();
+    window.location.href = 'index.html';
+  }
+}
+
+function showLogo() {
+  const logo = document.getElementById('form-failed');
+  logo.style.display = 'flex';
+  setTimeout(function () {
+    logo.style.display = 'none';
+  }, 2000);
 }
 
 async function putData(path = '', data = {}) {
