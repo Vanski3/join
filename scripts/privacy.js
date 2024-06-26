@@ -2,14 +2,19 @@ document.addEventListener('DOMContentLoaded', function () {
    const currentUrl = window.location.pathname;
    const privacyLink = document.querySelector('a[href="./privacy.html"]');
    const legalNoticeLink = document.querySelector('a[href="./legal-notice.html"]');
+   let mainContentDiv = document.getElementById('mainContent');
    if (currentUrl.includes('privacy.html')) {
       privacyLink.classList.add('active-link');
+      mainContentDiv.classList.add('main-content-responsive-external');
    } else if (currentUrl.includes('legal-notice.html')) {
       legalNoticeLink.classList.add('active-link');
+      mainContentDiv.classList.add('main-content-responsive-external');
    }
 });
 
 function loadPrivacyPoliceContent() {
+   let userHeaderPopup = document.getElementById('userHeaderPopup');
+   userHeaderPopup.style.display = 'none';
    let mainContent = document.getElementById('mainContent');
    mainContent.innerHTML = '';
    mainContent.innerHTML += /*html*/ `

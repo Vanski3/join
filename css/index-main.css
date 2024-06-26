@@ -263,7 +263,7 @@ header span {
    }
 
    .main-content {
-      height: inherit;
+      height: 90%;
       flex: 1;
    }
 

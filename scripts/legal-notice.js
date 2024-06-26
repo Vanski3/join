@@ -1,4 +1,7 @@
 function loadLegalNoticeContent(params) {
+   let userHeaderPopup = document.getElementById('userHeaderPopup');
+   userHeaderPopup.style.display = 'none';
+
    let mainContent = document.getElementById('mainContent');
    mainContent.innerHTML = '';
    mainContent.innerHTML += /*html*/ `
