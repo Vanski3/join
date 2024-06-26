@@ -12,6 +12,10 @@ let subtasksEdit = [
   },
 ];
 let formHasErrorTaskEdit = true;
+let todayEdit = new Date();
+let yearEdit = todayEdit.getFullYear();
+let monthEdit = todayEdit.getMonth() + 1;
+let dayEdit = todayEdit.getDate();
 
 function closeTaskOverlayEdit() {
   const overlay = document.getElementById('taskOverlay');
@@ -30,6 +34,7 @@ function editTask(i) {
   onloadFormValue(i);
   onclickRender();
   addTaskValidationEdit();
+  minDateEdit();
 }
 
 function getSubtasksEdit(i) {
@@ -351,4 +356,15 @@ function filterContactsEdit() {
       container.parentNode.style.display = 'none';
     }
   });
+}
+
+function minDateEdit() {
+  if (monthEdit < 10) {
+    monthEdit = '0' + monthEdit;
+  }
+  if (dayEdit < 10) {
+    dayEdit = '0' + dadayEdity;
+  }
+  const minDate = `${yearEdit}-${monthEdit}-${dayEdit}`;
+  document.getElementById('custom-date-edit').setAttribute('min', minDate);
 }

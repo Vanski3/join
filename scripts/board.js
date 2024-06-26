@@ -18,6 +18,7 @@ function openTaskDialog(parameter = null) {
   handleMediumClick(event);
   taskCategory(parameter);
   addTaskValidation();
+  minDate();
 }
 
 function closeTaskDialog() {
