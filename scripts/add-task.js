@@ -4,10 +4,6 @@ let contacts = [];
 let tasksNumber = '';
 let taskSelection = '0';
 let formHasErrorTask = true;
-let today = new Date();
-let year = today.getFullYear();
-let month = today.getMonth() + 1;
-let day = today.getDate();
 let assignedTo = [
   {
     contactImageBgColor: [],
@@ -350,12 +346,11 @@ function onclickRender() {
 }
 
 function minDate() {
-  if (month < 10) {
-    month = '0' + month;
-  }
-  if (day < 10) {
-    day = '0' + day;
-  }
+  const today = new Date();
+  const year = today.getFullYear();
+  let month = (today.getMonth() + 1).toString().padStart(2, '0');
+  let day = today.getDate().toString().padStart(2, '0');
+
   const minDate = `${year}-${month}-${day}`;
   document.getElementById('custom-date').setAttribute('min', minDate);
 }

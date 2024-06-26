@@ -12,10 +12,6 @@ let subtasksEdit = [
   },
 ];
 let formHasErrorTaskEdit = true;
-let todayEdit = new Date();
-let yearEdit = todayEdit.getFullYear();
-let monthEdit = todayEdit.getMonth() + 1;
-let dayEdit = todayEdit.getDate();
 
 function closeTaskOverlayEdit() {
   const overlay = document.getElementById('taskOverlay');
@@ -359,12 +355,11 @@ function filterContactsEdit() {
 }
 
 function minDateEdit() {
-  if (monthEdit < 10) {
-    monthEdit = '0' + monthEdit;
-  }
-  if (dayEdit < 10) {
-    dayEdit = '0' + dadayEdity;
-  }
-  const minDate = `${yearEdit}-${monthEdit}-${dayEdit}`;
+  const today = new Date();
+  const year = today.getFullYear();
+  let month = (today.getMonth() + 1).toString().padStart(2, '0');
+  let day = today.getDate().toString().padStart(2, '0');
+
+  const minDate = `${year}-${month}-${day}`;
   document.getElementById('custom-date-edit').setAttribute('min', minDate);
 }
