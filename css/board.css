@@ -415,6 +415,10 @@ h1 {
    font-weight: bold;
 }
 
+.highlight {
+   border: 2px dashed blue; /* or any other style you prefer */
+}
+
 @media only screen and (max-width: 1400px) {
    .board {
       flex-direction: column;
