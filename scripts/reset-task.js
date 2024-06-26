@@ -14,6 +14,16 @@ function clearObjects() {
   ];
 }
 
+function resetSearch() {
+  document.getElementById('contact-search').value = '';
+  let contactElements = document.querySelectorAll('.contactShow');
+
+  contactElements.forEach((contact) => {
+    let container = contact.parentNode;
+    container.parentNode.style.display = '';
+  });
+}
+
 function resetForm(event) {
   event.preventDefault();
   document.getElementById('addTask').reset();

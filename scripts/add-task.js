@@ -296,16 +296,6 @@ document.addEventListener('click', function (event) {
   }
 });
 
-function resetSearch() {
-  document.getElementById('contact-search').value = '';
-  let contactElements = document.querySelectorAll('.contactShow');
-
-  contactElements.forEach((contact) => {
-    let container = contact.parentNode;
-    container.parentNode.style.display = '';
-  });
-}
-
 function loadAddTaskContent(params) {
   let mainContent = document.getElementById('mainContent');
   mainContent.innerHTML = '';
@@ -347,7 +337,7 @@ function filterContacts() {
 function onclickRender() {
   let symbols = document.querySelectorAll('[id^=symbol-][id$=-edit]');
   symbols.forEach((symbol) => {
-    let i = symbol.id.match(/\d+/)[0]; // Extrahiert die Nummer aus der ID
+    let i = symbol.id.match(/\d+/)[0];
     symbol.onclick = function () {
       removeSymbol(i);
     };

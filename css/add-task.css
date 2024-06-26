@@ -60,6 +60,31 @@ details[open]:focus {
   position: relative;
 }
 
+#custom-date::-webkit-calendar-picker-indicator {
+  background-image: url(../assets/img/add-task/date-picker.svg);
+  background-position: center right -4px;
+  background-repeat: no-repeat;
+}
+
+#custom-date::placeholder {
+  color: #999; /* Hier die gewünschte Farbe eintragen */
+  opacity: 1; /* Optional: Falls gewünscht, die Deckkraft anpassen */
+}
+
+#custom-date {
+  padding: 12px 16px;
+}
+
+#custom-date-edit::-webkit-calendar-picker-indicator {
+  background-image: url(../assets/img/add-task/date-picker.svg);
+  background-position: center right -4px;
+  background-repeat: no-repeat;
+}
+
+#custom-date-edit {
+  padding: 12px 21px;
+}
+
 .my-inputs:focus,
 .my-inputs-edit:focus,
 #description-edit:focus,
