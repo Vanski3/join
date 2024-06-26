@@ -45,10 +45,11 @@ function resetValidation() {
       element.classList.remove('error');
       let nextDiv = element.nextElementSibling;
       if (nextDiv && nextDiv.tagName.toLowerCase() === 'div') {
-        nextDiv.remove(); // Das <div> Element entfernen
+        nextDiv.remove();
       }
     });
   });
+  formHasErrorTask = true;
 }
 
 function resetButtons() {

@@ -26,6 +26,7 @@ function closeTaskDialog() {
     popup.style.display = 'none';
   }, 300);
   taskSelection = 0;
+  resetValidation();
 }
 
 popup.addEventListener('click', function (event) {
