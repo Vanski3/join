@@ -55,6 +55,16 @@ details[open]:focus {
   border: 1px solid #005dff;
 }
 
+.error {
+  border: 1px solid #ff8190 !important;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  position: relative;
+}
+
 .my-inputs:focus,
 .my-inputs-edit:focus,
 #description-edit:focus,
