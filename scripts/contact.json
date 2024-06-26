@@ -1,58 +1,66 @@
 [
-    {
-        "initials": "AM",
-        "name": "Anton Mayer",
-        "email": "antom@gmail.com",
-        "phone": "+49 1111 111 11 11",
-        "color": "#ffab00"
-    },
-    {
-        "initials": "AS",
-        "name": "Anja Schulz",
-        "email": "schulz@hotmail.com",
-        "phone": "+49 1111 111 11 12",
-        "color": "#ff4081"
-    },
-    {
-        "initials": "BZ",
-        "name": "Benedikt Ziegler",
-        "email": "benedikt@gmail.com",
-        "phone": "+49 1111 111 11 13",
-        "color": "#536dfe"
-    },
-    {
-        "initials": "DE",
-        "name": "David Eisenberg",
-        "email": "davidberg@gmail.com",
-        "phone": "+49 1111 111 11 14",
-        "color": "#e040fb"
-    },
-    {
-        "initials": "EF",
-        "name": "Eva Fischer",
-        "email": "eva@gmail.com",
-        "phone": "+49 1111 111 11 15",
-        "color": "#ffab00"
-    },
-    {
-        "initials": "EM",
-        "name": "Emmanuel Mauer",
-        "email": "emmanuelma@gmail.com",
-        "phone": "+49 1111 111 11 16",
-        "color": "#00bfa5"
-    },
-    {
-        "initials": "MA",
-        "name": "Maximilian Arnold",
-        "email": "maxarnold@gmail.com",
-        "phone": "+49 1111 111 11 17",
-        "color": "#ff4081"
-    },
-    {
-        "initials": "MB",
-        "name": "Monika Braun",
-        "email": "monika.b@gmail.com",
-        "phone": "+49 1111 111 11 18",
-        "color": "#536dfe"
-    }
+  {
+    "initials": "AM",
+    "name": "Anton Mayer",
+    "email": "antom@gmail.com",
+    "phone": "+49 1111 111 11 11",
+    "color": "#ffab00",
+    "id": "0"
+  },
+  {
+    "initials": "AS",
+    "name": "Anja Schulz",
+    "email": "schulz@hotmail.com",
+    "phone": "+49 1111 111 11 12",
+    "color": "#ff4081",
+    "id": "1"
+  },
+  {
+    "initials": "BZ",
+    "name": "Benedikt Ziegler",
+    "email": "benedikt@gmail.com",
+    "phone": "+49 1111 111 11 13",
+    "color": "#536dfe",
+    "id": "2"
+  },
+  {
+    "initials": "DE",
+    "name": "David Eisenberg",
+    "email": "davidberg@gmail.com",
+    "phone": "+49 1111 111 11 14",
+    "color": "#e040fb",
+    "id": "3"
+  },
+  {
+    "initials": "EF",
+    "name": "Eva Fischer",
+    "email": "eva@gmail.com",
+    "phone": "+49 1111 111 11 15",
+    "color": "#ffab00",
+    "id": "4"
+  },
+  {
+    "initials": "EM",
+    "name": "Emmanuel Mauer",
+    "email": "emmanuelma@gmail.com",
+    "phone": "+49 1111 111 11 16",
+    "color": "#00bfa5",
+    "id": "5"
+  },
+  {
+    "initials": "MA",
+    "name": "Maximilian Arnold",
+    "email": "maxarnold@gmail.com",
+    "phone": "+49 1111 111 11 17",
+    "color": "#ff4081",
+    "id": "6"
+  },
+  {
+    "initials": "MB",
+    "name": "Monika Braun",
+    "email": "monika.b@gmail.com",
+    "phone": "+49 1111 111 11 18",
+    "color": "#536dfe",
+    "id": "7"
+  }
 ]
