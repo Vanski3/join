@@ -214,7 +214,6 @@ function guestLogin() {
   window.location.href = 'index-main.html';
 }
 
-// Helper functions
 function addValidationListeners(inputField, type, passwordField) {
   inputField.addEventListener('blur', () => validateInput(inputField, type, passwordField));
   inputField.addEventListener('input', () => clearError(inputField));
@@ -311,7 +310,6 @@ function isValidEmail(email) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  // Login Form Validation
   const loginForm = document.getElementById('loginForm');
   const loginEmailInput = document.getElementById('loginEmail');
   const loginPasswordInput = document.getElementById('loginPassword');
@@ -323,10 +321,8 @@ document.addEventListener('DOMContentLoaded', function () {
     event.preventDefault();
     validateInput(loginEmailInput, 'email');
     validateInput(loginPasswordInput, 'password');
-    // Additional logic for login form submission if needed
   });
 
-  // Signup Form Validation
   const signupForm = document.getElementById('signup-form');
   const signupNameInput = document.getElementById('signupName');
   const signupEmailInput = document.getElementById('signupEmail');
@@ -347,6 +343,5 @@ document.addEventListener('DOMContentLoaded', function () {
     validateInput(signupPasswordInput, 'password');
     validateConfirmPassword(confirmSignupInput, signupPasswordInput);
     validateCheckbox(signupCheckboxInput);
-    // Additional logic for signup form submission if needed
   });
 });
