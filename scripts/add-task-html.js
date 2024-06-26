@@ -120,6 +120,9 @@ function loadAddTaskContentHTML() {
      </main>
      </div>
      </div>
+     <div class="form-failed-container-task" id="form-failed-task" style="display: none;">
+                <button class="blue-btn">Task added to Board</button>
+      </div>
     `;
 }
 
@@ -250,8 +253,8 @@ function editTaskHTML() {
                          <button type=submit class="blue-btn">Ok <img src="./assets/img/add-task/check.svg"
                                alt=""></button>
                       </div>
-    
-                   </form>`;
+                   </form>
+                   `;
 }
 
 function renderToListHTML(i, contact) {

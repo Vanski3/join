@@ -182,6 +182,15 @@
   }
 }
 
+@keyframes buttonAnimation {
+  0% {
+    transform: translateY(100vh);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
 @media screen and (max-width: 650px) {
   @keyframes logoAnimation {
     0% {

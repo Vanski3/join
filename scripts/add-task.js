@@ -3,7 +3,7 @@ let priority = '';
 let contacts = [];
 let tasksNumber = '';
 let taskSelection = '0';
-let formHasErrorTask = true;
+let formHasErrorTask = false;
 let assignedTo = [
   {
     contactImageBgColor: [],
@@ -102,21 +102,23 @@ function taskCategory(parameter) {
 }
 
 function saveTask() {
-  const rows = ['first-row', 'second-row'];
-  rows.forEach((rowId) => {
-    let form = document.getElementById(rowId);
-    form.querySelectorAll('*').forEach((element) => {
-      if (element.classList.contains('error')) {
-        formHasErrorTask = true;
-      }
+  setTimeout(() => {
+    const rows = ['first-row', 'second-row'];
+    rows.forEach((rowId) => {
+      let form = document.getElementById(rowId);
+      form.querySelectorAll('*').forEach((element) => {
+        if (element.classList.contains('error')) {
+          formHasErrorTask = true;
+        }
+      });
     });
-  });
-  if (formHasErrorTask) {
-    formHasErrorTask = false;
-    return;
-  } else {
-    saveTaskElse();
-  }
+    if (formHasErrorTask) {
+      formHasErrorTask = false;
+      return;
+    } else {
+      saveTaskElse();
+    }
+  }, 500);
 }
 
 function saveTaskElse() {
@@ -138,7 +140,10 @@ function saveTaskElse() {
     categoryBGColor: result,
   };
   mergeObjects(tasks, newTask);
-  loadBoardContent();
+  showLogoAddTask();
+  setTimeout(() => {
+    loadBoardContent();
+  }, 2000);
   closeTaskDialog();
 }
 
@@ -314,7 +319,6 @@ function loadAddTaskContent(params) {
   changeColorSideAddTask();
   selectedButtonId = '';
   priority = '';
-  formHasErrorTask = true;
   handleMediumClick(event);
   addTaskValidation();
   minDate();
@@ -358,4 +362,12 @@ function minDate() {
 
   const minDate = `${year}-${month}-${day}`;
   document.getElementById('custom-date').setAttribute('min', minDate);
+}
+
+function showLogoAddTask() {
+  const logo = document.getElementById('form-failed-task');
+  logo.style.display = 'flex';
+  setTimeout(function () {
+    logo.style.display = 'none';
+  }, 2000);
 }

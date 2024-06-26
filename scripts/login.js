@@ -5,6 +5,7 @@ let toggleIcon = document.getElementById('togglePassword');
 let loginName = document.getElementById('loginEmail');
 let loginPassword = document.getElementById('loginPassword');
 let checkboxLogin = document.getElementById('checkbox');
+let formHasError = false;
 
 let password = document.getElementById('passwordSignup');
 let confirm_password = document.getElementById('confirmSignup');
@@ -153,6 +154,12 @@ function setSessionStorage(loginEmail) {
   sessionStorage.setItem('name', name);
 }
 
+function waitCreatUser() {
+  setTimeout(() => {
+    createUser();
+  }, 500);
+}
+
 async function createUser() {
   let signupName = document.getElementById('signupName').value;
   let signupEmail = document.getElementById('signupEmail').value;
@@ -161,11 +168,11 @@ async function createUser() {
   form.querySelectorAll('*').forEach((element) => {
     if (element.classList.contains('error')) {
       formHasError = true;
-      return;
     }
   });
   if (formHasError) {
-    showLogo();
+    formHasError = false;
+    return;
   } else {
     let newId = user.length.toString();
     let newUser = {
@@ -179,14 +186,6 @@ async function createUser() {
     document.getElementById('signup-form').reset();
     window.location.href = 'index.html';
   }
-}
-
-function showLogo() {
-  const logo = document.getElementById('form-failed');
-  logo.style.display = 'flex';
-  setTimeout(function () {
-    logo.style.display = 'none';
-  }, 2000);
 }
 
 async function putData(path = '', data = {}) {

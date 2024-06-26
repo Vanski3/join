@@ -11,7 +11,7 @@ let subtasksEdit = [
     subtaskStatus: [],
   },
 ];
-let formHasErrorTaskEdit = true;
+let formHasErrorTaskEdit = false;
 
 function closeTaskOverlayEdit() {
   const overlay = document.getElementById('taskOverlay');

@@ -62,7 +62,7 @@
                                 alt=""></a>
                         <span>Sign up</span>
                     </div>
-                    <form novalidate onsubmit="createUser(); return false" id="signup-form">
+                    <form novalidate onsubmit="waitCreatUser(); return false" id="signup-form">
                         <div class="form-container-signup" id="formvalidation">
                             <div class="input-wrapper">
                                 <input id="signupName" placeholder="Name" type="name" required>
@@ -108,15 +108,11 @@
                 <a href="./privacy.html">Privacy Policy</a>
                 <a href="./legal-notice.html">Legal Notice</a>
             </footer>
-            <div class="form-failed-container" id="form-failed">
-                <img src="./assets/img/login/form-failed.png" alt="">
-            </div>
-
         </dialog>
 
         <footer class="footer">
             <a href="./privacy.html" target="_blank">Privacy Policy</a>
-            <a href="./legal-notice.html"  target="_blank">Legal Notice</a>
+            <a href="./legal-notice.html" target="_blank">Legal Notice</a>
         </footer>
 
 </body>
