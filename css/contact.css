@@ -1,5 +1,10 @@
 :root {
   --headline-1: 3rem;
+  --button-blue: #007bff;
+  --hover-lightblue: #e0f7fa;
+  --hover-blue: #007bff;
+  --hover-darkblue: #0056b3;
+  --identity-clr: #007bff;
 }
 
 .contacts-container {
@@ -94,6 +99,7 @@
 .contact-detail {
   flex-grow: 1;
   padding: 20px;
+  overflow-y: auto;
 }
 
 .contact-header {
@@ -178,50 +184,46 @@
 
 /* dialog */
 
-/* .dialog-container {
-  position: absolute;
+.dialog-container {
   display: none;
-  height: 100vh;
+  position: fixed;
   top: 0;
+  right: 0;  /* Fix position to the right */
+  height: 100vh;
   width: 100%;
   z-index: 998;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: flex-end; /* Align to the right */
 }
 
-#contact-dialog-container{
-  position: absolute;
-  /* display: none; */
-  /* height: 100vh;
-  top: 0;
-  width: 100%;
-  z-index: 998;
-  background-color: rgba(255, 255, 255, 0.7); 
-} */
-
-/* .task-dialog {
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  top: 0;
-  right: 0;
-  height: 100vh;
-  padding-left: 36px;
-  width: 518px;
-  box-shadow: 0px 0px 4px 0px #00000029;
-  z-index: 999;
-  border-top-left-radius: 30px;
-  border-bottom-left-radius: 30px;
-  background-color: #fff;
-  right: -600px;
+.task-dialog {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 90%;
+  max-width: 500px;
   transition: right 0.3s ease;
-}*/
+  position: absolute;
+  right: -600px;
+}
+
+.task-dialog.show {
+  right: 0;
+}
 
 .close-button {
   position: absolute;
   top: 24px;
   right: 30px;
   cursor: pointer;
-} 
+}
+
+.contact-dialog-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
 
 @media (max-width: 1170px) {
   .contact-detail .contact-name-detail {
@@ -273,3 +275,16 @@
     display: block;
   }
 }
+
+/* Zusätzliche Stile für Sidebar und Button Hintergründe
+.menu-background {
+  background-color: #f0f0f0;
+}
+
+.color-img-sidebar {
+  filter: brightness(1.2);
+}
+
+.menu-row-font {
+  font-weight: bold;
+} */
