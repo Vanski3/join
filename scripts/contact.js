@@ -120,16 +120,16 @@ function openContactDialog() {
    const contactPopup = document.getElementById('contact-dialog-container');
    const contactDialog = document.querySelector('#contact-dialog-container .task-dialog');
 
-   contactPopup.style.display = 'unset';
+   contactPopup.style.display = 'flex'; // Use flex to enable centering
    setTimeout(() => {
-      contactDialog.style.right = '0';
+      contactDialog.classList.add('show'); // Add class to show the dialog
    }, 50);
 }
 
 function closeContactDialog() {
    const contactDialog = document.querySelector('#contact-dialog-container .task-dialog');
 
-   contactDialog.style.right = '-600px';
+   contactDialog.classList.remove('show'); // Remove class to hide the dialog
    setTimeout(() => {
       document.getElementById('contact-dialog-container').style.display = 'none';
    }, 300);
@@ -146,23 +146,11 @@ function toggleContactView() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-   //   loadContactsContent(); // Lädt die Kontakte beim Laden der Seite
-
    document.getElementById('contact-dialog-container').addEventListener('click', (event) => {
       const contactDialog = document.querySelector('#contact-dialog-container .task-dialog');
 
       if (!contactDialog.contains(event.target)) {
          closeContactDialog();
-      }
-   });
-
-   window.addEventListener('resize', () => {
-      const contactsList = document.querySelector('.contacts-list');
-      const contactDetail = document.querySelector('.contact-detail');
-
-      if (window.innerWidth > 800) {
-         contactsList.classList.remove('hidden');
-         contactDetail.classList.remove('visible');
       }
    });
 });
