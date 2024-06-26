@@ -55,20 +55,22 @@ function selectContactEdit(i) {
   if (icon.src.endsWith('checkbox-checked-white.svg')) {
     input.style.background = '';
     icon.src = './assets/img/login/checkbox.svg';
-
     removeSymbol(i);
   } else {
-    icon.src = './assets/img/login/checkbox-checked-white.svg';
-    input.style.background = '#4589FF';
+    selectContactEditElse(i, icon, input, symbol, placeholder);
+  }
+}
 
-    let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}-edit`);
-    if (!symbolInPlaceholder) {
-      symbol.onclick = function () {
-        removeSymbol(i);
-      };
-      symbol.id = `symbol-${i}-edit`;
-      placeholder.appendChild(symbol);
-    }
+function selectContactEditElse(i, icon, input, symbol, placeholder) {
+  icon.src = './assets/img/login/checkbox-checked-white.svg';
+  input.style.background = '#4589FF';
+  let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}-edit`);
+  if (!symbolInPlaceholder) {
+    symbol.onclick = function () {
+      removeSymbol(i);
+    };
+    symbol.id = `symbol-${i}-edit`;
+    placeholder.appendChild(symbol);
   }
 }
 
@@ -100,16 +102,18 @@ function getSelectedContactsEdit(i) {
 }
 
 function markSelectedContacts() {
-  const placeholderEditDivs = document.querySelectorAll('#placeholder-edit .initials');
-  const placeholderNames = Array.from(placeholderEditDivs).map((div) =>
-    div.getAttribute('name').trim()
+  const placeholderNames = Array.from(
+    document.querySelectorAll('#placeholder-edit .initials'),
+    (div) => div.getAttribute('name').trim()
   );
-  const contactListItems = document.querySelectorAll('#contacts-edit .change-bg-edit');
-  contactListItems.forEach((item) => {
+  document.querySelectorAll('#contacts-edit .change-bg-edit').forEach((item) => {
     const label = item.querySelector('label');
-    const nameText = label ? label.textContent.trim() : '';
-    const nameParts = nameText.split('\n').map((part) => part.trim());
-    const name = nameParts.length > 1 ? nameParts[1] : nameParts[0];
+    const name = label
+      ? label.textContent
+          .trim()
+          .split('\n')
+          .map((part) => part.trim())[1] || label.textContent.trim()
+      : '';
     if (placeholderNames.includes(name)) {
       item.style.backgroundColor = '#4589FF';
       const checkboxImg = item.querySelector('.checkbox-container img');
@@ -160,7 +164,6 @@ function getSavedSubtasksEdit() {
 
 function saveTaskEdit() {
   const rows = ['first-row-edit', 'second-row-edit'];
-
   rows.forEach((rowId) => {
     let form = document.getElementById(rowId);
     form.querySelectorAll('*').forEach((element) => {
@@ -173,29 +176,33 @@ function saveTaskEdit() {
     formHasErrorTaskEdit = false;
     return;
   } else {
-    getSavedContactsEdit();
-    getSavedSubtasksEdit();
-    let bgColor = document.getElementById('category-edit');
-    let selectedIndex = bgColor.selectedIndex;
-    let selectedOption = (bgColor = bgColor.options[selectedIndex]);
-    let result = selectedOption.getAttribute('bgColor');
-    let inputFields = document.getElementsByClassName('my-inputs-edit');
-    let statusNumber = tasks.taskStatus[tasksNumber];
-    let newTaskEdit = {
-      title: inputFields[0].value,
-      description: inputFields[1].value,
-      assignedTo: assignedToEdit,
-      dueDate: inputFields[2].value,
-      priority: priority,
-      categoryName: inputFields[3].value,
-      subtasksTest: subtasksEdit,
-      taskStatus: statusNumber,
-      categoryBGColor: result,
-    };
-    mergeObjectsEdit(tasks, newTaskEdit);
-    loadBoardContent();
-    closeTaskOverlayEdit();
+    saveTaskEditElse();
   }
+}
+
+function saveTaskEditElse() {
+  getSavedContactsEdit();
+  getSavedSubtasksEdit();
+  let bgColor = document.getElementById('category-edit');
+  let selectedIndex = bgColor.selectedIndex;
+  let selectedOption = (bgColor = bgColor.options[selectedIndex]);
+  let result = selectedOption.getAttribute('bgColor');
+  let inputFields = document.getElementsByClassName('my-inputs-edit');
+  let statusNumber = tasks.taskStatus[tasksNumber];
+  let newTaskEdit = {
+    title: inputFields[0].value,
+    description: inputFields[1].value,
+    assignedTo: assignedToEdit,
+    dueDate: inputFields[2].value,
+    priority: priority,
+    categoryName: inputFields[3].value,
+    subtasksTest: subtasksEdit,
+    taskStatus: statusNumber,
+    categoryBGColor: result,
+  };
+  mergeObjectsEdit(tasks, newTaskEdit);
+  loadBoardContent();
+  closeTaskOverlayEdit();
 }
 
 function mergeObjectsEdit(tasks, newTaskEdit) {
@@ -238,6 +245,10 @@ function toggleColorEdit(buttonId, color, idOne, idTwo) {
       if (prevSvgTwo) prevSvgTwo.style.fill = prev.getAttribute('data-original-color');
     }
   }
+  toggleColorEditIf(buttonId, color, idOne, idTwo);
+}
+
+function toggleColorEditIf(buttonId, color, idOne, idTwo) {
   if (buttonId === selectedButtonId) return (selectedButtonId = null);
   let button = document.getElementById(buttonId);
   if (button) {
@@ -285,32 +296,28 @@ function handleLowClickEdit(event) {
 }
 
 function selectContactEdit(i) {
-  let icon = document.getElementById('checkbox-' + i + '-edit');
-  let input = document.getElementById('contact-' + i + '-edit');
-  let symbol = document.getElementById('symbol-' + i + '-edit').cloneNode(true);
+  let icon = document.getElementById(`checkbox-${i}-edit`);
+  let input = document.getElementById(`contact-${i}-edit`);
+  let symbol = document.getElementById(`symbol-${i}-edit`).cloneNode(true);
   let placeholder = document.getElementById('placeholder-edit');
 
-  function removeSymbol() {
-    let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}-edit`);
-    if (symbolInPlaceholder) {
-      placeholder.removeChild(symbolInPlaceholder);
-      icon.src = './assets/img/login/checkbox.svg';
-      input.style.background = '';
-    }
-  }
   if (icon.src.endsWith('checkbox-checked-white.svg')) {
     input.style.background = '';
     icon.src = './assets/img/login/checkbox.svg';
 
-    let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}-edit`);
-    if (symbolInPlaceholder) {
-      placeholder.removeChild(symbolInPlaceholder);
-    }
+    removeSymbol(i);
   } else {
     icon.src = './assets/img/login/checkbox-checked-white.svg';
     input.style.background = '#4589FF';
-    symbol.onclick = removeSymbol;
-    document.getElementById('placeholder-edit').appendChild(symbol);
+
+    let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}-edit`);
+    if (!symbolInPlaceholder) {
+      symbol.onclick = function () {
+        removeSymbol(i);
+      };
+      symbol.id = `symbol-${i}-edit`;
+      placeholder.appendChild(symbol);
+    }
   }
 }
 
@@ -323,14 +330,12 @@ function editSubtask(element) {
   input.id = 'subtask-input';
   subtaskTextElement.replaceWith(input);
   input.focus();
-
   input.onblur = function () {
     let span = document.createElement('span');
     span.className = 'subtask-text';
     span.textContent = input.value;
     input.replaceWith(span);
   };
-
   input.onkeypress = function (e) {
     if (e.key === 'Enter') {
       input.blur();

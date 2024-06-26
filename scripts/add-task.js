@@ -103,7 +103,6 @@ function taskCategory(parameter) {
 
 function saveTask() {
   const rows = ['first-row', 'second-row'];
-
   rows.forEach((rowId) => {
     let form = document.getElementById(rowId);
     form.querySelectorAll('*').forEach((element) => {
@@ -116,27 +115,31 @@ function saveTask() {
     formHasErrorTask = false;
     return;
   } else {
-    getSelectedSubtasks();
-    let bgColor = document.getElementById('category');
-    let selectedIndex = bgColor.selectedIndex;
-    let selectedOption = (bgColor = bgColor.options[selectedIndex]);
-    let result = selectedOption.getAttribute('bgColor');
-    let inputFields = document.getElementsByClassName('my-inputs');
-    let newTask = {
-      title: inputFields[0].value,
-      description: inputFields[1].value,
-      assignedTo: assignedTo,
-      dueDate: inputFields[2].value,
-      priority: priority,
-      categoryName: inputFields[3].value,
-      subtasksTest: subtasks,
-      taskStatus: taskSelection,
-      categoryBGColor: result,
-    };
-    mergeObjects(tasks, newTask);
-    loadBoardContent();
-    closeTaskDialog();
+    saveTaskElse();
   }
+}
+
+function saveTaskElse() {
+  getSelectedSubtasks();
+  let bgColor = document.getElementById('category');
+  let selectedIndex = bgColor.selectedIndex;
+  let selectedOption = (bgColor = bgColor.options[selectedIndex]);
+  let result = selectedOption.getAttribute('bgColor');
+  let inputFields = document.getElementsByClassName('my-inputs');
+  let newTask = {
+    title: inputFields[0].value,
+    description: inputFields[1].value,
+    assignedTo: assignedTo,
+    dueDate: inputFields[2].value,
+    priority: priority,
+    categoryName: inputFields[3].value,
+    subtasksTest: subtasks,
+    taskStatus: taskSelection,
+    categoryBGColor: result,
+  };
+  mergeObjects(tasks, newTask);
+  loadBoardContent();
+  closeTaskDialog();
 }
 
 function mergeObjects(tasks, newTask) {
@@ -163,6 +166,10 @@ function toggleColor(buttonId, color, idOne, idTwo) {
       if (prevSvgTwo) prevSvgTwo.style.fill = prev.getAttribute('data-original-color');
     }
   }
+  toggleColorIf(buttonId, color, idOne, idTwo);
+}
+
+function toggleColorIf(buttonId, color, idOne, idTwo) {
   if (buttonId === selectedButtonId) return (selectedButtonId = null);
   let button = document.getElementById(buttonId);
   if (button) {
@@ -286,7 +293,6 @@ function selectCategory(category) {
   summaryHeadline.textContent = category;
   summaryHeadline.closest('details').removeAttribute('open');
 }
-
 document.addEventListener('click', function (event) {
   let details = document.getElementById('details');
 
@@ -322,7 +328,6 @@ function changeColorSideAddTask() {
 function filterContacts() {
   let input = document.getElementById('contact-search').value.toLowerCase();
   let contactElements = document.querySelectorAll('.contactShow');
-
   contactElements.forEach((contact) => {
     let name = contact.getAttribute('name');
     if (name.toLowerCase().includes(input)) {

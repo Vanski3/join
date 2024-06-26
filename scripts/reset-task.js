@@ -37,7 +37,6 @@ function resetForm(event) {
   document.querySelectorAll('.change-src').forEach(function (img) {
     img.src = './assets/img/login/checkbox.svg';
   });
-
   if (elements.childNodes.length < 1) {
     details.removeAttribute('open');
   }
@@ -67,17 +66,14 @@ function resetButtons() {
   document.getElementById('UrgentTwo').style.fill = '#FF3D00';
   document.getElementById('buttonUrgent').style.backgroundColor = '';
   document.getElementById('buttonUrgent').style.color = '#000';
-
   document.getElementById('MediumOne').style.fill = '#FFA800';
   document.getElementById('MediumTwo').style.fill = '#FFA800';
   document.getElementById('buttonMedium').style.backgroundColor = '';
   document.getElementById('buttonMedium').style.color = '#000';
-
   document.getElementById('LowOne').style.fill = '#7AE229';
   document.getElementById('LowTwo').style.fill = '#7AE229';
   document.getElementById('buttonLow').style.backgroundColor = '';
   document.getElementById('buttonLow').style.color = '#000';
-
   selectedButtonId = '';
   priority = '';
 }
