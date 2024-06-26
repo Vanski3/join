@@ -99,7 +99,7 @@ function renderGetGreeting() {
   } else if (hour >= 17 && hour < 21) {
     daytime.innerHTML = 'Good Evening,';
   } else {
-    daytime.innerHTML = 'Good Evening,';
+    daytime.innerHTML = 'Time for bed,';
   }
 }
 
