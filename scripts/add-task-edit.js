@@ -13,6 +13,10 @@ let subtasksEdit = [
 ];
 let formHasErrorTaskEdit = false;
 
+/**
+ * This function is used to close the popup for editing the task
+ *
+ */
 function closeTaskOverlayEdit() {
   const overlay = document.getElementById('taskOverlay');
   overlay.close();
@@ -22,6 +26,11 @@ function closeTaskOverlayEdit() {
   selectedButtonId = null;
 }
 
+/**
+ * This function is used to save the edited task
+ *
+ * @param {number} i  - This is the number of the task, to save it in the correct task
+ */
 function editTask(i) {
   let editTask = document.getElementById('edit-task');
   editTask.innerHTML = '';
@@ -33,6 +42,11 @@ function editTask(i) {
   minDateEdit();
 }
 
+/**
+ * This function is used to render the subtasks in the form from the inputfield
+ *
+ * @param {number} i - This number is the spot of the task on the API
+ */
 function getSubtasksEdit(i) {
   let subtaskPlaceholder = document.getElementById('subtask-placeholder-edit');
   subtaskPlaceholder.innerHTML = '';
@@ -46,6 +60,11 @@ function getSubtasksEdit(i) {
   }
 }
 
+/**
+ * This function is used to mark the contact at the dropdown menu
+ *
+ * @param {number} i - This is the spot of the contact
+ */
 function selectContactEdit(i) {
   let icon = document.getElementById(`checkbox-${i}-edit`);
   let input = document.getElementById(`contact-${i}-edit`);
@@ -61,6 +80,15 @@ function selectContactEdit(i) {
   }
 }
 
+/**
+ * This is the helper function of selectContactEdit()
+ *
+ * @param {number} i - This is the spot of the contact
+ * @param {element} icon - This is the icon div element
+ * @param {element} input - This is the input field element
+ * @param {element} symbol - This is the symbol div
+ * @param {element} placeholder - This is the div where the subtasks rendered
+ */
 function selectContactEditElse(i, icon, input, symbol, placeholder) {
   icon.src = './assets/img/login/checkbox-checked-white.svg';
   input.style.background = '#4589FF';
@@ -74,6 +102,10 @@ function selectContactEditElse(i, icon, input, symbol, placeholder) {
   }
 }
 
+/**
+ * This function is used to render the contacts from the API to the dropdown menu
+ *
+ */
 function renderToListEdit() {
   let list = document.getElementById('contacts-edit');
   for (let j = 0; j < contacts.length; j++) {
@@ -82,6 +114,11 @@ function renderToListEdit() {
   }
 }
 
+/**
+ * This function is used to render the selected contacts to the edit form
+ *
+ * @param {number} i - This is the spot of the contact
+ */
 function getSelectedContactsEdit(i) {
   let contactPlaceholder = document.getElementById('placeholder-edit');
   contactPlaceholder.innerHTML = '';
@@ -101,6 +138,10 @@ function getSelectedContactsEdit(i) {
   contacts = [];
 }
 
+/**
+ * This function is used to mark the selected contacts at the dropdown menu
+ *
+ */
 function markSelectedContacts() {
   const placeholderNames = Array.from(
     document.querySelectorAll('#placeholder-edit .initials'),
@@ -124,6 +165,11 @@ function markSelectedContacts() {
   });
 }
 
+/**
+ * This function is used to get the contacts from the API
+ *
+ * @param {number} j - - This is the spot of the contact
+ */
 async function onloadContactsEdit(j) {
   let userResponse = await getAllContacts('contacts');
   for (let i = 0; i < userResponse.contactImageBgColor.length; i++) {
@@ -138,6 +184,10 @@ async function onloadContactsEdit(j) {
   renderToListEdit(j);
 }
 
+/**
+ * This function is used to push the saved contacts into the assignedToEdit Object
+ *
+ */
 function getSavedContactsEdit() {
   const placeholderContainer = document.getElementById('placeholder-edit');
   const placeholder = placeholderContainer.querySelectorAll('div.savedContacts');
@@ -151,6 +201,10 @@ function getSavedContactsEdit() {
   }
 }
 
+/**
+ * This function is used to push the saved subtasks into the subtaskEdit Object
+ *
+ */
 function getSavedSubtasksEdit() {
   const placeholderContainer = document.getElementById('subtask-placeholder-edit');
   const li = placeholderContainer.querySelectorAll('li');
@@ -162,6 +216,11 @@ function getSavedSubtasksEdit() {
   }
 }
 
+/**
+ * This function is used to save the edited task
+ *
+ * @returns - This return is used to cancel the save function
+ */
 function saveTaskEdit() {
   const rows = ['first-row-edit', 'second-row-edit'];
   rows.forEach((rowId) => {
@@ -180,6 +239,10 @@ function saveTaskEdit() {
   }
 }
 
+/**
+ * This function is used to save the edited task
+ *
+ */
 function saveTaskEditElse() {
   getSavedContactsEdit();
   getSavedSubtasksEdit();
@@ -205,6 +268,12 @@ function saveTaskEditElse() {
   closeTaskOverlayEdit();
 }
 
+/**
+ * This function is used to merge the edited (new) task with the existing tasks object
+ *
+ * @param {object} tasks - This object saves all tasks
+ * @param {object} newTaskEdit - This is a new task
+ */
 function mergeObjectsEdit(tasks, newTaskEdit) {
   tasks.assignedTo.splice(tasksNumber, 1, ...newTaskEdit.assignedTo);
   tasks.categoryBgColor.splice(tasksNumber, 1, newTaskEdit.categoryBGColor);
@@ -218,6 +287,10 @@ function mergeObjectsEdit(tasks, newTaskEdit) {
   clearEditObjects();
 }
 
+/**
+ * This function is used to clear the helper objects of the edited task
+ *
+ */
 function clearEditObjects() {
   assignedToEdit = [
     {
@@ -234,6 +307,14 @@ function clearEditObjects() {
   ];
 }
 
+/**
+ * This function is used to toggle the button at the add-task form
+ *
+ * @param {id} buttonId - This is the button id
+ * @param {string} color - This is the new background color
+ * @param {string} idOne - This is the svg path id
+ * @param {string} idTwo - This is the second svg path id
+ */
 function toggleColorEdit(buttonId, color, idOne, idTwo) {
   if (selectedButtonId) {
     let prev = document.getElementById(selectedButtonId);
@@ -248,6 +329,14 @@ function toggleColorEdit(buttonId, color, idOne, idTwo) {
   toggleColorEditIf(buttonId, color, idOne, idTwo);
 }
 
+/**
+ *
+ * @param {id} buttonId - This is the button id
+ * @param {string} color - This is the new background color
+ * @param {string} idOne - This is the svg path id
+ * @param {string} idTwo - This is the second svg path id
+ * @returns - If the buttonId not the selectedButtonid the variable selectedButtonid is null
+ */
 function toggleColorEditIf(buttonId, color, idOne, idTwo) {
   if (buttonId === selectedButtonId) return (selectedButtonId = null);
   let button = document.getElementById(buttonId);
@@ -264,6 +353,11 @@ function toggleColorEditIf(buttonId, color, idOne, idTwo) {
   }
 }
 
+/**
+ * This function is used to mark the urgent button
+ *
+ * @param {event} event - stops the standard behavior of the button
+ */
 function handleUrgentClickEdit(event) {
   event.preventDefault();
   toggleColorEdit('buttonUrgent-edit', '#FF3D00', 'UrgentOne-edit', 'UrgentTwo-edit');
@@ -274,6 +368,11 @@ function handleUrgentClickEdit(event) {
   }
 }
 
+/**
+ * This function is used to mark the medium button
+ *
+ * @param {event} event - stops the standard behavior of the button
+ */
 function handleMediumClickEdit(event) {
   event.preventDefault();
   toggleColorEdit('buttonMedium-edit', '#FFA800', 'MediumOne-edit', 'MediumTwo-edit');
@@ -284,6 +383,11 @@ function handleMediumClickEdit(event) {
   }
 }
 
+/**
+ * This function is used to mark the low button
+ *
+ * @param {event} event - stops the standard behavior of the button
+ */
 function handleLowClickEdit(event) {
   event.preventDefault();
   toggleColorEdit('buttonLow-edit', '#7AE229', 'LowOne-edit', 'LowTwo-edit');
@@ -295,6 +399,11 @@ function handleLowClickEdit(event) {
   }
 }
 
+/**
+ * This function is used to mark the selected contacts in the dropwdown menu and render the symbols
+ *
+ * @param {number} i - This is the number of the contact
+ */
 function selectContactEdit(i) {
   let icon = document.getElementById(`checkbox-${i}-edit`);
   let input = document.getElementById(`contact-${i}-edit`);
@@ -321,6 +430,11 @@ function selectContactEdit(i) {
   }
 }
 
+/**
+ * This function is used to edit the subtasks
+ *
+ * @param {element} element - this is the clicked div subtask container
+ */
 function editSubtask(element) {
   let subtaskTextElement = element.closest('li').querySelector('.subtask-text');
 
@@ -343,6 +457,10 @@ function editSubtask(element) {
   };
 }
 
+/**
+ * This function is used to search for contacts in the dropdown menu
+ *
+ */
 function filterContactsEdit() {
   let input = document.getElementById('contact-search-edit').value.toLowerCase();
   let contactElements = document.querySelectorAll('.edit-contact-form');
@@ -359,6 +477,10 @@ function filterContactsEdit() {
   });
 }
 
+/**
+ * This function is used to set the dynamic minDate
+ *
+ */
 function minDateEdit() {
   const today = new Date();
   const year = today.getFullYear();

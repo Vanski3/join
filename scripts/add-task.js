@@ -18,6 +18,10 @@ let subtasks = [
   },
 ];
 
+/**
+ *  This function is used to render the contacts to the list
+ *
+ */
 function renderToList() {
   let list = document.getElementById('contacts');
   for (let i = 0; i < contacts.length; i++) {
@@ -26,6 +30,10 @@ function renderToList() {
   }
 }
 
+/**
+ * This function is used to get the contacts from the API and push it to the contacts object
+ *
+ */
 async function onloadContacts() {
   contacts = [];
   let userResponse = await getAllContacts('contacts');
@@ -41,6 +49,11 @@ async function onloadContacts() {
   renderToList();
 }
 
+/**
+ * This function is used to get the value of the task in the edit form
+ *
+ * @param {number} i - This is the spot of the task in the tasks object
+ */
 function onloadFormValue(i) {
   let inputFields = document.getElementsByClassName('my-inputs-edit');
   inputFields[0].value = tasks.title[i];
@@ -52,6 +65,10 @@ function onloadFormValue(i) {
   getProBtnClick(i);
 }
 
+/**
+ * This function is used to save the current priority button
+ *
+ */
 function getProBtnClick(i) {
   let prio = tasks.priority[i];
   let capitalizedPrio = prio.charAt(0).toUpperCase() + prio.slice(1);
@@ -63,6 +80,12 @@ function getProBtnClick(i) {
   }
 }
 
+/**
+ * This function is used to get the connection to the API
+ *
+ * @param {string} path - This is the contact string at the API
+ * @returns - This returns the response to a json
+ */
 async function getAllContacts(path) {
   let response = await fetch(BASE_URL + path + '.json');
   if (!response.ok) {
@@ -71,6 +94,10 @@ async function getAllContacts(path) {
   return await response.json();
 }
 
+/**
+ * This function is used to push the selected contacts to the helper object
+ *
+ */
 function getSelectedContacts() {
   let placeholder = document.getElementById('placeholder').childNodes;
   for (let i = 0; i < placeholder.length; i++) {
@@ -83,6 +110,10 @@ function getSelectedContacts() {
   }
 }
 
+/**
+ * This function is used to push the selected subtasks to the helper object
+ *
+ */
 function getSelectedSubtasks() {
   let placeholder = document.getElementById('subtask-placeholder').childNodes;
   for (let i = 0; i < placeholder.length; i++) {
@@ -93,6 +124,12 @@ function getSelectedSubtasks() {
   }
 }
 
+/**
+ * This function is used to get the selected button category at the board
+ *
+ * @param {number} parameter - This is the number of the category
+ * @returns - Stops the function, when the parameter is null
+ */
 function taskCategory(parameter) {
   if (parameter == null) {
     return;
@@ -101,6 +138,10 @@ function taskCategory(parameter) {
   }
 }
 
+/**
+ * This function is used to save the task
+ *
+ */
 function saveTask() {
   setTimeout(() => {
     const rows = ['first-row', 'second-row'];
@@ -121,6 +162,10 @@ function saveTask() {
   }, 500);
 }
 
+/**
+ * This function is used create a new task if the form validation is correct
+ *
+ */
 function saveTaskElse() {
   getSelectedSubtasks();
   let bgColor = document.getElementById('category');
@@ -147,6 +192,12 @@ function saveTaskElse() {
   closeTaskDialog();
 }
 
+/**
+ * This function is used to push the created new task into the existing tasks object
+ *
+ * @param {object} tasks - Existing tasks Object
+ * @param {object} newTask - created task
+ */
 function mergeObjects(tasks, newTask) {
   newTask.assignedTo.forEach((item) => tasks.assignedTo.push(item));
   tasks.categoryBgColor.push(newTask.categoryBGColor);
@@ -160,6 +211,14 @@ function mergeObjects(tasks, newTask) {
   clearObjects();
 }
 
+/**
+ * This function is used to toggle the button at the add-task form
+ *
+ * @param {id} buttonId - This is the button id
+ * @param {string} color - This is the new background color
+ * @param {string} idOne - This is the svg path id
+ * @param {string} idTwo - This is the second svg path id
+ */
 function toggleColor(buttonId, color, idOne, idTwo) {
   if (selectedButtonId) {
     let prev = document.getElementById(selectedButtonId);
@@ -174,6 +233,14 @@ function toggleColor(buttonId, color, idOne, idTwo) {
   toggleColorIf(buttonId, color, idOne, idTwo);
 }
 
+/**
+ *
+ * @param {id} buttonId - This is the button id
+ * @param {string} color - This is the new background color
+ * @param {string} idOne - This is the svg path id
+ * @param {string} idTwo - This is the second svg path id
+ * @returns - If the buttonId not the selectedButtonid the variable selectedButtonid is null
+ */
 function toggleColorIf(buttonId, color, idOne, idTwo) {
   if (buttonId === selectedButtonId) return (selectedButtonId = null);
   let button = document.getElementById(buttonId);
@@ -189,7 +256,11 @@ function toggleColorIf(buttonId, color, idOne, idTwo) {
     selectedButtonId = buttonId;
   }
 }
-
+/**
+ * This function is used to mark the urgent button
+ *
+ * @param {event} event - stops the standard behavior of the button
+ */
 function handleUrgentClick(event) {
   event.preventDefault();
   toggleColor('buttonUrgent', '#FF3D00', 'UrgentOne', 'UrgentTwo');
@@ -200,6 +271,11 @@ function handleUrgentClick(event) {
   }
 }
 
+/**
+ * This function is used to mark the medium button
+ *
+ * @param {event} event - stops the standard behavior of the button
+ */
 function handleMediumClick(event) {
   event.preventDefault();
   toggleColor('buttonMedium', '#FFA800', 'MediumOne', 'MediumTwo');
@@ -210,6 +286,11 @@ function handleMediumClick(event) {
   }
 }
 
+/**
+ * This function is used to mark the low button
+ *
+ * @param {event} event - stops the standard behavior of the button
+ */
 function handleLowClick(event) {
   event.preventDefault();
   toggleColor('buttonLow', '#7AE229', 'LowOne', 'LowTwo');
@@ -221,6 +302,11 @@ function handleLowClick(event) {
   }
 }
 
+/**
+ * This function is used to mark the contact at the dropdown menu
+ *
+ * @param {number} i - This is the spot of the contact
+ */
 function selectContact(i) {
   let icon = document.getElementById('checkbox-' + i);
   let input = document.getElementById('contact-' + i);
@@ -252,6 +338,11 @@ function selectContact(i) {
   }
 }
 
+/**
+ * This function is used to get the onclick function to remove the symbol
+ *
+ * @param {number} i - This is the number of the symbol
+ */
 function addLoadedContact(i) {
   let symbol = document.getElementById('symbol-' + i + '-edit');
   if (symbol) {
@@ -262,6 +353,10 @@ function addLoadedContact(i) {
   }
 }
 
+/**
+ * This is the new Input for hovering the existing input
+ *
+ */
 function newSubtaskInput() {
   document.getElementById('cancel-button').classList.remove('d-none');
   document.getElementById('check-blue').classList.remove('d-none');
@@ -269,6 +364,11 @@ function newSubtaskInput() {
   document.getElementById('subtasks').style.backgroundImage = 'unset';
 }
 
+/**
+ * This function is used to edit the subtask onclick
+ *
+ * @param {element} element - this is the div of the selected subtask
+ */
 function changeSubtask(element) {
   let imgElements = element.querySelectorAll('img');
   imgElements.forEach(function (img) {
@@ -281,6 +381,10 @@ function changeSubtask(element) {
   element.style.backgroundColor = '#E3EEFF';
 }
 
+/**
+ * This function is used to add a subtask
+ *
+ */
 function addSubtasks() {
   newSubtaskInput();
   let subtasks = document.getElementById('subtasks');
@@ -293,6 +397,11 @@ function addSubtasks() {
   }
 }
 
+/**
+ * This function is used to close the dropdown menu when you click on the background
+ *
+ * @param {string} category - This is the category
+ */
 function selectCategory(category) {
   let summaryHeadline = document.getElementById('categoy-headline');
   summaryHeadline.textContent = category;
@@ -307,7 +416,11 @@ document.addEventListener('click', function (event) {
   }
 });
 
-function loadAddTaskContent(params) {
+/**
+ * This function is used to load the add task site
+ *
+ */
+function loadAddTaskContent() {
   let mainContent = document.getElementById('mainContent');
   mainContent.innerHTML = '';
   mainContent.innerHTML += loadAddTaskContentHTML();
@@ -324,11 +437,19 @@ function loadAddTaskContent(params) {
   minDate();
 }
 
+/**
+ * This function is used to change the background in the sidebar
+ *
+ */
 function changeColorSideAddTask() {
   document.getElementById('sidebarImgAddTask').classList.add('color-img-sidebar');
   document.getElementById('fontAddTaskSidebar').classList.add('menu-row-font');
 }
 
+/**
+ * This function is used for search contacts
+ *
+ */
 function filterContacts() {
   let input = document.getElementById('contact-search').value.toLowerCase();
   let contactElements = document.querySelectorAll('.contactShow');
@@ -344,6 +465,10 @@ function filterContacts() {
   });
 }
 
+/**
+ * This function is used to onclick remove the existing symbols
+ *
+ */
 function onclickRender() {
   let symbols = document.querySelectorAll('[id^=symbol-][id$=-edit]');
   symbols.forEach((symbol) => {
@@ -354,6 +479,10 @@ function onclickRender() {
   });
 }
 
+/**
+ * This function is used to set the minDate
+ *
+ */
 function minDate() {
   const today = new Date();
   const year = today.getFullYear();
@@ -364,6 +493,10 @@ function minDate() {
   document.getElementById('custom-date').setAttribute('min', minDate);
 }
 
+/**
+ * This function is used to show a confirmation button when u add a new task
+ *
+ */
 function showLogoAddTask() {
   const logo = document.getElementById('form-failed-task');
   logo.style.display = 'flex';

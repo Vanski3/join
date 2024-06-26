@@ -10,9 +10,17 @@ let formHasError = false;
 let password = document.getElementById('passwordSignup');
 let confirm_password = document.getElementById('confirmSignup');
 
+/**
+ * This is password validation
+ *
+ */
 password.onchange = validatePassword;
 confirm_password.onkeyup = validatePassword;
 
+/**
+ * This is used for the form login validation
+ *
+ */
 setupToggle('loginPassword', 'togglePassword');
 setupToggle('passwordSignup', 'toggleSignupPassword');
 setupToggle('confirmSignup', 'confirmSignupPassword');
@@ -22,6 +30,11 @@ document.addEventListener('DOMContentLoaded', () => {
   initializeCheckboxListeners('checkboxSignup');
 });
 
+/**
+ * This function is used for the remember me checkbox
+ *
+ * @param {element} checkboxId - This is the id of the checkbox
+ */
 function initializeCheckboxListeners(checkboxId) {
   const checkbox = document.getElementById(checkboxId);
   const toggleCheckboxState = () => {
@@ -44,20 +57,38 @@ function initializeCheckboxListeners(checkboxId) {
   checkbox.addEventListener('click', toggleCheckboxState);
 }
 
+/**
+ * This function enable the sign up button
+ *
+ */
 function enableBtn() {
   let btn = document.getElementById('blue-btn');
   btn.disabled = !btn.disabled;
 }
 
+/**
+ * This function shows the signup page
+ *
+ */
 function showSignupPage() {
   showSignup.show();
 }
 
+/**
+ * This function close the signup page
+ *
+ */
 function closeSignupPage() {
   showSignup.close();
   document.getElementById('signup-form').reset();
 }
 
+/**
+ * This function is used for showing the password
+ *
+ * @param {element} inputField - This is the password input id
+ * @param {*} iconElement - This is the img id
+ */
 function updateIcon(inputField, iconElement) {
   iconElement.src =
     inputField.value.length > 0
@@ -65,6 +96,12 @@ function updateIcon(inputField, iconElement) {
       : '../assets/img/login/lock.svg';
 }
 
+/**
+ * This function is used for the password visibility
+ *
+ * @param {element} inputFieldId - this is the password input field
+ * @param {element} iconElementId - This is the img id
+ */
 function setupToggle(inputFieldId, iconElementId) {
   let inputField = document.getElementById(inputFieldId);
   let iconElement = document.getElementById(iconElementId);
@@ -83,6 +120,10 @@ function setupToggle(inputFieldId, iconElementId) {
   });
 }
 
+/**
+ * This function gets the local storage
+ *
+ */
 function getLocalStorage() {
   let storageName = localStorage.getItem('login');
   let storagePassword = localStorage.getItem('password');
@@ -91,6 +132,10 @@ function getLocalStorage() {
   loginPassword.value = storagePassword;
 }
 
+/**
+ * This function is used for get all user from the API
+ *
+ */
 async function onloadFunc() {
   user = [];
   getLocalStorage();
@@ -113,6 +158,12 @@ async function onloadFunc() {
   }
 }
 
+/**
+ * This function connect the page with the api
+ *
+ * @param {string} path - user path at the api
+ * @returns - Return the response to a json
+ */
 async function getAllUser(path) {
   let response = await fetch(BASE_URL + path + '.json');
   if (!response.ok) {
@@ -121,6 +172,10 @@ async function getAllUser(path) {
   return await response.json();
 }
 
+/**
+ * This function checks if the user is signed up
+ *
+ */
 function loginUser() {
   let loginEmail = document.getElementById('loginEmail');
   let loginPassword = document.getElementById('loginPassword');
@@ -136,13 +191,14 @@ function loginUser() {
       loginPassword.value = '';
       toggleIcon.src = '../assets/img/login/lock.svg';
     }
-  } else {
-    loginEmail.value = '';
-    loginPassword.value = '';
-    toggleIcon.src = '../assets/img/login/lock.svg';
   }
 }
 
+/**
+ * This function set the session storage when u logged in
+ *
+ * @param {element} loginEmail - This is the id if the email input field
+ */
 function setSessionStorage(loginEmail) {
   let result = user.filter((user) => user.email === loginEmail.value);
   let name = result[0].name;
@@ -160,6 +216,11 @@ function waitCreatUser() {
   }, 500);
 }
 
+/**
+ * This function create a user, creates an user object and put the object to the api
+ *
+ * @returns - When the form validation is incorrect, then function stops
+ */
 async function createUser() {
   let signupName = document.getElementById('signupName').value;
   let signupEmail = document.getElementById('signupEmail').value;
@@ -188,6 +249,13 @@ async function createUser() {
   }
 }
 
+/**
+ * This function puts the data to the api
+ *
+ * @param {string} path - exact path to the api
+ * @param {object} data - new data object
+ * @returns
+ */
 async function putData(path = '', data = {}) {
   let response = await fetch(BASE_URL + path + '.json', {
     method: 'PUT',
@@ -199,6 +267,10 @@ async function putData(path = '', data = {}) {
   return await response.json();
 }
 
+/**
+ * This is the password validation
+ *
+ */
 function validatePassword() {
   if (password.value != confirm_password.value) {
     confirm_password.setCustomValidity("Passwords Don't Match");
@@ -207,17 +279,36 @@ function validatePassword() {
   }
 }
 
+/**
+ * This function is the guest login button with no form validation
+ *
+ */
 function guestLogin() {
   sessionStorage.setItem('initials', 'G');
   sessionStorage.setItem('name', 'Guest');
   window.location.href = 'index-main.html';
 }
 
+/**
+ * This function adds eventlisteners to the input fields
+ *
+ * @param {element} inputField - This is the input field
+ * @param {string} type - this is the type of the input field
+ * @param {element} passwordField - this is the password input field
+ */
 function addValidationListeners(inputField, type, passwordField) {
   inputField.addEventListener('blur', () => validateInput(inputField, type, passwordField));
   inputField.addEventListener('input', () => clearError(inputField));
 }
 
+/**
+ * This function is used for form validation
+ *
+ * @param {element} inputField - This is the input field
+ * @param {string} type - this is the type of the input field
+ * @param {element} passwordField - this is the password input field
+ * @returns
+ */
 function validateInput(inputField, type, passwordField) {
   const value = inputField.value.trim();
   const parentNode = inputField.parentNode;
@@ -250,6 +341,12 @@ function validateInput(inputField, type, passwordField) {
   }
 }
 
+/**
+ * This function is used for the password validation
+ *
+ * @param {element} confirmInput - Confirm input field
+ * @param {element} passwordInput - Password input field
+ */
 function validateConfirmPassword(confirmInput, passwordInput) {
   const confirmValue = confirmInput.value.trim();
   const parent = confirmInput.parentNode;
@@ -271,6 +368,11 @@ function validateConfirmPassword(confirmInput, passwordInput) {
   }
 }
 
+/**
+ * This function adds the error message, when the input is not filled
+ *
+ * @param {element} checkboxInput - Input fields
+ */
 function validateCheckbox(checkboxInput) {
   const parent = checkboxInput.parentNode.parentNode;
   const errorClass = 'error';
@@ -282,6 +384,12 @@ function validateCheckbox(checkboxInput) {
   }
 }
 
+/**
+ * This function shows the error message
+ *
+ * @param {element} parentNode - this is the parentnode of the element with the error-message class
+ * @param {string} message - this is the showed message
+ */
 function showErrorMessage(parentNode, message) {
   let errorMessage = parentNode.querySelector('.error-message');
   if (!errorMessage) {
@@ -292,6 +400,11 @@ function showErrorMessage(parentNode, message) {
   errorMessage.textContent = message;
 }
 
+/**
+ * This function hides the error message
+ *
+ * @param {element} parentNode - this is the parentnode of the element with the error-message class
+ */
 function hideErrorMessage(parentNode) {
   const errorMessage = parentNode.querySelector('.error-message');
   if (errorMessage) {
@@ -299,15 +412,30 @@ function hideErrorMessage(parentNode) {
   }
 }
 
+/**
+ * This function remove the div with the error class
+ *
+ * @param {element} inputField - this is the inputfield
+ */
 function clearError(inputField) {
   inputField.classList.remove('error');
   hideErrorMessage(inputField.parentNode);
 }
 
+/**
+ * This function is used for email validation
+ *
+ * @param {element} email - this is the email input field
+ * @returns
+ */
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+/**
+ * This adds eventlistener to the login form
+ *
+ */
 document.addEventListener('DOMContentLoaded', function () {
   const loginForm = document.getElementById('loginForm');
   const loginEmailInput = document.getElementById('loginEmail');

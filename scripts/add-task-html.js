@@ -1,3 +1,8 @@
+/**
+ * This function is used to render the add-task content
+ *
+ * @returns - return the dynamic html code
+ */
 function loadAddTaskContentHTML() {
   return /*html*/ `
         <div class="add-task-main-content">
@@ -126,6 +131,13 @@ function loadAddTaskContentHTML() {
     `;
 }
 
+/**
+ * This function is used to render the saved contacts
+ *
+ * @param {number} j - This is the number of the contact
+ * @param {string} contact - This First and Last Name of the contact
+ * @returns - return the dynamic html code
+ */
 function renderToListEditHTML(j, contact) {
   return /*html*/ `
           <li class="change-bg-edit" id="contact-${j}-edit" onclick="selectContactEdit(${j})">
@@ -140,6 +152,11 @@ function renderToListEditHTML(j, contact) {
           </li>`;
 }
 
+/**
+ * This function is used to render the form into the edit popup
+ *
+ * @returns - return the dynamic html code
+ */
 function editTaskHTML() {
   return /*html*/ `
         <form novalidate onsubmit="saveTaskEdit(); return false" id="addTask-edit" class="task-description-edit">
@@ -257,6 +274,13 @@ function editTaskHTML() {
                    `;
 }
 
+/**
+ * This function is used to render the contacts to the dropdown menu
+ *
+ * @param {number} i - This is the number of the contact
+ * @param {string} contact - This First and Last Name of the contact
+ * @returns - return the dynamic html code
+ */
 function renderToListHTML(i, contact) {
   return /*html*/ `
       <li class="change-bg" id="contact-${i}" onclick="selectContact(${i})">
@@ -272,6 +296,12 @@ function renderToListHTML(i, contact) {
   `;
 }
 
+/**
+ * This function is used to render the subtasks to the form
+ *
+ * @param {element} subtasks - This is the input subtask field
+ * @returns - return the dynamic html code
+ */
 function addSubtasksHTML(subtasks) {
   return /*html*/ `
    <li onmouseover="changeSubtask(this)" ondblclick="changeSubtask(this)" onmouseout="resetSubtask(this)" class="subtask-link" status="open">

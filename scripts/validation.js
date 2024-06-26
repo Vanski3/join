@@ -1,3 +1,7 @@
+/**
+ * This function adds the validation to the add-task page
+ *
+ */
 function addTaskValidation() {
   const addTaskForm = document.getElementById('addTask');
   const title = document.getElementById('title-task');
@@ -16,12 +20,26 @@ function addTaskValidation() {
   });
 }
 
-// Helper functions
+/**
+ * This function is adds eventlisteners to the input fields
+ *
+ * @param {element} inputField - div id of the input field
+ * @param {string} type - this is the type of the input field
+ * @param {element} passwordField  div id of the input field
+ */
 function addValidationListeners(inputField, type, passwordField) {
   inputField.addEventListener('blur', () => validateInput(inputField, type, passwordField));
   inputField.addEventListener('input', () => clearError(inputField));
 }
 
+/**
+ * This function is used for validate the error messages
+ *
+ * @param {element} inputField - div id of the input field
+ * @param {string} type - this is the type of the input field
+ * @param {element} passwordField  div id of the input field
+ * @returns - returns the function when the password is incorrect
+ */
 function validateInput(inputField, type, passwordField) {
   const value = inputField.value.trim();
   const parentNode = inputField.parentNode;
@@ -48,6 +66,12 @@ function validateInput(inputField, type, passwordField) {
   }
 }
 
+/**
+ * This function validates the passwords
+ *
+ * @param {element} confirmInput - This is the confirm password Input field
+ * @param {element} passwordInput - This is the password Input field
+ */
 function validateConfirmPassword(confirmInput, passwordInput) {
   const confirmValue = confirmInput.value.trim();
   const parent = confirmInput.parentNode;
@@ -69,6 +93,11 @@ function validateConfirmPassword(confirmInput, passwordInput) {
   }
 }
 
+/**
+ * This function validates the error messages
+ *
+ * @param {*} checkboxInput
+ */
 function validateCheckbox(checkboxInput) {
   const parent = checkboxInput.parentNode.parentNode;
   const errorClass = 'error';
@@ -80,6 +109,10 @@ function validateCheckbox(checkboxInput) {
   }
 }
 
+/**
+ * This function shows the error messages
+ *
+ */
 function showErrorMessage(parentNode, message) {
   let errorMessage = parentNode.querySelector('.error-message');
   if (!errorMessage) {
@@ -90,6 +123,11 @@ function showErrorMessage(parentNode, message) {
   errorMessage.textContent = message;
 }
 
+/**
+ * This function is used to hide error messages
+ *
+ * @param {element} parentNode - This is the parentNode of the div with the error-message class
+ */
 function hideErrorMessage(parentNode) {
   const errorMessage = parentNode.querySelector('.error-message');
   if (errorMessage) {
@@ -97,38 +135,39 @@ function hideErrorMessage(parentNode) {
   }
 }
 
+/**
+ * This function reset the error messages
+ *
+ * @param {element} inputField - This is the inputfield
+ */
 function clearError(inputField) {
   inputField.classList.remove('error');
   hideErrorMessage(inputField.parentNode);
 }
 
+/**
+ * This function validates the email input
+ *
+ * @param {element} email - this is the email input field
+ * @returns - validate the value
+ */
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+/**
+ * This changes the background of the sidebar
+ *
+ */
 function changeAddTaskButtonBackground() {
   let addTaskButton = document.getElementById('addTaskButton');
   addTaskButton.classList.add('menu-background');
 }
 
-function addTaskValidation() {
-  const addTaskForm = document.getElementById('addTask');
-  const title = document.getElementById('title-task');
-  const date = document.getElementById('custom-date');
-  const category = document.getElementById('category');
-
-  addValidationListeners(title, 'name');
-  addValidationListeners(date, 'name');
-  addValidationListeners(category, 'name');
-
-  addTaskForm.addEventListener('submit', function (event) {
-    event.preventDefault();
-    validateInput(title, 'name');
-    validateInput(date, 'name');
-    validateInput(category, 'name');
-  });
-}
-
+/**
+ * This funcion adds the validation to the edit task form
+ *
+ */
 function addTaskValidationEdit() {
   const addTaskForm = document.getElementById('addTask-edit');
   const title = document.getElementById('title-edit');
@@ -146,13 +185,26 @@ function addTaskValidationEdit() {
     validateInput(category, 'name');
   });
 }
-
-// Helper functions
+/**
+ * This function is adds eventlisteners to the input fields of the edit-task form
+ *
+ * @param {element} inputField - div id of the input field
+ * @param {string} type - this is the type of the input field
+ * @param {element} passwordField  div id of the input field
+ */
 function addValidationListenersEdit(inputField, type, passwordField) {
   inputField.addEventListener('blur', () => validateInputEdit(inputField, type, passwordField));
   inputField.addEventListener('input', () => clearErrorEdit(inputField));
 }
 
+/**
+ * This function is used for validate the error messages of the edit-task popup
+ *
+ * @param {element} inputField - div id of the input field
+ * @param {string} type - this is the type of the input field
+ * @param {element} passwordField  div id of the input field
+ * @returns - returns the function when the password is incorrect
+ */
 function validateInputEdit(inputField, type, passwordField) {
   const value = inputField.value.trim();
   const parentNode = inputField.parentNode;
@@ -179,6 +231,12 @@ function validateInputEdit(inputField, type, passwordField) {
   }
 }
 
+/**
+ * This function validates the passwords
+ *
+ * @param {element} confirmInput - This is the confirm password Input field
+ * @param {element} passwordInput - This is the password Input field
+ */
 function validateConfirmPasswordEdit(confirmInput, passwordInput) {
   const confirmValue = confirmInput.value.trim();
   const parent = confirmInput.parentNode;
@@ -200,6 +258,11 @@ function validateConfirmPasswordEdit(confirmInput, passwordInput) {
   }
 }
 
+/**
+ * This function validates the error messages of the edit-form
+ *
+ * @param {*} checkboxInput
+ */
 function validateCheckboxEdit(checkboxInput) {
   const parent = checkboxInput.parentNode.parentNode;
   const errorClass = 'error';
@@ -211,6 +274,10 @@ function validateCheckboxEdit(checkboxInput) {
   }
 }
 
+/**
+ * This function shows the error messages of the edit form
+ *
+ */
 function showErrorMessageEdit(parentNode, message) {
   let errorMessage = parentNode.querySelector('.error-message');
   if (!errorMessage) {
@@ -221,6 +288,11 @@ function showErrorMessageEdit(parentNode, message) {
   errorMessage.textContent = message;
 }
 
+/**
+ * This function is used to hide error messages of the edit form
+ *
+ * @param {element} parentNode - This is the parentNode of the div with the error-message class
+ */
 function hideErrorMessageEdit(parentNode) {
   const errorMessage = parentNode.querySelector('.error-message');
   if (errorMessage) {
@@ -228,11 +300,22 @@ function hideErrorMessageEdit(parentNode) {
   }
 }
 
+/**
+ * This function reset the error messages of the edit form
+ *
+ * @param {element} inputField - This is the inputfield
+ */
 function clearErrorEdit(inputField) {
   inputField.classList.remove('error');
   hideErrorMessageEdit(inputField.parentNode);
 }
 
+/**
+ * This function validates the email input of the edit form
+ *
+ * @param {element} email - this is the email input field
+ * @returns - validate the value
+ */
 function isValidEmailEdit(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }

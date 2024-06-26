@@ -1,3 +1,7 @@
+/**
+ * This function reset the helper objects
+ *
+ */
 function clearObjects() {
   assignedTo = [
     {
@@ -14,6 +18,10 @@ function clearObjects() {
   ];
 }
 
+/**
+ * This function reset the search function at the dropdown menu
+ *
+ */
 function resetSearch() {
   document.getElementById('contact-search').value = '';
   let contactElements = document.querySelectorAll('.contactShow');
@@ -24,6 +32,11 @@ function resetSearch() {
   });
 }
 
+/**
+ * This function is used for reset the form
+ *
+ * @param {event} event - Stops the default submit event
+ */
 function resetForm(event) {
   event.preventDefault();
   document.getElementById('addTask').reset();
@@ -45,6 +58,10 @@ function resetForm(event) {
   loadAddTaskContent();
 }
 
+/**
+ * This function removes the error messages
+ *
+ */
 function resetValidation() {
   const rows = ['first-row', 'second-row'];
 
@@ -61,6 +78,10 @@ function resetValidation() {
   formHasErrorTask = true;
 }
 
+/**
+ * This function reset the priority buttons
+ *
+ */
 function resetButtons() {
   document.getElementById('UrgentOne').style.fill = '#FF3D00';
   document.getElementById('UrgentTwo').style.fill = '#FF3D00';
@@ -78,6 +99,11 @@ function resetButtons() {
   priority = '';
 }
 
+/**
+ * This function reset the subtasks
+ *
+ * @param {element} element - This is the id of a subtask div
+ */
 function resetSubtask(element) {
   element.style.backgroundColor = '';
   let editElements = element.querySelectorAll('.edit-subtask');
@@ -95,11 +121,21 @@ function resetSubtask(element) {
   });
 }
 
+/**
+ * This function remove onclick a subtask
+ *
+ * @param {element} element - This is the subtask
+ */
 function deleteSubtask(element) {
   let subtaskTextElement = element.closest('li');
   subtaskTextElement.remove();
 }
 
+/**
+ * This function is used for remove symbols under the dropdown menu
+ *
+ * @param {number} i - this is the symbol number
+ */
 function removeSymbol(i) {
   let placeholder = document.getElementById('placeholder-edit');
   let symbolInPlaceholder = placeholder.querySelector(`#symbol-${i}-edit`);
@@ -110,6 +146,10 @@ function removeSymbol(i) {
   }
 }
 
+/**
+ * This function is used for reset the subtask input field
+ *
+ */
 function resetSubtaskInput() {
   document.getElementById('cancel-button').classList.add('d-none');
   document.getElementById('check-blue').classList.add('d-none');
