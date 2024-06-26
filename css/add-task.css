@@ -343,7 +343,7 @@ textarea::placeholder {
   border-bottom: 1px solid #29abe2;
   border-radius: unset;
   height: 20px;
-  width: 440px;
+  width: 420px;
   z-index: 999;
   position: absolute;
   left: 0;

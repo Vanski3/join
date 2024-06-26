@@ -120,11 +120,11 @@
          </svg>
          <div class="add-task-main-content">
             <main>
-               <form onsubmit="saveTask(event)" id="addTask" class="task-description">
+               <form novalidate onsubmit="saveTask(); return false" id="addTask" class="task-description">
                   <div class="first-row-popup">
-                     <div>
+                     <div id="first-row">
                         <span>Title<span class="red-star">*</span></span>
-                        <input class="my-inputs" required placeholder="Enter a title" type="text">
+                        <input id="title-task" class="my-inputs" required placeholder="Enter a title" type="text">
                      </div>
                      <div>
                         Description
@@ -153,10 +153,10 @@
 
                   <div class="seperator"></div>
 
-                  <div class="second-row-popup">
+                  <div class="second-row-popup" id="second-row">
                      <div>
                         <span>Due Date<span class="red-star">*</span></span>
-                        <input class="my-inputs" required type="date">
+                        <input id="custom-date" class="my-inputs" required type="date">
                      </div>
 
                      <div class="prio-container">
@@ -223,8 +223,6 @@
                   </div>
 
                   <div class="buttons">
-                     <button onclick="resetForm(event); return false" class="white-btn">Clear <img
-                           src="./assets/img/add-task/cancel.svg" alt=""></button>
                      <button type=submit class="blue-btn">Create Task <img src="./assets/img/add-task/check.svg"
                            alt=""></button>
                   </div>

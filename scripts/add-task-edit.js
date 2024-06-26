@@ -11,6 +11,7 @@ let subtasksEdit = [
     subtaskStatus: [],
   },
 ];
+let formHasErrorTaskEdit = true;
 
 function closeTaskOverlayEdit() {
   const overlay = document.getElementById('taskOverlay');
@@ -28,6 +29,7 @@ function editTask(i) {
   onloadContactsEdit(i);
   onloadFormValue(i);
   onclickRender();
+  addTaskValidationEdit();
 }
 
 function getSubtasksEdit(i) {
@@ -155,30 +157,44 @@ function getSavedSubtasksEdit() {
   }
 }
 
-function saveTaskEdit(event) {
-  event.preventDefault();
-  getSavedContactsEdit();
-  getSavedSubtasksEdit();
-  let bgColor = document.getElementById('category-edit');
-  let selectedIndex = bgColor.selectedIndex;
-  let selectedOption = (bgColor = bgColor.options[selectedIndex]);
-  let result = selectedOption.getAttribute('bgColor');
-  let inputFields = document.getElementsByClassName('my-inputs-edit');
-  let statusNumber = tasks.taskStatus[tasksNumber];
-  let newTaskEdit = {
-    title: inputFields[0].value,
-    description: inputFields[1].value,
-    assignedTo: assignedToEdit,
-    dueDate: inputFields[2].value,
-    priority: priority,
-    categoryName: inputFields[3].value,
-    subtasksTest: subtasksEdit,
-    taskStatus: statusNumber,
-    categoryBGColor: result,
-  };
-  mergeObjectsEdit(tasks, newTaskEdit);
-  loadBoardContent();
-  closeTaskOverlayEdit();
+function saveTaskEdit() {
+  const rows = ['first-row-edit', 'second-row-edit'];
+
+  rows.forEach((rowId) => {
+    let form = document.getElementById(rowId);
+    form.querySelectorAll('*').forEach((element) => {
+      if (element.classList.contains('error')) {
+        formHasErrorTaskEdit = true;
+      }
+    });
+  });
+  if (formHasErrorTaskEdit) {
+    formHasErrorTaskEdit = false;
+    return;
+  } else {
+    getSavedContactsEdit();
+    getSavedSubtasksEdit();
+    let bgColor = document.getElementById('category-edit');
+    let selectedIndex = bgColor.selectedIndex;
+    let selectedOption = (bgColor = bgColor.options[selectedIndex]);
+    let result = selectedOption.getAttribute('bgColor');
+    let inputFields = document.getElementsByClassName('my-inputs-edit');
+    let statusNumber = tasks.taskStatus[tasksNumber];
+    let newTaskEdit = {
+      title: inputFields[0].value,
+      description: inputFields[1].value,
+      assignedTo: assignedToEdit,
+      dueDate: inputFields[2].value,
+      priority: priority,
+      categoryName: inputFields[3].value,
+      subtasksTest: subtasksEdit,
+      taskStatus: statusNumber,
+      categoryBGColor: result,
+    };
+    mergeObjectsEdit(tasks, newTaskEdit);
+    loadBoardContent();
+    closeTaskOverlayEdit();
+  }
 }
 
 function mergeObjectsEdit(tasks, newTaskEdit) {

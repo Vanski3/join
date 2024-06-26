@@ -33,7 +33,7 @@ function resetForm(event) {
   }
   resetButtons();
   resetValidation();
-  handleMediumClick(event);
+  loadAddTaskContent();
 }
 
 function resetValidation() {
@@ -101,4 +101,13 @@ function removeSymbol(i) {
     document.getElementById('checkbox-' + i + '-edit').src = './assets/img/login/checkbox.svg';
     document.getElementById('contact-' + i + '-edit').style.background = '';
   }
+}
+
+function resetSubtaskInput() {
+  document.getElementById('cancel-button').classList.add('d-none');
+  document.getElementById('check-blue').classList.add('d-none');
+  document.getElementById('mini-seperator').style.display = 'none';
+  let subtaskInput = document.getElementById('subtasks');
+  subtaskInput.style.backgroundImage = 'url(../assets/img/add-task/plus.svg)';
+  subtaskInput.value = '';
 }

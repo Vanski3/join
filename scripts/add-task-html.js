@@ -139,7 +139,7 @@ function renderToListEditHTML(j, contact) {
 
 function editTaskHTML() {
   return /*html*/ `
-        <form onsubmit="saveTaskEdit(event); return false" id="addTask-edit" class="task-description-edit">
+        <form novalidate onsubmit="saveTaskEdit(); return false" id="addTask-edit" class="task-description-edit">
         <img
                      onclick="closeTaskOverlayEdit()"
                      id="closeTaskOverlay"
@@ -149,9 +149,9 @@ function editTaskHTML() {
                      src="./assets/img/task-overlay/close-icon.svg"
                      alt="" />
                       <div class="first-row-edit">
-                         <div>
+                         <div id="first-row-edit"> 
                             <span>Title<span class="red-star">*</span></span>
-                            <input class="my-inputs-edit" required placeholder="Enter a title" type="text">
+                            <input id="title-edit" class="my-inputs-edit" required placeholder="Enter a title" type="text">
                          </div>
                          <div>
                             Description
@@ -177,10 +177,10 @@ function editTaskHTML() {
                          </div>
                       </div>
     
-                      <div class="second-row-edit">
+                      <div class="second-row-edit" id="second-row-edit">
                          <div>
                             <span>Due Date<span class="red-star">*</span></span>
-                            <input class="my-inputs-edit" id="custom-date" required type="date">
+                            <input class="my-inputs-edit" id="custom-date-edit" required type="date">
                          </div>
     
                          <div class="prio-container">
@@ -267,4 +267,18 @@ function renderToListHTML(i, contact) {
       </div>
   </li>        
   `;
+}
+
+function addSubtasksHTML(subtasks) {
+  return /*html*/ `
+   <li onmouseover="changeSubtask(this)" ondblclick="changeSubtask(this)" onmouseout="resetSubtask(this)" class="subtask-link" status="open">
+    <span>&#10625 <span class="subtask-text">${subtasks.value}</span></span>
+    <span>
+       <img onclick="editSubtask(this)" class="edit-subtask d-none" id="edit-subtask"
+          src="./assets/img/add-task/edit-subtask.svg" alt="">
+       <div class="mini-seperator-subtask" id="mini-seperator-subtask" style="display: none"></div>
+       <img onclick="deleteSubtask(this)" class="trash-subtask d-none" id="trash-subtask"
+          src="./assets/img/add-task/trash.svg" alt="">
+    </span>
+   </li>`;
 }

@@ -257,14 +257,6 @@ function newSubtaskInput() {
   document.getElementById('subtasks').style.backgroundImage = 'unset';
 }
 
-function resetSubtaskInput() {
-  document.getElementById('cancel-button').classList.add('d-none');
-  document.getElementById('check-blue').classList.add('d-none');
-  document.getElementById('mini-seperator').style.display = 'none';
-  document.getElementById('subtasks').style.backgroundImage =
-    'url(../assets/img/add-task/plus.svg)';
-}
-
 function changeSubtask(element) {
   let imgElements = element.querySelectorAll('img');
   imgElements.forEach(function (img) {
@@ -283,15 +275,7 @@ function addSubtasks() {
 
   let placeholder = document.getElementById('subtask-placeholder');
   if (subtasks.value.length >= 1) {
-    placeholder.innerHTML += /*html*/ `
-    <li onmouseover="changeSubtask(this)" onmouseout="resetSubtask(this)" class="subtask-link" status="open">
-    <span>&#10625 <span class="subtask-text">${subtasks.value}</span></span>
-      <span>
-        <img onclick="editSubtask(this)" class="edit-subtask d-none" id="edit-subtask" src="./assets/img/add-task/edit-subtask.svg" alt="">
-        <div class="mini-seperator-subtask" id="mini-seperator-subtask" style="display: none"></div>
-        <img onclick="deleteSubtask(this)" class="trash-subtask d-none" id="trash-subtask" src="./assets/img/add-task/trash.svg" alt="">
-      </span>
-    </li>`;
+    placeholder.innerHTML += addSubtasksHTML(subtasks);
     subtasks.value = '';
     resetSubtaskInput();
   }
