@@ -1,12 +1,12 @@
 /**
  * Renders the summary view in the main content area.
  */
-function renderSummary() {
+function renderSummary(fromMobile = false) {
    const name = sessionStorage.getItem('name') ?? 'Guest';
    const content = document.querySelector('.main-content');
    content.innerHTML = '';
    content.innerHTML += /*html*/ `
-       <main id="summaryMain" class="summary-main summary-main-slide">
+       <main id="summaryMain" class="summary-main ${fromMobile ? 'summary-main-slide' : ''}">
         <div class="headline-wrapper"><span class="headline" id="daytime">Good morning,</span><span id="username"> ${name}</span></div>
           <div class="summary-wrapper">
               <div class="row1">
@@ -66,6 +66,11 @@ function renderSummary() {
               </div>
           </div>
       </main>`;
+   if (fromMobile) {
+      setTimeout(() => {
+         document.querySelector('.summary-main').classList.remove('summary-main-slide');
+      }, 1000);
+   }
    removeBackgroundLowerSidebar();
    removeButtonBackground();
    changeSummaryButtonBackground();
@@ -77,7 +82,8 @@ function renderSummary() {
 /**
  * Renders the total amount of tasks and calls individual task amount rendering functions.
  */
-function renderTaskAmount() {
+async function renderTaskAmount() {
+   await loadTasksData(); // Wait for tasks to be fetched and populated
    let taskNumber = document.getElementById('task-in-board');
    let taskAmount = tasks.taskStatus.length;
    taskNumber.innerHTML = `${taskAmount}`;

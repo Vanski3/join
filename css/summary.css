@@ -185,6 +185,13 @@
    color: black;
 }
 
+.greeting-mobile-daytime {
+   font-size: 48px;
+   font-weight: 700;
+   display: flex;
+   text-align: center;
+}
+
 @keyframes slideUp {
    from {
       transform: translateY(100%);
