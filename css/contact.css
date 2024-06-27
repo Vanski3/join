@@ -246,7 +246,7 @@
 }
 
 .contact-person-icon {
-  background-color: #D1D1D1;
+  background-color: #d1d1d1;
   border-radius: 50%;
   padding: 36px;
   border: 2px solid white;
@@ -378,7 +378,7 @@
     display: none;
   }
 
-  .contact.selected+.contact-detail {
+  .contact.selected + .contact-detail {
     display: block;
   }
 
@@ -418,14 +418,14 @@
   }
 }
 
-@media (max-width: 460px){
-  .contact-input-group input{
+@media (max-width: 460px) {
+  .contact-input-group input {
     width: 290px;
   }
 }
 
-@media (max-width: 450px){
-  .contact-input-group input{
+@media (max-width: 450px) {
+  .contact-input-group input {
     width: 270px;
   }
 
@@ -434,73 +434,71 @@
     margin-bottom: 0;
   }
 
-  .contact-description{
+  .contact-description {
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding-left: 64px;
   }
 
-  .contact-logo-slogan{
+  .contact-logo-slogan {
     padding-left: 60px;
   }
 
-  .contact-icon-container{
+  .contact-icon-container {
     padding-left: 62px;
   }
 }
 
-@media (max-width: 440px){
-  .contact-input-group input{
+@media (max-width: 440px) {
+  .contact-input-group input {
     width: 250px;
   }
 }
 
-@media (max-width: 430px){
-  .contact-input-group input{
+@media (max-width: 430px) {
+  .contact-input-group input {
     width: 230px;
   }
 
-  .contact-description{
+  .contact-description {
     padding-left: 84px;
   }
 
-  .contact-logo-slogan{
+  .contact-logo-slogan {
     padding-left: 80px;
   }
 
-  .contact-icon-container{
+  .contact-icon-container {
     padding-left: 82px;
   }
 }
 
-@media (max-width: 400px){
-  .contact-input-group input{
+@media (max-width: 400px) {
+  .contact-input-group input {
     width: 200px;
   }
 }
 
-@media (max-width: 390px){
-
+@media (max-width: 390px) {
   .contact-popup-header {
     padding: 85px;
   }
 
-  .contact-description{
+  .contact-description {
     padding-left: 90px;
   }
 
-  .contact-logo-slogan{
+  .contact-logo-slogan {
     padding-left: 90px;
   }
 
-  .contact-icon-container{
+  .contact-icon-container {
     padding-left: 92px;
   }
 }
 
-@media (max-width: 370px){
-
+@media (max-width: 370px) {
   .contact-popup-header {
     padding: 80px;
   }
@@ -512,14 +510,13 @@
   }
 }
 
-@media (max-width: 350px){
-
+@media (max-width: 350px) {
   .contact-description,
-  .contact-logo-slogan{
+  .contact-logo-slogan {
     padding-left: 110px;
   }
 
-  .contact-icon-container{
+  .contact-icon-container {
     top: 220px;
     padding-left: 110px;
   }
@@ -529,8 +526,7 @@
   }
 }
 
-@media (max-width: 340px){
-
+@media (max-width: 340px) {
   .contact-popup-header {
     padding: 75px;
   }
@@ -550,8 +546,7 @@
   }
 }
 
-@media (max-width: 330px){
-
+@media (max-width: 330px) {
   .contact-popup-header {
     padding: 75px;
   }
