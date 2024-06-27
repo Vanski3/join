@@ -9,7 +9,7 @@ function clearObjects() {
       nameInitials: [],
     },
   ];
-  subtasks = [
+  subtasksTest = [
     {
       subtask: [],
       subtaskStatus: [],

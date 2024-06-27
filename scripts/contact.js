@@ -355,21 +355,33 @@ function saveContact(event) {
 //  * Adds validation listeners to the edit contact form.
 //  */
 // function addTaskValidationEditContact() {
-//   const addTaskForm = document.getElementById('edit-contact');
-//   const name = document.getElementById('name-edit-contact');
-//   const email = document.getElementById('email-edit-contact');
-//   const phone = document.getElementById('phone-edit-contact');
+//   const addTaskFormEditContact = document.getElementById('edit-contact');
+//   const nameEditContact = document.getElementById('name-edit-contact');
+//   const emailEditContact = document.getElementById('email-edit-contact');
+//   const phoneEditContact = document.getElementById('phone-edit-contact');
 
-//   addValidationListeners(name, 'name');
-//   addValidationListeners(email, 'email');
-//   addValidationListeners(phone, 'phone');
+//   addValidationListenersEditContact(nameEditContact, 'name');
+//   addValidationListenersEditContact(emailEditContact, 'email');
+//   addValidationListenersEditContact(phoneEditContact, 'phone');
 
-//   addTaskForm.addEventListener('submit', function (event) {
+//   addTaskFormEditContact.addEventListener('submit', function (event) {
 //     event.preventDefault();
-//     validateInput(name, 'name');
-//     validateInput(email, 'email');
-//     validateInput(phone, 'phone');
+//     validateInputEditContact(nameEditContact, 'name');
+//     validateInputEditContact(emailEditContact, 'email');
+//     validateInputEditContact(phoneEditContact, 'phone');
 //   });
+// }
+
+// /**
+//  * Adds validation listeners to input fields.
+//  *
+//  * @param {HTMLElement} inputField - The input field element.
+//  * @param {string} type - The type of the input field.
+//  * @param {HTMLElement} passwordField - The password input field element.
+//  */
+// function addValidationListenersEditContact(inputField, type) {
+//   inputField.addEventListener('blur', () => validateInput(inputField, type));
+//   inputField.addEventListener('input', () => clearError(inputField));
 // }
 
 // /**
@@ -379,14 +391,14 @@ function saveContact(event) {
 //  * @param {string} type - The type of the input field.
 //  * @param {HTMLElement} [passwordField] - The password input field for confirm password validation.
 //  */
-// function validateInput(inputField, type, passwordField) {
+// function validateInputEditContact(inputField, type, passwordField) {
 //   const value = inputField.value.trim();
 //   const parentNode = inputField.parentNode;
 //   const errorClass = 'error-edit-contact';
 //   let errorMessage = '';
 
 //   if (type === 'confirmPassword') {
-//     validateConfirmPassword(inputField, passwordField);
+//     validateConfirmPasswordEditContact(inputField, passwordField);
 //     return;
 //   }
 
@@ -419,7 +431,7 @@ function saveContact(event) {
 //  * @param {HTMLElement} confirmInput - The confirm password input field.
 //  * @param {HTMLElement} passwordInput - The password input field.
 //  */
-// function validateConfirmPassword(confirmInput, passwordInput) {
+// function validateConfirmPasswordEditContact(confirmInput, passwordInput) {
 //   const confirmValue = confirmInput.value.trim();
 //   const parent = confirmInput.parentNode;
 //   const errorClass = 'error';
@@ -433,10 +445,10 @@ function saveContact(event) {
 
 //   if (errorMessage) {
 //     confirmInput.classList.add(errorClass);
-//     showErrorMessage(parent, errorMessage);
+//     showErrorMessageEditContact(parent, errorMessage);
 //   } else {
 //     confirmInput.classList.remove(errorClass);
-//     hideErrorMessage(parent);
+//     hideErrorMessageEditContact(parent);
 //   }
 // }
 
@@ -445,14 +457,14 @@ function saveContact(event) {
 //  *
 //  * @param {HTMLElement} checkboxInput - The checkbox input field.
 //  */
-// function validateCheckbox(checkboxInput) {
+// function validateCheckboxEditContact(checkboxInput) {
 //   const parent = checkboxInput.parentNode.parentNode;
 //   const errorClass = 'error-edit-contact';
 
 //   if (!checkboxInput.checked) {
-//     showErrorMessage(parent, 'You must accept the Privacy policy');
+//     showErrorMessageEditContact(parent, 'You must accept the Privacy policy');
 //   } else {
-//     hideErrorMessage(parent);
+//     hideErrorMessageEditContact(parent);
 //   }
 // }
 
@@ -462,7 +474,7 @@ function saveContact(event) {
 //  * @param {HTMLElement} parentNode - The parent node of the input field.
 //  * @param {string} message - The error message to show.
 //  */
-// function showErrorMessage(parentNode, message) {
+// function showErrorMessageEditContact(parentNode, message) {
 //   let errorMessage = parentNode.querySelector('.error-message');
 //   if (!errorMessage) {
 //     errorMessage = document.createElement('div');
@@ -477,7 +489,7 @@ function saveContact(event) {
 //  *
 //  * @param {HTMLElement} parentNode - The parent node of the input field.
 //  */
-// function hideErrorMessage(parentNode) {
+// function hideErrorMessageEditContact(parentNode) {
 //   const errorMessage = parentNode.querySelector('.error-message');
 //   if (errorMessage) {
 //     errorMessage.remove();
@@ -491,7 +503,7 @@ function saveContact(event) {
 //  */
 // function clearError(inputField) {
 //   inputField.classList.remove('error');
-//   hideErrorMessage(inputField.parentNode);
+//   hideErrorMessageEditContact(inputField.parentNode);
 // }
 
 // /**
@@ -500,7 +512,7 @@ function saveContact(event) {
 //  * @param {string} email - The email address to validate.
 //  * @returns {boolean} True if the email is valid, otherwise false.
 //  */
-// function isValidEmail(email) {
+// function isValidEmailEditContact(email) {
 //   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 // }
 
@@ -510,6 +522,6 @@ function saveContact(event) {
 //  * @param {string} phone - The phone number to validate.
 //  * @returns {boolean} True if the phone number is valid, otherwise false.
 //  */
-// function isValidPhone(phone) {
+// function isValidPhoneEditContact(phone) {
 //   return /^\+?[0-9]{5,15}$/.test(phone);
 // }

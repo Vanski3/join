@@ -11,7 +11,7 @@ let assignedTo = [
     nameInitials: [],
   },
 ];
-let subtasks = [
+let subtasksTest = [
   {
     subtask: [],
     subtaskStatus: [],
@@ -112,12 +112,14 @@ function getSelectedContacts() {
  * Collects selected subtasks and pushes them to the subtasks object.
  */
 function getSelectedSubtasks() {
-  let placeholder = document.getElementById('subtask-placeholder').childNodes;
-  for (let i = 0; i < placeholder.length; i++) {
-    let subtask = placeholder[i].innerHTML;
-    let status = placeholder[i].getAttribute('status');
-    subtasks[0].subtask.push(subtask);
-    subtasks[0].subtaskStatus.push(status);
+  let liElements = document.querySelectorAll('#subtask-placeholder li.subtask-link');
+  let subtasks = [{ subtask: [], subtaskStatus: [] }];
+  for (let i = 0; i < liElements.length; i++) {
+    let subtaskTextElement = liElements[i].querySelector('.subtask-text');
+    let subtaskText = subtaskTextElement.textContent;
+    let status = liElements[i].getAttribute('status');
+    subtasksTest[0].subtask.push(subtaskText);
+    subtasksTest[0].subtaskStatus.push(status);
   }
 }
 
@@ -172,7 +174,7 @@ function saveTaskElse() {
     dueDate: inputFields[2].value,
     priority: priority,
     categoryName: inputFields[3].value,
-    subtasksTest: subtasks,
+    subtasksTest: subtasksTest,
     taskStatus: taskSelection,
     categoryBGColor: result,
   };
