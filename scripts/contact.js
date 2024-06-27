@@ -96,7 +96,7 @@ function renderEditContact(id) {
                 <h1>Edit contact</h1>
             </div>
             <div class="img-container">
-                <img class="popup-header-img" src="./assets/img/contact/cancel-white.svg">
+                <img onclick="closeEditContainer()" class="popup-header-img" src="./assets/img/contact/cancel-white.svg">
             </div>
             
         </div>
