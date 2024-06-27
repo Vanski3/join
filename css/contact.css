@@ -361,6 +361,7 @@
 @media (max-width: 990px) {
   .contacts-list {
     width: 350px;
+    margin-bottom: 80px;
   }
 }
 
