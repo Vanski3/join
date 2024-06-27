@@ -1,6 +1,5 @@
 /**
- * This function reset the helper objects
- *
+ * Resets the helper objects.
  */
 function clearObjects() {
   assignedTo = [
@@ -19,8 +18,7 @@ function clearObjects() {
 }
 
 /**
- * This function reset the search function at the dropdown menu
- *
+ * Resets the search input and displays all contacts in the dropdown menu.
  */
 function resetSearch() {
   document.getElementById('contact-search').value = '';
@@ -33,9 +31,9 @@ function resetSearch() {
 }
 
 /**
- * This function is used for reset the form
+ * Resets the form and its elements.
  *
- * @param {event} event - Stops the default submit event
+ * @param {Event} event - The event object to prevent the default submit event.
  */
 function resetForm(event) {
   event.preventDefault();
@@ -59,8 +57,7 @@ function resetForm(event) {
 }
 
 /**
- * This function removes the error messages
- *
+ * Removes error messages from the form.
  */
 function resetValidation() {
   const rows = ['first-row', 'second-row'];
@@ -79,8 +76,7 @@ function resetValidation() {
 }
 
 /**
- * This function reset the priority buttons
- *
+ * Resets the priority buttons to their default state.
  */
 function resetButtons() {
   document.getElementById('UrgentOne').style.fill = '#FF3D00';
@@ -100,9 +96,9 @@ function resetButtons() {
 }
 
 /**
- * This function reset the subtasks
+ * Resets the styles of a subtask element.
  *
- * @param {element} element - This is the id of a subtask div
+ * @param {HTMLElement} element - The subtask element to reset.
  */
 function resetSubtask(element) {
   element.style.backgroundColor = '';
@@ -122,9 +118,9 @@ function resetSubtask(element) {
 }
 
 /**
- * This function remove onclick a subtask
+ * Removes a subtask element when clicked.
  *
- * @param {element} element - This is the subtask
+ * @param {HTMLElement} element - The subtask element to remove.
  */
 function deleteSubtask(element) {
   let subtaskTextElement = element.closest('li');
@@ -132,9 +128,9 @@ function deleteSubtask(element) {
 }
 
 /**
- * This function is used for remove symbols under the dropdown menu
+ * Removes a symbol from the dropdown menu.
  *
- * @param {number} i - this is the symbol number
+ * @param {number} i - The index of the symbol to remove.
  */
 function removeSymbol(i) {
   let placeholder = document.getElementById('placeholder-edit');
@@ -147,8 +143,7 @@ function removeSymbol(i) {
 }
 
 /**
- * This function is used for reset the subtask input field
- *
+ * Resets the subtask input field to its default state.
  */
 function resetSubtaskInput() {
   document.getElementById('cancel-button').classList.add('d-none');
