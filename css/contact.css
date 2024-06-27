@@ -325,7 +325,6 @@
 
 .task-dialog {
   background: white;
-  border-radius: 5px;
   max-width: 500px;
   transition: right 0.3s ease;
   position: absolute;

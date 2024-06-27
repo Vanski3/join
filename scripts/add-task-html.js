@@ -7,7 +7,7 @@ function loadAddTaskContentHTML() {
   return /*html*/ `
         <div class="add-task-main-content">
         <main>
-           <form novalidate onsubmit="saveTask(); return false" id="addTask" class="task-description">
+           <form novalidate onsubmit="setTimeout(saveTask, 1000); return false" id="addTask" class="task-description">
               <div class="first-row">
                  <div id="first-row">
                     <span>Title<span class="red-star">*</span></span>

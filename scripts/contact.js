@@ -148,7 +148,7 @@ function renderEditContact(id) {
     </div>
   `;
   getContactToEditForm(contact);
-  addTaskValidation();
+  addTaskValidationEditContact();
 }
 
 /**
@@ -254,7 +254,7 @@ function openContactDialog() {
   const contactPopup = document.getElementById('contact-dialog-container');
   const contactDialog = document.querySelector('#contact-dialog-container .task-dialog');
 
-  contactPopup.style.display = 'flex'; 
+  contactPopup.style.display = 'flex';
   setTimeout(() => {
     contactDialog.style.right = '0';
   }, 50);
@@ -355,7 +355,7 @@ function saveContact(event) {
 /**
  * Adds validation listeners to the edit contact form.
  */
-function addTaskValidation() {
+function addTaskValidationEditContact() {
   const addTaskForm = document.getElementById('edit-contact');
   const name = document.getElementById('name-edit-contact');
   const email = document.getElementById('email-edit-contact');
