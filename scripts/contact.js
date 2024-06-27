@@ -9,6 +9,7 @@ function loadContactsContent() {
       return response.json();
     })
     .then((data) => {
+      console.log('Contacts loaded:', data);
       contactsData = data; // Store contacts data
       renderContacts(contactsData);
     })
@@ -205,7 +206,7 @@ function openContactDialog() {
 function closeContactDialog() {
   const contactDialog = document.querySelector('#contact-dialog-container .task-dialog');
 
-  contactDialog.classList.remove('show');
+  contactDialog.classList.remove('show'); // Remove class to hide the dialog
   setTimeout(() => {
     document.getElementById('contact-dialog-container').style.display = 'none';
   }, 300);
@@ -244,4 +245,30 @@ function changeColorSidebarContacts() {
 function changeContactsButtonBackground(params) {
   let contactButton = document.getElementById('contactButton');
   contactButton.classList.add('menu-background');
+}
+
+function saveContact(event) {
+  event.preventDefault();
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const phone = document.getElementById('phone').value;
+  const initials = name
+    .split(' ')
+    .map((word) => word[0].toUpperCase())
+    .join('');
+  const color = '#' + Math.floor(Math.random() * 16777215).toString(16); // Random color
+
+  const newContact = {
+    id: Date.now().toString(),
+    name,
+    email,
+    phone,
+    initials,
+    color,
+  };
+
+  contactsData.push(newContact);
+  renderContacts(contactsData);
+  closeContactDialog();
+  document.getElementById('addContact').reset(); // Reset form
 }

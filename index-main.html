@@ -253,55 +253,53 @@
    <!-- Create Contact Popup -->
    <div id="contact-dialog-container" class="dialog-container">
       <div class="task-dialog" onclick="event.stopPropagation()">
-         <!-- <h1>Add Contact</h1> -->
-         <svg onclick="closeContactDialog()" class="close-button" width="32" height="32" viewBox="0 0 24 25" fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <path
-               d="M12.0011 12.4998L17.2441 17.7428M6.75806 17.7428L12.0011 12.4998L6.75806 17.7428ZM17.2441 7.25684L12.0001 12.4998L17.2441 7.25684ZM12.0001 12.4998L6.75806 7.25684L12.0001 12.4998Z"
-               stroke="#4589FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-         </svg>
-         <div class="add-dialog-main-content">
-            <main>
-               <div id="task-dialog-container" class="contact-dialog-container">
-                  <div class="contact-dialog" onclick="event.stopPropagation()">
-                     <div class="popup-header">
-                        <img src="/assets/img/logo-white.svg" alt="Logo">
-                        <h1>Add contact</h1>
-                        <p>Tasks are better with a team!</p>
-                        <svg onclick="closeContactDialog()" class="close-button" width="32" height="32"
-                           viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                           <path
-                              d="M12.0011 12.4998L17.2441 17.7428M6.75806 17.7428L12.0011 12.4998L6.75806 17.7428ZM17.2441 7.25684L12.0001 12.4998L17.2441 7.25684ZM12.0001 12.4998L6.75806 7.25684L12.0001 12.4998Z"
-                              stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                     </div>
-                     <div class="add-contact-main-content">
-                        <div class="avatar-placeholder">
-                           <img src="path/to/avatar-placeholder.png" alt="Avatar">
-                        </div>
-                        <main>
-                           <form onsubmit="saveContact(event)" id="addContact" class="contact-description">
-                              <div class="input-group">
-                                 <label for="name" style="display: none;">Name</label>
-                                 <input type="text" id="name" name="name" placeholder="Name">
-                              </div>
-                              <div class="input-group">
-                                 <label for="email" style="display: none;">Email</label>
-                                 <input type="email" id="email" name="email" placeholder="Email">
-                              </div>
-                              <div class="input-group">
-                                 <label for="phone" style="display: none;">Phone</label>
-                                 <input type="text" id="phone" name="phone" placeholder="Phone">
-                              </div>
-                              <div class="button-group">
-                                 <button type="button" onclick="closeContactDialog()" class="cancel-btn">Cancel</button>
-                                 <button type="submit" class="create-btn">Create contact</button>
-                              </div>
-                           </form>
-                        </main>
-                     </div>
-                  </div>
+         <div class="contact-dialog">
+            <div class="contact-popup-header">
+               <div class="contact-logo-slogan">
+                  <img class="contact-logo-white" src="/assets/img/logo-white.svg" alt="Logo">
+                  <h1>Add contact</h1>
+                  <p>Tasks are better with a team!</p>
                </div>
+               <div class="contact-img-container">
+                  <svg onclick="closeContactDialog()" class="contact-close-btn" width="32" height="32"
+                     viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     <path
+                        d="M12.0011 12.4998L17.2441 17.7428M6.75806 17.7428L12.0011 12.4998L6.75806 17.7428ZM17.2441 7.25684L12.0001 12.4998L17.2441 7.25684ZM12.0001 12.4998L6.75806 7.25684L12.0001 12.4998Z"
+                        stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+               </div>
+            </div>
+
+            <main class="contact-popup-main">
+               <div class="contact-icon-container">
+                  <img src="/assets/img/contact/person-white.svg" alt="Person Icon" class="contact-person-icon">
+               </div>
+               <form onsubmit="saveContact(event)" id="addContact" class="contact-description">
+                  <div class="contact-input-group">
+                     <input type="text" id="name" name="name" placeholder="Name">
+                     <img src="/assets/img/contact/person.svg" class="contact-input-icon" alt="Person Icon">
+                  </div>
+                  <div class="contact-input-group">
+                     <input type="email" id="email" name="email" placeholder="Email">
+                     <img src="/assets/img/contact/mail.svg" class="contact-input-icon" alt="Mail Icon">
+                  </div>
+                  <div class="contact-input-group">
+                     <input type="text" id="phone" name="phone" placeholder="Phone">
+                     <img src="/assets/img/contact/call.svg" class="contact-input-icon" alt="Call Icon">
+                  </div>
+                  <div class="contact-button-group">
+                     <button type="button" onclick="closeContactDialog()" class="contact-cancel-btn">Cancel <img
+                           src="/assets/img/contact/iconoir_cancel.svg" alt=""></button>
+                     <button type="submit" class="contact-create-btn">Create contact <img
+                           src="/assets/img/contact/check-btn.svg" alt=""></button>
+                  </div>
+               </form>
+            </main>
+         </div>
+      </div>
+   </div>
+
+
 </body>
 
 </html>
