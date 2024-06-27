@@ -7,6 +7,7 @@ let allDataFromFirebase = [];
 function init(params) {
    loadTasksData();
    loadallDataFromFirebase();
+   welcomeTextMobile();
 }
 
 function openTaskDialog(parameter = null) {
@@ -271,7 +272,6 @@ function deleteCurrentTask(i) {
 async function loadTasksData(path = '/tasks') {
    let fetchTasks = await fetch(BASE_URL + path + '.json');
    tasks = await fetchTasks.json();
-   renderSummary();
 }
 
 async function loadallDataFromFirebase() {

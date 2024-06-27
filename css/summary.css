@@ -9,7 +9,7 @@
 
    /* background colours */
    --bg-clr-1: #ffffff;
-   --bg-clr-2: #D2E3FF;
+   --bg-clr-2: #d2e3ff;
 
    --headline-1: 3rem;
    --headline-2: 4rem;
@@ -185,6 +185,17 @@
    color: black;
 }
 
+@keyframes slideUp {
+   from {
+      transform: translateY(100%);
+      opacity: 0;
+   }
+   to {
+      transform: translateY(0);
+      opacity: 1;
+   }
+}
+
 @media only screen and (max-width: 1200px) {
    .summary-wrapper {
       width: 90%;
@@ -267,5 +278,9 @@
 
    .date span {
       font-size: 0.75rem;
+   }
+
+   .summary-main-slide {
+      animation: slideUp 0.5s ease-out;
    }
 }

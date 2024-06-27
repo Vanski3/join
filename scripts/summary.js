@@ -1,11 +1,9 @@
-// renderSummary()
-
 function renderSummary() {
-  const name = sessionStorage.getItem('name') ?? 'Guest';
-  const content = document.querySelector('.main-content');
-  content.innerHTML = '';
-  content.innerHTML += /*html*/ `
-     <main class="summary-main">
+   const name = sessionStorage.getItem('name') ?? 'Guest';
+   const content = document.querySelector('.main-content');
+   content.innerHTML = '';
+   content.innerHTML += /*html*/ `
+     <main id="summaryMain" class="summary-main summary-main-slide">
       <div class="headline-wrapper"><span class="headline" id="daytime">Good morning,</span><span id="username"> ${name}</span></div>
         <div class="summary-wrapper">
             <div class="row1">
@@ -65,97 +63,97 @@ function renderSummary() {
             </div>
         </div>
     </main>`;
-  removeBackgroundLowerSidebar();
-  removeButtonBackground();
-  changeSummaryButtonBackground();
-  removeColorSideBar();
-  changeColorSideSummary();
-  renderTaskAmount();
+   removeBackgroundLowerSidebar();
+   removeButtonBackground();
+   changeSummaryButtonBackground();
+   removeColorSideBar();
+   changeColorSideSummary();
+   renderTaskAmount();
 }
 
 function renderTaskAmount() {
-  let taskNumber = document.getElementById('task-in-board');
+   let taskNumber = document.getElementById('task-in-board');
 
-  let taskAmount = tasks.taskStatus.length;
-  taskNumber.innerHTML = `${taskAmount}`;
-  renderTaskToDoAmount();
-  renderTaskinProgressAmount();
-  renderTaskAwaitingAmount();
-  renderTaskDoneAmount();
-  renderDueDate();
-  renderUrgendTaskAmount();
-  renderGetGreeting();
+   let taskAmount = tasks.taskStatus.length;
+   taskNumber.innerHTML = `${taskAmount}`;
+   renderTaskToDoAmount();
+   renderTaskinProgressAmount();
+   renderTaskAwaitingAmount();
+   renderTaskDoneAmount();
+   renderDueDate();
+   renderUrgendTaskAmount();
+   renderGetGreeting();
 }
 
 function renderGetGreeting() {
-  let daytime = document.getElementById('daytime');
-  let now = new Date();
-  let hour = now.getHours();
+   let daytime = document.getElementById('daytime');
+   let now = new Date();
+   let hour = now.getHours();
 
-  if (hour >= 5 && hour < 12) {
-    daytime.innerHTML = 'Good Morning,';
-  } else if (hour >= 12 && hour < 17) {
-    daytime.innerHTML = 'Good Afternoon,';
-  } else if (hour >= 17 && hour < 21) {
-    daytime.innerHTML = 'Good Evening,';
-  } else {
-    daytime.innerHTML = 'Time for bed,';
-  }
+   if (hour >= 5 && hour < 12) {
+      daytime.innerHTML = 'Good Morning,';
+   } else if (hour >= 12 && hour < 17) {
+      daytime.innerHTML = 'Good Afternoon,';
+   } else if (hour >= 17 && hour < 21) {
+      daytime.innerHTML = 'Good Evening,';
+   } else {
+      daytime.innerHTML = 'Time for bed,';
+   }
 }
 
 function renderUrgendTaskAmount() {
-  let taskNumber = document.getElementById('urgent');
-  let CountThrees = tasks.priority.filter((task) => task === 'urgent').length;
+   let taskNumber = document.getElementById('urgent');
+   let CountThrees = tasks.priority.filter((task) => task === 'urgent').length;
 
-  taskNumber.innerHTML = `${CountThrees}`;
+   taskNumber.innerHTML = `${CountThrees}`;
 }
 
 function renderDueDate() {
-  let dateContainer = document.getElementById('date');
-  let earliestDate = tasks.dueDate.reduce((earliest, current) => {
-    return new Date(current) < new Date(earliest) ? current : earliest;
-  });
-  let date = new Date(earliestDate);
-  let options = { year: 'numeric', month: 'long', day: 'numeric' };
-  let formattedDate = date.toLocaleDateString('en-US', options);
+   let dateContainer = document.getElementById('date');
+   let earliestDate = tasks.dueDate.reduce((earliest, current) => {
+      return new Date(current) < new Date(earliest) ? current : earliest;
+   });
+   let date = new Date(earliestDate);
+   let options = { year: 'numeric', month: 'long', day: 'numeric' };
+   let formattedDate = date.toLocaleDateString('en-US', options);
 
-  dateContainer.innerHTML = `${formattedDate}`;
+   dateContainer.innerHTML = `${formattedDate}`;
 }
 
 function renderTaskDoneAmount() {
-  let taskNumber = document.getElementById('done');
-  let CountThrees = tasks.taskStatus.filter((task) => task === '3').length;
+   let taskNumber = document.getElementById('done');
+   let CountThrees = tasks.taskStatus.filter((task) => task === '3').length;
 
-  taskNumber.innerHTML = `${CountThrees}`;
+   taskNumber.innerHTML = `${CountThrees}`;
 }
 
 function renderTaskAwaitingAmount() {
-  let taskNumber = document.getElementById('feedback');
-  let countTwos = tasks.taskStatus.filter((task) => task === '2').length;
+   let taskNumber = document.getElementById('feedback');
+   let countTwos = tasks.taskStatus.filter((task) => task === '2').length;
 
-  taskNumber.innerHTML = `${countTwos}`;
+   taskNumber.innerHTML = `${countTwos}`;
 }
 
 function renderTaskinProgressAmount() {
-  let taskNumber = document.getElementById('todo');
-  let countZeroes = tasks.taskStatus.filter((task) => task === '0').length;
+   let taskNumber = document.getElementById('todo');
+   let countZeroes = tasks.taskStatus.filter((task) => task === '0').length;
 
-  taskNumber.innerHTML = `${countZeroes}`;
+   taskNumber.innerHTML = `${countZeroes}`;
 }
 
 function renderTaskToDoAmount() {
-  let taskNumber = document.getElementById('in-progress');
-  let countOnes = tasks.taskStatus.filter((task) => task === '1').length;
+   let taskNumber = document.getElementById('in-progress');
+   let countOnes = tasks.taskStatus.filter((task) => task === '1').length;
 
-  taskNumber.innerHTML = `${countOnes}`;
+   taskNumber.innerHTML = `${countOnes}`;
 }
 
 function changeSummaryButtonBackground(params) {
-  let summaryButton = document.getElementById('summaryButton');
-  summaryButton.classList.add('menu-background');
+   let summaryButton = document.getElementById('summaryButton');
+   summaryButton.classList.add('menu-background');
 }
 
 function changeColorSideSummary(params) {
-  document.getElementById('sidebarImgSummary').classList.add('color-img-sidebar');
-  document.getElementById('fontSummarySidebar').classList.add('menu-row-font');
+   document.getElementById('sidebarImgSummary').classList.add('color-img-sidebar');
+   document.getElementById('fontSummarySidebar').classList.add('menu-row-font');
 }

@@ -140,10 +140,6 @@ header span {
    cursor: pointer;
 }
 
-/* .header-headline:hover {
-   cursor: pointer;
-} */
-
 .user-icon-popup {
    height: 137px;
    width: 172px;
@@ -196,6 +192,19 @@ header span {
 .user-icon-popup a:hover {
    background-color: var(--hover-lightblue);
    cursor: pointer;
+}
+
+.greeting-mobile {
+   font-size: 48px;
+   font-weight: 700;
+}
+
+.greeting-div-mobile {
+   height: 100%;
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }
 
 @media only screen and (max-width: 800px) {

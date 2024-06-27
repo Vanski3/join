@@ -40,3 +40,14 @@ function removeBackgroundLowerSidebar(params) {
    let privacePoliceButton = document.getElementById('privacePoliceButton');
    privacePoliceButton.classList.remove('active-link');
 }
+
+function welcomeTextMobile(params) {
+   document.getElementById('mainContent').innerHTML = /*html*/ `
+   <div class="greeting-div-mobile">
+      <span class="greeting-mobile">Hello !</span>
+   </div>
+   `;
+   setTimeout(() => {
+      renderSummary();
+   }, 1500);
+}
