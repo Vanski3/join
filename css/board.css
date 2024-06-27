@@ -416,7 +416,9 @@ h1 {
 }
 
 .highlight {
-   border: 2px dashed blue; /* or any other style you prefer */
+   border: 1px dashed #a8a8a8;
+   border-radius: 10px;
+   background-color: rgb(233, 233, 233);
 }
 
 @media only screen and (max-width: 1400px) {

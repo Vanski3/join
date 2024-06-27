@@ -28,7 +28,7 @@ function loadBoardContentHTML() {
                    src="./assets/img/board/add-button-default.svg"
                    alt="" />
              </div>
-             <div id="taskStatus0" class="task-div" ondrop="drop(event)" ondragover="allowDrop(event)">
+             <div id="taskStatus0" class="task-div" ondrop="drop(event)" ondragover="allowDrop(event)" ondragenter="highlight(event)">
              </div>
           </div>
           <div class="tasks-column">
@@ -40,7 +40,7 @@ function loadBoardContentHTML() {
                    src="./assets/img/board/add-button-default.svg"
                    alt="" />
              </div>
-             <div id="taskStatus1" class="task-div" ondrop="drop(event)" ondragover="allowDrop(event)">
+             <div id="taskStatus1" class="task-div" ondrop="drop(event)" ondragover="allowDrop(event)" ondragenter="highlight(event)">
              </div>
           </div>
           <div class="tasks-column">
@@ -52,14 +52,14 @@ function loadBoardContentHTML() {
                    src="./assets/img/board/add-button-default.svg"
                    alt="" />
              </div>
-             <div id="taskStatus2" class="task-div" ondrop="drop(event)" ondragover="allowDrop(event)">
+             <div id="taskStatus2" class="task-div" ondrop="drop(event)" ondragover="allowDrop(event)" ondragenter="highlight(event)">
              </div>
           </div>
           <div class="tasks-column">
              <div class="board-headline">
                 <span id="board-done">Done</span>
              </div>
-             <div id="taskStatus3" class="task-div" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+             <div id="taskStatus3" class="task-div" ondrop="drop(event, 'taskStatus3')" ondragover="allowDrop(event)" ondragenter="highlight(event)"></div>
           </div>
        </div>
     </main>
@@ -68,7 +68,7 @@ function loadBoardContentHTML() {
 
 function renderBoardCardsHTML(i, title, description, categoryName) {
    return /*html*/ `
-    <div id="boardCard${i}" draggable="true" ondragstart="drag(event)" class="board-card" onclick="renderTaskOverlay(${i})">
+    <div id="boardCard${i}" draggable="true" ondragstart="drag(event)" class="board-card no-drag" onclick="renderTaskOverlay(${i})">
       <div class="header-row-board-card" id="headerRowBoardCard${i}">
         <img id="categorieImg${i}" class="card-label" src="./assets/img/board/${categoryName}.svg" alt="" />
         <img onclick="showMoveToPopup(event, ${i})" class="move-to-img" src="./assets/img/board/Move-to.svg" alt="">
