@@ -14,7 +14,6 @@ function loadContactsContent() {
       return response.json();
     })
     .then((data) => {
-      console.log('Contacts loaded:', data);
       contactsData = data; // Store contacts data
       renderContacts(contactsData);
     })
