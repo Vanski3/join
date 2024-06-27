@@ -372,15 +372,15 @@ textarea::placeholder {
   border-bottom: 1px solid #29abe2;
   border-radius: unset;
   height: 20px;
-  width: 420px;
   z-index: 999;
   position: absolute;
   left: 0;
   top: 0;
+  width: 420px;
   padding: 5px 10px;
   background-image: none;
-  max-width: 80%;
   overflow-x: scroll;
+  display: flex;
 }
 
 .edit-subtask {
@@ -405,6 +405,22 @@ textarea::placeholder {
 }
 
 #subtask-placeholder::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+}
+
+#subtask-placeholder-edit {
+  max-height: 80px;
+}
+
+#subtask-placeholder-edit::-webkit-scrollbar {
+  width: 5px;
+}
+
+#subtask-placeholder-edit::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+#subtask-placeholder-edit::-webkit-scrollbar-thumb {
   background-color: darkgrey;
 }
 

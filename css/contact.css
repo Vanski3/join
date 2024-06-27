@@ -325,7 +325,6 @@
 
 .task-dialog {
   background: white;
-  border-radius: 5px;
   max-width: 500px;
   transition: right 0.3s ease;
   position: absolute;
@@ -361,13 +360,16 @@
 @media (max-width: 990px) {
   .contacts-list {
     width: 350px;
-    margin-bottom: 80px;
   }
 }
 
 @media (max-width: 800px) {
   .contacts-container {
     flex-direction: column;
+  }
+
+  .contacts-list {
+    margin-bottom: 80px;
   }
 
   .contacts-list,

@@ -237,3 +237,29 @@
   background-color: var(--button-blue);
   color: #fff;
 }
+
+@media (max-width: 600px) {
+  .dialog-edit {
+    right: 0;
+    width: 100%;
+  }
+
+  .popup-header {
+    width: 100%;
+    border-top-right-radius: unset;
+  }
+
+  .popup-header-img {
+    right: 40px;
+  }
+}
+
+@media (max-width: 450px) {
+  .contact-description {
+    padding-left: 0;
+  }
+
+  .input-group input {
+    width: 90%;
+  }
+}

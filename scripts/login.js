@@ -11,15 +11,13 @@ let password = document.getElementById('passwordSignup');
 let confirm_password = document.getElementById('confirmSignup');
 
 /**
- * This is password validation
- *
+ * Validates the password and confirms password fields.
  */
 password.onchange = validatePassword;
 confirm_password.onkeyup = validatePassword;
 
 /**
- * This is used for the form login validation
- *
+ * Sets up password visibility toggles for the given input fields.
  */
 setupToggle('loginPassword', 'togglePassword');
 setupToggle('passwordSignup', 'toggleSignupPassword');
@@ -31,9 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /**
- * This function is used for the remember me checkbox
+ * Initializes checkbox listeners for the remember me functionality.
  *
- * @param {element} checkboxId - This is the id of the checkbox
+ * @param {string} checkboxId - The ID of the checkbox.
  */
 function initializeCheckboxListeners(checkboxId) {
   const checkbox = document.getElementById(checkboxId);
@@ -58,8 +56,7 @@ function initializeCheckboxListeners(checkboxId) {
 }
 
 /**
- * This function enable the sign up button
- *
+ * Enables or disables the sign-up button.
  */
 function enableBtn() {
   let btn = document.getElementById('blue-btn');
@@ -67,16 +64,14 @@ function enableBtn() {
 }
 
 /**
- * This function shows the signup page
- *
+ * Displays the sign-up page.
  */
 function showSignupPage() {
   showSignup.show();
 }
 
 /**
- * This function close the signup page
- *
+ * Closes the sign-up page and resets the form.
  */
 function closeSignupPage() {
   showSignup.close();
@@ -84,10 +79,10 @@ function closeSignupPage() {
 }
 
 /**
- * This function is used for showing the password
+ * Updates the visibility icon based on the password field state.
  *
- * @param {element} inputField - This is the password input id
- * @param {*} iconElement - This is the img id
+ * @param {HTMLElement} inputField - The password input field.
+ * @param {HTMLElement} iconElement - The icon element.
  */
 function updateIcon(inputField, iconElement) {
   iconElement.src =
@@ -97,10 +92,10 @@ function updateIcon(inputField, iconElement) {
 }
 
 /**
- * This function is used for the password visibility
+ * Sets up the password visibility toggle functionality.
  *
- * @param {element} inputFieldId - this is the password input field
- * @param {element} iconElementId - This is the img id
+ * @param {string} inputFieldId - The ID of the password input field.
+ * @param {string} iconElementId - The ID of the icon element.
  */
 function setupToggle(inputFieldId, iconElementId) {
   let inputField = document.getElementById(inputFieldId);
@@ -121,8 +116,7 @@ function setupToggle(inputFieldId, iconElementId) {
 }
 
 /**
- * This function gets the local storage
- *
+ * Retrieves the stored login information from local storage.
  */
 function getLocalStorage() {
   let storageName = localStorage.getItem('login');
@@ -133,8 +127,7 @@ function getLocalStorage() {
 }
 
 /**
- * This function is used for get all user from the API
- *
+ * Loads all users from the API and stores them in the user array.
  */
 async function onloadFunc() {
   user = [];
@@ -159,10 +152,10 @@ async function onloadFunc() {
 }
 
 /**
- * This function connect the page with the api
+ * Fetches all users from the API.
  *
- * @param {string} path - user path at the api
- * @returns - Return the response to a json
+ * @param {string} path - The user path in the API.
+ * @returns {Promise<Object>} The response data in JSON format.
  */
 async function getAllUser(path) {
   let response = await fetch(BASE_URL + path + '.json');
@@ -173,8 +166,7 @@ async function getAllUser(path) {
 }
 
 /**
- * This function checks if the user is signed up
- *
+ * Checks if the user is signed up and logs them in.
  */
 function loginUser() {
   let loginEmail = document.getElementById('loginEmail');
@@ -195,9 +187,9 @@ function loginUser() {
 }
 
 /**
- * This function set the session storage when u logged in
+ * Sets the session storage for the logged-in user.
  *
- * @param {element} loginEmail - This is the id if the email input field
+ * @param {HTMLElement} loginEmail - The email input field element.
  */
 function setSessionStorage(loginEmail) {
   let result = user.filter((user) => user.email === loginEmail.value);
@@ -210,6 +202,9 @@ function setSessionStorage(loginEmail) {
   sessionStorage.setItem('name', name);
 }
 
+/**
+ * Waits for a brief moment before creating a new user.
+ */
 function waitCreatUser() {
   setTimeout(() => {
     createUser();
@@ -217,9 +212,9 @@ function waitCreatUser() {
 }
 
 /**
- * This function create a user, creates an user object and put the object to the api
+ * Creates a new user, validates the form, and sends the user data to the API.
  *
- * @returns - When the form validation is incorrect, then function stops
+ * @returns {Promise<void>} Stops function execution if the form validation fails.
  */
 async function createUser() {
   let signupName = document.getElementById('signupName').value;
@@ -250,16 +245,16 @@ async function createUser() {
 }
 
 /**
- * This function puts the data to the api
+ * Sends data to the API.
  *
- * @param {string} path - exact path to the api
- * @param {object} data - new data object
- * @returns
+ * @param {string} path - The exact path to the API.
+ * @param {Object} data - The data object to be sent.
+ * @returns {Promise<Object>} The response data in JSON format.
  */
 async function putData(path = '', data = {}) {
   let response = await fetch(BASE_URL + path + '.json', {
     method: 'PUT',
-    header: {
+    headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
@@ -268,8 +263,7 @@ async function putData(path = '', data = {}) {
 }
 
 /**
- * This is the password validation
- *
+ * Validates the password and confirm password fields.
  */
 function validatePassword() {
   if (password.value != confirm_password.value) {
@@ -280,8 +274,7 @@ function validatePassword() {
 }
 
 /**
- * This function is the guest login button with no form validation
- *
+ * Logs in as a guest without form validation.
  */
 function guestLogin() {
   sessionStorage.setItem('initials', 'G');
@@ -290,11 +283,11 @@ function guestLogin() {
 }
 
 /**
- * This function adds eventlisteners to the input fields
+ * Adds validation listeners to input fields.
  *
- * @param {element} inputField - This is the input field
- * @param {string} type - this is the type of the input field
- * @param {element} passwordField - this is the password input field
+ * @param {HTMLElement} inputField - The input field element.
+ * @param {string} type - The type of the input field.
+ * @param {HTMLElement} passwordField - The password input field element.
  */
 function addValidationListeners(inputField, type, passwordField) {
   inputField.addEventListener('blur', () => validateInput(inputField, type, passwordField));
@@ -302,12 +295,11 @@ function addValidationListeners(inputField, type, passwordField) {
 }
 
 /**
- * This function is used for form validation
+ * Validates the input fields.
  *
- * @param {element} inputField - This is the input field
- * @param {string} type - this is the type of the input field
- * @param {element} passwordField - this is the password input field
- * @returns
+ * @param {HTMLElement} inputField - The input field element.
+ * @param {string} type - The type of the input field.
+ * @param {HTMLElement} passwordField - The password input field element.
  */
 function validateInput(inputField, type, passwordField) {
   const value = inputField.value.trim();
@@ -342,10 +334,10 @@ function validateInput(inputField, type, passwordField) {
 }
 
 /**
- * This function is used for the password validation
+ * Validates the confirm password field.
  *
- * @param {element} confirmInput - Confirm input field
- * @param {element} passwordInput - Password input field
+ * @param {HTMLElement} confirmInput - The confirm password input field.
+ * @param {HTMLElement} passwordInput - The password input field.
  */
 function validateConfirmPassword(confirmInput, passwordInput) {
   const confirmValue = confirmInput.value.trim();
@@ -369,9 +361,9 @@ function validateConfirmPassword(confirmInput, passwordInput) {
 }
 
 /**
- * This function adds the error message, when the input is not filled
+ * Validates the checkbox input field.
  *
- * @param {element} checkboxInput - Input fields
+ * @param {HTMLElement} checkboxInput - The checkbox input field.
  */
 function validateCheckbox(checkboxInput) {
   const parent = checkboxInput.parentNode.parentNode;
@@ -385,10 +377,10 @@ function validateCheckbox(checkboxInput) {
 }
 
 /**
- * This function shows the error message
+ * Shows an error message for an input field.
  *
- * @param {element} parentNode - this is the parentnode of the element with the error-message class
- * @param {string} message - this is the showed message
+ * @param {HTMLElement} parentNode - The parent node of the input field.
+ * @param {string} message - The error message to be displayed.
  */
 function showErrorMessage(parentNode, message) {
   let errorMessage = parentNode.querySelector('.error-message');
@@ -401,9 +393,9 @@ function showErrorMessage(parentNode, message) {
 }
 
 /**
- * This function hides the error message
+ * Hides the error message for an input field.
  *
- * @param {element} parentNode - this is the parentnode of the element with the error-message class
+ * @param {HTMLElement} parentNode - The parent node of the input field.
  */
 function hideErrorMessage(parentNode) {
   const errorMessage = parentNode.querySelector('.error-message');
@@ -413,9 +405,9 @@ function hideErrorMessage(parentNode) {
 }
 
 /**
- * This function remove the div with the error class
+ * Clears the error class and hides the error message for an input field.
  *
- * @param {element} inputField - this is the inputfield
+ * @param {HTMLElement} inputField - The input field element.
  */
 function clearError(inputField) {
   inputField.classList.remove('error');
@@ -423,18 +415,17 @@ function clearError(inputField) {
 }
 
 /**
- * This function is used for email validation
+ * Validates the email input field.
  *
- * @param {element} email - this is the email input field
- * @returns
+ * @param {string} email - The email input value.
+ * @returns {boolean} True if the email is valid, otherwise false.
  */
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 /**
- * This adds eventlistener to the login form
- *
+ * Adds event listeners for form validation on DOMContentLoaded.
  */
 document.addEventListener('DOMContentLoaded', function () {
   const loginForm = document.getElementById('loginForm');

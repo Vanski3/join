@@ -143,23 +143,21 @@ function taskCategory(parameter) {
  *
  */
 function saveTask() {
-  setTimeout(() => {
-    const rows = ['first-row', 'second-row'];
-    rows.forEach((rowId) => {
-      let form = document.getElementById(rowId);
-      form.querySelectorAll('*').forEach((element) => {
-        if (element.classList.contains('error')) {
-          formHasErrorTask = true;
-        }
-      });
+  const rows = ['first-row', 'second-row'];
+  rows.forEach((rowId) => {
+    let form = document.getElementById(rowId);
+    form.querySelectorAll('*').forEach((element) => {
+      if (element.classList.contains('error-edit-contact')) {
+        formHasErrorTask = true;
+      }
     });
-    if (formHasErrorTask) {
-      formHasErrorTask = false;
-      return;
-    } else {
-      saveTaskElse();
-    }
-  }, 500);
+  });
+  if (formHasErrorTask) {
+    formHasErrorTask = false;
+    return;
+  } else {
+    saveTaskElse();
+  }
 }
 
 /**
