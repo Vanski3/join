@@ -9,8 +9,8 @@ let allDataFromFirebase = [];
  *
  * @param {Object} [params] - Optional parameters (not used in the function).
  */
-function init(params) {
-   loadTasksData();
+async function init(params) {
+   await loadTasksData(); // Wait for tasks to be fetched and populated
    loadallDataFromFirebase();
    welcomeTextMobile();
 }

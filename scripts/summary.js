@@ -22,8 +22,7 @@ function renderSummary(fromMobile = false) {
 /**
  * Renders the total amount of tasks and calls individual task amount rendering functions.
  */
-async function renderTaskAmount() {
-   await loadTasksData(); // Wait for tasks to be fetched and populated
+function renderTaskAmount() {
    let taskNumber = document.getElementById('task-in-board');
    let taskAmount = tasks.taskStatus.length;
    taskNumber.innerHTML = `${taskAmount}`;
