@@ -1,6 +1,10 @@
 let contactsData = [];
 let formHasErrorEditContact = false;
 
+/**
+ * Loads contacts content from a JSON file, updates the contactsData array,
+ * and renders the contacts on the page.
+ */
 function loadContactsContent() {
   fetch('/scripts/contact.json')
     .then((response) => {
@@ -22,6 +26,11 @@ function loadContactsContent() {
   changeColorSidebarContacts();
 }
 
+/**
+ * Renders the contacts on the page.
+ *
+ * @param {Array} contacts - An array of contact objects.
+ */
 function renderContacts(contacts) {
   const content = document.getElementById('mainContent');
   content.innerHTML = /*html*/ `
@@ -36,7 +45,7 @@ function renderContacts(contacts) {
 
   const contactsList = document.querySelector('.contacts-list');
 
-  // Sortiert Kontakte nach Namen
+  // Sort contacts by name
   contacts.sort((a, b) => a.name.localeCompare(b.name));
 
   let currentLetter = '';
@@ -76,6 +85,12 @@ function renderContacts(contacts) {
   }
 }
 
+/**
+ * Gets a contact by its ID.
+ *
+ * @param {string} id - The ID of the contact.
+ * @returns {Object|null} The contact object if found, otherwise null.
+ */
 function getContact(id) {
   for (let i = 0; i < contactsData.length; i++) {
     if (contactsData[i].id === id.toString()) {
@@ -85,6 +100,11 @@ function getContact(id) {
   return null;
 }
 
+/**
+ * Renders the edit contact form for a specific contact.
+ *
+ * @param {string} id - The ID of the contact to edit.
+ */
 function renderEditContact(id) {
   let contact = getContact(id);
   document.getElementById('edit-popup').style.display = 'unset';
@@ -131,6 +151,11 @@ function renderEditContact(id) {
   addTaskValidation();
 }
 
+/**
+ * Saves the edited contact information.
+ *
+ * @param {string} id - The ID of the contact to save.
+ */
 function saveContactEdit(id) {
   let form = document.getElementById('edit-contact');
   form.querySelectorAll('*').forEach((element) => {
@@ -156,6 +181,11 @@ function saveContactEdit(id) {
   }
 }
 
+/**
+ * Populates the edit form with the contact's current information.
+ *
+ * @param {Object} contact - The contact object to edit.
+ */
 function getContactToEditForm(contact) {
   let backgroundcolor = contact.color;
   document.getElementById('person-icon').style.backgroundColor = backgroundcolor;
@@ -164,6 +194,12 @@ function getContactToEditForm(contact) {
   document.getElementById('phone-edit-contact').value = contact.phone;
 }
 
+/**
+ * Renders the details of a selected contact.
+ *
+ * @param {HTMLElement} contactElement - The HTML element of the contact.
+ * @param {Object} contact - The contact object.
+ */
 function renderContactDetail(contactElement, contact) {
   document.querySelectorAll('.contact').forEach((element) => {
     element.classList.remove('selected');
@@ -197,6 +233,11 @@ function renderContactDetail(contactElement, contact) {
   `;
 }
 
+/**
+ * Deletes a contact by its ID.
+ *
+ * @param {string} id - The ID of the contact to delete.
+ */
 function deleteContact(id) {
   const index = contactsData.findIndex((contact) => contact.id === id);
   if (index !== -1) {
@@ -206,16 +247,22 @@ function deleteContact(id) {
   }
 }
 
+/**
+ * Opens the contact dialog to add a new contact.
+ */
 function openContactDialog() {
   const contactPopup = document.getElementById('contact-dialog-container');
   const contactDialog = document.querySelector('#contact-dialog-container .task-dialog');
 
-  contactPopup.style.display = 'flex'; // Use flex to enable centering
+  contactPopup.style.display = 'flex'; 
   setTimeout(() => {
     contactDialog.style.right = '0';
   }, 50);
 }
 
+/**
+ * Closes the contact dialog.
+ */
 function closeContactDialog() {
   const contactDialog = document.querySelector('#contact-dialog-container .task-dialog');
 
@@ -225,11 +272,19 @@ function closeContactDialog() {
   }, 300);
 }
 
+/**
+ * Closes the edit contact popup and deletes the contact.
+ *
+ * @param {string} id - The ID of the contact to delete.
+ */
 function closeEditContainer(id) {
   document.getElementById('edit-popup').style.display = 'none';
   deleteContact(id);
 }
 
+/**
+ * Toggles the visibility of the contact list and contact details on smaller screens.
+ */
 function toggleContactView() {
   const contactsList = document.querySelector('.contacts-list');
   const contactDetail = document.querySelector('.contact-detail');
@@ -250,16 +305,27 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+/**
+ * Changes the color of the sidebar for the contacts section.
+ */
 function changeColorSidebarContacts() {
   document.getElementById('sidebarImgContact').classList.add('color-img-sidebar');
   document.getElementById('fontContactsSidebar').classList.add('menu-row-font');
 }
 
+/**
+ * Changes the background color of the contacts button.
+ */
 function changeContactsButtonBackground(params) {
   let contactButton = document.getElementById('contactButton');
   contactButton.classList.add('menu-background');
 }
 
+/**
+ * Saves a new contact from the contact form.
+ *
+ * @param {Event} event - The form submission event.
+ */
 function saveContact(event) {
   event.preventDefault();
   const name = document.getElementById('name').value;
@@ -286,6 +352,9 @@ function saveContact(event) {
   document.getElementById('addContact').reset(); // Reset form
 }
 
+/**
+ * Adds validation listeners to the edit contact form.
+ */
 function addTaskValidation() {
   const addTaskForm = document.getElementById('edit-contact');
   const name = document.getElementById('name-edit-contact');
@@ -305,12 +374,11 @@ function addTaskValidation() {
 }
 
 /**
- * This function is used for form validation
+ * Validates the input fields in the form.
  *
- * @param {element} inputField - This is the input field
- * @param {string} type - this is the type of the input field
- * @param {element} passwordField - this is the password input field
- * @returns
+ * @param {HTMLElement} inputField - The input field element.
+ * @param {string} type - The type of the input field.
+ * @param {HTMLElement} [passwordField] - The password input field for confirm password validation.
  */
 function validateInput(inputField, type, passwordField) {
   const value = inputField.value.trim();
@@ -347,10 +415,10 @@ function validateInput(inputField, type, passwordField) {
 }
 
 /**
- * This function is used for the password validation
+ * Validates the confirm password field.
  *
- * @param {element} confirmInput - Confirm input field
- * @param {element} passwordInput - Password input field
+ * @param {HTMLElement} confirmInput - The confirm password input field.
+ * @param {HTMLElement} passwordInput - The password input field.
  */
 function validateConfirmPassword(confirmInput, passwordInput) {
   const confirmValue = confirmInput.value.trim();
@@ -374,9 +442,9 @@ function validateConfirmPassword(confirmInput, passwordInput) {
 }
 
 /**
- * This function adds the error message, when the input is not filled
+ * Validates a checkbox input field.
  *
- * @param {element} checkboxInput - Input fields
+ * @param {HTMLElement} checkboxInput - The checkbox input field.
  */
 function validateCheckbox(checkboxInput) {
   const parent = checkboxInput.parentNode.parentNode;
@@ -390,10 +458,10 @@ function validateCheckbox(checkboxInput) {
 }
 
 /**
- * This function shows the error message
+ * Shows an error message for an input field.
  *
- * @param {element} parentNode - this is the parentnode of the element with the error-message class
- * @param {string} message - this is the showed message
+ * @param {HTMLElement} parentNode - The parent node of the input field.
+ * @param {string} message - The error message to show.
  */
 function showErrorMessage(parentNode, message) {
   let errorMessage = parentNode.querySelector('.error-message');
@@ -406,9 +474,9 @@ function showErrorMessage(parentNode, message) {
 }
 
 /**
- * This function hides the error message
+ * Hides the error message for an input field.
  *
- * @param {element} parentNode - this is the parentnode of the element with the error-message class
+ * @param {HTMLElement} parentNode - The parent node of the input field.
  */
 function hideErrorMessage(parentNode) {
   const errorMessage = parentNode.querySelector('.error-message');
@@ -418,9 +486,9 @@ function hideErrorMessage(parentNode) {
 }
 
 /**
- * This function remove the div with the error class
+ * Clears the error message for an input field.
  *
- * @param {element} inputField - this is the inputfield
+ * @param {HTMLElement} inputField - The input field element.
  */
 function clearError(inputField) {
   inputField.classList.remove('error');
@@ -428,20 +496,20 @@ function clearError(inputField) {
 }
 
 /**
- * This function is used for email validation
+ * Validates an email address.
  *
- * @param {element} email - this is the email input field
- * @returns
+ * @param {string} email - The email address to validate.
+ * @returns {boolean} True if the email is valid, otherwise false.
  */
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 /**
- * This function is used for phone number validation
+ * Validates a phone number.
  *
- * @param {element} phone - this is the phone input field
- * @returns
+ * @param {string} phone - The phone number to validate.
+ * @returns {boolean} True if the phone number is valid, otherwise false.
  */
 function isValidPhone(phone) {
   return /^\+?[0-9]{5,15}$/.test(phone);
