@@ -1,4 +1,5 @@
 let contactsData = [];
+let formHasErrorEditContact = false;
 
 function loadContactsContent() {
   fetch('/scripts/contact.json')
@@ -105,7 +106,7 @@ function renderEditContact(id) {
             <div class="icon-container">
               <div id="person-icon">${contact.initials}</div>
             </div>
-            <form onsubmit="saveContactEdit('${id}')" id="addContact" class="contact-description">
+            <form onsubmit="saveContactEdit('${id}')"id="edit-contact" class="contact-description">
                 <div class="input-group">
                    <input type="text" id="name-edit-contact" name="name" placeholder="Name">
                    <img src="./assets/img/contact/person.svg" class="input-icon" alt="Person Icon">
@@ -127,19 +128,31 @@ function renderEditContact(id) {
     </div>
   `;
   getContactToEditForm(contact);
+  addTaskValidation();
 }
 
 function saveContactEdit(id) {
-  let index = contactsData.findIndex((contact) => contact.id === id.toString());
+  let form = document.getElementById('edit-contact');
+  form.querySelectorAll('*').forEach((element) => {
+    if (element.classList.contains('error-edit-contact')) {
+      formHasErrorEditContact = true;
+    }
+  });
+  if (formHasErrorEditContact) {
+    formHasErrorEditContact = false;
+    return;
+  } else {
+    let index = contactsData.findIndex((contact) => contact.id === id.toString());
 
-  if (index !== -1) {
-    let newName = document.getElementById('name-edit-contact').value;
-    let newMail = document.getElementById('email-edit-contact').value;
-    let newPhone = document.getElementById('phone-edit-contact').value;
-    contactsData[index].name = newName;
-    contactsData[index].email = newMail;
-    contactsData[index].phone = newPhone;
-    renderContacts(contactsData);
+    if (index !== -1) {
+      let newName = document.getElementById('name-edit-contact').value;
+      let newMail = document.getElementById('email-edit-contact').value;
+      let newPhone = document.getElementById('phone-edit-contact').value;
+      contactsData[index].name = newName;
+      contactsData[index].email = newMail;
+      contactsData[index].phone = newPhone;
+      renderContacts(contactsData);
+    }
   }
 }
 
@@ -271,4 +284,314 @@ function saveContact(event) {
   renderContacts(contactsData);
   closeContactDialog();
   document.getElementById('addContact').reset(); // Reset form
+}
+
+// function addTaskValidation() {
+//   const addTaskForm = document.getElementById('edit-contact');
+//   const name = document.getElementById('name-edit-contact');
+//   const email = document.getElementById('email-edit-contact');
+//   const phone = document.getElementById('phone-edit-contact');
+
+//   addValidationListeners(name, 'name');
+//   addValidationListeners(email, 'email');
+//   addValidationListeners(phone, 'name');
+
+//   addTaskForm.addEventListener('submit', function (event) {
+//     event.preventDefault();
+//     validateInput(name, 'name');
+//     validateInput(email, 'email');
+//     validateInput(phone, 'name');
+//   });
+// }
+
+// /**
+//  * This function is used for form validation
+//  *
+//  * @param {element} inputField - This is the input field
+//  * @param {string} type - this is the type of the input field
+//  * @param {element} passwordField - this is the password input field
+//  * @returns
+//  */
+// function validateInput(inputField, type, passwordField) {
+//   const value = inputField.value.trim();
+//   const parentNode = inputField.parentNode;
+//   const errorClass = 'error-edit-contact';
+//   let errorMessage = '';
+
+//   if (type === 'confirmPassword') {
+//     validateConfirmPassword(inputField, passwordField);
+//     return;
+//   }
+
+//   if (type === 'name') {
+//     if (value === '') {
+//       errorMessage = 'This field is required';
+//     } else if (!value.includes(' ')) {
+//       errorMessage = 'Please enter both first name and last name';
+//     }
+//   } else if (type === 'email' && !isValidEmail(value)) {
+//     errorMessage = 'Please enter a valid email address';
+//   } else if (type === 'password' && value.length < 8) {
+//     errorMessage = 'Password must be at least 8 characters';
+//   }
+
+//   if (errorMessage) {
+//     inputField.classList.add(errorClass);
+//     showErrorMessage(parentNode, errorMessage);
+//   } else {
+//     inputField.classList.remove(errorClass);
+//     hideErrorMessage(parentNode);
+//   }
+// }
+
+// /**
+//  * This function is used for the password validation
+//  *
+//  * @param {element} confirmInput - Confirm input field
+//  * @param {element} passwordInput - Password input field
+//  */
+// function validateConfirmPassword(confirmInput, passwordInput) {
+//   const confirmValue = confirmInput.value.trim();
+//   const parent = confirmInput.parentNode;
+//   const errorClass = 'error';
+//   let errorMessage = '';
+
+//   if (confirmValue === '') {
+//     errorMessage = 'This field is required';
+//   } else if (confirmValue !== passwordInput.value.trim()) {
+//     errorMessage = 'Passwords do not match';
+//   }
+
+//   if (errorMessage) {
+//     confirmInput.classList.add(errorClass);
+//     showErrorMessage(parent, errorMessage);
+//   } else {
+//     confirmInput.classList.remove(errorClass);
+//     hideErrorMessage(parent);
+//   }
+// }
+
+// /**
+//  * This function adds the error message, when the input is not filled
+//  *
+//  * @param {element} checkboxInput - Input fields
+//  */
+// function validateCheckbox(checkboxInput) {
+//   const parent = checkboxInput.parentNode.parentNode;
+//   const errorClass = 'error-edit-contact';
+
+//   if (!checkboxInput.checked) {
+//     showErrorMessage(parent, 'You must accept the Privacy policy');
+//   } else {
+//     hideErrorMessage(parent);
+//   }
+// }
+
+// /**
+//  * This function shows the error message
+//  *
+//  * @param {element} parentNode - this is the parentnode of the element with the error-message class
+//  * @param {string} message - this is the showed message
+//  */
+// function showErrorMessage(parentNode, message) {
+//   let errorMessage = parentNode.querySelector('.error-message');
+//   if (!errorMessage) {
+//     errorMessage = document.createElement('div');
+//     errorMessage.classList.add('error-message');
+//     parentNode.appendChild(errorMessage);
+//   }
+//   errorMessage.textContent = message;
+// }
+
+// /**
+//  * This function hides the error message
+//  *
+//  * @param {element} parentNode - this is the parentnode of the element with the error-message class
+//  */
+// function hideErrorMessage(parentNode) {
+//   const errorMessage = parentNode.querySelector('.error-message');
+//   if (errorMessage) {
+//     errorMessage.remove();
+//   }
+// }
+
+// /**
+//  * This function remove the div with the error class
+//  *
+//  * @param {element} inputField - this is the inputfield
+//  */
+// function clearError(inputField) {
+//   inputField.classList.remove('error');
+//   hideErrorMessage(inputField.parentNode);
+// }
+
+// /**
+//  * This function is used for email validation
+//  *
+//  * @param {element} email - this is the email input field
+//  * @returns
+//  */
+// function isValidEmail(email) {
+//   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+// }
+
+function addTaskValidation() {
+  const addTaskForm = document.getElementById('edit-contact');
+  const name = document.getElementById('name-edit-contact');
+  const email = document.getElementById('email-edit-contact');
+  const phone = document.getElementById('phone-edit-contact');
+
+  addValidationListeners(name, 'name');
+  addValidationListeners(email, 'email');
+  addValidationListeners(phone, 'phone');
+
+  addTaskForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    validateInput(name, 'name');
+    validateInput(email, 'email');
+    validateInput(phone, 'phone');
+  });
+}
+
+/**
+ * This function is used for form validation
+ *
+ * @param {element} inputField - This is the input field
+ * @param {string} type - this is the type of the input field
+ * @param {element} passwordField - this is the password input field
+ * @returns
+ */
+function validateInput(inputField, type, passwordField) {
+  const value = inputField.value.trim();
+  const parentNode = inputField.parentNode;
+  const errorClass = 'error-edit-contact';
+  let errorMessage = '';
+
+  if (type === 'confirmPassword') {
+    validateConfirmPassword(inputField, passwordField);
+    return;
+  }
+
+  if (type === 'name') {
+    if (value === '') {
+      errorMessage = 'This field is required';
+    } else if (!value.includes(' ')) {
+      errorMessage = 'Please enter both first name and last name';
+    }
+  } else if (type === 'email' && !isValidEmail(value)) {
+    errorMessage = 'Please enter a valid email address';
+  } else if (type === 'phone' && !isValidPhone(value)) {
+    errorMessage = 'Please enter a valid phone number';
+  } else if (type === 'password' && value.length < 8) {
+    errorMessage = 'Password must be at least 8 characters';
+  }
+
+  if (errorMessage) {
+    inputField.classList.add(errorClass);
+    showErrorMessage(parentNode, errorMessage);
+  } else {
+    inputField.classList.remove(errorClass);
+    hideErrorMessage(parentNode);
+  }
+}
+
+/**
+ * This function is used for the password validation
+ *
+ * @param {element} confirmInput - Confirm input field
+ * @param {element} passwordInput - Password input field
+ */
+function validateConfirmPassword(confirmInput, passwordInput) {
+  const confirmValue = confirmInput.value.trim();
+  const parent = confirmInput.parentNode;
+  const errorClass = 'error';
+  let errorMessage = '';
+
+  if (confirmValue === '') {
+    errorMessage = 'This field is required';
+  } else if (confirmValue !== passwordInput.value.trim()) {
+    errorMessage = 'Passwords do not match';
+  }
+
+  if (errorMessage) {
+    confirmInput.classList.add(errorClass);
+    showErrorMessage(parent, errorMessage);
+  } else {
+    confirmInput.classList.remove(errorClass);
+    hideErrorMessage(parent);
+  }
+}
+
+/**
+ * This function adds the error message, when the input is not filled
+ *
+ * @param {element} checkboxInput - Input fields
+ */
+function validateCheckbox(checkboxInput) {
+  const parent = checkboxInput.parentNode.parentNode;
+  const errorClass = 'error-edit-contact';
+
+  if (!checkboxInput.checked) {
+    showErrorMessage(parent, 'You must accept the Privacy policy');
+  } else {
+    hideErrorMessage(parent);
+  }
+}
+
+/**
+ * This function shows the error message
+ *
+ * @param {element} parentNode - this is the parentnode of the element with the error-message class
+ * @param {string} message - this is the showed message
+ */
+function showErrorMessage(parentNode, message) {
+  let errorMessage = parentNode.querySelector('.error-message');
+  if (!errorMessage) {
+    errorMessage = document.createElement('div');
+    errorMessage.classList.add('error-message');
+    parentNode.appendChild(errorMessage);
+  }
+  errorMessage.textContent = message;
+}
+
+/**
+ * This function hides the error message
+ *
+ * @param {element} parentNode - this is the parentnode of the element with the error-message class
+ */
+function hideErrorMessage(parentNode) {
+  const errorMessage = parentNode.querySelector('.error-message');
+  if (errorMessage) {
+    errorMessage.remove();
+  }
+}
+
+/**
+ * This function remove the div with the error class
+ *
+ * @param {element} inputField - this is the inputfield
+ */
+function clearError(inputField) {
+  inputField.classList.remove('error');
+  hideErrorMessage(inputField.parentNode);
+}
+
+/**
+ * This function is used for email validation
+ *
+ * @param {element} email - this is the email input field
+ * @returns
+ */
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+/**
+ * This function is used for phone number validation
+ *
+ * @param {element} phone - this is the phone input field
+ * @returns
+ */
+function isValidPhone(phone) {
+  return /^\+?[0-9]{5,15}$/.test(phone);
 }

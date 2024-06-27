@@ -86,6 +86,10 @@
   align-items: center;
 }
 
+.error-edit-contact {
+  border-bottom: 1px solid #ff8190 !important;
+}
+
 .dialog-edit {
   position: fixed;
   display: flex;
