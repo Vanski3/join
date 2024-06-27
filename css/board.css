@@ -134,6 +134,10 @@
    transition: right 0.3s ease;
 }
 
+#task-dialog-popup {
+   padding-left: 20px;
+}
+
 h1 {
    font-size: 48px;
 }
