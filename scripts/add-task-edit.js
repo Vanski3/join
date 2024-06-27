@@ -475,3 +475,20 @@ function addSubtasksEdit() {
     }
   }
 }
+
+/**
+ * This function is used to edit the subtask onclick
+ *
+ * @param {element} element - this is the div of the selected subtask
+ */
+function changeSubtaskEdit(element) {
+  let imgElements = element.querySelectorAll('img');
+  imgElements.forEach(function (img) {
+    img.classList.remove('d-none');
+  });
+  let innerDivContainer = element.querySelector('div');
+  if (innerDivContainer) {
+    innerDivContainer.style.display = 'unset';
+  }
+  element.style.backgroundColor = '#E3EEFF';
+}
