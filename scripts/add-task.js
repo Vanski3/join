@@ -19,8 +19,7 @@ let subtasks = [
 ];
 
 /**
- *  This function is used to render the contacts to the list
- *
+ * Renders the contacts to the list.
  */
 function renderToList() {
   let list = document.getElementById('contacts');
@@ -31,8 +30,7 @@ function renderToList() {
 }
 
 /**
- * This function is used to get the contacts from the API and push it to the contacts object
- *
+ * Fetches the contacts from the API and populates the contacts array.
  */
 async function onloadContacts() {
   contacts = [];
@@ -50,9 +48,9 @@ async function onloadContacts() {
 }
 
 /**
- * This function is used to get the value of the task in the edit form
+ * Loads the task values into the edit form.
  *
- * @param {number} i - This is the spot of the task in the tasks object
+ * @param {number} i - The index of the task in the tasks array.
  */
 function onloadFormValue(i) {
   let inputFields = document.getElementsByClassName('my-inputs-edit');
@@ -66,8 +64,9 @@ function onloadFormValue(i) {
 }
 
 /**
- * This function is used to save the current priority button
+ * Sets the priority button based on the task priority.
  *
+ * @param {number} i - The index of the task.
  */
 function getProBtnClick(i) {
   let prio = tasks.priority[i];
@@ -81,10 +80,10 @@ function getProBtnClick(i) {
 }
 
 /**
- * This function is used to get the connection to the API
+ * Fetches data from the API.
  *
- * @param {string} path - This is the contact string at the API
- * @returns - This returns the response to a json
+ * @param {string} path - The endpoint to fetch data from.
+ * @returns {Promise<Object>} The JSON response from the API.
  */
 async function getAllContacts(path) {
   let response = await fetch(BASE_URL + path + '.json');
@@ -95,8 +94,7 @@ async function getAllContacts(path) {
 }
 
 /**
- * This function is used to push the selected contacts to the helper object
- *
+ * Collects selected contacts and pushes them to the assignedTo object.
  */
 function getSelectedContacts() {
   let placeholder = document.getElementById('placeholder').childNodes;
@@ -111,8 +109,7 @@ function getSelectedContacts() {
 }
 
 /**
- * This function is used to push the selected subtasks to the helper object
- *
+ * Collects selected subtasks and pushes them to the subtasks object.
  */
 function getSelectedSubtasks() {
   let placeholder = document.getElementById('subtask-placeholder').childNodes;
@@ -125,10 +122,9 @@ function getSelectedSubtasks() {
 }
 
 /**
- * This function is used to get the selected button category at the board
+ * Sets the selected task category.
  *
- * @param {number} parameter - This is the number of the category
- * @returns - Stops the function, when the parameter is null
+ * @param {number} parameter - The category index.
  */
 function taskCategory(parameter) {
   if (parameter == null) {
@@ -139,8 +135,7 @@ function taskCategory(parameter) {
 }
 
 /**
- * This function is used to save the task
- *
+ * Saves the task after validation.
  */
 function saveTask() {
   const rows = ['first-row', 'second-row'];
@@ -161,8 +156,7 @@ function saveTask() {
 }
 
 /**
- * This function is used create a new task if the form validation is correct
- *
+ * Creates a new task if form validation passes.
  */
 function saveTaskElse() {
   getSelectedSubtasks();
@@ -191,10 +185,10 @@ function saveTaskElse() {
 }
 
 /**
- * This function is used to push the created new task into the existing tasks object
+ * Merges the new task into the existing tasks object.
  *
- * @param {object} tasks - Existing tasks Object
- * @param {object} newTask - created task
+ * @param {Object} tasks - The existing tasks object.
+ * @param {Object} newTask - The new task object.
  */
 function mergeObjects(tasks, newTask) {
   newTask.assignedTo.forEach((item) => tasks.assignedTo.push(item));
@@ -210,12 +204,12 @@ function mergeObjects(tasks, newTask) {
 }
 
 /**
- * This function is used to toggle the button at the add-task form
+ * Toggles the color of the button in the add-task form.
  *
- * @param {id} buttonId - This is the button id
- * @param {string} color - This is the new background color
- * @param {string} idOne - This is the svg path id
- * @param {string} idTwo - This is the second svg path id
+ * @param {string} buttonId - The ID of the button.
+ * @param {string} color - The new background color.
+ * @param {string} idOne - The ID of the first SVG path.
+ * @param {string} idTwo - The ID of the second SVG path.
  */
 function toggleColor(buttonId, color, idOne, idTwo) {
   if (selectedButtonId) {
@@ -232,12 +226,13 @@ function toggleColor(buttonId, color, idOne, idTwo) {
 }
 
 /**
+ * Helper function to toggle the color of the button.
  *
- * @param {id} buttonId - This is the button id
- * @param {string} color - This is the new background color
- * @param {string} idOne - This is the svg path id
- * @param {string} idTwo - This is the second svg path id
- * @returns - If the buttonId not the selectedButtonid the variable selectedButtonid is null
+ * @param {string} buttonId - The ID of the button.
+ * @param {string} color - The new background color.
+ * @param {string} idOne - The ID of the first SVG path.
+ * @param {string} idTwo - The ID of the second SVG path.
+ * @returns {null} - Returns null if the buttonId is not the selectedButtonId.
  */
 function toggleColorIf(buttonId, color, idOne, idTwo) {
   if (buttonId === selectedButtonId) return (selectedButtonId = null);
@@ -254,10 +249,11 @@ function toggleColorIf(buttonId, color, idOne, idTwo) {
     selectedButtonId = buttonId;
   }
 }
+
 /**
- * This function is used to mark the urgent button
+ * Handles the click event for the urgent button.
  *
- * @param {event} event - stops the standard behavior of the button
+ * @param {Event} event - The event object.
  */
 function handleUrgentClick(event) {
   event.preventDefault();
@@ -270,9 +266,9 @@ function handleUrgentClick(event) {
 }
 
 /**
- * This function is used to mark the medium button
+ * Handles the click event for the medium button.
  *
- * @param {event} event - stops the standard behavior of the button
+ * @param {Event} event - The event object.
  */
 function handleMediumClick(event) {
   event.preventDefault();
@@ -285,9 +281,9 @@ function handleMediumClick(event) {
 }
 
 /**
- * This function is used to mark the low button
+ * Handles the click event for the low button.
  *
- * @param {event} event - stops the standard behavior of the button
+ * @param {Event} event - The event object.
  */
 function handleLowClick(event) {
   event.preventDefault();
@@ -301,9 +297,9 @@ function handleLowClick(event) {
 }
 
 /**
- * This function is used to mark the contact at the dropdown menu
+ * Toggles the selection of a contact in the dropdown menu.
  *
- * @param {number} i - This is the spot of the contact
+ * @param {number} i - The index of the contact.
  */
 function selectContact(i) {
   let icon = document.getElementById('checkbox-' + i);
@@ -337,9 +333,9 @@ function selectContact(i) {
 }
 
 /**
- * This function is used to get the onclick function to remove the symbol
+ * Adds the onclick function to remove the symbol.
  *
- * @param {number} i - This is the number of the symbol
+ * @param {number} i - The index of the symbol.
  */
 function addLoadedContact(i) {
   let symbol = document.getElementById('symbol-' + i + '-edit');
@@ -352,8 +348,7 @@ function addLoadedContact(i) {
 }
 
 /**
- * This is the new Input for hovering the existing input
- *
+ * Shows the input fields for adding a new subtask.
  */
 function newSubtaskInput() {
   document.getElementById('cancel-button').classList.remove('d-none');
@@ -363,9 +358,9 @@ function newSubtaskInput() {
 }
 
 /**
- * This function is used to edit the subtask onclick
+ * Edits the subtask when clicked.
  *
- * @param {element} element - this is the div of the selected subtask
+ * @param {Element} element - The subtask element.
  */
 function changeSubtask(element) {
   let imgElements = element.querySelectorAll('img');
@@ -380,8 +375,7 @@ function changeSubtask(element) {
 }
 
 /**
- * This function is used to add a subtask
- *
+ * Adds a new subtask.
  */
 function addSubtasks() {
   newSubtaskInput();
@@ -403,15 +397,16 @@ function addSubtasks() {
 }
 
 /**
- * This function is used to close the dropdown menu when you click on the background
+ * Selects a category and closes the dropdown menu.
  *
- * @param {string} category - This is the category
+ * @param {string} category - The selected category.
  */
 function selectCategory(category) {
   let summaryHeadline = document.getElementById('categoy-headline');
   summaryHeadline.textContent = category;
   summaryHeadline.closest('details').removeAttribute('open');
 }
+
 document.addEventListener('click', function (event) {
   let details = document.getElementById('details');
 
@@ -422,8 +417,7 @@ document.addEventListener('click', function (event) {
 });
 
 /**
- * This function is used to load the add task site
- *
+ * Loads the add task content.
  */
 function loadAddTaskContent() {
   let mainContent = document.getElementById('mainContent');
@@ -443,8 +437,7 @@ function loadAddTaskContent() {
 }
 
 /**
- * This function is used to change the background in the sidebar
- *
+ * Changes the background color in the sidebar for the add task section.
  */
 function changeColorSideAddTask() {
   document.getElementById('sidebarImgAddTask').classList.add('color-img-sidebar');
@@ -452,8 +445,7 @@ function changeColorSideAddTask() {
 }
 
 /**
- * This function is used for search contacts
- *
+ * Filters contacts based on the search input.
  */
 function filterContacts() {
   let input = document.getElementById('contact-search').value.toLowerCase();
@@ -471,8 +463,7 @@ function filterContacts() {
 }
 
 /**
- * This function is used to onclick remove the existing symbols
- *
+ * Adds the onclick event to remove symbols.
  */
 function onclickRender() {
   let symbols = document.querySelectorAll('[id^=symbol-][id$=-edit]');
@@ -485,8 +476,7 @@ function onclickRender() {
 }
 
 /**
- * This function is used to set the minDate
- *
+ * Sets the minimum date for date input fields.
  */
 function minDate() {
   const today = new Date();
@@ -499,8 +489,7 @@ function minDate() {
 }
 
 /**
- * This function is used to show a confirmation button when u add a new task
- *
+ * Shows a confirmation logo when a new task is added.
  */
 function showLogoAddTask() {
   const logo = document.getElementById('form-failed-task');

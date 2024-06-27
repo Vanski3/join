@@ -4,12 +4,22 @@ const BASE_URL = 'https://join-2024-default-rtdb.europe-west1.firebasedatabase.a
 let tasks = [];
 let allDataFromFirebase = [];
 
-function init() {
+/**
+ * Initializes the application by loading task data and other necessary data from Firebase.
+ *
+ * @param {Object} [params] - Optional parameters (not used in the function).
+ */
+function init(params) {
    loadTasksData();
    loadallDataFromFirebase();
    welcomeTextMobile();
 }
 
+/**
+ * Opens the task dialog with an optional parameter for task category.
+ *
+ * @param {Object|null} [parameter=null] - Optional parameter to specify the task category.
+ */
 function openTaskDialog(parameter = null) {
    popup.style.display = 'unset';
    setTimeout(function () {
@@ -22,6 +32,9 @@ function openTaskDialog(parameter = null) {
    minDate();
 }
 
+/**
+ * Closes the task dialog and resets validation.
+ */
 function closeTaskDialog() {
    taskDialog.style.right = '-600px';
    setTimeout(function () {
@@ -31,18 +44,27 @@ function closeTaskDialog() {
    resetValidation();
 }
 
+// Event listener to close the task dialog when clicking outside of it.
 popup.addEventListener('click', function (event) {
    if (!taskDialog.contains(event.target)) {
       closeTaskDialog();
    }
 });
 
+/**
+ * Loads all data from Firebase and logs it to the console.
+ */
 async function loadallDataFromFirebase() {
    let fetchData = await fetch(BASE_URL + '.json');
    allDataFromFirebase = await fetchData.json();
    console.log(allDataFromFirebase);
 }
 
+/**
+ * Loads the board content and renders the necessary components.
+ *
+ * @param {string} sectionId - The ID of the section to scroll to.
+ */
 function loadBoardContent(sectionId) {
    let mainContent = document.getElementById('mainContent');
    mainContent.innerHTML = '';
@@ -56,11 +78,19 @@ function loadBoardContent(sectionId) {
    scrollToSection(sectionId);
 }
 
+/**
+ * Changes the background color of the board button.
+ *
+ * @param {Object} [params] - Optional parameters (not used in the function).
+ */
 function changeBoardButtonBackground(params) {
    let boardButton = document.getElementById('boardButton');
    boardButton.classList.add('menu-background');
 }
 
+/**
+ * Renders the task cards on the board.
+ */
 function renderBoardCards() {
    clearBoardContent();
    for (let i = 0; i < tasks.taskStatus.length; i++) {
@@ -79,6 +109,11 @@ function renderBoardCards() {
    checkIfTaskIsEmpty();
 }
 
+/**
+ * Renders the priority icon in the board cards.
+ *
+ * @param {number} i - The index of the task.
+ */
 function renderPriorityinBoardCards(i) {
    let priority = tasks.priority[i];
    if (priority == '') {
@@ -89,6 +124,11 @@ function renderPriorityinBoardCards(i) {
    `;
 }
 
+/**
+ * Handles the drop event for drag and drop functionality.
+ *
+ * @param {DragEvent} ev - The drag event.
+ */
 function drop(ev) {
    ev.preventDefault();
    var data = ev.dataTransfer.getData('text');
@@ -107,10 +147,20 @@ function drop(ev) {
    unhighlight(ev);
 }
 
+/**
+ * Allows the drop event for drag and drop functionality.
+ *
+ * @param {DragEvent} ev - The drag event.
+ */
 function allowDrop(ev) {
    ev.preventDefault();
 }
 
+/**
+ * Handles the drag event for drag and drop functionality.
+ *
+ * @param {DragEvent} ev - The drag event.
+ */
 function drag(ev) {
    if (window.matchMedia('(max-width: 1400px)').matches) {
       ev.preventDefault();
@@ -119,10 +169,20 @@ function drag(ev) {
    ev.target.classList.add('rotate-45');
 }
 
+/**
+ * Handles the drag end event for drag and drop functionality.
+ *
+ * @param {DragEvent} ev - The drag event.
+ */
 function dragend(ev) {
    ev.target.classList.remove('rotate-45');
 }
 
+/**
+ * Highlights the drop target during drag and drop.
+ *
+ * @param {DragEvent} ev - The drag event.
+ */
 function highlight(ev) {
    unhighlight();
    var allowedIds = ['taskStatus0', 'taskStatus1', 'taskStatus2', 'taskStatus3'];
@@ -135,6 +195,9 @@ function highlight(ev) {
    }
 }
 
+/**
+ * Removes highlight from all elements.
+ */
 function unhighlight() {
    var highlightedElements = document.querySelectorAll('.highlight');
    highlightedElements.forEach(function (element) {
@@ -142,6 +205,11 @@ function unhighlight() {
    });
 }
 
+/**
+ * Renders the subtasks in the board cards.
+ *
+ * @param {number} i - The index of the task.
+ */
 function renderSubtasksInBoardCards(i) {
    let subtasks = tasks?.subtasksTest?.[i]?.subtask || [];
    let finishedSubtasks = 0;
@@ -165,6 +233,9 @@ function renderSubtasksInBoardCards(i) {
    }
 }
 
+/**
+ * Checks if the task list is empty and displays a message if it is.
+ */
 function checkIfTaskIsEmpty() {
    const taskContents = [
       document.getElementById('taskStatus0'),
@@ -182,6 +253,11 @@ function checkIfTaskIsEmpty() {
    });
 }
 
+/**
+ * Renders the task overlay with detailed information about the task.
+ *
+ * @param {number} i - The index of the task.
+ */
 function renderTaskOverlay(i) {
    document.getElementById('taskOverlay').innerHTML = '';
    let title = tasks.title[i];
@@ -195,10 +271,18 @@ function renderTaskOverlay(i) {
    showOverlayTask();
 }
 
+/**
+ * Closes the edit task popup.
+ */
 function closePopup() {
    document.getElementById('edit-task').style.display = 'none';
 }
 
+/**
+ * Renders the priority information in the task overlay.
+ *
+ * @param {number} i - The index of the task.
+ */
 function renderPriorityInTaskOverlay(i) {
    let priority = tasks.priority[i].charAt(0).toUpperCase() + tasks.priority[i].slice(1);
    if (priority == '') {
@@ -212,6 +296,11 @@ function renderPriorityInTaskOverlay(i) {
    `;
 }
 
+/**
+ * Renders the subtasks in the task overlay.
+ *
+ * @param {number} i - The index of the task.
+ */
 function renderSubtasksinTaskOverlay(i) {
    let subtasks = tasks?.subtasksTest?.[i]?.subtask;
    if (subtasks.length === 0) {
@@ -233,6 +322,12 @@ function renderSubtasksinTaskOverlay(i) {
    }
 }
 
+/**
+ * Changes the status of a subtask between 'open' and 'closed'.
+ *
+ * @param {number} j - The index of the subtask.
+ * @param {number} i - The index of the task.
+ */
 function changeSubtaskStatus(j, i) {
    if (tasks.subtasksTest[i].subtaskStatus[j] == 'open') {
       tasks.subtasksTest[i].subtaskStatus.splice(j, 1, 'closed');
@@ -242,6 +337,12 @@ function changeSubtaskStatus(j, i) {
    changeImgBasedOnSubtaskStatus(i, j);
 }
 
+/**
+ * Updates the subtask status icon based on its current status.
+ *
+ * @param {number} i - The index of the task.
+ * @param {number} j - The index of the subtask.
+ */
 function changeImgBasedOnSubtaskStatus(i, j) {
    if (tasks.subtasksTest[i].subtaskStatus[j] == 'open') {
       document.getElementById(`subtaskStatusImg${j}`).innerHTML = /*html*/ `
@@ -254,6 +355,11 @@ function changeImgBasedOnSubtaskStatus(i, j) {
    }
 }
 
+/**
+ * Deletes the current task after confirmation.
+ *
+ * @param {number} i - The index of the task to be deleted.
+ */
 function deleteCurrentTask(i) {
    if (confirm('Delete This Task?') == true) {
       tasks.taskStatus.splice(i, 1);
@@ -269,23 +375,39 @@ function deleteCurrentTask(i) {
    }
 }
 
+/**
+ * Loads the task data from Firebase.
+ *
+ * @param {string} [path='/tasks'] - The path to the tasks data in Firebase.
+ */
 async function loadTasksData(path = '/tasks') {
    let fetchTasks = await fetch(BASE_URL + path + '.json');
    tasks = await fetchTasks.json();
 }
 
+/**
+ * Loads all data from Firebase and logs it to the console.
+ */
 async function loadallDataFromFirebase() {
    let fetchData = await fetch(BASE_URL + '.json');
    allDataFromFirebase = await fetchData.json();
    console.log(allDataFromFirebase);
 }
 
+/**
+ * Shows the task overlay with a fade-in animation.
+ */
 function showOverlayTask() {
    const overlay = document.getElementById('taskOverlay');
    overlay.showModal();
    overlay.classList.add('fade-in-right');
 }
 
+/**
+ * Renders the contacts assigned to a task in the task overlay.
+ *
+ * @param {number} i - The index of the task.
+ */
 function renderContactsInTaskOverlay(i) {
    for (let j = 0; j < tasks.assignedTo[i].contactImageBgColor.length; j++) {
       let imageByColor = tasks.assignedTo[i].contactImageBgColor[j];
@@ -300,6 +422,11 @@ function renderContactsInTaskOverlay(i) {
    }
 }
 
+/**
+ * Renders the contacts assigned to a task in the task cards.
+ *
+ * @param {number} i - The index of the task.
+ */
 function renderContactsInCards(i) {
    for (let j = 0; j < tasks.assignedTo[i].contactImageBgColor.length; j++) {
       let imageByColor = tasks.assignedTo[i].contactImageBgColor[j];
@@ -311,6 +438,11 @@ function renderContactsInCards(i) {
    }
 }
 
+/**
+ * Searches for tasks based on the input in the search field.
+ *
+ * @param {Object} [params] - Optional parameters (not used in the function).
+ */
 function searchTask(params) {
    clearBoardContent();
    let searchTitle = document.getElementById('searchInput').value.toLowerCase();
@@ -341,6 +473,11 @@ function searchTask(params) {
    checkIfTaskIsEmpty();
 }
 
+/**
+ * Clears the content of the board.
+ *
+ * @param {Object} [params] - Optional parameters (not used in the function).
+ */
 function clearBoardContent(params) {
    document.getElementById('taskStatus0').innerHTML = '';
    document.getElementById('taskStatus1').innerHTML = '';
@@ -348,6 +485,9 @@ function clearBoardContent(params) {
    document.getElementById('taskStatus3').innerHTML = '';
 }
 
+/**
+ * Closes the task overlay and re-renders the board cards.
+ */
 function closeTaskOverlay() {
    const overlay = document.getElementById('taskOverlay');
    overlay.close();
@@ -355,6 +495,12 @@ function closeTaskOverlay() {
    overlay.classList.remove('fade-in-right');
 }
 
+/**
+ * Shows the move-to popup for a task card.
+ *
+ * @param {Event} event - The event object.
+ * @param {number} i - The index of the task.
+ */
 function showMoveToPopup(event, i) {
    event.stopPropagation();
    const popup = document.getElementById(`popupBoardCard${i}`);
@@ -365,35 +511,67 @@ function showMoveToPopup(event, i) {
    }
 }
 
+/**
+ * Moves a task card to the "To Do" status.
+ *
+ * @param {Event} event - The event object.
+ * @param {number} i - The index of the task.
+ */
 function moveCardToToDo(event, i) {
    event.stopPropagation();
    tasks.taskStatus.splice(i, 1, '0');
    renderBoardCards();
 }
 
+/**
+ * Moves a task card to the "In Progress" status.
+ *
+ * @param {Event} event - The event object.
+ * @param {number} i - The index of the task.
+ */
 function moveCardToInProgress(event, i) {
    event.stopPropagation();
    tasks.taskStatus.splice(i, 1, '1');
    renderBoardCards();
 }
 
+/**
+ * Moves a task card to the "Awaiting Feedback" status.
+ *
+ * @param {Event} event - The event object.
+ * @param {number} i - The index of the task.
+ */
 function moveCardToAwaitingFeedback(event, i) {
    event.stopPropagation();
    tasks.taskStatus.splice(i, 1, '2');
    renderBoardCards();
 }
 
+/**
+ * Moves a task card to the "Done" status.
+ *
+ * @param {Event} event - The event object.
+ * @param {number} i - The index of the task.
+ */
 function moveCardToDone(event, i) {
    event.stopPropagation();
    tasks.taskStatus.splice(i, 1, '3');
    renderBoardCards();
 }
 
+/**
+ * Changes the sidebar color for the board section.
+ */
 function changeColorSidebarBoard() {
    document.getElementById('sidebarImgBoard').classList.add('color-img-sidebar');
    document.getElementById('fontBoardSidebar').classList.add('menu-row-font');
 }
 
+/**
+ * Scrolls smoothly to the specified section.
+ *
+ * @param {string} sectionId - The ID of the section to scroll to.
+ */
 function scrollToSection(sectionId) {
    let targetElement = document.getElementById(sectionId);
 
