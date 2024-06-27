@@ -71,18 +71,18 @@ function loadBoardContentHTML() {
         </div>
      </main>
    `;
- }
- 
- /**
-  * Generates the HTML content for a task card on the board.
-  *
-  * @param {number} i - The index of the task.
-  * @param {string} title - The title of the task.
-  * @param {string} description - The description of the task.
-  * @param {string} categoryName - The category name of the task.
-  * @returns {string} The HTML content for the task card.
-  */
- function renderBoardCardsHTML(i, title, description, categoryName) {
+}
+
+/**
+ * Generates the HTML content for a task card on the board.
+ *
+ * @param {number} i - The index of the task.
+ * @param {string} title - The title of the task.
+ * @param {string} description - The description of the task.
+ * @param {string} categoryName - The category name of the task.
+ * @returns {string} The HTML content for the task card.
+ */
+function renderBoardCardsHTML(i, title, description, categoryName) {
    return /*html*/ `
      <div id="boardCard${i}" draggable="true" ondragstart="drag(event)" class="board-card no-drag" onclick="renderTaskOverlay(${i})">
        <div class="header-row-board-card" id="headerRowBoardCard${i}">
@@ -105,19 +105,19 @@ function loadBoardContentHTML() {
        </div>
     </div>
    `;
- }
- 
- /**
-  * Generates the HTML content for the task overlay with detailed information.
-  *
-  * @param {number} i - The index of the task.
-  * @param {string} title - The title of the task.
-  * @param {string} description - The description of the task.
-  * @param {string} categoryName - The category name of the task.
-  * @param {string} dueDate - The due date of the task.
-  * @returns {string} The HTML content for the task overlay.
-  */
- function renderTaskOverlayHTML(i, title, description, categoryName, dueDate) {
+}
+
+/**
+ * Generates the HTML content for the task overlay with detailed information.
+ *
+ * @param {number} i - The index of the task.
+ * @param {string} title - The title of the task.
+ * @param {string} description - The description of the task.
+ * @param {string} categoryName - The category name of the task.
+ * @param {string} dueDate - The due date of the task.
+ * @returns {string} The HTML content for the task overlay.
+ */
+function renderTaskOverlayHTML(i, title, description, categoryName, dueDate) {
    return /*html*/ `
      <div class="task-overlay" id="edit-task">
         <div class="categorie-info">
@@ -128,7 +128,7 @@ function loadBoardContentHTML() {
               class="close-overlay-task"
               onmouseover="this.src='./assets/img/task-overlay/close-icon-variant2.svg'"
               onmouseout="this.src='./assets/img/task-overlay/close-icon.svg'"
-              src="./assets/img/task-overlay/close-icon.svg'"
+              src="./assets/img/task-overlay/close-icon.svg"
               alt="" />
         </div>
         <span class="title-field">${title}</span>
@@ -152,31 +152,31 @@ function loadBoardContentHTML() {
               onclick="deleteCurrentTask(${i})"
               onmouseover="this.src='./assets/img/task-overlay/delete-variant2.svg'"
               onmouseout="this.src='./assets/img/task-overlay/Delete.svg'"
-              src="./assets/img/task-overlay/Delete.svg'"
+              src="./assets/img/task-overlay/Delete.svg"
               alt="" />
            <div class="seperator-field"></div>
            <img
               onclick="editTask(${i})"
               onmouseover="this.src='./assets/img/task-overlay/edit-variant2.svg'"
               onmouseout="this.src='./assets/img/task-overlay/edit.svg'"
-              src="./assets/img/task-overlay/edit.svg'"
+              src="./assets/img/task-overlay/edit.svg"
               alt="" />
         </div>
      </div>
    `;
- }
- 
- /**
-  * Generates the HTML content for a task card in the search results.
-  *
-  * @param {number} i - The index of the task.
-  * @param {string} title - The title of the task.
-  * @param {string} description - The description of the task.
-  * @param {string} priority - The priority of the task.
-  * @param {string} categoryName - The category name of the task.
-  * @returns {string} The HTML content for the task card in the search results.
-  */
- function searchTaskHTML(i, title, description, priority, categoryName) {
+}
+
+/**
+ * Generates the HTML content for a task card in the search results.
+ *
+ * @param {number} i - The index of the task.
+ * @param {string} title - The title of the task.
+ * @param {string} description - The description of the task.
+ * @param {string} priority - The priority of the task.
+ * @param {string} categoryName - The category name of the task.
+ * @returns {string} The HTML content for the task card in the search results.
+ */
+function searchTaskHTML(i, title, description, priority, categoryName) {
    return /*html*/ `
      <div id="boardCard${i}" class="board-card" onclick="renderTaskOverlay(${i})">
        <img class="card-label" src="./assets/img/board/${categoryName}.svg" alt="" />
@@ -194,5 +194,4 @@ function loadBoardContentHTML() {
        </div>
      </div>
    `;
- }
- 
+}
