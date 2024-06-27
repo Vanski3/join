@@ -199,14 +199,14 @@ function openContactDialog() {
 
   contactPopup.style.display = 'flex'; // Use flex to enable centering
   setTimeout(() => {
-    contactDialog.classList.add('show'); // Add class to show the dialog
+    contactDialog.style.right = '0';
   }, 50);
 }
 
 function closeContactDialog() {
   const contactDialog = document.querySelector('#contact-dialog-container .task-dialog');
 
-  contactDialog.classList.remove('show'); // Remove class to hide the dialog
+  contactDialog.style.right = '-600px';
   setTimeout(() => {
     document.getElementById('contact-dialog-container').style.display = 'none';
   }, 300);
