@@ -1,10 +1,13 @@
 :root {
   --headline-1: 3rem;
+  --headline-4: 1.5rem;
   --button-blue: #007bff;
   --hover-lightblue: #e0f7fa;
   --hover-blue: #007bff;
   --hover-darkblue: #0056b3;
   --identity-clr: #007bff;
+  --bx-shadow-task: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --bg-clr-1: #ffffff;
 }
 
 .contacts-container {
@@ -182,7 +185,130 @@
   text-decoration: underline;
 }
 
-/* dialog */
+/* Neues Design für das Popup */
+
+.contact-dialog {
+  height: 100vh;
+  width: 100%;
+  box-shadow: var(--bx-shadow-task);
+  color: var(--bg-clr-1);
+}
+
+.contact-popup-header {
+  display: flex;
+  background-color: #005dff;
+  padding: 40px;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-logo-white {
+  height: 80px;
+}
+
+.contact-logo-slogan {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+}
+
+.contact-popup-header h1 {
+  font-size: var(--headline-1);
+  margin-bottom: 0;
+}
+
+.contact-popup-header p {
+  font-size: var(--headline-4);
+}
+
+.contact-img-container {
+  height: 30px;
+}
+
+.contact-close-btn {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 30px;
+  left: 470px;
+  cursor: pointer;
+}
+
+.contact-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  position: absolute;
+  z-index: 1;
+  top: 250px;
+}
+
+.contact-person-icon {
+  background-color: #D1D1D1;
+  border-radius: 50%;
+  padding: 36px;
+}
+
+.contact-popup-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 124px;
+}
+
+.contact-input-group {
+  position: relative;
+  margin: 15px 0;
+}
+
+.contact-input-group input {
+  width: 310px;
+  padding: 10px 35px 10px 10px;
+  border: none;
+  border-bottom: 2px solid #d1d1d1;
+  font-size: 16px;
+}
+
+.contact-input-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+}
+
+.contact-button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.contact-cancel-btn, .contact-create-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.contact-cancel-btn {
+  background-color: #d1d1d1;
+  color: #000;
+}
+
+.contact-create-btn {
+  background-color: var(--button-blue);
+  color: #fff;
+}
+
+/* Dialog Container */
 
 .dialog-container {
   display: none;
@@ -196,11 +322,11 @@
   justify-content: flex-end; /* Align to the right */
 }
 
-.task-dialog {
+.contact-dialog-wrap {
   background: white;
-  padding: 20px;
+  /* padding: 20px; */
   border-radius: 5px;
-  width: 90%;
+  /* width: 90%; */
   max-width: 500px;
   transition: right 0.3s ease;
   position: absolute;
@@ -211,18 +337,8 @@
   right: 0;
 }
 
-.close-button {
-  position: absolute;
-  top: 24px;
-  right: 30px;
-  cursor: pointer;
-}
-
-.contact-dialog-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+.task-dialog{
+  padding-left: 0;
 }
 
 @media (max-width: 1170px) {
@@ -275,16 +391,3 @@
     display: block;
   }
 }
-
-/* Zusätzliche Stile für Sidebar und Button Hintergründe
-.menu-background {
-  background-color: #f0f0f0;
-}
-
-.color-img-sidebar {
-  filter: brightness(1.2);
-}
-
-.menu-row-font {
-  font-weight: bold;
-} */
