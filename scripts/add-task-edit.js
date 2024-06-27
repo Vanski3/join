@@ -52,13 +52,22 @@ function getSubtasksEdit(i) {
   tasksNumber = i;
   let array = tasks.subtasksTest[i].subtask;
   for (let j = 0; j < array.length; j++) {
-    const subtask = tasks.subtasksTest[i].subtask[j];
-    subtaskPlaceholder.innerHTML += `
-                                       <li id="subtask${j}" status="${tasks.subtasksTest[i].subtaskStatus[j]}">${subtask}</li>
-                                    `;
+    const subtask = array[j];
+    subtaskPlaceholder.innerHTML += /*html*/ `
+      <input class="subtask-input-edit" id="subtask${j}" status="${tasks.subtasksTest[i].subtaskStatus[j]}" value="${subtask}">
+    `;
+  }
+
+  // Add event listeners after elements are created
+  for (let j = 0; j < array.length; j++) {
+    let input = document.getElementById(`subtask${j}`);
+    input.onkeypress = function (e) {
+      if (e.key === 'Enter') {
+        input.blur();
+      }
+    };
   }
 }
-
 /**
  * Marks the contact in the dropdown menu.
  *
@@ -202,10 +211,10 @@ function getSavedContactsEdit() {
  */
 function getSavedSubtasksEdit() {
   const placeholderContainer = document.getElementById('subtask-placeholder-edit');
-  const li = placeholderContainer.querySelectorAll('li');
-  for (let i = 0; i < li.length; i++) {
-    let subtask = li[i].innerHTML;
-    let status = li[i].getAttribute('status');
+  const input = placeholderContainer.querySelectorAll('input');
+  for (let i = 0; i < input.length; i++) {
+    let subtask = input[i].value;
+    let status = input[i].getAttribute('status');
     subtasksEdit[0].subtask.push(subtask);
     subtasksEdit[0].subtaskStatus.push(status);
   }
