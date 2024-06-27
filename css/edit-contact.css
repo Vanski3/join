@@ -1,0 +1,236 @@
+:root {
+  --identity-clr: #4589ff;
+
+  /* hover */
+  --hover-lightblue: #d2e3ff;
+  --hover-blue: #4589ff;
+  --hover-darkblue: #005dff;
+
+  /* background colours */
+  --bg-clr-1: #ffffff;
+  --bg-clr-2: #d2e3ff;
+
+  /* box shadows */
+  --bx-shadow-login: 0px 0px 10px 3px #00000014;
+  --bx-shadow-task: 0 0 4px 0 rgba(0, 0, 0, 0.16);
+
+  /* login form */
+  --login-clr: #d1d1d1;
+  --links: #42526e;
+  --btn-color-font: #647188;
+  --btn-hover-shadow: 0px 4px 8px 0px #00000033;
+
+  /* contact icon colours */
+  --contact-icon-red: #ff4646;
+
+  --contact-icon-pink-1: #ff5eb3;
+  --contact-icon-pink-2: #fc71ff;
+
+  --contact-icon-orage-1: #ff7a00;
+  --contact-icon-orange-2: #ff745e;
+  --contact-icon-orange-3: #ffa35e;
+  --contact-icon-orange-4: #ffbb2b;
+
+  --contact-icon-yellow-1: #ffc701;
+  --contact-icon-yellow-2: #ffe62b;
+
+  --contact-icon-neon-green: #c3ff2b;
+
+  --contact-icon-turquise-1: #00bee8;
+  --contact-icon-turquise-2: #1fd7c1;
+  --contact-icon-blue: #0038ff;
+
+  /* button colours */
+  --button-blue: #4589ff;
+  --button-darkblue: #005dff;
+  --button-blackblue: #091931;
+
+  /* priotity colurs */
+  --urgent: #ff3d00;
+  --medium: #ffa800;
+  --low: #7ae229;
+
+  /* font */
+  --font-fam: 'Open Sans';
+
+  --headline-1: 3rem;
+  --headline-2: 4rem;
+  --headline-3: 1.5rem;
+  --headline-4: 1rem;
+
+  --button-txt: 1.5rem;
+
+  --font-weight-bold: 700;
+}
+
+#edit-popup {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 554px;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.16);
+}
+
+#edit-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 998;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dialog-edit {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  padding-right: 36px;
+  width: 518px;
+  box-shadow: 0px 0px 4px 0px #00000029;
+  z-index: 999;
+  border-bottom-right-radius: 30px;
+  border-top-right-radius: 30px;
+  background-color: #fff;
+  left: 0;
+  transition: right 0.3s ease;
+}
+
+.task-edit-description {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.popup-header {
+  display: flex;
+  background-color: #005dff;
+  height: 300px;
+  justify-content: center;
+  align-items: center;
+  border-top-right-radius: 30px;
+  width: 554px;
+}
+
+.logo-white {
+  height: 80px;
+}
+
+.logo-slogan {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+}
+
+.popup-header h1 {
+  font-size: var(--headline-1);
+  margin-bottom: 0;
+  color: #fff;
+}
+
+.popup-header p {
+  font-size: var(--headline-4);
+}
+
+.img-container {
+  height: 30px;
+}
+
+.popup-header-img {
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 200;
+  z-index: 1;
+}
+
+.d-none {
+  display: none;
+}
+
+#person-icon {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  padding: 20px;
+  margin-bottom: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  color: white;
+}
+
+.input-group {
+  position: relative;
+  margin: 15px 0;
+}
+
+.input-group input {
+  width: 310px;
+  padding: 10px 35px 10px 10px;
+  border: none;
+  border-bottom: 2px solid #d1d1d1;
+  font-size: 16px;
+}
+
+.input-group input:focus {
+  border-bottom: 1px solid #005dff;
+}
+
+.input-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 30px;
+}
+
+.delete-btn,
+.save-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.delete-btn {
+  background-color: #d1d1d1;
+  color: #000;
+}
+
+.save-btn {
+  background-color: var(--button-blue);
+  color: #fff;
+}

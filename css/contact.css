@@ -188,7 +188,7 @@
   display: none;
   position: fixed;
   top: 0;
-  right: 0;  /* Fix position to the right */
+  right: 0; /* Fix position to the right */
   height: 100vh;
   width: 100%;
   z-index: 998;
@@ -196,7 +196,7 @@
   justify-content: flex-end; /* Align to the right */
 }
 
-.task-dialog {
+/* .task-dialog {
   background: white;
   padding: 20px;
   border-radius: 5px;
@@ -205,7 +205,7 @@
   transition: right 0.3s ease;
   position: absolute;
   right: -600px;
-}
+} */
 
 .task-dialog.show {
   right: 0;
@@ -263,7 +263,7 @@
     display: none;
   }
 
-  .contact.selected+.contact-detail {
+  .contact.selected + .contact-detail {
     display: block;
   }
 

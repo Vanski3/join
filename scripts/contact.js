@@ -9,7 +9,6 @@ function loadContactsContent() {
       return response.json();
     })
     .then((data) => {
-      console.log('Contacts loaded:', data);
       contactsData = data; // Store contacts data
       renderContacts(contactsData);
     })
@@ -24,12 +23,13 @@ function loadContactsContent() {
 function renderContacts(contacts) {
   const content = document.getElementById('mainContent');
   content.innerHTML = /*html*/ `
-    <div class="contacts-container">
+    <div class="contacts-container" id="contacts-container">
       <div class="contacts-list">
         <button class="add-contact-btn">Add new contact</button>
       </div>
       <div class="contact-detail"></div>
     </div>
+    <div id=edit-popup></div>
   `;
 
   const contactsList = document.querySelector('.contacts-list');
@@ -74,6 +74,82 @@ function renderContacts(contacts) {
   }
 }
 
+function getContact(id) {
+  for (let i = 0; i < contactsData.length; i++) {
+    if (contactsData[i].id === id.toString()) {
+      return contactsData[i];
+    }
+  }
+  return null;
+}
+
+function renderEditContact(id) {
+  let contact = getContact(id);
+  document.getElementById('edit-popup').style.display = 'unset';
+  const content = document.getElementById('edit-popup');
+  content.innerHTML = /*html*/ `
+    <div class="dialog-edit">
+        <div class="popup-header">
+            <div class="logo-slogan">
+                <img class="logo-white" src="../assets/img/contact/logo-white.svg">
+                <h1>Edit contact</h1>
+            </div>
+            <div class="img-container">
+                <img class="popup-header-img" src="./assets/img/contact/cancel-white.svg">
+            </div>
+            
+        </div>
+
+        <div class="task-edit-description">
+            <div class="icon-container">
+              <div id="person-icon">${contact.initials}</div>
+            </div>
+            <form onsubmit="saveContactEdit('${id}')" id="addContact" class="contact-description">
+                <div class="input-group">
+                   <input type="text" id="name-edit-contact" name="name" placeholder="Name">
+                   <img src="./assets/img/contact/person.svg" class="input-icon" alt="Person Icon">
+                </div>
+                <div class="input-group">
+                   <input type="email" id="email-edit-contact" name="email" placeholder="Email">
+                   <img src="./assets/img/contact/mail.svg" class="input-icon" alt="Mail Icon">
+                </div>
+                <div class="input-group">
+                   <input type="text" id="phone-edit-contact" name="phone" placeholder="Phone">
+                   <img src="./assets/img/contact/call.svg" class="input-icon" alt="Call Icon">
+                </div>
+                <div class="button-group">
+                   <button type="button" onclick="closeEditContainer('${id}')" class="white-btn">Delete</button>
+                   <button type="submit" class="blue-btn">Save<img src="./assets/img/contact/check-btn.svg" alt=""></button>
+                </div>
+             </form>
+</div>
+    </div>
+  `;
+  getContactToEditForm(contact);
+}
+
+function saveContactEdit(id) {
+  let index = contactsData.findIndex((contact) => contact.id === id.toString());
+
+  if (index !== -1) {
+    let newName = document.getElementById('name-edit-contact').value;
+    let newMail = document.getElementById('email-edit-contact').value;
+    let newPhone = document.getElementById('phone-edit-contact').value;
+    contactsData[index].name = newName;
+    contactsData[index].email = newMail;
+    contactsData[index].phone = newPhone;
+    renderContacts(contactsData);
+  }
+}
+
+function getContactToEditForm(contact) {
+  let backgroundcolor = contact.color;
+  document.getElementById('person-icon').style.backgroundColor = backgroundcolor;
+  document.getElementById('name-edit-contact').value = contact.name;
+  document.getElementById('email-edit-contact').value = contact.email;
+  document.getElementById('phone-edit-contact').value = contact.phone;
+}
+
 function renderContactDetail(contactElement, contact) {
   document.querySelectorAll('.contact').forEach((element) => {
     element.classList.remove('selected');
@@ -89,7 +165,7 @@ function renderContactDetail(contactElement, contact) {
         <div class="contact-name contact-name-detail">${contact.name}</div>
       </div>
       <div class="contact-actions">
-        <button class="edit-btn">
+        <button onclick="renderEditContact(${contact.id})" class="edit-btn">
           <img src="/assets/img/contact/edit.svg" alt="Edit" />
           Edit
         </button>
@@ -129,10 +205,15 @@ function openContactDialog() {
 function closeContactDialog() {
   const contactDialog = document.querySelector('#contact-dialog-container .task-dialog');
 
-  contactDialog.classList.remove('show'); // Remove class to hide the dialog
+  contactDialog.classList.remove('show');
   setTimeout(() => {
     document.getElementById('contact-dialog-container').style.display = 'none';
   }, 300);
+}
+
+function closeEditContainer(id) {
+  document.getElementById('edit-popup').style.display = 'none';
+  deleteContact(id);
 }
 
 function toggleContactView() {
