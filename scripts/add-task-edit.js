@@ -452,3 +452,26 @@ function minDateEdit() {
   const minDate = `${year}-${month}-${day}`;
   document.getElementById('custom-date-edit').setAttribute('min', minDate);
 }
+
+/**
+ * This function is used to add a subtask
+ *
+ */
+function addSubtasksEdit() {
+  newSubtaskInput();
+  let subtasks = document.getElementById('subtasks-edit');
+
+  let placeholder = document.getElementById('subtask-placeholder-edit');
+  if (subtasks.value.length >= 1) {
+    placeholder.innerHTML += addSubtasksHTML(subtasks);
+    subtasks.value = '';
+    let container = document.getElementById('addTask');
+    container.scrollTop = container.scrollHeight;
+    resetSubtaskInput();
+    if (placeholder.querySelectorAll('li').length >= 3) {
+      placeholder.style.overflowY = 'scroll';
+      placeholder.scrollTop = container.scrollHeight;
+      resetSubtaskInput();
+    }
+  }
+}
