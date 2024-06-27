@@ -75,7 +75,7 @@ function removeBackgroundLowerSidebar(params) {
 function welcomeTextMobile(params) {
   let mainContent = document.getElementById('mainContent');
   const name = sessionStorage.getItem('name') ?? 'Guest';
-  if (window.matchMedia('(max-width: 600px)').matches) {
+  if (window.matchMedia('(max-width: 800px)').matches) {
     mainContent.innerHTML = /*html*/ `
        <div class="greeting-div-mobile">
        <span class="greeting-mobile-daytime" id="daytimeMobile"></span>
