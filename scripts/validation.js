@@ -170,19 +170,19 @@ function changeAddTaskButtonBackground() {
  */
 function addTaskValidationEdit() {
   const addTaskForm = document.getElementById('addTask-edit');
-  const title = document.getElementById('title-edit');
-  const date = document.getElementById('custom-date-edit');
-  const category = document.getElementById('category-edit');
+  const titleEdit = document.getElementById('title-edit');
+  const dateEdit = document.getElementById('custom-date-edit');
+  const categoryEdit = document.getElementById('category-edit');
 
-  addValidationListenersEdit(title, 'name');
-  addValidationListenersEdit(date, 'name');
-  addValidationListenersEdit(category, 'name');
+  addValidationListenersEdit(titleEdit, 'name');
+  addValidationListenersEdit(dateEdit, 'name');
+  addValidationListenersEdit(categoryEdit, 'name');
 
   addTaskForm.addEventListener('submit', function (event) {
     event.preventDefault();
-    validateInput(title, 'name');
-    validateInput(date, 'name');
-    validateInput(category, 'name');
+    validateInput(titleEdit, 'name');
+    validateInput(dateEdit, 'name');
+    validateInput(categoryEdit, 'name');
   });
 }
 /**

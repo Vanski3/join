@@ -352,165 +352,165 @@ function saveContact(event) {
   document.getElementById('addContact').reset(); // Reset form
 }
 
-/**
- * Adds validation listeners to the edit contact form.
- */
-function addTaskValidationEditContact() {
-  const addTaskForm = document.getElementById('edit-contact');
-  const name = document.getElementById('name-edit-contact');
-  const email = document.getElementById('email-edit-contact');
-  const phone = document.getElementById('phone-edit-contact');
+// /**
+//  * Adds validation listeners to the edit contact form.
+//  */
+// function addTaskValidationEditContact() {
+//   const addTaskForm = document.getElementById('edit-contact');
+//   const name = document.getElementById('name-edit-contact');
+//   const email = document.getElementById('email-edit-contact');
+//   const phone = document.getElementById('phone-edit-contact');
 
-  addValidationListeners(name, 'name');
-  addValidationListeners(email, 'email');
-  addValidationListeners(phone, 'phone');
+//   addValidationListeners(name, 'name');
+//   addValidationListeners(email, 'email');
+//   addValidationListeners(phone, 'phone');
 
-  addTaskForm.addEventListener('submit', function (event) {
-    event.preventDefault();
-    validateInput(name, 'name');
-    validateInput(email, 'email');
-    validateInput(phone, 'phone');
-  });
-}
+//   addTaskForm.addEventListener('submit', function (event) {
+//     event.preventDefault();
+//     validateInput(name, 'name');
+//     validateInput(email, 'email');
+//     validateInput(phone, 'phone');
+//   });
+// }
 
-/**
- * Validates the input fields in the form.
- *
- * @param {HTMLElement} inputField - The input field element.
- * @param {string} type - The type of the input field.
- * @param {HTMLElement} [passwordField] - The password input field for confirm password validation.
- */
-function validateInput(inputField, type, passwordField) {
-  const value = inputField.value.trim();
-  const parentNode = inputField.parentNode;
-  const errorClass = 'error-edit-contact';
-  let errorMessage = '';
+// /**
+//  * Validates the input fields in the form.
+//  *
+//  * @param {HTMLElement} inputField - The input field element.
+//  * @param {string} type - The type of the input field.
+//  * @param {HTMLElement} [passwordField] - The password input field for confirm password validation.
+//  */
+// function validateInput(inputField, type, passwordField) {
+//   const value = inputField.value.trim();
+//   const parentNode = inputField.parentNode;
+//   const errorClass = 'error-edit-contact';
+//   let errorMessage = '';
 
-  if (type === 'confirmPassword') {
-    validateConfirmPassword(inputField, passwordField);
-    return;
-  }
+//   if (type === 'confirmPassword') {
+//     validateConfirmPassword(inputField, passwordField);
+//     return;
+//   }
 
-  if (type === 'name') {
-    if (value === '') {
-      errorMessage = 'This field is required';
-    } else if (!value.includes(' ')) {
-      errorMessage = 'Please enter both first name and last name';
-    }
-  } else if (type === 'email' && !isValidEmail(value)) {
-    errorMessage = 'Please enter a valid email address';
-  } else if (type === 'phone' && !isValidPhone(value)) {
-    errorMessage = 'Please enter a valid phone number';
-  } else if (type === 'password' && value.length < 8) {
-    errorMessage = 'Password must be at least 8 characters';
-  }
+//   if (type === 'name') {
+//     if (value === '') {
+//       errorMessage = 'This field is required';
+//     } else if (!value.includes(' ')) {
+//       errorMessage = 'Please enter both first name and last name';
+//     }
+//   } else if (type === 'email' && !isValidEmail(value)) {
+//     errorMessage = 'Please enter a valid email address';
+//   } else if (type === 'phone' && !isValidPhone(value)) {
+//     errorMessage = 'Please enter a valid phone number';
+//   } else if (type === 'password' && value.length < 8) {
+//     errorMessage = 'Password must be at least 8 characters';
+//   }
 
-  if (errorMessage) {
-    inputField.classList.add(errorClass);
-    showErrorMessage(parentNode, errorMessage);
-  } else {
-    inputField.classList.remove(errorClass);
-    hideErrorMessage(parentNode);
-  }
-}
+//   if (errorMessage) {
+//     inputField.classList.add(errorClass);
+//     showErrorMessage(parentNode, errorMessage);
+//   } else {
+//     inputField.classList.remove(errorClass);
+//     hideErrorMessage(parentNode);
+//   }
+// }
 
-/**
- * Validates the confirm password field.
- *
- * @param {HTMLElement} confirmInput - The confirm password input field.
- * @param {HTMLElement} passwordInput - The password input field.
- */
-function validateConfirmPassword(confirmInput, passwordInput) {
-  const confirmValue = confirmInput.value.trim();
-  const parent = confirmInput.parentNode;
-  const errorClass = 'error';
-  let errorMessage = '';
+// /**
+//  * Validates the confirm password field.
+//  *
+//  * @param {HTMLElement} confirmInput - The confirm password input field.
+//  * @param {HTMLElement} passwordInput - The password input field.
+//  */
+// function validateConfirmPassword(confirmInput, passwordInput) {
+//   const confirmValue = confirmInput.value.trim();
+//   const parent = confirmInput.parentNode;
+//   const errorClass = 'error';
+//   let errorMessage = '';
 
-  if (confirmValue === '') {
-    errorMessage = 'This field is required';
-  } else if (confirmValue !== passwordInput.value.trim()) {
-    errorMessage = 'Passwords do not match';
-  }
+//   if (confirmValue === '') {
+//     errorMessage = 'This field is required';
+//   } else if (confirmValue !== passwordInput.value.trim()) {
+//     errorMessage = 'Passwords do not match';
+//   }
 
-  if (errorMessage) {
-    confirmInput.classList.add(errorClass);
-    showErrorMessage(parent, errorMessage);
-  } else {
-    confirmInput.classList.remove(errorClass);
-    hideErrorMessage(parent);
-  }
-}
+//   if (errorMessage) {
+//     confirmInput.classList.add(errorClass);
+//     showErrorMessage(parent, errorMessage);
+//   } else {
+//     confirmInput.classList.remove(errorClass);
+//     hideErrorMessage(parent);
+//   }
+// }
 
-/**
- * Validates a checkbox input field.
- *
- * @param {HTMLElement} checkboxInput - The checkbox input field.
- */
-function validateCheckbox(checkboxInput) {
-  const parent = checkboxInput.parentNode.parentNode;
-  const errorClass = 'error-edit-contact';
+// /**
+//  * Validates a checkbox input field.
+//  *
+//  * @param {HTMLElement} checkboxInput - The checkbox input field.
+//  */
+// function validateCheckbox(checkboxInput) {
+//   const parent = checkboxInput.parentNode.parentNode;
+//   const errorClass = 'error-edit-contact';
 
-  if (!checkboxInput.checked) {
-    showErrorMessage(parent, 'You must accept the Privacy policy');
-  } else {
-    hideErrorMessage(parent);
-  }
-}
+//   if (!checkboxInput.checked) {
+//     showErrorMessage(parent, 'You must accept the Privacy policy');
+//   } else {
+//     hideErrorMessage(parent);
+//   }
+// }
 
-/**
- * Shows an error message for an input field.
- *
- * @param {HTMLElement} parentNode - The parent node of the input field.
- * @param {string} message - The error message to show.
- */
-function showErrorMessage(parentNode, message) {
-  let errorMessage = parentNode.querySelector('.error-message');
-  if (!errorMessage) {
-    errorMessage = document.createElement('div');
-    errorMessage.classList.add('error-message');
-    parentNode.appendChild(errorMessage);
-  }
-  errorMessage.textContent = message;
-}
+// /**
+//  * Shows an error message for an input field.
+//  *
+//  * @param {HTMLElement} parentNode - The parent node of the input field.
+//  * @param {string} message - The error message to show.
+//  */
+// function showErrorMessage(parentNode, message) {
+//   let errorMessage = parentNode.querySelector('.error-message');
+//   if (!errorMessage) {
+//     errorMessage = document.createElement('div');
+//     errorMessage.classList.add('error-message');
+//     parentNode.appendChild(errorMessage);
+//   }
+//   errorMessage.textContent = message;
+// }
 
-/**
- * Hides the error message for an input field.
- *
- * @param {HTMLElement} parentNode - The parent node of the input field.
- */
-function hideErrorMessage(parentNode) {
-  const errorMessage = parentNode.querySelector('.error-message');
-  if (errorMessage) {
-    errorMessage.remove();
-  }
-}
+// /**
+//  * Hides the error message for an input field.
+//  *
+//  * @param {HTMLElement} parentNode - The parent node of the input field.
+//  */
+// function hideErrorMessage(parentNode) {
+//   const errorMessage = parentNode.querySelector('.error-message');
+//   if (errorMessage) {
+//     errorMessage.remove();
+//   }
+// }
 
-/**
- * Clears the error message for an input field.
- *
- * @param {HTMLElement} inputField - The input field element.
- */
-function clearError(inputField) {
-  inputField.classList.remove('error');
-  hideErrorMessage(inputField.parentNode);
-}
+// /**
+//  * Clears the error message for an input field.
+//  *
+//  * @param {HTMLElement} inputField - The input field element.
+//  */
+// function clearError(inputField) {
+//   inputField.classList.remove('error');
+//   hideErrorMessage(inputField.parentNode);
+// }
 
-/**
- * Validates an email address.
- *
- * @param {string} email - The email address to validate.
- * @returns {boolean} True if the email is valid, otherwise false.
- */
-function isValidEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
+// /**
+//  * Validates an email address.
+//  *
+//  * @param {string} email - The email address to validate.
+//  * @returns {boolean} True if the email is valid, otherwise false.
+//  */
+// function isValidEmail(email) {
+//   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+// }
 
-/**
- * Validates a phone number.
- *
- * @param {string} phone - The phone number to validate.
- * @returns {boolean} True if the phone number is valid, otherwise false.
- */
-function isValidPhone(phone) {
-  return /^\+?[0-9]{5,15}$/.test(phone);
-}
+// /**
+//  * Validates a phone number.
+//  *
+//  * @param {string} phone - The phone number to validate.
+//  * @returns {boolean} True if the phone number is valid, otherwise false.
+//  */
+// function isValidPhone(phone) {
+//   return /^\+?[0-9]{5,15}$/.test(phone);
+// }

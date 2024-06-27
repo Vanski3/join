@@ -4,10 +4,10 @@
  * @returns {string} - Returns the dynamic HTML code for the add-task content.
  */
 function loadAddTaskContentHTML() {
-   return /*html*/ `
+  return /*html*/ `
      <div class="add-task-main-content">
        <main>
-         <form novalidate onsubmit="setTimeout(saveTask, 1000); return false" id="addTask" class="task-description">
+         <form novalidate onsubmit="setTimeout(saveTask, 200); return false" id="addTask" class="task-description">
            <div class="first-row">
              <div id="first-row">
                <span>Title<span class="red-star">*</span></span>
@@ -107,17 +107,17 @@ function loadAddTaskContentHTML() {
        <button class="blue-btn">Task added to Board</button>
      </div>
    `;
- }
- 
- /**
-  * This function is used to render the saved contacts.
-  *
-  * @param {number} j - The index of the contact.
-  * @param {string} contact - The full name of the contact.
-  * @returns {string} - Returns the dynamic HTML code for the contact in edit form.
-  */
- function renderToListEditHTML(j, contact) {
-   return /*html*/ `
+}
+
+/**
+ * This function is used to render the saved contacts.
+ *
+ * @param {number} j - The index of the contact.
+ * @param {string} contact - The full name of the contact.
+ * @returns {string} - Returns the dynamic HTML code for the contact in edit form.
+ */
+function renderToListEditHTML(j, contact) {
+  return /*html*/ `
      <li class="change-bg-edit" id="contact-${j}-edit" onclick="selectContactEdit(${j})">
        <label for="${contact}">
          <div id="symbol-${j}-edit" name="${contact}" class="initials edit-contact-form savedContacts"
@@ -128,15 +128,15 @@ function loadAddTaskContentHTML() {
          <img class="change-src-edit" id="checkbox-${j}-edit" src="./assets/img/login/checkbox.svg" alt="">
        </div>
      </li>`;
- }
- 
- /**
-  * This function is used to render the form into the edit popup.
-  *
-  * @returns {string} - Returns the dynamic HTML code for the edit form.
-  */
- function editTaskHTML() {
-   return /*html*/ `
+}
+
+/**
+ * This function is used to render the form into the edit popup.
+ *
+ * @returns {string} - Returns the dynamic HTML code for the edit form.
+ */
+function editTaskHTML() {
+  return /*html*/ `
      <form novalidate onsubmit="saveTaskEdit(); return false" id="addTask-edit" class="task-description-edit">
        <img
          onclick="closeTaskOverlayEdit()"
@@ -228,17 +228,17 @@ function loadAddTaskContentHTML() {
        </div>
      </form>
    `;
- }
- 
- /**
-  * This function is used to render the contacts to the dropdown menu.
-  *
-  * @param {number} i - The index of the contact.
-  * @param {string} contact - The full name of the contact.
-  * @returns {string} - Returns the dynamic HTML code for the contact in the dropdown menu.
-  */
- function renderToListHTML(i, contact) {
-   return /*html*/ `
+}
+
+/**
+ * This function is used to render the contacts to the dropdown menu.
+ *
+ * @param {number} i - The index of the contact.
+ * @param {string} contact - The full name of the contact.
+ * @returns {string} - Returns the dynamic HTML code for the contact in the dropdown menu.
+ */
+function renderToListHTML(i, contact) {
+  return /*html*/ `
      <li class="change-bg" id="contact-${i}" onclick="selectContact(${i})">
        <label for="${contact}">
          <div id="symbol-${i}" name="${contact}" class="contactShow initials"
@@ -249,16 +249,16 @@ function loadAddTaskContentHTML() {
          <img class="change-src" id="checkbox-${i}" src="./assets/img/login/checkbox.svg" alt="">
        </div>
      </li>`;
- }
- 
- /**
-  * This function is used to render the subtasks to the form.
-  *
-  * @param {HTMLElement} subtasks - The input subtask field.
-  * @returns {string} - Returns the dynamic HTML code for the subtask.
-  */
- function addSubtasksHTML(subtasks) {
-   return /*html*/ `
+}
+
+/**
+ * This function is used to render the subtasks to the form.
+ *
+ * @param {HTMLElement} subtasks - The input subtask field.
+ * @returns {string} - Returns the dynamic HTML code for the subtask.
+ */
+function addSubtasksHTML(subtasks) {
+  return /*html*/ `
      <li onmouseover="changeSubtask(this)" ondblclick="changeSubtask(this)" onmouseout="resetSubtask(this)" class="subtask-link" status="open">
        <span class="subtask-input-field">&#10625 <span class="subtask-text">${subtasks.value}</span></span>
        <span>
@@ -269,5 +269,4 @@ function loadAddTaskContentHTML() {
            src="./assets/img/add-task/trash.svg" alt="">
        </span>
      </li>`;
- }
- 
+}

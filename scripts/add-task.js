@@ -142,7 +142,7 @@ function saveTask() {
   rows.forEach((rowId) => {
     let form = document.getElementById(rowId);
     form.querySelectorAll('*').forEach((element) => {
-      if (element.classList.contains('error-edit-contact')) {
+      if (element.classList.contains('error')) {
         formHasErrorTask = true;
       }
     });
