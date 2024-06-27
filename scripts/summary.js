@@ -5,67 +5,7 @@ function renderSummary(fromMobile = false) {
    const name = sessionStorage.getItem('name') ?? 'Guest';
    const content = document.querySelector('.main-content');
    content.innerHTML = '';
-   content.innerHTML += /*html*/ `
-       <main id="summaryMain" class="summary-main ${fromMobile ? 'summary-main-slide' : ''}">
-        <div class="headline-wrapper"><span class="headline" id="daytime">Good morning,</span><span id="username"> ${name}</span></div>
-          <div class="summary-wrapper">
-              <div class="row1">
-                  <div class="date-urgent-task" onclick="loadBoardContent()">
-                      <div class="urgent-task">
-                          <div class="img-amount-container">
-                              <img src="./assets/img/summary/urgent-frame.svg" alt="urgent task" />
-                              <span id="urgent">1</span>
-                          </div>
-                          <p>Tasks Urgent</p>
-                      </div>
-                      <div class="separator"></div>
-                      <div class="date">
-                          <div>
-                              <span id="date">October 16, 2022</span>
-                              <p>Upcoming Deadline</p>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="task" onclick="loadBoardContent('mainContent')">
-                      <div class="img-amount-container">
-                          <img src="./assets/img/summary/Board.svg" alt="Task in Board" />
-                          <span id="task-in-board">5</span>
-                      </div>
-                      <p>Task in Board</p>
-                  </div>
-              </div>
-              <div class="row2">
-                  <div class="task task-todo" onclick="loadBoardContent('board-todo')">
-                      <div class="img-amount-container">
-                          <img src="./assets/img/summary/todo.svg" alt="Task To-do" />
-                          <span id="todo">1</span>
-                      </div>
-                      <p>Task To-do</p>
-                  </div>
-                  <div class="task" onclick="loadBoardContent('board-progress')">
-                      <div class="img-amount-container">
-                          <img src="./assets/img/summary/In Progress.svg" alt="Task in Progress" />
-                          <span id="in-progress">2</span>
-                      </div>
-                      <p>Task in Progress</p>
-                  </div>
-                  <div class="task" onclick="loadBoardContent('board-feedback')">
-                      <div class="img-amount-container">
-                          <img src="./assets/img/summary/Awaiting feedback.svg" alt="Awaiting feedback" />
-                          <span id="feedback">2</span>
-                      </div>
-                      <p>Awaiting Feedback</p>
-                  </div>
-                  <div class="task" onclick="loadBoardContent('board-done')">
-                      <div class="img-amount-container">
-                          <img src="./assets/img/summary/Done.svg" alt="Task done">
-                          <span id="done">1</span>
-                      </div>
-                      <p>Tasks Done</p>
-                  </div>
-              </div>
-          </div>
-      </main>`;
+   content.innerHTML += renderSummaryHTML(name, fromMobile);
    if (fromMobile) {
       setTimeout(() => {
          document.querySelector('.summary-main').classList.remove('summary-main-slide');
@@ -188,4 +128,68 @@ function changeSummaryButtonBackground() {
 function changeColorSideSummary() {
    document.getElementById('sidebarImgSummary').classList.add('color-img-sidebar');
    document.getElementById('fontSummarySidebar').classList.add('menu-row-font');
+}
+
+function renderSummaryHTML(name, fromMobile) {
+   return /*html*/ `
+    <main id="summaryMain" class="summary-main ${fromMobile ? 'summary-main-slide' : ''}">
+     <div class="headline-wrapper"><span class="headline" id="daytime">Good morning,</span><span id="username"> ${name}</span></div>
+       <div class="summary-wrapper">
+           <div class="row1">
+               <div class="date-urgent-task" onclick="loadBoardContent()">
+                   <div class="urgent-task">
+                       <div class="img-amount-container">
+                           <img src="./assets/img/summary/urgent-frame.svg" alt="urgent task" />
+                           <span id="urgent">1</span>
+                       </div>
+                       <p>Tasks Urgent</p>
+                   </div>
+                   <div class="separator"></div>
+                   <div class="date">
+                       <div>
+                           <span id="date">October 16, 2022</span>
+                           <p>Upcoming Deadline</p>
+                       </div>
+                   </div>
+               </div>
+               <div class="task" onclick="loadBoardContent('mainContent')">
+                   <div class="img-amount-container">
+                       <img src="./assets/img/summary/Board.svg" alt="Task in Board" />
+                       <span id="task-in-board">5</span>
+                   </div>
+                   <p>Task in Board</p>
+               </div>
+           </div>
+           <div class="row2">
+               <div class="task task-todo" onclick="loadBoardContent('board-todo')">
+                   <div class="img-amount-container">
+                       <img src="./assets/img/summary/todo.svg" alt="Task To-do" />
+                       <span id="todo">1</span>
+                   </div>
+                   <p>Task To-do</p>
+               </div>
+               <div class="task" onclick="loadBoardContent('board-progress')">
+                   <div class="img-amount-container">
+                       <img src="./assets/img/summary/In Progress.svg" alt="Task in Progress" />
+                       <span id="in-progress">2</span>
+                   </div>
+                   <p>Task in Progress</p>
+               </div>
+               <div class="task" onclick="loadBoardContent('board-feedback')">
+                   <div class="img-amount-container">
+                       <img src="./assets/img/summary/Awaiting feedback.svg" alt="Awaiting feedback" />
+                       <span id="feedback">2</span>
+                   </div>
+                   <p>Awaiting Feedback</p>
+               </div>
+               <div class="task" onclick="loadBoardContent('board-done')">
+                   <div class="img-amount-container">
+                       <img src="./assets/img/summary/Done.svg" alt="Task done">
+                       <span id="done">1</span>
+                   </div>
+                   <p>Tasks Done</p>
+               </div>
+           </div>
+       </div>
+   </main>`;
 }
