@@ -305,7 +305,7 @@ function renderToListHTML(i, contact) {
 function addSubtasksHTML(subtasks) {
   return /*html*/ `
    <li onmouseover="changeSubtask(this)" ondblclick="changeSubtask(this)" onmouseout="resetSubtask(this)" class="subtask-link" status="open">
-    <span>&#10625 <span class="subtask-text">${subtasks.value}</span></span>
+    <span class="subtask-input-field">&#10625 <span class="subtask-text">${subtasks.value}</span></span>
     <span>
        <img onclick="editSubtask(this)" class="edit-subtask d-none" id="edit-subtask"
           src="./assets/img/add-task/edit-subtask.svg" alt="">

@@ -393,7 +393,14 @@ function addSubtasks() {
   if (subtasks.value.length >= 1) {
     placeholder.innerHTML += addSubtasksHTML(subtasks);
     subtasks.value = '';
+    let container = document.getElementById('addTask');
+    container.scrollTop = container.scrollHeight;
     resetSubtaskInput();
+    if (placeholder.querySelectorAll('li').length >= 3) {
+      placeholder.style.overflowY = 'scroll';
+      placeholder.scrollTop = container.scrollHeight;
+      resetSubtaskInput();
+    }
   }
 }
 

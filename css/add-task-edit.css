@@ -81,7 +81,7 @@ textarea::placeholder {
   transition: background-image 1ms ease-in-out;
 }
 
-.task-description-edit select:focus {
+#category:focus {
   background-image: url(../assets/img/add-task/arrow-up.svg);
 }
 

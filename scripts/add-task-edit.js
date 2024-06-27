@@ -448,6 +448,7 @@ function editSubtask(element) {
     let span = document.createElement('span');
     span.className = 'subtask-text';
     span.textContent = input.value;
+
     input.replaceWith(span);
   };
   input.onkeypress = function (e) {
