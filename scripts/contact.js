@@ -351,6 +351,134 @@ function saveContact(event) {
   document.getElementById('addContact').reset(); // Reset form
 }
 
+/**
+ * Adds validation listeners to the edit contact form.
+ */
+function addTaskValidationEditContact() {
+  const addTaskFormEditContact = document.getElementById('edit-contact');
+  const nameEditContact = document.getElementById('name-edit-contact');
+  const emailEditContact = document.getElementById('email-edit-contact');
+  const phoneEditContact = document.getElementById('phone-edit-contact');
+
+  addValidationListenersEditContact(nameEditContact, 'name');
+  addValidationListenersEditContact(emailEditContact, 'email');
+  addValidationListenersEditContact(phoneEditContact, 'phone');
+
+  addTaskFormEditContact.addEventListener('submit', function (event) {
+    event.preventDefault();
+    validateInputEditContact(nameEditContact, 'name');
+    validateInputEditContact(emailEditContact, 'email');
+    validateInputEditContact(phoneEditContact, 'phone');
+
+    // If no validation errors, submit the form (optional)
+    if (!document.querySelector('.error-edit-contact')) {
+      addTaskFormEditContact.submit();
+    }
+  });
+}
+
+/**
+ * Adds validation listeners to input fields.
+ *
+ * @param {HTMLElement} inputField - The input field element.
+ * @param {string} type - The type of the input field.
+ */
+function addValidationListenersEditContact(inputField, type) {
+  inputField.addEventListener('blur', () => validateInputEditContact(inputField, type));
+  inputField.addEventListener('input', () => clearErrorEditContact(inputField));
+}
+
+/**
+ * Validates the input fields in the form.
+ *
+ * @param {HTMLElement} inputField - The input field element.
+ * @param {string} type - The type of the input field.
+ */
+function validateInputEditContact(inputField, type) {
+  const value = inputField.value.trim();
+  const parentNode = inputField.parentNode;
+  const errorClass = 'error-edit-contact';
+  let errorMessage = '';
+
+  if (type === 'name') {
+    if (value === '') {
+      errorMessage = 'This field is required';
+    } else if (!value.includes(' ')) {
+      errorMessage = 'Please enter both first name and last name';
+    }
+  } else if (type === 'email' && !isValidEmailEditContact(value)) {
+    errorMessage = 'Please enter a valid email address';
+  } else if (type === 'phone' && !isValidPhoneEditContact(value)) {
+    errorMessage = 'Please enter a valid phone number';
+  }
+
+  if (errorMessage) {
+    inputField.classList.add(errorClass);
+    showErrorMessageEditContact(parentNode, errorMessage);
+  } else {
+    inputField.classList.remove(errorClass);
+    hideErrorMessageEditContact(parentNode);
+  }
+}
+
+/**
+ * Shows an error message for an input field.
+ *
+ * @param {HTMLElement} parentNode - The parent node of the input field.
+ * @param {string} message - The error message to show.
+ */
+function showErrorMessageEditContact(parentNode, message) {
+  let errorMessage = parentNode.querySelector('.error-message');
+  if (!errorMessage) {
+    errorMessage = document.createElement('div');
+    errorMessage.classList.add('error-message');
+    parentNode.appendChild(errorMessage);
+  }
+  errorMessage.textContent = message;
+}
+
+/**
+ * Hides the error message for an input field.
+ *
+ * @param {HTMLElement} parentNode - The parent node of the input field.
+ */
+function hideErrorMessageEditContact(parentNode) {
+  const errorMessage = parentNode.querySelector('.error-message');
+  if (errorMessage) {
+    errorMessage.remove();
+  }
+}
+
+/**
+ * Clears the error message for an input field.
+ *
+ * @param {HTMLElement} inputField - The input field element.
+ */
+function clearErrorEditContact(inputField) {
+  inputField.classList.remove('error-edit-contact');
+  hideErrorMessageEditContact(inputField.parentNode);
+}
+
+/**
+ * Validates an email address.
+ *
+ * @param {string} email - The email address to validate.
+ * @returns {boolean} True if the email is valid, otherwise false.
+ */
+function isValidEmailEditContact(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+/**
+ * Validates a phone number.
+ *
+ * @param {string} phone - The phone number to validate.
+ * @returns {boolean} True if the phone number is valid, otherwise false.
+ */
+function isValidPhoneEditContact(phone) {
+  return /^\+?[0-9]{5,15}$/.test(phone);
+}
+
 // /**
 //  * Adds validation listeners to the edit contact form.
 //  */

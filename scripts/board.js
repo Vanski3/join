@@ -21,6 +21,7 @@ function init(params) {
  * @param {Object|null} [parameter=null] - Optional parameter to specify the task category.
  */
 function openTaskDialog(parameter = null) {
+  formHasErrorTask = false;
   popup.style.display = 'unset';
   setTimeout(function () {
     taskDialog.style.right = '0';

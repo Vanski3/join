@@ -113,7 +113,6 @@ function getSelectedContacts() {
  */
 function getSelectedSubtasks() {
   let liElements = document.querySelectorAll('#subtask-placeholder li.subtask-link');
-  let subtasks = [{ subtask: [], subtaskStatus: [] }];
   for (let i = 0; i < liElements.length; i++) {
     let subtaskTextElement = liElements[i].querySelector('.subtask-text');
     let subtaskText = subtaskTextElement.textContent;
@@ -162,6 +161,7 @@ function saveTask() {
  */
 function saveTaskElse() {
   getSelectedSubtasks();
+  getSelectedContacts();
   let bgColor = document.getElementById('category');
   let selectedIndex = bgColor.selectedIndex;
   let selectedOption = (bgColor = bgColor.options[selectedIndex]);
