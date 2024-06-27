@@ -372,15 +372,15 @@ textarea::placeholder {
   border-bottom: 1px solid #29abe2;
   border-radius: unset;
   height: 20px;
-  width: 420px;
   z-index: 999;
   position: absolute;
   left: 0;
   top: 0;
+  width: 420px;
   padding: 5px 10px;
   background-image: none;
-  max-width: 80%;
   overflow-x: scroll;
+  display: flex;
 }
 
 .edit-subtask {
