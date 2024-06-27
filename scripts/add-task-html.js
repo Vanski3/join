@@ -256,7 +256,7 @@ function editTaskHTML() {
                                <option bgColor="#FF7A00" value="User Story">User Story</option>
                             </select>
                          </div>
-    
+   
                          <div class="substasks">
                             Subtasks
                             <input onclick="addSubtasksEdit()" class="my-inputs-edit" placeholder="Add new subtask" name="subtasks"

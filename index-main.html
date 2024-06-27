@@ -215,10 +215,18 @@
 
                      <div class="substasks">
                         Subtasks
-                        <input onclick="addSubtasks()" class="my-inputs" placeholder="Add new subtask" name="subtasks"
-                           id="subtasks">
+                        <div id="subtask-container">
+                           <input onclick="addSubtasks()" class="my-inputs" placeholder="Add new subtask"
+                              name="subtasks" id="subtasks">
+                           <img onclick="resetSubtaskInput()" class="cancel-button d-none" id="cancel-button"
+                              src="./assets/img/add-task/cancel-blue.svg" alt="">
+                           <div class="mini-seperator" id="mini-seperator" style="display: none"></div>
+                           <img onclick="addSubtasks()" class="check-blue d-none" id="check-blue"
+                              src="./assets/img/add-task/check-blue.svg" alt="">
+                        </div>
                         <div id="subtask-placeholder"></div>
                      </div>
+
 
                   </div>
 

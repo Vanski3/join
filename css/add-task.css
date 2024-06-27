@@ -392,6 +392,10 @@ textarea::placeholder {
   cursor: pointer;
 }
 
+#subtask-placeholder {
+  max-height: 80px;
+}
+
 #subtask-placeholder::-webkit-scrollbar {
   width: 5px;
 }
