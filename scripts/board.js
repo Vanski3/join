@@ -4,7 +4,7 @@ const BASE_URL = 'https://join-2024-default-rtdb.europe-west1.firebasedatabase.a
 let tasks = [];
 let allDataFromFirebase = [];
 
-function init(params) {
+function init() {
    loadTasksData();
    loadallDataFromFirebase();
    welcomeTextMobile();
