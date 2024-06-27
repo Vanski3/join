@@ -42,12 +42,17 @@ function removeBackgroundLowerSidebar(params) {
 }
 
 function welcomeTextMobile(params) {
-   document.getElementById('mainContent').innerHTML = /*html*/ `
-   <div class="greeting-div-mobile">
-      <span class="greeting-mobile">Hello !</span>
-   </div>
-   `;
-   setTimeout(() => {
+   const name = sessionStorage.getItem('name') ?? 'Guest';
+   if (window.matchMedia('(max-width: 600px)').matches) {
+      document.getElementById('mainContent').innerHTML = /*html*/ `
+      <div class="greeting-div-mobile">
+         <span class="greeting-mobile">Hello, ${name}!</span>
+      </div>
+      `;
+      setTimeout(() => {
+         renderSummary();
+      }, 1500);
+   } else {
       renderSummary();
-   }, 1500);
+   }
 }
