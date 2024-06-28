@@ -89,7 +89,7 @@ let formHasErrorEditContact = false;
  */
 
 async function loadContactsContent() {
-  let contactsData = await getAllContacts('contacts');
+  //   let contactsData = await getAllContacts('contacts');
   renderContacts(contactsData);
   removeBackgroundLowerSidebar();
   removeButtonBackground();
