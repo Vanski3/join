@@ -456,6 +456,5 @@ document.addEventListener('DOMContentLoaded', function () {
     validateInput(signupEmailInput, 'email');
     validateInput(signupPasswordInput, 'password');
     validateConfirmPassword(confirmSignupInput, signupPasswordInput);
-    validateCheckbox(signupCheckboxInput);
   });
 });

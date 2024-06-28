@@ -9,13 +9,13 @@ function addTaskValidation() {
   const category = document.getElementById('category');
 
   addValidationListeners(title, 'name');
-  addValidationListeners(date, 'name');
+  addValidationListeners(date, 'date'); // Changed from 'name' to 'date'
   addValidationListeners(category, 'name');
 
   addTaskForm.addEventListener('submit', function (event) {
     event.preventDefault();
     validateInput(title, 'name');
-    validateInput(date, 'name');
+    validateInput(date, 'date'); // Changed from 'name' to 'date'
     validateInput(category, 'name');
   });
 }
@@ -54,6 +54,14 @@ function validateInput(inputField, type, passwordField) {
   if (type === 'name') {
     if (value === '') {
       errorMessage = 'This field is required';
+    }
+  }
+
+  if (type === 'date') {
+    if (value === '') {
+      errorMessage = 'This field is required';
+    } else if (inputField.min && value < inputField.min) {
+      errorMessage = `Date must be on or after ${inputField.min}`;
     }
   }
 
@@ -165,8 +173,7 @@ function changeAddTaskButtonBackground() {
 }
 
 /**
- * This funcion adds the validation to the edit task form
- *
+ * This function adds validation to the edit task form.
  */
 function addTaskValidationEdit() {
   const addTaskForm = document.getElementById('addTask-edit');
@@ -175,22 +182,23 @@ function addTaskValidationEdit() {
   const categoryEdit = document.getElementById('category-edit');
 
   addValidationListenersEdit(titleEdit, 'name');
-  addValidationListenersEdit(dateEdit, 'name');
+  addValidationListenersEdit(dateEdit, 'date');
   addValidationListenersEdit(categoryEdit, 'name');
 
   addTaskForm.addEventListener('submit', function (event) {
     event.preventDefault();
-    validateInput(titleEdit, 'name');
-    validateInput(dateEdit, 'name');
-    validateInput(categoryEdit, 'name');
+    validateInputEdit(titleEdit, 'name');
+    validateInputEdit(dateEdit, 'date');
+    validateInputEdit(categoryEdit, 'name');
   });
 }
+
 /**
- * This function is adds eventlisteners to the input fields of the edit-task form
+ * This function adds event listeners to the input fields of the edit-task form.
  *
- * @param {element} inputField - div id of the input field
- * @param {string} type - this is the type of the input field
- * @param {element} passwordField  div id of the input field
+ * @param {HTMLElement} inputField - The input field element.
+ * @param {string} type - The type of the input field.
+ * @param {HTMLElement} [passwordField] - The password field element (optional).
  */
 function addValidationListenersEdit(inputField, type, passwordField) {
   inputField.addEventListener('blur', () => validateInputEdit(inputField, type, passwordField));
@@ -198,12 +206,12 @@ function addValidationListenersEdit(inputField, type, passwordField) {
 }
 
 /**
- * This function is used for validate the error messages of the edit-task popup
+ * This function validates the input fields of the edit-task form.
  *
- * @param {element} inputField - div id of the input field
- * @param {string} type - this is the type of the input field
- * @param {element} passwordField  div id of the input field
- * @returns - returns the function when the password is incorrect
+ * @param {HTMLElement} inputField - The input field element.
+ * @param {string} type - The type of the input field.
+ * @param {HTMLElement} [passwordField] - The password field element (optional).
+ * @returns {void}
  */
 function validateInputEdit(inputField, type, passwordField) {
   const value = inputField.value.trim();
@@ -222,6 +230,16 @@ function validateInputEdit(inputField, type, passwordField) {
     }
   }
 
+  if (type === 'date') {
+    const minDate = new Date(inputField.min);
+    const inputDate = new Date(value);
+    if (value === '') {
+      errorMessage = 'This field is required';
+    } else if (inputDate < minDate) {
+      errorMessage = `Date should be after ${inputField.min}`;
+    }
+  }
+
   if (errorMessage) {
     inputField.classList.add(errorClass);
     showErrorMessageEdit(parentNode, errorMessage);
@@ -232,10 +250,10 @@ function validateInputEdit(inputField, type, passwordField) {
 }
 
 /**
- * This function validates the passwords
+ * This function validates the password confirmation field.
  *
- * @param {element} confirmInput - This is the confirm password Input field
- * @param {element} passwordInput - This is the password Input field
+ * @param {HTMLElement} confirmInput - The confirm password input field.
+ * @param {HTMLElement} passwordInput - The password input field.
  */
 function validateConfirmPasswordEdit(confirmInput, passwordInput) {
   const confirmValue = confirmInput.value.trim();
@@ -259,24 +277,10 @@ function validateConfirmPasswordEdit(confirmInput, passwordInput) {
 }
 
 /**
- * This function validates the error messages of the edit-form
+ * This function shows the error messages of the edit form.
  *
- * @param {*} checkboxInput
- */
-function validateCheckboxEdit(checkboxInput) {
-  const parent = checkboxInput.parentNode.parentNode;
-  const errorClass = 'error';
-
-  if (!checkboxInput.checked) {
-    showErrorMessageEdit(parent, 'You must accept the Privacy policy');
-  } else {
-    hideErrorMessageEdit(parent);
-  }
-}
-
-/**
- * This function shows the error messages of the edit form
- *
+ * @param {HTMLElement} parentNode - The parent node where the error message will be shown.
+ * @param {string} message - The error message to be displayed.
  */
 function showErrorMessageEdit(parentNode, message) {
   let errorMessage = parentNode.querySelector('.error-message');
@@ -289,9 +293,9 @@ function showErrorMessageEdit(parentNode, message) {
 }
 
 /**
- * This function is used to hide error messages of the edit form
+ * This function hides error messages of the edit form.
  *
- * @param {element} parentNode - This is the parentNode of the div with the error-message class
+ * @param {HTMLElement} parentNode - The parent node where the error message will be hidden.
  */
 function hideErrorMessageEdit(parentNode) {
   const errorMessage = parentNode.querySelector('.error-message');
@@ -301,9 +305,9 @@ function hideErrorMessageEdit(parentNode) {
 }
 
 /**
- * This function reset the error messages of the edit form
+ * This function clears the error messages of the edit form.
  *
- * @param {element} inputField - This is the inputfield
+ * @param {HTMLElement} inputField - The input field element.
  */
 function clearErrorEdit(inputField) {
   inputField.classList.remove('error');
@@ -311,10 +315,10 @@ function clearErrorEdit(inputField) {
 }
 
 /**
- * This function validates the email input of the edit form
+ * This function validates the email input of the edit form.
  *
- * @param {element} email - this is the email input field
- * @returns - validate the value
+ * @param {string} email - The email input field value.
+ * @returns {boolean} - True if the email is valid, otherwise false.
  */
 function isValidEmailEdit(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);

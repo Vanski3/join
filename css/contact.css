@@ -196,6 +196,7 @@
 
 .contact-popup-header {
   display: flex;
+  border-top-left-radius: 30px;
   background-color: #005dff;
   padding: 40px;
   justify-content: center;

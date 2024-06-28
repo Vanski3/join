@@ -4,13 +4,13 @@
  * @param {Object} [params] - Optional parameters (not used in the function).
  */
 function loadLegalNoticeContent(params) {
-   let userHeaderPopup = document.getElementById('userHeaderPopup');
-   userHeaderPopup.style.display = 'none';
-   let mainContent = document.getElementById('mainContent');
-   mainContent.innerHTML = '';
-   mainContent.innerHTML += loadLegalNoticeContentHTML();
-   removeBackgroundLowerSidebar();
-   addBackgroundLegalNotice();
+  let userHeaderPopup = document.getElementById('userHeaderPopup');
+  userHeaderPopup.style.display = 'none';
+  let mainContent = document.getElementById('mainContent');
+  mainContent.innerHTML = '';
+  mainContent.innerHTML += loadLegalNoticeContentHTML();
+  removeBackgroundLowerSidebar();
+  addBackgroundLegalNotice();
 }
 
 /**
@@ -20,14 +20,18 @@ function loadLegalNoticeContent(params) {
  * @returns {string} The HTML content for the legal notice.
  */
 function loadLegalNoticeContentHTML(params) {
-   return /*html*/ `
+  return /*html*/ `
         <div class="content-div">
           <div class="headline-row">
             <h1>Legal Notice</h1>
             <img onclick="returnToPreviousContent()" src="./assets/img/privacy-legal-help/move-back-arrow.svg" alt="zurück" />
           </div>
           <h2>Imprint</h2>
-          <!-- individual Names -->
+          <ul style="cursor: auto">
+            <ul><span style="font-weight: bold">Vanessa Sachs</span>  <br> Testweg 12 <br> 05484 Berlin</ul> <br>
+            <ul><span style="font-weight: bold">Rene Lochschmidt</span> <br> Siedlerstrasse 1a <br> 82256 Fürstenfeldbruck</ul> <br>
+            <ul><span style="font-weight: bold">Pascal Nehlsen</span> <br> Lüffringhauser Weg 12 <br> 42929 Wermelskirchen</ul>
+          </ul>
           <h3>Exploring the Board</h3>
           <!-- individual email -->
           <h3>Acceptance of terms</h3>
@@ -79,6 +83,6 @@ function loadLegalNoticeContentHTML(params) {
  * Adds a background to the legal notice button to highlight it.
  */
 function addBackgroundLegalNotice() {
-   let legalNoticeButton = document.getElementById('legalNoticeButton');
-   legalNoticeButton.classList.add('active-link');
+  let legalNoticeButton = document.getElementById('legalNoticeButton');
+  legalNoticeButton.classList.add('active-link');
 }

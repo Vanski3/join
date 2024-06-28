@@ -434,8 +434,8 @@ function loadAddTaskContent() {
   selectedButtonId = '';
   priority = '';
   handleMediumClick(event);
-  addTaskValidation();
   minDate();
+  addTaskValidation();
 }
 
 /**
@@ -487,7 +487,15 @@ function minDate() {
   let day = today.getDate().toString().padStart(2, '0');
 
   const minDate = `${year}-${month}-${day}`;
-  document.getElementById('custom-date').setAttribute('min', minDate);
+  const dateInput = document.getElementById('custom-date');
+  dateInput.setAttribute('min', minDate);
+
+  dateInput.oninvalid = function (event) {
+    event.target.setCustomValidity('The date cannot be earlier than todays date.');
+  };
+  dateInput.oninput = function (event) {
+    event.target.setCustomValidity('');
+  };
 }
 
 /**
