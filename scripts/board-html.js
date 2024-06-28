@@ -4,7 +4,7 @@
  * @returns {string} The HTML content for the board view.
  */
 function loadBoardContentHTML() {
-   return /*html*/ `
+  return /*html*/ `
      <main class="main-board-div">
         <div class="search-addtask-div">
            <div class="search-input-div">
@@ -13,12 +13,12 @@ function loadBoardContentHTML() {
               <img
                  onmouseover="this.src='./assets/img/board/search-symbol-variant2.svg'"
                  onmouseout="this.src='./assets/img/board/search-image-default.svg'"
-                 src="assets/img/board/search-image-default.svg"
+                 src="./assets/img/board/search-image-default.svg"
                  alt="" />
            </div>
            <button onclick="openTaskDialog()" class="add-task-button" id="">
               Add Task
-              <img src="assets/img/board/add-task-plus-icon.svg" alt="" />
+              <img src="./assets/img/board/add-task-plus-icon.svg" alt="" />
            </button>
         </div>
  
@@ -83,7 +83,7 @@ function loadBoardContentHTML() {
  * @returns {string} The HTML content for the task card.
  */
 function renderBoardCardsHTML(i, title, description, categoryName) {
-   return /*html*/ `
+  return /*html*/ `
      <div id="boardCard${i}" draggable="true" ondragstart="drag(event)" class="board-card no-drag" onclick="renderTaskOverlay(${i})">
        <div class="header-row-board-card" id="headerRowBoardCard${i}">
          <img id="categorieImg${i}" class="card-label" src="./assets/img/board/${categoryName}.svg" alt="" />
@@ -118,7 +118,7 @@ function renderBoardCardsHTML(i, title, description, categoryName) {
  * @returns {string} The HTML content for the task overlay.
  */
 function renderTaskOverlayHTML(i, title, description, categoryName, dueDate) {
-   return /*html*/ `
+  return /*html*/ `
      <div class="task-overlay" id="edit-task">
         <div class="categorie-info">
            <img class="overlay-card-label" src="./assets/img/board/${categoryName}.svg" alt="" />
@@ -177,7 +177,7 @@ function renderTaskOverlayHTML(i, title, description, categoryName, dueDate) {
  * @returns {string} The HTML content for the task card in the search results.
  */
 function searchTaskHTML(i, title, description, priority, categoryName) {
-   return /*html*/ `
+  return /*html*/ `
      <div id="boardCard${i}" class="board-card" onclick="renderTaskOverlay(${i})">
        <img class="card-label" src="./assets/img/board/${categoryName}.svg" alt="" />
        <span class="card-title">${title}</span>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: add-task-html.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: add-task-html.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * This function is used to render the add-task content.
+ *
+ * @returns {string} - Returns the dynamic HTML code for the add-task content.
+ */
+function loadAddTaskContentHTML() {
+  return /*html*/ `
+     &lt;div class="add-task-main-content">
+       &lt;main>
+         &lt;form novalidate onsubmit="setTimeout(saveTask, 200); return false" id="addTask" class="task-description">
+           &lt;div class="first-row">
+             &lt;div id="first-row">
+               &lt;span>Title&lt;span class="red-star">*&lt;/span>&lt;/span>
+               &lt;input id="title-task" class="my-inputs" required placeholder="Enter a title" type="text">
+             &lt;/div>
+             &lt;div>
+               Description
+               &lt;textarea class="my-inputs" placeholder="Enter a Description" name="description" id="description">&lt;/textarea>
+             &lt;/div>
+             &lt;div>
+               &lt;div>
+                 Assigned to
+                 &lt;details id="details">
+                   &lt;summary id="contact-summary">
+                     &lt;div class="summary-headline">Select contacts to assign&lt;/div>
+                     &lt;input type="text" id="contact-search" onkeyup="filterContacts()" placeholder="Search contacts">
+                   &lt;/summary>
+                   &lt;fieldset>
+                     &lt;ul id="contacts">&lt;/ul>
+                   &lt;/fieldset>
+                 &lt;/details>
+                 &lt;div id="placeholder">&lt;/div>
+               &lt;/div>
+             &lt;/div>
+           &lt;/div>
+           &lt;div class="seperator">&lt;/div>
+           &lt;div class="second-row" id="second-row">
+             &lt;div>
+               &lt;span>Due Date&lt;span class="red-star">*&lt;/span>&lt;/span>
+               &lt;input class="my-inputs" id="custom-date" required type="date">
+             &lt;/div>
+             &lt;div class="prio-container">
+               Prio
+               &lt;div id="button-container">
+                 &lt;button onclick="handleUrgentClick(event)" id="buttonUrgent">
+                   Urgent
+                   &lt;svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     &lt;path id="UrgentOne" d="M19.6528 15.2547C19.4182 15.2551 19.1896 15.1803 19.0007 15.0412L10.7487 8.958L2.49663 15.0412C2.38078 15.1267 2.24919 15.1887 2.10939 15.2234C1.96959 15.2582 1.82431 15.2651 1.68184 15.2437C1.53937 15.2223 1.40251 15.1732 1.27906 15.099C1.15562 15.0247 1.04801 14.927 0.96238 14.8112C0.876751 14.6954 0.814779 14.5639 0.780002 14.4243C0.745226 14.2846 0.738325 14.1394 0.759696 13.997C0.802855 13.7095 0.958545 13.4509 1.19252 13.2781L10.0966 6.70761C10.2853 6.56802 10.5139 6.49268 10.7487 6.49268C10.9835 6.49268 11.212 6.56802 11.4007 6.70761L20.3048 13.2781C20.4908 13.415 20.6286 13.6071 20.6988 13.827C20.7689 14.0469 20.7678 14.2833 20.6955 14.5025C20.6232 14.7216 20.4834 14.9124 20.2962 15.0475C20.1089 15.1826 19.8837 15.2551 19.6528 15.2547Z" fill="#FF3D00"/>
+                     &lt;path id="UrgentTwo" d="M19.6528 9.50568C19.4182 9.50609 19.1896 9.43124 19.0007 9.29214L10.7487 3.20898L2.49663 9.29214C2.26266 9.46495 1.96957 9.5378 1.68184 9.49468C1.39412 9.45155 1.13532 9.29597 0.962385 9.06218C0.789449 8.82838 0.716541 8.53551 0.7597 8.24799C0.802859 7.96048 0.95855 7.70187 1.19252 7.52906L10.0966 0.958588C10.2853 0.818997 10.5139 0.743652 10.7487 0.743652C10.9835 0.743652 11.212 0.818997 11.4007 0.958588L20.3048 7.52906C20.4908 7.66598 20.6286 7.85809 20.6988 8.07797C20.769 8.29785 20.7678 8.53426 20.6955 8.75344C20.6232 8.97262 20.4834 9.16338 20.2962 9.29847C20.1089 9.43356 19.8837 9.50608 19.6528 9.50568Z" fill="#FF3D00"/>
+                   &lt;/svg>
+                 &lt;/button>
+                 &lt;button onclick="handleMediumClick(event)" id="buttonMedium">
+                   Medium
+                   &lt;svg width="21" height="8" viewBox="0 0 21 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     &lt;g clip-path="url(#clip0_187336_4295)">
+                       &lt;path id="MediumOne" d="M19.1526 7.72528H1.34443C1.05378 7.72528 0.775033 7.60898 0.569514 7.40197C0.363995 7.19495 0.248535 6.91419 0.248535 6.62143C0.248535 6.32867 0.363995 6.0479 0.569514 5.84089C0.775033 5.63388 1.05378 5.51758 1.34443 5.51758H19.1526C19.4433 5.51758 19.722 5.63388 19.9276 5.84089C20.1331 6.0479 20.2485 6.32867 20.2485 6.62143C20.2485 6.91419 20.1331 7.19495 19.9276 7.40197C19.722 7.60898 19.4433 7.72528 19.1526 7.72528Z" fill="#FFA800"/>
+                       &lt;path id="MediumTwo" d="M19.1526 2.48211H1.34443C1.05378 2.48211 0.775033 2.36581 0.569514 2.1588C0.363995 1.95179 0.248535 1.67102 0.248535 1.37826C0.248535 1.0855 0.363995 0.804736 0.569514 0.597724C0.775033 0.390712 1.05378 0.274414 1.34443 0.274414L19.1526 0.274414C19.4433 0.274414 19.722 0.390712 19.9276 0.597724C20.1331 0.804736 20.2485 1.0855 20.2485 1.37826C20.2485 1.67102 20.1331 1.95179 19.9276 2.1588C19.722 2.36581 19.4433 2.48211 19.1526 2.48211Z" fill="#FFA800"/>
+                     &lt;/g>
+                     &lt;defs>
+                       &lt;clipPath id="clip0_187336_4295">
+                         &lt;rect width="20" height="7.45098" fill="white" transform="translate(0.248535 0.274414)"/>
+                       &lt;/clipPath>
+                     &lt;/defs>
+                   &lt;/svg>
+                 &lt;/button>
+                 &lt;button onclick="handleLowClick(event)" id="buttonLow">
+                   Low
+                   &lt;svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     &lt;path id="LowOne" d="M10.2485 9.50589C10.0139 9.5063 9.7854 9.43145 9.59655 9.29238L0.693448 2.72264C0.57761 2.63708 0.47977 2.52957 0.405515 2.40623C0.33126 2.28289 0.282043 2.14614 0.260675 2.00379C0.217521 1.71631 0.290421 1.42347 0.463337 1.1897C0.636253 0.955928 0.895021 0.800371 1.18272 0.757248C1.47041 0.714126 1.76347 0.786972 1.99741 0.95976L10.2485 7.04224L18.4997 0.95976C18.6155 0.874204 18.7471 0.812285 18.8869 0.777538C19.0266 0.742791 19.1719 0.735896 19.3144 0.757248C19.4568 0.7786 19.5937 0.82778 19.7171 0.901981C19.8405 0.976181 19.9481 1.07395 20.0337 1.1897C20.1194 1.30545 20.1813 1.43692 20.2161 1.57661C20.2509 1.71629 20.2578 1.86145 20.2364 2.00379C20.215 2.14614 20.1658 2.28289 20.0916 2.40623C20.0173 2.52957 19.9195 2.63708 19.8036 2.72264L10.9005 9.29238C10.7117 9.43145 10.4831 9.5063 10.2485 9.50589Z" fill="#7AE229"/>
+                     &lt;path id="LowTwo" d="M10.2485 15.2544C10.0139 15.2548 9.7854 15.18 9.59655 15.0409L0.693448 8.47117C0.459502 8.29839 0.30383 8.03981 0.260675 7.75233C0.217521 7.46485 0.290421 7.17201 0.463337 6.93824C0.636253 6.70446 0.895021 6.54891 1.18272 6.50578C1.47041 6.46266 1.76347 6.53551 1.99741 6.7083L10.2485 12.7908L18.4997 6.7083C18.7336 6.53551 19.0267 6.46266 19.3144 6.50578C19.602 6.54891 19.8608 6.70446 20.0337 6.93824C20.2066 7.17201 20.2795 7.46485 20.2364 7.75233C20.1932 8.03981 20.0376 8.29839 19.8036 8.47117L10.9005 15.0409C10.7117 15.18 10.4831 15.2548 10.2485 15.2544Z" fill="#7AE229"/>
+                   &lt;/svg>
+                 &lt;/button>
+               &lt;/div>
+             &lt;/div>
+             &lt;div>
+               &lt;span>Category&lt;span class="red-star">*&lt;/span>&lt;/span>
+               &lt;select class="my-inputs" required name="task-list" id="category">
+                 &lt;option value="">Select task category&lt;/option>
+                 &lt;option bgColor="#0038FF" value="Technical Task">Technical Task&lt;/option>
+                 &lt;option bgColor="#FF7A00" value="User Story">User Story&lt;/option>
+               &lt;/select>
+             &lt;/div>
+             &lt;div class="substasks">
+               Subtasks
+               &lt;div id="subtask-container">
+                 &lt;input onclick="addSubtasks()" class="my-inputs" placeholder="Add new subtask" name="subtasks" id="subtasks">
+                 &lt;img onclick="resetSubtaskInput()" class="cancel-button d-none" id="cancel-button" src="./assets/img/add-task/cancel-blue.svg" alt="">
+                 &lt;div class="mini-seperator" id="mini-seperator" style="display: none">&lt;/div>
+                 &lt;img onclick="addSubtasks()" class="check-blue d-none" id="check-blue" src="./assets/img/add-task/check-blue.svg" alt="">
+               &lt;/div>
+               &lt;div id="subtask-placeholder">&lt;/div>
+             &lt;/div>
+           &lt;/div>
+           &lt;div class="buttons">
+             &lt;button onclick="resetForm(event); return false" class="white-btn">Clear &lt;img src="./assets/img/add-task/cancel.svg" alt="">&lt;/button>
+             &lt;button type=submit class="blue-btn">Create Task &lt;img src="./assets/img/add-task/check.svg" alt="">&lt;/button>
+           &lt;/div>
+         &lt;/form>
+       &lt;/div>
+       &lt;div class="required-container">
+         &lt;span class="red-star">*&lt;/span>&lt;span>This field is required&lt;/span>
+       &lt;/div>
+       &lt;/main>
+     &lt;/div>
+     &lt;/div>
+     &lt;div class="form-failed-container-task" id="form-failed-task" style="display: none;">
+       &lt;button class="blue-btn">Task added to Board&lt;/button>
+     &lt;/div>
+   `;
+}
+
+/**
+ * This function is used to render the saved contacts.
+ *
+ * @param {number} j - The index of the contact.
+ * @param {string} contact - The full name of the contact.
+ * @returns {string} - Returns the dynamic HTML code for the contact in edit form.
+ */
+function renderToListEditHTML(j, contact) {
+  return /*html*/ `
+     &lt;li class="change-bg-edit" id="contact-${j}-edit" onclick="selectContactEdit(${j})">
+       &lt;label for="${contact}">
+         &lt;div id="symbol-${j}-edit" name="${contact}" class="initials edit-contact-form savedContacts"
+           style="background-color: ${contacts[j].contactImageBgColor}">${contacts[j].nameInitials}&lt;/div>
+         ${contact}
+       &lt;/label>
+       &lt;div class="checkbox-container">
+         &lt;img class="change-src-edit" id="checkbox-${j}-edit" src="./assets/img/login/checkbox.svg" alt="">
+       &lt;/div>
+     &lt;/li>`;
+}
+
+/**
+ * This function is used to render the form into the edit popup.
+ *
+ * @returns {string} - Returns the dynamic HTML code for the edit form.
+ */
+function editTaskHTML() {
+  return /*html*/ `
+     &lt;form novalidate onsubmit="saveTaskEdit(); return false" id="addTask-edit" class="task-description-edit">
+       &lt;img
+         onclick="closeTaskOverlayEdit()"
+         id="closeTaskOverlay"
+         class="close-button-edit"
+         onmouseover="this.src='./assets/img/task-overlay/close-icon-variant2.svg'"
+         onmouseout="this.src='./assets/img/task-overlay/close-icon.svg'"
+         src="./assets/img/task-overlay/close-icon.svg"
+         alt="" />
+       &lt;div class="first-row-edit">
+         &lt;div id="first-row-edit"> 
+           &lt;span>Title&lt;span class="red-star">*&lt;/span>&lt;/span>
+           &lt;input id="title-edit" class="my-inputs-edit" required placeholder="Enter a title" type="text">
+         &lt;/div>
+         &lt;div>
+           Description
+           &lt;textarea class="my-inputs-edit" placeholder="Enter a Description" name="description" id="description-edit">&lt;/textarea>
+         &lt;/div>
+         &lt;div>
+           &lt;div>
+             Assigned to
+             &lt;details onclick="markSelectedContacts()" tabindex="0" id="details-edit">
+               &lt;summary id="contact-summary">
+                 &lt;div class="summary-headline">Select contacts to assign&lt;/div>
+                 &lt;input type="text" id="contact-search-edit" onkeyup="filterContactsEdit()" placeholder="Search contacts">
+               &lt;/summary>
+               &lt;fieldset>
+                 &lt;ul id="contacts-edit">&lt;/ul>
+               &lt;/fieldset>
+             &lt;/details>
+             &lt;div id="placeholder-edit">&lt;/div>
+           &lt;/div>
+         &lt;/div>
+       &lt;/div>
+       &lt;div class="second-row-edit" id="second-row-edit">
+         &lt;div>
+           &lt;span>Due Date&lt;span class="red-star">*&lt;/span>&lt;/span>
+           &lt;input class="my-inputs-edit" id="custom-date-edit" required type="date">
+         &lt;/div>
+         &lt;div class="prio-container">
+           Prio
+           &lt;div id="button-container-edit">
+             &lt;button onclick="handleUrgentClickEdit(event)" id="buttonUrgent-edit">
+               Urgent
+               &lt;svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                 &lt;path id="UrgentOne-edit" d="M19.6528 15.2547C19.4182 15.2551 19.1896 15.1803 19.0007 15.0412L10.7487 8.958L2.49663 15.0412C2.38078 15.1267 2.24919 15.1887 2.10939 15.2234C1.96959 15.2582 1.82431 15.2651 1.68184 15.2437C1.53937 15.2223 1.40251 15.1732 1.27906 15.099C1.15562 15.0247 1.04801 14.927 0.96238 14.8112C0.876751 14.6954 0.814779 14.5639 0.780002 14.4243C0.745226 14.2846 0.738325 14.1394 0.759696 13.997C0.802855 13.7095 0.958545 13.4509 1.19252 13.2781L10.0966 6.70761C10.2853 6.56802 10.5139 6.49268 10.7487 6.49268C10.9835 6.49268 11.212 6.56802 11.4007 6.70761L20.3048 13.2781C20.4908 13.415 20.6286 13.6071 20.6988 13.827C20.7689 14.0469 20.7678 14.2833 20.6955 14.5025C20.6232 14.7216 20.4834 14.9124 20.2962 15.0475C20.1089 15.1826 19.8837 15.2551 19.6528 15.2547Z" fill="#FF3D00"/>
+                 &lt;path id="UrgentTwo-edit" d="M19.6528 9.50568C19.4182 9.50609 19.1896 9.43124 19.0007 9.29214L10.7487 3.20898L2.49663 9.29214C2.26266 9.46495 1.96957 9.5378 1.68184 9.49468C1.39412 9.45155 1.13532 9.29597 0.962385 9.06218C0.789449 8.82838 0.716541 8.53551 0.7597 8.24799C0.802859 7.96048 0.95855 7.70187 1.19252 7.52906L10.0966 0.958588C10.2853 0.818997 10.5139 0.743652 10.7487 0.743652C10.9835 0.743652 11.212 0.818997 11.4007 0.958588L20.3048 7.52906C20.4908 7.66598 20.6286 7.85809 20.6988 8.07797C20.769 8.29785 20.7678 8.53426 20.6955 8.75344C20.6232 8.97262 20.4834 9.16338 20.2962 9.29847C20.1089 9.43356 19.8837 9.50608 19.6528 9.50568Z" fill="#FF3D00"/>
+               &lt;/svg>
+             &lt;/button>
+             &lt;button onclick="handleMediumClickEdit(event)" id="buttonMedium-edit">
+               Medium
+               &lt;svg width="21" height="8" viewBox="0 0 21 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                 &lt;g clip-path="url(#clip0_187336_4295)">
+                   &lt;path id="MediumOne-edit" d="M19.1526 7.72528H1.34443C1.05378 7.72528 0.775033 7.60898 0.569514 7.40197C0.363995 7.19495 0.248535 6.91419 0.248535 6.62143C0.248535 6.32867 0.363995 6.0479 0.569514 5.84089C0.775033 5.63388 1.05378 5.51758 1.34443 5.51758H19.1526C19.4433 5.51758 19.722 5.63388 19.9276 5.84089C20.1331 6.0479 20.2485 6.32867 20.2485 6.62143C20.2485 6.91419 20.1331 7.19495 19.9276 7.40197C19.722 7.60898 19.4433 7.72528 19.1526 7.72528Z" fill="#FFA800"/>
+                   &lt;path id="MediumTwo-edit" d="M19.1526 2.48211H1.34443C1.05378 2.48211 0.775033 2.36581 0.569514 2.1588C0.363995 1.95179 0.248535 1.67102 0.248535 1.37826C0.248535 1.0855 0.363995 0.804736 0.569514 0.597724C0.775033 0.390712 1.05378 0.274414 1.34443 0.274414L19.1526 0.274414C19.4433 0.274414 19.722 0.390712 19.9276 0.597724C20.1331 0.804736 20.2485 1.0855 20.2485 1.37826C20.2485 1.67102 20.1331 1.95179 19.9276 2.1588C19.722 2.36581 19.4433 2.48211 19.1526 2.48211Z" fill="#FFA800"/>
+                 &lt;/g>
+                 &lt;defs>
+                   &lt;clipPath id="clip0_187336_4295">
+                     &lt;rect width="20" height="7.45098" fill="white" transform="translate(0.248535 0.274414)"/>
+                   &lt;/clipPath>
+                 &lt;/defs>
+               &lt;/svg>
+             &lt;/button>
+             &lt;button onclick="handleLowClickEdit(event)" id="buttonLow-edit">
+               Low
+               &lt;svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                 &lt;path id="LowOne-edit" d="M10.2485 9.50589C10.0139 9.5063 9.7854 9.43145 9.59655 9.29238L0.693448 2.72264C0.57761 2.63708 0.47977 2.52957 0.405515 2.40623C0.33126 2.28289 0.282043 2.14614 0.260675 2.00379C0.217521 1.71631 0.290421 1.42347 0.463337 1.1897C0.636253 0.955928 0.895021 0.800371 1.18272 0.757248C1.47041 0.714126 1.76347 0.786972 1.99741 0.95976L10.2485 7.04224L18.4997 0.95976C18.6155 0.874204 18.7471 0.812285 18.8869 0.777538C19.0266 0.742791 19.1719 0.735896 19.3144 0.757248C19.4568 0.7786 19.5937 0.82778 19.7171 0.901981C19.8405 0.976181 19.9481 1.07395 20.0337 1.1897C20.1194 1.30545 20.1813 1.43692 20.2161 1.57661C20.2509 1.71629 20.2578 1.86145 20.2364 2.00379C20.215 2.14614 20.1658 2.28289 20.0916 2.40623C20.0173 2.52957 19.9195 2.63708 19.8036 2.72264L10.9005 9.29238C10.7117 9.43145 10.4831 9.5063 10.2485 9.50589Z" fill="#7AE229"/>
+                 &lt;path id="LowTwo-edit" d="M10.2485 15.2544C10.0139 15.2548 9.7854 15.18 9.59655 15.0409L0.693448 8.47117C0.459502 8.29839 0.30383 8.03981 0.260675 7.75233C0.217521 7.46485 0.290421 7.17201 0.463337 6.93824C0.636253 6.70446 0.895021 6.54891 1.18272 6.50578C1.47041 6.46266 1.76347 6.53551 1.99741 6.7083L10.2485 12.7908L18.4997 6.7083C18.7336 6.53551 19.0267 6.46266 19.3144 6.50578C19.602 6.54891 19.8608 6.70446 20.0337 6.93824C20.2066 7.17201 20.2795 7.46485 20.2364 7.75233C20.1932 8.03981 20.0376 8.29839 19.8036 8.47117L10.9005 15.0409C10.7117 15.18 10.4831 15.2548 10.2485 15.2544Z" fill="#7AE229"/>
+               &lt;/svg>
+             &lt;/button>
+           &lt;/div>
+         &lt;/div>
+         &lt;div>
+           &lt;span>Category&lt;span class="red-star">*&lt;/span>&lt;/span>
+           &lt;select class="my-inputs-edit" required name="task-list" id="category-edit">
+             &lt;option value="">Select task category&lt;/option>
+             &lt;option bgColor="#0038FF" value="Technical Task">Technical Task&lt;/option>
+             &lt;option bgColor="#FF7A00" value="User Story">User Story&lt;/option>
+           &lt;/select>
+         &lt;/div>
+         &lt;div class="substasks">
+           Subtasks
+           &lt;input onclick="addSubtasksEdit()" class="my-inputs-edit" placeholder="Add new subtask" name="subtasks" id="subtasks-edit">
+           &lt;div id="subtask-placeholder-edit">&lt;/div>
+         &lt;/div>
+       &lt;/div>
+       &lt;div class="buttons-edit">
+         &lt;button type=submit class="blue-btn">Ok &lt;img src="./assets/img/add-task/check.svg" alt="">&lt;/button>
+       &lt;/div>
+     &lt;/form>
+   `;
+}
+
+/**
+ * This function is used to render the contacts to the dropdown menu.
+ *
+ * @param {number} i - The index of the contact.
+ * @param {string} contact - The full name of the contact.
+ * @returns {string} - Returns the dynamic HTML code for the contact in the dropdown menu.
+ */
+function renderToListHTML(i, contact) {
+  return /*html*/ `
+     &lt;li class="change-bg" id="contact-${i}" onclick="selectContact(${i})">
+       &lt;label for="${contact}">
+         &lt;div id="symbol-${i}" name="${contact}" class="contactShow initials"
+           style="background-color: ${contacts[i].contactImageBgColor}">${contacts[i].nameInitials}&lt;/div>
+         ${contact}
+       &lt;/label>
+       &lt;div class="checkbox-container">
+         &lt;img class="change-src" id="checkbox-${i}" src="./assets/img/login/checkbox.svg" alt="">
+       &lt;/div>
+     &lt;/li>`;
+}
+
+/**
+ * This function is used to render the subtasks to the form.
+ *
+ * @param {HTMLElement} subtasks - The input subtask field.
+ * @returns {string} - Returns the dynamic HTML code for the subtask.
+ */
+function addSubtasksHTML(subtasks) {
+  return /*html*/ `
+     &lt;li onmouseover="changeSubtask(this)" ondblclick="changeSubtask(this)" onmouseout="resetSubtask(this)" class="subtask-link" status="open">
+       &lt;span class="subtask-input-field">&amp;#10625 &lt;span class="subtask-text">${subtasks.value}&lt;/span>&lt;/span>
+       &lt;span>
+         &lt;img onclick="editSubtask(this)" class="edit-subtask d-none" id="edit-subtask"
+           src="./assets/img/add-task/edit-subtask.svg" alt="">
+         &lt;div class="mini-seperator-subtask" id="mini-seperator-subtask" style="display: none">&lt;/div>
+         &lt;img onclick="deleteSubtask(this)" class="trash-subtask d-none" id="trash-subtask"
+           src="./assets/img/add-task/trash.svg" alt="">
+       &lt;/span>
+     &lt;/li>`;
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addBackgroundLegalNotice">addBackgroundLegalNotice</a></li><li><a href="global.html#addBackgroundPrivacyPolice">addBackgroundPrivacyPolice</a></li><li><a href="global.html#addLoadedContact">addLoadedContact</a></li><li><a href="global.html#addSubtasks">addSubtasks</a></li><li><a href="global.html#addSubtasksEdit">addSubtasksEdit</a></li><li><a href="global.html#addSubtasksHTML">addSubtasksHTML</a></li><li><a href="global.html#addTaskValidation">addTaskValidation</a></li><li><a href="global.html#addTaskValidationEdit">addTaskValidationEdit</a></li><li><a href="global.html#addTaskValidationEditContact">addTaskValidationEditContact</a></li><li><a href="global.html#addValidationListeners">addValidationListeners</a></li><li><a href="global.html#addValidationListenersEdit">addValidationListenersEdit</a></li><li><a href="global.html#addValidationListenersEditContact">addValidationListenersEditContact</a></li><li><a href="global.html#changeAddTaskButtonBackground">changeAddTaskButtonBackground</a></li><li><a href="global.html#changeColorSideAddTask">changeColorSideAddTask</a></li><li><a href="global.html#changeColorSideSummary">changeColorSideSummary</a></li><li><a href="global.html#changeColorSidebarContacts">changeColorSidebarContacts</a></li><li><a href="global.html#changeContactsButtonBackground">changeContactsButtonBackground</a></li><li><a href="global.html#changeSubtask">changeSubtask</a></li><li><a href="global.html#changeSubtaskEdit">changeSubtaskEdit</a></li><li><a href="global.html#changeSummaryButtonBackground">changeSummaryButtonBackground</a></li><li><a href="global.html#clearEditObjects">clearEditObjects</a></li><li><a href="global.html#clearError">clearError</a></li><li><a href="global.html#clearErrorEdit">clearErrorEdit</a></li><li><a href="global.html#clearErrorEditContact">clearErrorEditContact</a></li><li><a href="global.html#clearObjects">clearObjects</a></li><li><a href="global.html#closeContactDialog">closeContactDialog</a></li><li><a href="global.html#closeEditContainer">closeEditContainer</a></li><li><a href="global.html#closeSignupPage">closeSignupPage</a></li><li><a href="global.html#closeTaskOverlayEdit">closeTaskOverlayEdit</a></li><li><a href="global.html#createUser">createUser</a></li><li><a href="global.html#deleteContact">deleteContact</a></li><li><a href="global.html#deleteSubtask">deleteSubtask</a></li><li><a href="global.html#editSubtask">editSubtask</a></li><li><a href="global.html#editTask">editTask</a></li><li><a href="global.html#editTaskHTML">editTaskHTML</a></li><li><a href="global.html#enableBtn">enableBtn</a></li><li><a href="global.html#filterContacts">filterContacts</a></li><li><a href="global.html#filterContactsEdit">filterContactsEdit</a></li><li><a href="global.html#getAllContacts">getAllContacts</a></li><li><a href="global.html#getAllUser">getAllUser</a></li><li><a href="global.html#getContact">getContact</a></li><li><a href="global.html#getContactToEditForm">getContactToEditForm</a></li><li><a href="global.html#getLocalStorage">getLocalStorage</a></li><li><a href="global.html#getProBtnClick">getProBtnClick</a></li><li><a href="global.html#getSavedContactsEdit">getSavedContactsEdit</a></li><li><a href="global.html#getSavedSubtasksEdit">getSavedSubtasksEdit</a></li><li><a href="global.html#getSelectedContacts">getSelectedContacts</a></li><li><a href="global.html#getSelectedContactsEdit">getSelectedContactsEdit</a></li><li><a href="global.html#getSelectedSubtasks">getSelectedSubtasks</a></li><li><a href="global.html#getSubtasksEdit">getSubtasksEdit</a></li><li><a href="global.html#goBack">goBack</a></li><li><a href="global.html#guestLogin">guestLogin</a></li><li><a href="global.html#handleLowClick">handleLowClick</a></li><li><a href="global.html#handleLowClickEdit">handleLowClickEdit</a></li><li><a href="global.html#handleMediumClick">handleMediumClick</a></li><li><a href="global.html#handleMediumClickEdit">handleMediumClickEdit</a></li><li><a href="global.html#handleUrgentClick">handleUrgentClick</a></li><li><a href="global.html#handleUrgentClickEdit">handleUrgentClickEdit</a></li><li><a href="global.html#hideErrorMessage">hideErrorMessage</a></li><li><a href="global.html#hideErrorMessageEdit">hideErrorMessageEdit</a></li><li><a href="global.html#hideErrorMessageEditContact">hideErrorMessageEditContact</a></li><li><a href="global.html#initializeCheckboxListeners">initializeCheckboxListeners</a></li><li><a href="global.html#isValidEmail">isValidEmail</a></li><li><a href="global.html#isValidEmailEdit">isValidEmailEdit</a></li><li><a href="global.html#isValidEmailEditContact">isValidEmailEditContact</a></li><li><a href="global.html#isValidPhoneEditContact">isValidPhoneEditContact</a></li><li><a href="global.html#loadAddTaskContent">loadAddTaskContent</a></li><li><a href="global.html#loadAddTaskContentHTML">loadAddTaskContentHTML</a></li><li><a href="global.html#loadBoardContentHTML">loadBoardContentHTML</a></li><li><a href="global.html#loadContactsContent">loadContactsContent</a></li><li><a href="global.html#loadHelpContent">loadHelpContent</a></li><li><a href="global.html#loadHelpContentHTML">loadHelpContentHTML</a></li><li><a href="global.html#loadLegalNoticeContent">loadLegalNoticeContent</a></li><li><a href="global.html#loadLegalNoticeContentHTML">loadLegalNoticeContentHTML</a></li><li><a href="global.html#loadPrivacyPoliceContent">loadPrivacyPoliceContent</a></li><li><a href="global.html#loadPrivacyPoliceContentHTML">loadPrivacyPoliceContentHTML</a></li><li><a href="global.html#logOut">logOut</a></li><li><a href="global.html#loginUser">loginUser</a></li><li><a href="global.html#markSelectedContacts">markSelectedContacts</a></li><li><a href="global.html#mergeObjects">mergeObjects</a></li><li><a href="global.html#mergeObjectsEdit">mergeObjectsEdit</a></li><li><a href="global.html#minDate">minDate</a></li><li><a href="global.html#minDateEdit">minDateEdit</a></li><li><a href="global.html#newSubtaskInput">newSubtaskInput</a></li><li><a href="global.html#onclickRender">onclickRender</a></li><li><a href="global.html#onloadContacts">onloadContacts</a></li><li><a href="global.html#onloadContactsEdit">onloadContactsEdit</a></li><li><a href="global.html#onloadFormValue">onloadFormValue</a></li><li><a href="global.html#onloadFunc">onloadFunc</a></li><li><a href="global.html#openContactDialog">openContactDialog</a></li><li><a href="global.html#putData">putData</a></li><li><a href="global.html#removeBackgroundLowerSidebar">removeBackgroundLowerSidebar</a></li><li><a href="global.html#removeButtonBackground">removeButtonBackground</a></li><li><a href="global.html#removeColorSideBar">removeColorSideBar</a></li><li><a href="global.html#removeSymbol">removeSymbol</a></li><li><a href="global.html#renderBoardCardsHTML">renderBoardCardsHTML</a></li><li><a href="global.html#renderContactDetail">renderContactDetail</a></li><li><a href="global.html#renderContacts">renderContacts</a></li><li><a href="global.html#renderDueDate">renderDueDate</a></li><li><a href="global.html#renderEditContact">renderEditContact</a></li><li><a href="global.html#renderGetGreeting">renderGetGreeting</a></li><li><a href="global.html#renderSummary">renderSummary</a></li><li><a href="global.html#renderTaskAmount">renderTaskAmount</a></li><li><a href="global.html#renderTaskAwaitingAmount">renderTaskAwaitingAmount</a></li><li><a href="global.html#renderTaskDoneAmount">renderTaskDoneAmount</a></li><li><a href="global.html#renderTaskOverlayHTML">renderTaskOverlayHTML</a></li><li><a href="global.html#renderTaskToDoAmount">renderTaskToDoAmount</a></li><li><a href="global.html#renderTaskinProgressAmount">renderTaskinProgressAmount</a></li><li><a href="global.html#renderToList">renderToList</a></li><li><a href="global.html#renderToListEdit">renderToListEdit</a></li><li><a href="global.html#renderToListEditHTML">renderToListEditHTML</a></li><li><a href="global.html#renderToListHTML">renderToListHTML</a></li><li><a href="global.html#renderUrgendTaskAmount">renderUrgendTaskAmount</a></li><li><a href="global.html#resetButtons">resetButtons</a></li><li><a href="global.html#resetForm">resetForm</a></li><li><a href="global.html#resetSearch">resetSearch</a></li><li><a href="global.html#resetSubtask">resetSubtask</a></li><li><a href="global.html#resetSubtaskInput">resetSubtaskInput</a></li><li><a href="global.html#resetValidation">resetValidation</a></li><li><a href="global.html#returnToPreviousContent">returnToPreviousContent</a></li><li><a href="global.html#saveContact">saveContact</a></li><li><a href="global.html#saveContactEdit">saveContactEdit</a></li><li><a href="global.html#saveTask">saveTask</a></li><li><a href="global.html#saveTaskEdit">saveTaskEdit</a></li><li><a href="global.html#saveTaskEditElse">saveTaskEditElse</a></li><li><a href="global.html#saveTaskElse">saveTaskElse</a></li><li><a href="global.html#searchTaskHTML">searchTaskHTML</a></li><li><a href="global.html#selectCategory">selectCategory</a></li><li><a href="global.html#selectContact">selectContact</a></li><li><a href="global.html#selectContactEdit">selectContactEdit</a></li><li><a href="global.html#selectContactEditElse">selectContactEditElse</a></li><li><a href="global.html#sessionStorageToHeader">sessionStorageToHeader</a></li><li><a href="global.html#setSessionStorage">setSessionStorage</a></li><li><a href="global.html#setupToggle">setupToggle</a></li><li><a href="global.html#showErrorMessage">showErrorMessage</a></li><li><a href="global.html#showErrorMessageEdit">showErrorMessageEdit</a></li><li><a href="global.html#showErrorMessageEditContact">showErrorMessageEditContact</a></li><li><a href="global.html#showLogoAddTask">showLogoAddTask</a></li><li><a href="global.html#showSignupPage">showSignupPage</a></li><li><a href="global.html#taskCategory">taskCategory</a></li><li><a href="global.html#toggleColor">toggleColor</a></li><li><a href="global.html#toggleColorEdit">toggleColorEdit</a></li><li><a href="global.html#toggleColorEditIf">toggleColorEditIf</a></li><li><a href="global.html#toggleColorIf">toggleColorIf</a></li><li><a href="global.html#toggleContactView">toggleContactView</a></li><li><a href="global.html#updateIcon">updateIcon</a></li><li><a href="global.html#validateCheckbox">validateCheckbox</a></li><li><a href="global.html#validateCheckboxEdit">validateCheckboxEdit</a></li><li><a href="global.html#validateConfirmPassword">validateConfirmPassword</a></li><li><a href="global.html#validateConfirmPasswordEdit">validateConfirmPasswordEdit</a></li><li><a href="global.html#validateInput">validateInput</a></li><li><a href="global.html#validateInputEdit">validateInputEdit</a></li><li><a href="global.html#validateInputEditContact">validateInputEditContact</a></li><li><a href="global.html#validatePassword">validatePassword</a></li><li><a href="global.html#waitCreatUser">waitCreatUser</a></li><li><a href="global.html#welcomeTextMobile">welcomeTextMobile</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Thu Jun 27 2024 23:22:14 GMT+0200 (Mitteleuropäische Sommerzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

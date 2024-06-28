@@ -1,81 +1,150 @@
 {
-    "users": {
-      "name": ["Vanessa Sachs", "Pascal Nehlsen", "Rene Lochschmidt"],
-      "email": ["vanessa@test.de", "pascal@test.de", "rene@test.de"],
-      "password": ["1234", "1234", "1234"],
-      "photo": ["vanessa", "pascal", "rene"]
-    },
-    "settings": {
-      "taskStatus": ["0", "1", "2", "3"],
-      "categoryName": ["User Story", "Technical Task"],
-      "categoryBgColor": ["#FF7A00", "#0038FF"],
-      "priority": ["low", "medium", "urgent"],
-      "contactImageBgColor": ["#9327FF", "#FFA800", "#0223CF", "#CB02CF", "#FF7A00", "#FC71FF", "#1FD7C1", "#0038FF", "#FFC701"]
-    },
-    "contacts": {
-      "name": ["Vanessa Sachs", "Pascal Nehlsen", "Rene Lochschmidt", "David Eisenberg", "Barbara Ziegler", "Marcel Bauer", "Stefanie Farber", "Maja Mauer"],
-      "nameInitials": ["VS", "PN", "RL", "DE", "BZ", "MB", "SF", "MM"],
-      "email": ["vanessa@test.de", "pascal@test.de", "rene@test.de", "david@test.de", "barbara@test.de", "marcel@test.de", "stefanie@test.de", "maja@test.de"],
-      "phoneNumber": [190666666, 1111111111, 3411234567, 84949433994, 1424242345, 4242342342, 3112335567, 234234432],
-      "contactImageBgColor": ["#9327FF", "#FFA800", "#0223CF", "#CB02CF", "#FF7A00", "#FC71FF", "#1FD7C1", "#FFC701"]
-    },
-    "tasks": {
-      "taskStatus": ["0", "2", "2", "2", "1"],
-      "title": ["Website redesign", "Call potential clients", "Accounting invoices", "Video cut", "Social media strategy"],
-      "description": ["Modify the contents of the main website. Adjust the UI to the company's brand design.", "Make the product presentation to prospective buyers", "Write open invoices for customer", "Edit the new company video", "Develop an ad campaign for brand positioning"],
-      "priority": ["low", "urgent", "medium", "medium", "low"],
-      "dueDate": ["2023-05-20", "2025-06-10", "2023-08-25", "2024-10-01", "2023-09-02"],
-      "categoryName": ["User Story", "Technical Task"],
-      "categoryBgColor": ["#FF7A00", "#0038FF"],
-      "subtasks": [
-        {
-          "subtask": ["Header", "Footer"],
-          "subtaskStatus": ["open", "closed"]
-        },
-        {
-          "subtask": [],
-          "subtaskStatus": []
-        },
-        {
-          "subtask": [],
-          "subtaskStatus": []
-        },
-        {
-          "subtask": [],
-          "subtaskStatus": []
-        },
-        {
-          "subtask": ["Content strategy", "Community strategy", "Influencer strategy"],
-          "subtaskStatus": ["closed", "closed", "closed"]
-        }
-      ],
-      "assignedTo": [
-        {
-          "name": ["Vanessa Sachs", "Pascal Nehlsen", "Rene Lochschmidt"],
-          "nameInitials": ["VS", "PN", "RL"],
-          "contactImageBgColor": ["#9327FF", "#FFA800", "#0223CF"]
-        },
-        {
-          "name": ["David Eisenberg", "Barbara Ziegler", "Vanessa Sachs", "Pascal Nehlsen"],
-          "nameInitials": ["DE", "BZ", "VS", "PN"],
-          "contactImageBgColor": ["#CB02CF", "#FF7A00", "#9327FF", "#FFA800"]
-        },
-        {
-          "name": ["Rene Lochschmidt", "David Eisenberg", "Barbara Ziegler", "Marcel Bauer", "Stefanie Farber"],
-          "nameInitials": ["RL", "DE", "BZ", "MB", "SF"],
-          "contactImageBgColor": ["#0223CF", "#CB02CF", "#FF7A00", "#FC71FF", "#1FD7C1"]
-        },
-        {
-          "name": ["Stefanie Farber"],
-          "nameInitials": ["SF"],
-          "contactImageBgColor": ["#1FD7C1"]
-        },
-        {
-          "name": ["Marcel Bauer", "Stefanie Farber"],
-          "nameInitials": ["MB", "SF"],
-          "contactImageBgColor": ["#FC71FF", "#1FD7C1"]
-        }
-      ]
-    }
+  "users": {
+    "name": ["Vanessa Sachs", "Pascal Nehlsen", "Rene Lochschmidt"],
+    "email": ["vanessa@test.de", "pascal@test.de", "rene@test.de"],
+    "password": ["1234", "1234", "1234"],
+    "photo": ["vanessa", "pascal", "rene"],
+    "id": ["0", "1", "2", "3"]
+  },
+  "settings": {
+    "taskStatus": ["0", "1", "2", "3"],
+    "categoryName": [
+      "User Story",
+      "Technical Task",
+      "Technical Task",
+      "Technical Task",
+      "User Story"
+    ],
+    "categoryBgColor": ["#FF7A00", "#0038FF"],
+    "priority": ["low", "medium", "urgent", "urgent", "urgent"],
+    "contactImageBgColor": [
+      "#9327FF",
+      "#FFA800",
+      "#0223CF",
+      "#CB02CF",
+      "#FF7A00",
+      "#FC71FF",
+      "#1FD7C1",
+      "#0038FF",
+      "#FFC701"
+    ]
+  },
+  "contacts": {
+    "name": [
+      "Vanessa Sachs",
+      "Pascal Nehlsen",
+      "Rene Lochschmidt",
+      "David Eisenberg",
+      "Barbara Ziegler",
+      "Marcel Bauer",
+      "Stefanie Farber",
+      "Maja Mauer"
+    ],
+    "nameInitials": ["VS", "PN", "RL", "DE", "BZ", "MB", "SF", "MM"],
+    "email": [
+      "vanessa@test.de",
+      "pascal@test.de",
+      "rene@test.de",
+      "david@test.de",
+      "barbara@test.de",
+      "marcel@test.de",
+      "stefanie@test.de",
+      "maja@test.de"
+    ],
+    "phoneNumber": [
+      190666666, 1111111111, 3411234567, 84949433994, 1424242345, 4242342342, 3112335567, 234234432
+    ],
+    "contactImageBgColor": [
+      "#9327FF",
+      "#FFA800",
+      "#0223CF",
+      "#CB02CF",
+      "#FF7A00",
+      "#FC71FF",
+      "#1FD7C1",
+      "#FFC701"
+    ]
+  },
+  "tasks": {
+    "taskStatus": ["0", "2", "2", "2", "1"],
+    "title": [
+      "Website redesign",
+      "Call potential clients",
+      "Accounting invoices",
+      "Video cut",
+      "Social media strategy"
+    ],
+    "description": [
+      "Modify the contents of the main website. Adjust the UI to the company's brand design.",
+      "Make the product presentation to prospective buyers",
+      "Write open invoices for customer",
+      "Edit the new company video",
+      "Develop an ad campaign for brand positioning"
+    ],
+    "priority": ["low", "urgent", "medium", "medium", "low"],
+    "dueDate": ["2023-05-20", "2025-06-10", "2023-08-25", "2024-10-01", "2023-09-02"],
+    "categoryName": [
+      "User Story",
+      "Technical Task",
+      "Technical Task",
+      "Technical Task",
+      "User Story"
+    ],
+    "categoryBgColor": ["#FF7A00", "#0038FF"],
+    "subtasksTest": [
+      {
+        "subtask": ["Header", "Footer"],
+        "subtaskStatus": ["open", "closed"]
+      },
+      {
+        "subtask": ["Header", "Footer"],
+        "subtaskStatus": ["open", "closed"]
+      },
+      {
+        "subtask": ["Header", "Footer"],
+        "subtaskStatus": ["open", "closed"]
+      },
+      {
+        "subtask": ["Header", "Footer"],
+        "subtaskStatus": ["open", "closed"]
+      },
+      {
+        "subtask": ["Content strategy", "Community strategy", "Influencer strategy"],
+        "subtaskStatus": ["closed", "closed", "closed"]
+      }
+    ],
+    "assignedTo": [
+      {
+        "name": ["Vanessa Sachs", "Pascal Nehlsen", "Rene Lochschmidt"],
+        "nameInitials": ["VS", "PN", "RL"],
+        "contactImageBgColor": ["#9327FF", "#FFA800", "#0223CF"]
+      },
+      {
+        "name": ["David Eisenberg", "Barbara Ziegler", "Vanessa Sachs", "Pascal Nehlsen"],
+        "nameInitials": ["DE", "BZ", "VS", "PN"],
+        "contactImageBgColor": ["#CB02CF", "#FF7A00", "#9327FF", "#FFA800"]
+      },
+      {
+        "name": [
+          "Rene Lochschmidt",
+          "David Eisenberg",
+          "Barbara Ziegler",
+          "Marcel Bauer",
+          "Stefanie Farber"
+        ],
+        "nameInitials": ["RL", "DE", "BZ", "MB", "SF"],
+        "contactImageBgColor": ["#0223CF", "#CB02CF", "#FF7A00", "#FC71FF", "#1FD7C1"]
+      },
+      {
+        "name": ["Stefanie Farber"],
+        "nameInitials": ["SF"],
+        "contactImageBgColor": ["#1FD7C1"]
+      },
+      {
+        "name": ["Marcel Bauer", "Stefanie Farber"],
+        "nameInitials": ["MB", "SF"],
+        "contactImageBgColor": ["#FC71FF", "#1FD7C1"]
+      }
+    ]
   }
-  
+}

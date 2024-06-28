@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: privacy.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: privacy.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Adds event listeners for DOMContentLoaded to highlight active links based on the current URL.
+ */
+document.addEventListener('DOMContentLoaded', function () {
+   const currentUrl = window.location.pathname;
+   const privacyLink = document.querySelector('a[href="./privacy.html"]');
+   const legalNoticeLink = document.querySelector('a[href="./legal-notice.html"]');
+   let mainContentDiv = document.getElementById('mainContent');
+ 
+   if (currentUrl.includes('privacy.html')) {
+     privacyLink.classList.add('active-link');
+     mainContentDiv.classList.add('main-content-responsive-external');
+   } else if (currentUrl.includes('legal-notice.html')) {
+     legalNoticeLink.classList.add('active-link');
+     mainContentDiv.classList.add('main-content-responsive-external');
+   }
+ });
+ 
+ /**
+  * Loads the privacy policy content into the main content area.
+  */
+ function loadPrivacyPoliceContent() {
+   let userHeaderPopup = document.getElementById('userHeaderPopup');
+   userHeaderPopup.style.display = 'none';
+   let mainContent = document.getElementById('mainContent');
+   mainContent.innerHTML = '';
+   mainContent.innerHTML += loadPrivacyPoliceContentHTML();
+   removeBackgroundLowerSidebar();
+   addBackgroundPrivacyPolice();
+ }
+ 
+ /**
+  * Generates the HTML content for the privacy policy.
+  *
+  * @returns {string} The HTML content for the privacy policy.
+  */
+ function loadPrivacyPoliceContentHTML() {
+   return /*html*/ `
+    &lt;div class="content-div">
+       &lt;div class="headline-row">
+          &lt;h1>Privacy Policy&lt;/h1>
+          &lt;img onclick="returnToPreviousContent()" src="/assets/img/privacy-legal-help/move-back-arrow.svg" alt="zurück" />
+       &lt;/div>
+       &lt;h3>1. Privacy at a Glance&lt;/h3>
+       &lt;h3>General Information&lt;/h3>
+       &lt;p>
+          The following notes provide a simple overview of what happens to your personal data when you visit this website. Personal
+          data is any data with which you can be personally identified. Detailed information on the subject of data protection can be
+          found in our privacy policy listed below this text.
+       &lt;/p>
+       &lt;h3>Data Collection on This Website&lt;/h3>
+       &lt;h4>Who is responsible for data collection on this website?&lt;/h4>
+       &lt;p>
+          The data processing on this website is carried out by the website operator. You can find the operator's contact details in
+          the section “Notice on the Responsible Party” in this privacy policy.
+       &lt;/p>
+       &lt;h4>How do we collect your data?&lt;/h4>
+       &lt;p>Your data is collected firstly by you providing it to us. This could, for example, be data you enter in a contact form.&lt;/p>
+       &lt;p>
+          Other data is collected automatically or with your consent when you visit the website by our IT systems. This is mainly
+          technical data (e.g., internet browser, operating system, or time of page access). The collection of this data happens
+          automatically as soon as you enter this website.
+       &lt;/p>
+       &lt;h4>What do we use your data for?&lt;/h4>
+       &lt;p>
+          Part of the data is collected to ensure the error-free provision of the website. Other data can be used to analyze your user
+          behavior.
+       &lt;/p>
+       &lt;h4>What rights do you have regarding your data?&lt;/h4>
+       &lt;p>
+          You have the right at any time to receive information free of charge about the origin, recipient, and purpose of your stored
+          personal data. You also have the right to request the correction or deletion of this data. If you have given consent for
+          data processing, you can revoke this consent at any time for the future. You also have the right, under certain
+          circumstances, to request the restriction of the processing of your personal data. Furthermore, you have the right to lodge
+          a complaint with the competent supervisory authority.
+       &lt;/p>
+       &lt;p>For this and any other questions on the subject of data protection, you can contact us at any time.&lt;/p>
+       &lt;h3>2. General Information and Mandatory Information&lt;/h3>
+       &lt;h3>Data Protection&lt;/h3>
+       &lt;p>
+          The operators of these pages take the protection of your personal data very seriously. We treat your personal data
+          confidentially and in accordance with the statutory data protection regulations and this privacy policy.
+       &lt;/p>
+       &lt;p>
+          When you use this website, various personal data are collected. Personal data is data with which you can be personally
+          identified. This privacy policy explains what data we collect and what we use it for. It also explains how and for what
+          purpose this happens.
+       &lt;/p>
+       &lt;p>
+          We would like to point out that data transmission over the Internet (e.g., communication by e-mail) can have security gaps.
+          A complete protection of the data against access by third parties is not possible.
+       &lt;/p>
+       &lt;h3>Notice on the Responsible Party&lt;/h3>
+       &lt;p>The responsible party for data processing on this website is:&lt;/p>
+    &lt;/div>;
+     `;
+ }
+ 
+ /**
+  * Adds a background to the privacy policy button to highlight it.
+  */
+ function addBackgroundPrivacyPolice() {
+   let privacePoliceButton = document.getElementById('privacePoliceButton');
+   privacePoliceButton.classList.add('active-link');
+ }
+ </code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addBackgroundLegalNotice">addBackgroundLegalNotice</a></li><li><a href="global.html#addBackgroundPrivacyPolice">addBackgroundPrivacyPolice</a></li><li><a href="global.html#addLoadedContact">addLoadedContact</a></li><li><a href="global.html#addSubtasks">addSubtasks</a></li><li><a href="global.html#addSubtasksEdit">addSubtasksEdit</a></li><li><a href="global.html#addSubtasksHTML">addSubtasksHTML</a></li><li><a href="global.html#addTaskValidation">addTaskValidation</a></li><li><a href="global.html#addTaskValidationEdit">addTaskValidationEdit</a></li><li><a href="global.html#addTaskValidationEditContact">addTaskValidationEditContact</a></li><li><a href="global.html#addValidationListeners">addValidationListeners</a></li><li><a href="global.html#addValidationListenersEdit">addValidationListenersEdit</a></li><li><a href="global.html#addValidationListenersEditContact">addValidationListenersEditContact</a></li><li><a href="global.html#changeAddTaskButtonBackground">changeAddTaskButtonBackground</a></li><li><a href="global.html#changeColorSideAddTask">changeColorSideAddTask</a></li><li><a href="global.html#changeColorSideSummary">changeColorSideSummary</a></li><li><a href="global.html#changeColorSidebarContacts">changeColorSidebarContacts</a></li><li><a href="global.html#changeContactsButtonBackground">changeContactsButtonBackground</a></li><li><a href="global.html#changeSubtask">changeSubtask</a></li><li><a href="global.html#changeSubtaskEdit">changeSubtaskEdit</a></li><li><a href="global.html#changeSummaryButtonBackground">changeSummaryButtonBackground</a></li><li><a href="global.html#clearEditObjects">clearEditObjects</a></li><li><a href="global.html#clearError">clearError</a></li><li><a href="global.html#clearErrorEdit">clearErrorEdit</a></li><li><a href="global.html#clearErrorEditContact">clearErrorEditContact</a></li><li><a href="global.html#clearObjects">clearObjects</a></li><li><a href="global.html#closeContactDialog">closeContactDialog</a></li><li><a href="global.html#closeEditContainer">closeEditContainer</a></li><li><a href="global.html#closeSignupPage">closeSignupPage</a></li><li><a href="global.html#closeTaskOverlayEdit">closeTaskOverlayEdit</a></li><li><a href="global.html#createUser">createUser</a></li><li><a href="global.html#deleteContact">deleteContact</a></li><li><a href="global.html#deleteSubtask">deleteSubtask</a></li><li><a href="global.html#editSubtask">editSubtask</a></li><li><a href="global.html#editTask">editTask</a></li><li><a href="global.html#editTaskHTML">editTaskHTML</a></li><li><a href="global.html#enableBtn">enableBtn</a></li><li><a href="global.html#filterContacts">filterContacts</a></li><li><a href="global.html#filterContactsEdit">filterContactsEdit</a></li><li><a href="global.html#getAllContacts">getAllContacts</a></li><li><a href="global.html#getAllUser">getAllUser</a></li><li><a href="global.html#getContact">getContact</a></li><li><a href="global.html#getContactToEditForm">getContactToEditForm</a></li><li><a href="global.html#getLocalStorage">getLocalStorage</a></li><li><a href="global.html#getProBtnClick">getProBtnClick</a></li><li><a href="global.html#getSavedContactsEdit">getSavedContactsEdit</a></li><li><a href="global.html#getSavedSubtasksEdit">getSavedSubtasksEdit</a></li><li><a href="global.html#getSelectedContacts">getSelectedContacts</a></li><li><a href="global.html#getSelectedContactsEdit">getSelectedContactsEdit</a></li><li><a href="global.html#getSelectedSubtasks">getSelectedSubtasks</a></li><li><a href="global.html#getSubtasksEdit">getSubtasksEdit</a></li><li><a href="global.html#goBack">goBack</a></li><li><a href="global.html#guestLogin">guestLogin</a></li><li><a href="global.html#handleLowClick">handleLowClick</a></li><li><a href="global.html#handleLowClickEdit">handleLowClickEdit</a></li><li><a href="global.html#handleMediumClick">handleMediumClick</a></li><li><a href="global.html#handleMediumClickEdit">handleMediumClickEdit</a></li><li><a href="global.html#handleUrgentClick">handleUrgentClick</a></li><li><a href="global.html#handleUrgentClickEdit">handleUrgentClickEdit</a></li><li><a href="global.html#hideErrorMessage">hideErrorMessage</a></li><li><a href="global.html#hideErrorMessageEdit">hideErrorMessageEdit</a></li><li><a href="global.html#hideErrorMessageEditContact">hideErrorMessageEditContact</a></li><li><a href="global.html#initializeCheckboxListeners">initializeCheckboxListeners</a></li><li><a href="global.html#isValidEmail">isValidEmail</a></li><li><a href="global.html#isValidEmailEdit">isValidEmailEdit</a></li><li><a href="global.html#isValidEmailEditContact">isValidEmailEditContact</a></li><li><a href="global.html#isValidPhoneEditContact">isValidPhoneEditContact</a></li><li><a href="global.html#loadAddTaskContent">loadAddTaskContent</a></li><li><a href="global.html#loadAddTaskContentHTML">loadAddTaskContentHTML</a></li><li><a href="global.html#loadBoardContentHTML">loadBoardContentHTML</a></li><li><a href="global.html#loadContactsContent">loadContactsContent</a></li><li><a href="global.html#loadHelpContent">loadHelpContent</a></li><li><a href="global.html#loadHelpContentHTML">loadHelpContentHTML</a></li><li><a href="global.html#loadLegalNoticeContent">loadLegalNoticeContent</a></li><li><a href="global.html#loadLegalNoticeContentHTML">loadLegalNoticeContentHTML</a></li><li><a href="global.html#loadPrivacyPoliceContent">loadPrivacyPoliceContent</a></li><li><a href="global.html#loadPrivacyPoliceContentHTML">loadPrivacyPoliceContentHTML</a></li><li><a href="global.html#logOut">logOut</a></li><li><a href="global.html#loginUser">loginUser</a></li><li><a href="global.html#markSelectedContacts">markSelectedContacts</a></li><li><a href="global.html#mergeObjects">mergeObjects</a></li><li><a href="global.html#mergeObjectsEdit">mergeObjectsEdit</a></li><li><a href="global.html#minDate">minDate</a></li><li><a href="global.html#minDateEdit">minDateEdit</a></li><li><a href="global.html#newSubtaskInput">newSubtaskInput</a></li><li><a href="global.html#onclickRender">onclickRender</a></li><li><a href="global.html#onloadContacts">onloadContacts</a></li><li><a href="global.html#onloadContactsEdit">onloadContactsEdit</a></li><li><a href="global.html#onloadFormValue">onloadFormValue</a></li><li><a href="global.html#onloadFunc">onloadFunc</a></li><li><a href="global.html#openContactDialog">openContactDialog</a></li><li><a href="global.html#putData">putData</a></li><li><a href="global.html#removeBackgroundLowerSidebar">removeBackgroundLowerSidebar</a></li><li><a href="global.html#removeButtonBackground">removeButtonBackground</a></li><li><a href="global.html#removeColorSideBar">removeColorSideBar</a></li><li><a href="global.html#removeSymbol">removeSymbol</a></li><li><a href="global.html#renderBoardCardsHTML">renderBoardCardsHTML</a></li><li><a href="global.html#renderContactDetail">renderContactDetail</a></li><li><a href="global.html#renderContacts">renderContacts</a></li><li><a href="global.html#renderDueDate">renderDueDate</a></li><li><a href="global.html#renderEditContact">renderEditContact</a></li><li><a href="global.html#renderGetGreeting">renderGetGreeting</a></li><li><a href="global.html#renderSummary">renderSummary</a></li><li><a href="global.html#renderTaskAmount">renderTaskAmount</a></li><li><a href="global.html#renderTaskAwaitingAmount">renderTaskAwaitingAmount</a></li><li><a href="global.html#renderTaskDoneAmount">renderTaskDoneAmount</a></li><li><a href="global.html#renderTaskOverlayHTML">renderTaskOverlayHTML</a></li><li><a href="global.html#renderTaskToDoAmount">renderTaskToDoAmount</a></li><li><a href="global.html#renderTaskinProgressAmount">renderTaskinProgressAmount</a></li><li><a href="global.html#renderToList">renderToList</a></li><li><a href="global.html#renderToListEdit">renderToListEdit</a></li><li><a href="global.html#renderToListEditHTML">renderToListEditHTML</a></li><li><a href="global.html#renderToListHTML">renderToListHTML</a></li><li><a href="global.html#renderUrgendTaskAmount">renderUrgendTaskAmount</a></li><li><a href="global.html#resetButtons">resetButtons</a></li><li><a href="global.html#resetForm">resetForm</a></li><li><a href="global.html#resetSearch">resetSearch</a></li><li><a href="global.html#resetSubtask">resetSubtask</a></li><li><a href="global.html#resetSubtaskInput">resetSubtaskInput</a></li><li><a href="global.html#resetValidation">resetValidation</a></li><li><a href="global.html#returnToPreviousContent">returnToPreviousContent</a></li><li><a href="global.html#saveContact">saveContact</a></li><li><a href="global.html#saveContactEdit">saveContactEdit</a></li><li><a href="global.html#saveTask">saveTask</a></li><li><a href="global.html#saveTaskEdit">saveTaskEdit</a></li><li><a href="global.html#saveTaskEditElse">saveTaskEditElse</a></li><li><a href="global.html#saveTaskElse">saveTaskElse</a></li><li><a href="global.html#searchTaskHTML">searchTaskHTML</a></li><li><a href="global.html#selectCategory">selectCategory</a></li><li><a href="global.html#selectContact">selectContact</a></li><li><a href="global.html#selectContactEdit">selectContactEdit</a></li><li><a href="global.html#selectContactEditElse">selectContactEditElse</a></li><li><a href="global.html#sessionStorageToHeader">sessionStorageToHeader</a></li><li><a href="global.html#setSessionStorage">setSessionStorage</a></li><li><a href="global.html#setupToggle">setupToggle</a></li><li><a href="global.html#showErrorMessage">showErrorMessage</a></li><li><a href="global.html#showErrorMessageEdit">showErrorMessageEdit</a></li><li><a href="global.html#showErrorMessageEditContact">showErrorMessageEditContact</a></li><li><a href="global.html#showLogoAddTask">showLogoAddTask</a></li><li><a href="global.html#showSignupPage">showSignupPage</a></li><li><a href="global.html#taskCategory">taskCategory</a></li><li><a href="global.html#toggleColor">toggleColor</a></li><li><a href="global.html#toggleColorEdit">toggleColorEdit</a></li><li><a href="global.html#toggleColorEditIf">toggleColorEditIf</a></li><li><a href="global.html#toggleColorIf">toggleColorIf</a></li><li><a href="global.html#toggleContactView">toggleContactView</a></li><li><a href="global.html#updateIcon">updateIcon</a></li><li><a href="global.html#validateCheckbox">validateCheckbox</a></li><li><a href="global.html#validateCheckboxEdit">validateCheckboxEdit</a></li><li><a href="global.html#validateConfirmPassword">validateConfirmPassword</a></li><li><a href="global.html#validateConfirmPasswordEdit">validateConfirmPasswordEdit</a></li><li><a href="global.html#validateInput">validateInput</a></li><li><a href="global.html#validateInputEdit">validateInputEdit</a></li><li><a href="global.html#validateInputEditContact">validateInputEditContact</a></li><li><a href="global.html#validatePassword">validatePassword</a></li><li><a href="global.html#waitCreatUser">waitCreatUser</a></li><li><a href="global.html#welcomeTextMobile">welcomeTextMobile</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Thu Jun 27 2024 23:22:14 GMT+0200 (Mitteleuropäische Sommerzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

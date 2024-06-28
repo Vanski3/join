@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: summary.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: summary.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Renders the summary view in the main content area.
+ */
+function renderSummary(fromMobile = false) {
+  const name = sessionStorage.getItem('name') ?? 'Guest';
+  const content = document.querySelector('.main-content');
+  content.innerHTML = '';
+  content.innerHTML += renderSummaryHTML(name, fromMobile);
+  if (fromMobile) {
+    setTimeout(() => {
+      document.querySelector('.summary-main').classList.remove('summary-main-slide');
+    }, 1000);
+  }
+  removeBackgroundLowerSidebar();
+  removeButtonBackground();
+  changeSummaryButtonBackground();
+  removeColorSideBar();
+  changeColorSideSummary();
+  renderTaskAmount();
+}
+
+/**
+ * Renders the total amount of tasks and calls individual task amount rendering functions.
+ */
+function renderTaskAmount() {
+  let taskNumber = document.getElementById('task-in-board');
+  let taskAmount = tasks.taskStatus.length;
+  taskNumber.innerHTML = `${taskAmount}`;
+  renderTaskToDoAmount();
+  renderTaskinProgressAmount();
+  renderTaskAwaitingAmount();
+  renderTaskDoneAmount();
+  renderDueDate();
+  renderUrgendTaskAmount();
+  renderGetGreeting();
+}
+
+/**
+ * Renders a greeting message based on the current time of day.
+ */
+function renderGetGreeting() {
+  let daytime = document.getElementById('daytime');
+  let now = new Date();
+  let hour = now.getHours();
+
+  if (hour >= 5 &amp;&amp; hour &lt; 12) {
+    daytime.innerHTML = 'Good Morning,';
+  } else if (hour >= 12 &amp;&amp; hour &lt; 17) {
+    daytime.innerHTML = 'Good Afternoon,';
+  } else if (hour >= 17 &amp;&amp; hour &lt; 21) {
+    daytime.innerHTML = 'Good Evening,';
+  } else {
+    daytime.innerHTML = 'Time for bed,';
+  }
+}
+
+/**
+ * Renders the amount of urgent tasks.
+ */
+function renderUrgendTaskAmount() {
+  let taskNumber = document.getElementById('urgent');
+  let countThrees = tasks.priority.filter((task) => task === 'urgent').length;
+  taskNumber.innerHTML = `${countThrees}`;
+}
+
+/**
+ * Renders the earliest due date from the tasks.
+ */
+function renderDueDate() {
+  let dateContainer = document.getElementById('date');
+  let earliestDate = tasks.dueDate.reduce((earliest, current) => {
+    return new Date(current) &lt; new Date(earliest) ? current : earliest;
+  });
+  let date = new Date(earliestDate);
+  let options = { year: 'numeric', month: 'long', day: 'numeric' };
+  let formattedDate = date.toLocaleDateString('en-US', options);
+  dateContainer.innerHTML = `${formattedDate}`;
+}
+
+/**
+ * Renders the amount of tasks marked as done.
+ */
+function renderTaskDoneAmount() {
+  let taskNumber = document.getElementById('done');
+  let countThrees = tasks.taskStatus.filter((task) => task === '3').length;
+  taskNumber.innerHTML = `${countThrees}`;
+}
+
+/**
+ * Renders the amount of tasks awaiting feedback.
+ */
+function renderTaskAwaitingAmount() {
+  let taskNumber = document.getElementById('feedback');
+  let countTwos = tasks.taskStatus.filter((task) => task === '2').length;
+  taskNumber.innerHTML = `${countTwos}`;
+}
+
+/**
+ * Renders the amount of tasks in progress.
+ */
+function renderTaskinProgressAmount() {
+  let taskNumber = document.getElementById('todo');
+  let countZeroes = tasks.taskStatus.filter((task) => task === '0').length;
+  taskNumber.innerHTML = `${countZeroes}`;
+}
+
+/**
+ * Renders the amount of tasks to do.
+ */
+function renderTaskToDoAmount() {
+  let taskNumber = document.getElementById('in-progress');
+  let countOnes = tasks.taskStatus.filter((task) => task === '1').length;
+  taskNumber.innerHTML = `${countOnes}`;
+}
+
+/**
+ * Changes the background of the summary button.
+ */
+function changeSummaryButtonBackground() {
+  let summaryButton = document.getElementById('summaryButton');
+  summaryButton.classList.add('menu-background');
+}
+
+/**
+ * Changes the color of the sidebar elements for the summary section.
+ */
+function changeColorSideSummary() {
+  document.getElementById('sidebarImgSummary').classList.add('color-img-sidebar');
+  document.getElementById('fontSummarySidebar').classList.add('menu-row-font');
+}
+
+function renderSummaryHTML(name, fromMobile) {
+  return /*html*/ `
+    &lt;main id="summaryMain" class="summary-main ${fromMobile ? 'summary-main-slide' : ''}">
+     &lt;div class="headline-wrapper">&lt;span class="headline" id="daytime">Good morning,&lt;/span>&lt;span id="username"> ${name}&lt;/span>&lt;/div>
+       &lt;div class="summary-wrapper">
+           &lt;div class="row1">
+               &lt;div class="date-urgent-task" onclick="loadBoardContent()">
+                   &lt;div class="urgent-task">
+                       &lt;div class="img-amount-container">
+                           &lt;img src="./assets/img/summary/urgent-frame.svg" alt="urgent task" />
+                           &lt;span id="urgent">1&lt;/span>
+                       &lt;/div>
+                       &lt;p>Tasks Urgent&lt;/p>
+                   &lt;/div>
+                   &lt;div class="separator">&lt;/div>
+                   &lt;div class="date">
+                       &lt;div>
+                           &lt;span id="date">October 16, 2022&lt;/span>
+                           &lt;p>Upcoming Deadline&lt;/p>
+                       &lt;/div>
+                   &lt;/div>
+               &lt;/div>
+               &lt;div class="task" onclick="loadBoardContent('mainContent')">
+                   &lt;div class="img-amount-container">
+                       &lt;img src="./assets/img/summary/Board.svg" alt="Task in Board" />
+                       &lt;span id="task-in-board">5&lt;/span>
+                   &lt;/div>
+                   &lt;p>Task in Board&lt;/p>
+               &lt;/div>
+           &lt;/div>
+           &lt;div class="row2">
+               &lt;div class="task task-todo" onclick="loadBoardContent('board-todo')">
+                   &lt;div class="img-amount-container">
+                       &lt;img src="./assets/img/summary/todo.svg" alt="Task To-do" />
+                       &lt;span id="todo">1&lt;/span>
+                   &lt;/div>
+                   &lt;p>Task To-do&lt;/p>
+               &lt;/div>
+               &lt;div class="task" onclick="loadBoardContent('board-progress')">
+                   &lt;div class="img-amount-container">
+                       &lt;img src="./assets/img/summary/In Progress.svg" alt="Task in Progress" />
+                       &lt;span id="in-progress">2&lt;/span>
+                   &lt;/div>
+                   &lt;p>Task in Progress&lt;/p>
+               &lt;/div>
+               &lt;div class="task" onclick="loadBoardContent('board-feedback')">
+                   &lt;div class="img-amount-container">
+                       &lt;img src="./assets/img/summary/Awaiting feedback.svg" alt="Awaiting feedback" />
+                       &lt;span id="feedback">2&lt;/span>
+                   &lt;/div>
+                   &lt;p>Awaiting Feedback&lt;/p>
+               &lt;/div>
+               &lt;div class="task" onclick="loadBoardContent('board-done')">
+                   &lt;div class="img-amount-container">
+                       &lt;img src="./assets/img/summary/Done.svg" alt="Task done">
+                       &lt;span id="done">1&lt;/span>
+                   &lt;/div>
+                   &lt;p>Tasks Done&lt;/p>
+               &lt;/div>
+           &lt;/div>
+       &lt;/div>
+   &lt;/main>`;
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addBackgroundLegalNotice">addBackgroundLegalNotice</a></li><li><a href="global.html#addBackgroundPrivacyPolice">addBackgroundPrivacyPolice</a></li><li><a href="global.html#addLoadedContact">addLoadedContact</a></li><li><a href="global.html#addSubtasks">addSubtasks</a></li><li><a href="global.html#addSubtasksEdit">addSubtasksEdit</a></li><li><a href="global.html#addSubtasksHTML">addSubtasksHTML</a></li><li><a href="global.html#addTaskValidation">addTaskValidation</a></li><li><a href="global.html#addTaskValidationEdit">addTaskValidationEdit</a></li><li><a href="global.html#addTaskValidationEditContact">addTaskValidationEditContact</a></li><li><a href="global.html#addValidationListeners">addValidationListeners</a></li><li><a href="global.html#addValidationListenersEdit">addValidationListenersEdit</a></li><li><a href="global.html#addValidationListenersEditContact">addValidationListenersEditContact</a></li><li><a href="global.html#changeAddTaskButtonBackground">changeAddTaskButtonBackground</a></li><li><a href="global.html#changeColorSideAddTask">changeColorSideAddTask</a></li><li><a href="global.html#changeColorSideSummary">changeColorSideSummary</a></li><li><a href="global.html#changeColorSidebarContacts">changeColorSidebarContacts</a></li><li><a href="global.html#changeContactsButtonBackground">changeContactsButtonBackground</a></li><li><a href="global.html#changeSubtask">changeSubtask</a></li><li><a href="global.html#changeSubtaskEdit">changeSubtaskEdit</a></li><li><a href="global.html#changeSummaryButtonBackground">changeSummaryButtonBackground</a></li><li><a href="global.html#clearEditObjects">clearEditObjects</a></li><li><a href="global.html#clearError">clearError</a></li><li><a href="global.html#clearErrorEdit">clearErrorEdit</a></li><li><a href="global.html#clearErrorEditContact">clearErrorEditContact</a></li><li><a href="global.html#clearObjects">clearObjects</a></li><li><a href="global.html#closeContactDialog">closeContactDialog</a></li><li><a href="global.html#closeEditContainer">closeEditContainer</a></li><li><a href="global.html#closeSignupPage">closeSignupPage</a></li><li><a href="global.html#closeTaskOverlayEdit">closeTaskOverlayEdit</a></li><li><a href="global.html#createUser">createUser</a></li><li><a href="global.html#deleteContact">deleteContact</a></li><li><a href="global.html#deleteSubtask">deleteSubtask</a></li><li><a href="global.html#editSubtask">editSubtask</a></li><li><a href="global.html#editTask">editTask</a></li><li><a href="global.html#editTaskHTML">editTaskHTML</a></li><li><a href="global.html#enableBtn">enableBtn</a></li><li><a href="global.html#filterContacts">filterContacts</a></li><li><a href="global.html#filterContactsEdit">filterContactsEdit</a></li><li><a href="global.html#getAllContacts">getAllContacts</a></li><li><a href="global.html#getAllUser">getAllUser</a></li><li><a href="global.html#getContact">getContact</a></li><li><a href="global.html#getContactToEditForm">getContactToEditForm</a></li><li><a href="global.html#getLocalStorage">getLocalStorage</a></li><li><a href="global.html#getProBtnClick">getProBtnClick</a></li><li><a href="global.html#getSavedContactsEdit">getSavedContactsEdit</a></li><li><a href="global.html#getSavedSubtasksEdit">getSavedSubtasksEdit</a></li><li><a href="global.html#getSelectedContacts">getSelectedContacts</a></li><li><a href="global.html#getSelectedContactsEdit">getSelectedContactsEdit</a></li><li><a href="global.html#getSelectedSubtasks">getSelectedSubtasks</a></li><li><a href="global.html#getSubtasksEdit">getSubtasksEdit</a></li><li><a href="global.html#goBack">goBack</a></li><li><a href="global.html#guestLogin">guestLogin</a></li><li><a href="global.html#handleLowClick">handleLowClick</a></li><li><a href="global.html#handleLowClickEdit">handleLowClickEdit</a></li><li><a href="global.html#handleMediumClick">handleMediumClick</a></li><li><a href="global.html#handleMediumClickEdit">handleMediumClickEdit</a></li><li><a href="global.html#handleUrgentClick">handleUrgentClick</a></li><li><a href="global.html#handleUrgentClickEdit">handleUrgentClickEdit</a></li><li><a href="global.html#hideErrorMessage">hideErrorMessage</a></li><li><a href="global.html#hideErrorMessageEdit">hideErrorMessageEdit</a></li><li><a href="global.html#hideErrorMessageEditContact">hideErrorMessageEditContact</a></li><li><a href="global.html#initializeCheckboxListeners">initializeCheckboxListeners</a></li><li><a href="global.html#isValidEmail">isValidEmail</a></li><li><a href="global.html#isValidEmailEdit">isValidEmailEdit</a></li><li><a href="global.html#isValidEmailEditContact">isValidEmailEditContact</a></li><li><a href="global.html#isValidPhoneEditContact">isValidPhoneEditContact</a></li><li><a href="global.html#loadAddTaskContent">loadAddTaskContent</a></li><li><a href="global.html#loadAddTaskContentHTML">loadAddTaskContentHTML</a></li><li><a href="global.html#loadBoardContentHTML">loadBoardContentHTML</a></li><li><a href="global.html#loadContactsContent">loadContactsContent</a></li><li><a href="global.html#loadHelpContent">loadHelpContent</a></li><li><a href="global.html#loadHelpContentHTML">loadHelpContentHTML</a></li><li><a href="global.html#loadLegalNoticeContent">loadLegalNoticeContent</a></li><li><a href="global.html#loadLegalNoticeContentHTML">loadLegalNoticeContentHTML</a></li><li><a href="global.html#loadPrivacyPoliceContent">loadPrivacyPoliceContent</a></li><li><a href="global.html#loadPrivacyPoliceContentHTML">loadPrivacyPoliceContentHTML</a></li><li><a href="global.html#logOut">logOut</a></li><li><a href="global.html#loginUser">loginUser</a></li><li><a href="global.html#markSelectedContacts">markSelectedContacts</a></li><li><a href="global.html#mergeObjects">mergeObjects</a></li><li><a href="global.html#mergeObjectsEdit">mergeObjectsEdit</a></li><li><a href="global.html#minDate">minDate</a></li><li><a href="global.html#minDateEdit">minDateEdit</a></li><li><a href="global.html#newSubtaskInput">newSubtaskInput</a></li><li><a href="global.html#onclickRender">onclickRender</a></li><li><a href="global.html#onloadContacts">onloadContacts</a></li><li><a href="global.html#onloadContactsEdit">onloadContactsEdit</a></li><li><a href="global.html#onloadFormValue">onloadFormValue</a></li><li><a href="global.html#onloadFunc">onloadFunc</a></li><li><a href="global.html#openContactDialog">openContactDialog</a></li><li><a href="global.html#putData">putData</a></li><li><a href="global.html#removeBackgroundLowerSidebar">removeBackgroundLowerSidebar</a></li><li><a href="global.html#removeButtonBackground">removeButtonBackground</a></li><li><a href="global.html#removeColorSideBar">removeColorSideBar</a></li><li><a href="global.html#removeSymbol">removeSymbol</a></li><li><a href="global.html#renderBoardCardsHTML">renderBoardCardsHTML</a></li><li><a href="global.html#renderContactDetail">renderContactDetail</a></li><li><a href="global.html#renderContacts">renderContacts</a></li><li><a href="global.html#renderDueDate">renderDueDate</a></li><li><a href="global.html#renderEditContact">renderEditContact</a></li><li><a href="global.html#renderGetGreeting">renderGetGreeting</a></li><li><a href="global.html#renderSummary">renderSummary</a></li><li><a href="global.html#renderTaskAmount">renderTaskAmount</a></li><li><a href="global.html#renderTaskAwaitingAmount">renderTaskAwaitingAmount</a></li><li><a href="global.html#renderTaskDoneAmount">renderTaskDoneAmount</a></li><li><a href="global.html#renderTaskOverlayHTML">renderTaskOverlayHTML</a></li><li><a href="global.html#renderTaskToDoAmount">renderTaskToDoAmount</a></li><li><a href="global.html#renderTaskinProgressAmount">renderTaskinProgressAmount</a></li><li><a href="global.html#renderToList">renderToList</a></li><li><a href="global.html#renderToListEdit">renderToListEdit</a></li><li><a href="global.html#renderToListEditHTML">renderToListEditHTML</a></li><li><a href="global.html#renderToListHTML">renderToListHTML</a></li><li><a href="global.html#renderUrgendTaskAmount">renderUrgendTaskAmount</a></li><li><a href="global.html#resetButtons">resetButtons</a></li><li><a href="global.html#resetForm">resetForm</a></li><li><a href="global.html#resetSearch">resetSearch</a></li><li><a href="global.html#resetSubtask">resetSubtask</a></li><li><a href="global.html#resetSubtaskInput">resetSubtaskInput</a></li><li><a href="global.html#resetValidation">resetValidation</a></li><li><a href="global.html#returnToPreviousContent">returnToPreviousContent</a></li><li><a href="global.html#saveContact">saveContact</a></li><li><a href="global.html#saveContactEdit">saveContactEdit</a></li><li><a href="global.html#saveTask">saveTask</a></li><li><a href="global.html#saveTaskEdit">saveTaskEdit</a></li><li><a href="global.html#saveTaskEditElse">saveTaskEditElse</a></li><li><a href="global.html#saveTaskElse">saveTaskElse</a></li><li><a href="global.html#searchTaskHTML">searchTaskHTML</a></li><li><a href="global.html#selectCategory">selectCategory</a></li><li><a href="global.html#selectContact">selectContact</a></li><li><a href="global.html#selectContactEdit">selectContactEdit</a></li><li><a href="global.html#selectContactEditElse">selectContactEditElse</a></li><li><a href="global.html#sessionStorageToHeader">sessionStorageToHeader</a></li><li><a href="global.html#setSessionStorage">setSessionStorage</a></li><li><a href="global.html#setupToggle">setupToggle</a></li><li><a href="global.html#showErrorMessage">showErrorMessage</a></li><li><a href="global.html#showErrorMessageEdit">showErrorMessageEdit</a></li><li><a href="global.html#showErrorMessageEditContact">showErrorMessageEditContact</a></li><li><a href="global.html#showLogoAddTask">showLogoAddTask</a></li><li><a href="global.html#showSignupPage">showSignupPage</a></li><li><a href="global.html#taskCategory">taskCategory</a></li><li><a href="global.html#toggleColor">toggleColor</a></li><li><a href="global.html#toggleColorEdit">toggleColorEdit</a></li><li><a href="global.html#toggleColorEditIf">toggleColorEditIf</a></li><li><a href="global.html#toggleColorIf">toggleColorIf</a></li><li><a href="global.html#toggleContactView">toggleContactView</a></li><li><a href="global.html#updateIcon">updateIcon</a></li><li><a href="global.html#validateCheckbox">validateCheckbox</a></li><li><a href="global.html#validateCheckboxEdit">validateCheckboxEdit</a></li><li><a href="global.html#validateConfirmPassword">validateConfirmPassword</a></li><li><a href="global.html#validateConfirmPasswordEdit">validateConfirmPasswordEdit</a></li><li><a href="global.html#validateInput">validateInput</a></li><li><a href="global.html#validateInputEdit">validateInputEdit</a></li><li><a href="global.html#validateInputEditContact">validateInputEditContact</a></li><li><a href="global.html#validatePassword">validatePassword</a></li><li><a href="global.html#waitCreatUser">waitCreatUser</a></li><li><a href="global.html#welcomeTextMobile">welcomeTextMobile</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Thu Jun 27 2024 23:22:14 GMT+0200 (Mitteleuropäische Sommerzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

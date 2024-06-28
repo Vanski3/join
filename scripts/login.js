@@ -87,8 +87,8 @@ function closeSignupPage() {
 function updateIcon(inputField, iconElement) {
   iconElement.src =
     inputField.value.length > 0
-      ? '../assets/img/login/visibility_off.svg'
-      : '../assets/img/login/lock.svg';
+      ? './assets/img/login/visibility_off.svg'
+      : './assets/img/login/lock.svg';
 }
 
 /**
@@ -107,7 +107,7 @@ function setupToggle(inputFieldId, iconElementId) {
   iconElement.addEventListener('click', () => {
     if (inputField.type === 'password') {
       inputField.type = 'text';
-      iconElement.src = '../assets/img/login/visibility.svg';
+      iconElement.src = './assets/img/login/visibility.svg';
     } else {
       inputField.type = 'password';
       updateIcon(inputField, iconElement);
@@ -134,20 +134,16 @@ async function onloadFunc() {
   getLocalStorage();
   try {
     let userResponse = await getAllUser('users');
-    if (Array.isArray(userResponse)) {
-      for (let i = 0; i < userResponse.length; i++) {
-        user.push({
-          id: userResponse[i].id,
-          email: userResponse[i].email,
-          name: userResponse[i].name,
-          password: userResponse[i].password,
-        });
-      }
-    } else {
-      console.error('userResponse is not in the expected array format');
+    for (let i = 0; i < userResponse.length; i++) {
+      user.push({
+        id: userResponse[i].id,
+        email: userResponse[i].email,
+        name: userResponse[i].name,
+        password: userResponse[i].password,
+      });
     }
-  } catch (error) {
-    console.error('Failed to load users:', error);
+  } catch {
+    console.error('userResponse is not in the expected array format');
   }
 }
 
@@ -181,7 +177,7 @@ function loginUser() {
     } else {
       loginEmail.value = '';
       loginPassword.value = '';
-      toggleIcon.src = '../assets/img/login/lock.svg';
+      toggleIcon.src = './assets/img/login/lock.svg';
     }
   }
 }
