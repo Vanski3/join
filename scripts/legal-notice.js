@@ -4,27 +4,27 @@
  * @param {Object} [params] - Optional parameters (not used in the function).
  */
 function loadLegalNoticeContent(params) {
-      let userHeaderPopup = document.getElementById('userHeaderPopup');
-      userHeaderPopup.style.display = 'none';
-      let mainContent = document.getElementById('mainContent');
-      mainContent.innerHTML = '';
-      mainContent.innerHTML += loadLegalNoticeContentHTML();
-      removeBackgroundLowerSidebar();
-      addBackgroundLegalNotice();
-    }
-    
-    /**
-     * Generates the HTML content for the legal notice.
-     *
-     * @param {Object} [params] - Optional parameters (not used in the function).
-     * @returns {string} The HTML content for the legal notice.
-     */
-    function loadLegalNoticeContentHTML(params) {
-      return /*html*/ `
+   let userHeaderPopup = document.getElementById('userHeaderPopup');
+   userHeaderPopup.style.display = 'none';
+   let mainContent = document.getElementById('mainContent');
+   mainContent.innerHTML = '';
+   mainContent.innerHTML += loadLegalNoticeContentHTML();
+   removeBackgroundLowerSidebar();
+   addBackgroundLegalNotice();
+}
+
+/**
+ * Generates the HTML content for the legal notice.
+ *
+ * @param {Object} [params] - Optional parameters (not used in the function).
+ * @returns {string} The HTML content for the legal notice.
+ */
+function loadLegalNoticeContentHTML(params) {
+   return /*html*/ `
         <div class="content-div">
           <div class="headline-row">
             <h1>Legal Notice</h1>
-            <img onclick="returnToPreviousContent()" src="/assets/img/privacy-legal-help/move-back-arrow.svg" alt="zurück" />
+            <img onclick="returnToPreviousContent()" src="./assets/img/privacy-legal-help/move-back-arrow.svg" alt="zurück" />
           </div>
           <h2>Imprint</h2>
           <!-- individual Names -->
@@ -73,13 +73,12 @@ function loadLegalNoticeContent(params) {
           </p>
         </div>
       `;
-    }
-    
-    /**
-     * Adds a background to the legal notice button to highlight it.
-     */
-    function addBackgroundLegalNotice() {
-      let legalNoticeButton = document.getElementById('legalNoticeButton');
-      legalNoticeButton.classList.add('active-link');
-    }
-    
+}
+
+/**
+ * Adds a background to the legal notice button to highlight it.
+ */
+function addBackgroundLegalNotice() {
+   let legalNoticeButton = document.getElementById('legalNoticeButton');
+   legalNoticeButton.classList.add('active-link');
+}

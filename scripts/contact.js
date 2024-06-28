@@ -6,23 +6,28 @@ let formHasErrorEditContact = false;
  * and renders the contacts on the page.
  */
 function loadContactsContent() {
-  fetch('/scripts/contact.json')
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok ' + response.statusText);
-      }
-      return response.json();
-    })
-    .then((data) => {
-      contactsData = data; // Store contacts data
-      renderContacts(contactsData);
-    })
-    .catch((error) => console.error('Error loading contacts:', error));
-  removeBackgroundLowerSidebar();
-  removeButtonBackground();
-  changeContactsButtonBackground();
-  removeColorSideBar();
-  changeColorSidebarContacts();
+   fetch('./scripts/contact.json', {
+      credentials: 'same-origin',
+   })
+      .then((response) => {
+         if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+         }
+         return response.json();
+      })
+      .then((data) => {
+         contactsData = data; // Store contacts data
+         renderContacts(contactsData);
+         removeBackgroundLowerSidebar();
+         removeButtonBackground();
+         changeContactsButtonBackground();
+         removeColorSideBar();
+         changeColorSidebarContacts();
+      })
+      .catch((error) => {
+         console.error('Error loading contacts:', error);
+         // Handle errors appropriately, e.g., show an error message to the user
+      });
 }
 
 /**
@@ -31,8 +36,8 @@ function loadContactsContent() {
  * @param {Array} contacts - An array of contact objects.
  */
 function renderContacts(contacts) {
-  const content = document.getElementById('mainContent');
-  content.innerHTML = /*html*/ `
+   const content = document.getElementById('mainContent');
+   content.innerHTML = /*html*/ `
     <div class="contacts-container" id="contacts-container">
       <div class="contacts-list">
         <button class="add-contact-btn">Add new contact</button>
@@ -42,27 +47,27 @@ function renderContacts(contacts) {
     <div id=edit-popup></div>
   `;
 
-  const contactsList = document.querySelector('.contacts-list');
+   const contactsList = document.querySelector('.contacts-list');
 
-  // Sort contacts by name
-  contacts.sort((a, b) => a.name.localeCompare(b.name));
+   // Sort contacts by name
+   contacts.sort((a, b) => a.name.localeCompare(b.name));
 
-  let currentLetter = '';
+   let currentLetter = '';
 
-  contacts.forEach((contact) => {
-    const firstLetter = contact.name[0].toUpperCase();
+   contacts.forEach((contact) => {
+      const firstLetter = contact.name[0].toUpperCase();
 
-    if (firstLetter !== currentLetter) {
-      currentLetter = firstLetter;
-      const groupTitle = document.createElement('div');
-      groupTitle.classList.add('contact-group-title');
-      groupTitle.textContent = currentLetter;
-      contactsList.appendChild(groupTitle);
-    }
+      if (firstLetter !== currentLetter) {
+         currentLetter = firstLetter;
+         const groupTitle = document.createElement('div');
+         groupTitle.classList.add('contact-group-title');
+         groupTitle.textContent = currentLetter;
+         contactsList.appendChild(groupTitle);
+      }
 
-    const contactElement = document.createElement('div');
-    contactElement.classList.add('contact');
-    contactElement.innerHTML = /*html*/ `
+      const contactElement = document.createElement('div');
+      contactElement.classList.add('contact');
+      contactElement.innerHTML = /*html*/ `
       <div class="contact-initials" style="background-color: ${contact.color};">${contact.initials}</div>
       <div class="contact-info">
         <div class="contact-name">${contact.name}</div>
@@ -70,18 +75,18 @@ function renderContacts(contacts) {
       </div>
     `;
 
-    contactElement.addEventListener('click', () => {
-      renderContactDetail(contactElement, contact);
-      toggleContactView();
-    });
+      contactElement.addEventListener('click', () => {
+         renderContactDetail(contactElement, contact);
+         toggleContactView();
+      });
 
-    contactsList.appendChild(contactElement);
-  });
+      contactsList.appendChild(contactElement);
+   });
 
-  const addContactButton = document.querySelector('.add-contact-btn');
-  if (addContactButton) {
-    addContactButton.addEventListener('click', openContactDialog);
-  }
+   const addContactButton = document.querySelector('.add-contact-btn');
+   if (addContactButton) {
+      addContactButton.addEventListener('click', openContactDialog);
+   }
 }
 
 /**
@@ -91,12 +96,12 @@ function renderContacts(contacts) {
  * @returns {Object|null} The contact object if found, otherwise null.
  */
 function getContact(id) {
-  for (let i = 0; i < contactsData.length; i++) {
-    if (contactsData[i].id === id.toString()) {
-      return contactsData[i];
-    }
-  }
-  return null;
+   for (let i = 0; i < contactsData.length; i++) {
+      if (contactsData[i].id === id.toString()) {
+         return contactsData[i];
+      }
+   }
+   return null;
 }
 
 /**
@@ -105,10 +110,10 @@ function getContact(id) {
  * @param {string} id - The ID of the contact to edit.
  */
 function renderEditContact(id) {
-  let contact = getContact(id);
-  document.getElementById('edit-popup').style.display = 'unset';
-  const content = document.getElementById('edit-popup');
-  content.innerHTML = /*html*/ `
+   let contact = getContact(id);
+   document.getElementById('edit-popup').style.display = 'unset';
+   const content = document.getElementById('edit-popup');
+   content.innerHTML = /*html*/ `
     <div class="dialog-edit">
         <div class="popup-header">
             <div class="logo-slogan">
@@ -146,8 +151,8 @@ function renderEditContact(id) {
 </div>
     </div>
   `;
-  getContactToEditForm(contact);
-  addTaskValidationEditContact();
+   getContactToEditForm(contact);
+   addTaskValidationEditContact();
 }
 
 /**
@@ -156,28 +161,28 @@ function renderEditContact(id) {
  * @param {string} id - The ID of the contact to save.
  */
 function saveContactEdit(id) {
-  let form = document.getElementById('edit-contact');
-  form.querySelectorAll('*').forEach((element) => {
-    if (element.classList.contains('error-edit-contact')) {
-      formHasErrorEditContact = true;
-    }
-  });
-  if (formHasErrorEditContact) {
-    formHasErrorEditContact = false;
-    return;
-  } else {
-    let index = contactsData.findIndex((contact) => contact.id === id.toString());
+   let form = document.getElementById('edit-contact');
+   form.querySelectorAll('*').forEach((element) => {
+      if (element.classList.contains('error-edit-contact')) {
+         formHasErrorEditContact = true;
+      }
+   });
+   if (formHasErrorEditContact) {
+      formHasErrorEditContact = false;
+      return;
+   } else {
+      let index = contactsData.findIndex((contact) => contact.id === id.toString());
 
-    if (index !== -1) {
-      let newName = document.getElementById('name-edit-contact').value;
-      let newMail = document.getElementById('email-edit-contact').value;
-      let newPhone = document.getElementById('phone-edit-contact').value;
-      contactsData[index].name = newName;
-      contactsData[index].email = newMail;
-      contactsData[index].phone = newPhone;
-      renderContacts(contactsData);
-    }
-  }
+      if (index !== -1) {
+         let newName = document.getElementById('name-edit-contact').value;
+         let newMail = document.getElementById('email-edit-contact').value;
+         let newPhone = document.getElementById('phone-edit-contact').value;
+         contactsData[index].name = newName;
+         contactsData[index].email = newMail;
+         contactsData[index].phone = newPhone;
+         renderContacts(contactsData);
+      }
+   }
 }
 
 /**
@@ -186,11 +191,11 @@ function saveContactEdit(id) {
  * @param {Object} contact - The contact object to edit.
  */
 function getContactToEditForm(contact) {
-  let backgroundcolor = contact.color;
-  document.getElementById('person-icon').style.backgroundColor = backgroundcolor;
-  document.getElementById('name-edit-contact').value = contact.name;
-  document.getElementById('email-edit-contact').value = contact.email;
-  document.getElementById('phone-edit-contact').value = contact.phone;
+   let backgroundcolor = contact.color;
+   document.getElementById('person-icon').style.backgroundColor = backgroundcolor;
+   document.getElementById('name-edit-contact').value = contact.name;
+   document.getElementById('email-edit-contact').value = contact.email;
+   document.getElementById('phone-edit-contact').value = contact.phone;
 }
 
 /**
@@ -200,14 +205,14 @@ function getContactToEditForm(contact) {
  * @param {Object} contact - The contact object.
  */
 function renderContactDetail(contactElement, contact) {
-  document.querySelectorAll('.contact').forEach((element) => {
-    element.classList.remove('selected');
-  });
+   document.querySelectorAll('.contact').forEach((element) => {
+      element.classList.remove('selected');
+   });
 
-  contactElement.classList.add('selected');
+   contactElement.classList.add('selected');
 
-  const contactDetail = document.querySelector('.contact-detail');
-  contactDetail.innerHTML = /*html*/ `
+   const contactDetail = document.querySelector('.contact-detail');
+   contactDetail.innerHTML = /*html*/ `
     <div class="contact-header">
       <div class="name-initial-container">
         <div class="contact-initials-large" style="background-color: ${contact.color};">${contact.initials}</div>
@@ -238,37 +243,37 @@ function renderContactDetail(contactElement, contact) {
  * @param {string} id - The ID of the contact to delete.
  */
 function deleteContact(id) {
-  const index = contactsData.findIndex((contact) => contact.id === id);
-  if (index !== -1) {
-    contactsData.splice(index, 1);
-    renderContacts(contactsData);
-    document.querySelector('.contact-detail').innerHTML = '';
-  }
+   const index = contactsData.findIndex((contact) => contact.id === id);
+   if (index !== -1) {
+      contactsData.splice(index, 1);
+      renderContacts(contactsData);
+      document.querySelector('.contact-detail').innerHTML = '';
+   }
 }
 
 /**
  * Opens the contact dialog to add a new contact.
  */
 function openContactDialog() {
-  const contactPopup = document.getElementById('contact-dialog-container');
-  const contactDialog = document.querySelector('#contact-dialog-container .task-dialog');
+   const contactPopup = document.getElementById('contact-dialog-container');
+   const contactDialog = document.querySelector('#contact-dialog-container .task-dialog');
 
-  contactPopup.style.display = 'flex';
-  setTimeout(() => {
-    contactDialog.style.right = '0';
-  }, 50);
+   contactPopup.style.display = 'flex';
+   setTimeout(() => {
+      contactDialog.style.right = '0';
+   }, 50);
 }
 
 /**
  * Closes the contact dialog.
  */
 function closeContactDialog() {
-  const contactDialog = document.querySelector('#contact-dialog-container .task-dialog');
+   const contactDialog = document.querySelector('#contact-dialog-container .task-dialog');
 
-  contactDialog.style.right = '-600px';
-  setTimeout(() => {
-    document.getElementById('contact-dialog-container').style.display = 'none';
-  }, 300);
+   contactDialog.style.right = '-600px';
+   setTimeout(() => {
+      document.getElementById('contact-dialog-container').style.display = 'none';
+   }, 300);
 }
 
 /**
@@ -277,47 +282,47 @@ function closeContactDialog() {
  * @param {string} id - The ID of the contact to delete.
  */
 function closeEditContainer(id) {
-  document.getElementById('edit-popup').style.display = 'none';
-  deleteContact(id);
+   document.getElementById('edit-popup').style.display = 'none';
+   deleteContact(id);
 }
 
 /**
  * Toggles the visibility of the contact list and contact details on smaller screens.
  */
 function toggleContactView() {
-  const contactsList = document.querySelector('.contacts-list');
-  const contactDetail = document.querySelector('.contact-detail');
+   const contactsList = document.querySelector('.contacts-list');
+   const contactDetail = document.querySelector('.contact-detail');
 
-  if (window.innerWidth <= 800) {
-    contactsList.classList.toggle('hidden');
-    contactDetail.classList.toggle('visible');
-  }
+   if (window.innerWidth <= 800) {
+      contactsList.classList.toggle('hidden');
+      contactDetail.classList.toggle('visible');
+   }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('contact-dialog-container').addEventListener('click', (event) => {
-    const contactDialog = document.querySelector('#contact-dialog-container .task-dialog');
+   document.getElementById('contact-dialog-container').addEventListener('click', (event) => {
+      const contactDialog = document.querySelector('#contact-dialog-container .task-dialog');
 
-    if (!contactDialog.contains(event.target)) {
-      closeContactDialog();
-    }
-  });
+      if (!contactDialog.contains(event.target)) {
+         closeContactDialog();
+      }
+   });
 });
 
 /**
  * Changes the color of the sidebar for the contacts section.
  */
 function changeColorSidebarContacts() {
-  document.getElementById('sidebarImgContact').classList.add('color-img-sidebar');
-  document.getElementById('fontContactsSidebar').classList.add('menu-row-font');
+   document.getElementById('sidebarImgContact').classList.add('color-img-sidebar');
+   document.getElementById('fontContactsSidebar').classList.add('menu-row-font');
 }
 
 /**
  * Changes the background color of the contacts button.
  */
 function changeContactsButtonBackground(params) {
-  let contactButton = document.getElementById('contactButton');
-  contactButton.classList.add('menu-background');
+   let contactButton = document.getElementById('contactButton');
+   contactButton.classList.add('menu-background');
 }
 
 /**
@@ -326,55 +331,55 @@ function changeContactsButtonBackground(params) {
  * @param {Event} event - The form submission event.
  */
 function saveContact(event) {
-  event.preventDefault();
-  const name = document.getElementById('name').value;
-  const email = document.getElementById('email').value;
-  const phone = document.getElementById('phone').value;
-  const initials = name
-    .split(' ')
-    .map((word) => word[0].toUpperCase())
-    .join('');
-  const color = '#' + Math.floor(Math.random() * 16777215).toString(16); // Random color
+   event.preventDefault();
+   const name = document.getElementById('name').value;
+   const email = document.getElementById('email').value;
+   const phone = document.getElementById('phone').value;
+   const initials = name
+      .split(' ')
+      .map((word) => word[0].toUpperCase())
+      .join('');
+   const color = '#' + Math.floor(Math.random() * 16777215).toString(16); // Random color
 
-  const newContact = {
-    id: Date.now().toString(),
-    name,
-    email,
-    phone,
-    initials,
-    color,
-  };
+   const newContact = {
+      id: Date.now().toString(),
+      name,
+      email,
+      phone,
+      initials,
+      color,
+   };
 
-  contactsData.push(newContact);
-  renderContacts(contactsData);
-  closeContactDialog();
-  document.getElementById('addContact').reset(); // Reset form
+   contactsData.push(newContact);
+   renderContacts(contactsData);
+   closeContactDialog();
+   document.getElementById('addContact').reset(); // Reset form
 }
 
 /**
  * Adds validation listeners to the edit contact form.
  */
 function addTaskValidationEditContact() {
-  const addTaskFormEditContact = document.getElementById('edit-contact');
-  const nameEditContact = document.getElementById('name-edit-contact');
-  const emailEditContact = document.getElementById('email-edit-contact');
-  const phoneEditContact = document.getElementById('phone-edit-contact');
+   const addTaskFormEditContact = document.getElementById('edit-contact');
+   const nameEditContact = document.getElementById('name-edit-contact');
+   const emailEditContact = document.getElementById('email-edit-contact');
+   const phoneEditContact = document.getElementById('phone-edit-contact');
 
-  addValidationListenersEditContact(nameEditContact, 'name');
-  addValidationListenersEditContact(emailEditContact, 'email');
-  addValidationListenersEditContact(phoneEditContact, 'phone');
+   addValidationListenersEditContact(nameEditContact, 'name');
+   addValidationListenersEditContact(emailEditContact, 'email');
+   addValidationListenersEditContact(phoneEditContact, 'phone');
 
-  addTaskFormEditContact.addEventListener('submit', function (event) {
-    event.preventDefault();
-    validateInputEditContact(nameEditContact, 'name');
-    validateInputEditContact(emailEditContact, 'email');
-    validateInputEditContact(phoneEditContact, 'phone');
+   addTaskFormEditContact.addEventListener('submit', function (event) {
+      event.preventDefault();
+      validateInputEditContact(nameEditContact, 'name');
+      validateInputEditContact(emailEditContact, 'email');
+      validateInputEditContact(phoneEditContact, 'phone');
 
-    // If no validation errors, submit the form (optional)
-    if (!document.querySelector('.error-edit-contact')) {
-      addTaskFormEditContact.submit();
-    }
-  });
+      // If no validation errors, submit the form (optional)
+      if (!document.querySelector('.error-edit-contact')) {
+         addTaskFormEditContact.submit();
+      }
+   });
 }
 
 /**
@@ -384,8 +389,8 @@ function addTaskValidationEditContact() {
  * @param {string} type - The type of the input field.
  */
 function addValidationListenersEditContact(inputField, type) {
-  inputField.addEventListener('blur', () => validateInputEditContact(inputField, type));
-  inputField.addEventListener('input', () => clearErrorEditContact(inputField));
+   inputField.addEventListener('blur', () => validateInputEditContact(inputField, type));
+   inputField.addEventListener('input', () => clearErrorEditContact(inputField));
 }
 
 /**
@@ -395,30 +400,30 @@ function addValidationListenersEditContact(inputField, type) {
  * @param {string} type - The type of the input field.
  */
 function validateInputEditContact(inputField, type) {
-  const value = inputField.value.trim();
-  const parentNode = inputField.parentNode;
-  const errorClass = 'error-edit-contact';
-  let errorMessage = '';
+   const value = inputField.value.trim();
+   const parentNode = inputField.parentNode;
+   const errorClass = 'error-edit-contact';
+   let errorMessage = '';
 
-  if (type === 'name') {
-    if (value === '') {
-      errorMessage = 'This field is required';
-    } else if (!value.includes(' ')) {
-      errorMessage = 'Please enter both first name and last name';
-    }
-  } else if (type === 'email' && !isValidEmailEditContact(value)) {
-    errorMessage = 'Please enter a valid email address';
-  } else if (type === 'phone' && !isValidPhoneEditContact(value)) {
-    errorMessage = 'Please enter a valid phone number';
-  }
+   if (type === 'name') {
+      if (value === '') {
+         errorMessage = 'This field is required';
+      } else if (!value.includes(' ')) {
+         errorMessage = 'Please enter both first name and last name';
+      }
+   } else if (type === 'email' && !isValidEmailEditContact(value)) {
+      errorMessage = 'Please enter a valid email address';
+   } else if (type === 'phone' && !isValidPhoneEditContact(value)) {
+      errorMessage = 'Please enter a valid phone number';
+   }
 
-  if (errorMessage) {
-    inputField.classList.add(errorClass);
-    showErrorMessageEditContact(parentNode, errorMessage);
-  } else {
-    inputField.classList.remove(errorClass);
-    hideErrorMessageEditContact(parentNode);
-  }
+   if (errorMessage) {
+      inputField.classList.add(errorClass);
+      showErrorMessageEditContact(parentNode, errorMessage);
+   } else {
+      inputField.classList.remove(errorClass);
+      hideErrorMessageEditContact(parentNode);
+   }
 }
 
 /**
@@ -428,13 +433,13 @@ function validateInputEditContact(inputField, type) {
  * @param {string} message - The error message to show.
  */
 function showErrorMessageEditContact(parentNode, message) {
-  let errorMessage = parentNode.querySelector('.error-message');
-  if (!errorMessage) {
-    errorMessage = document.createElement('div');
-    errorMessage.classList.add('error-message');
-    parentNode.appendChild(errorMessage);
-  }
-  errorMessage.textContent = message;
+   let errorMessage = parentNode.querySelector('.error-message');
+   if (!errorMessage) {
+      errorMessage = document.createElement('div');
+      errorMessage.classList.add('error-message');
+      parentNode.appendChild(errorMessage);
+   }
+   errorMessage.textContent = message;
 }
 
 /**
@@ -443,10 +448,10 @@ function showErrorMessageEditContact(parentNode, message) {
  * @param {HTMLElement} parentNode - The parent node of the input field.
  */
 function hideErrorMessageEditContact(parentNode) {
-  const errorMessage = parentNode.querySelector('.error-message');
-  if (errorMessage) {
-    errorMessage.remove();
-  }
+   const errorMessage = parentNode.querySelector('.error-message');
+   if (errorMessage) {
+      errorMessage.remove();
+   }
 }
 
 /**
@@ -455,8 +460,8 @@ function hideErrorMessageEditContact(parentNode) {
  * @param {HTMLElement} inputField - The input field element.
  */
 function clearErrorEditContact(inputField) {
-  inputField.classList.remove('error-edit-contact');
-  hideErrorMessageEditContact(inputField.parentNode);
+   inputField.classList.remove('error-edit-contact');
+   hideErrorMessageEditContact(inputField.parentNode);
 }
 
 /**
@@ -466,7 +471,7 @@ function clearErrorEditContact(inputField) {
  * @returns {boolean} True if the email is valid, otherwise false.
  */
 function isValidEmailEditContact(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 /**
@@ -476,7 +481,7 @@ function isValidEmailEditContact(email) {
  * @returns {boolean} True if the phone number is valid, otherwise false.
  */
 function isValidPhoneEditContact(phone) {
-  return /^\+?[0-9]{5,15}$/.test(phone);
+   return /^\+?[0-9]{5,15}$/.test(phone);
 }
 
 // /**

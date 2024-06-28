@@ -6,20 +6,20 @@ document.addEventListener('DOMContentLoaded', function () {
    const privacyLink = document.querySelector('a[href="./privacy.html"]');
    const legalNoticeLink = document.querySelector('a[href="./legal-notice.html"]');
    let mainContentDiv = document.getElementById('mainContent');
- 
+
    if (currentUrl.includes('privacy.html')) {
-     privacyLink.classList.add('active-link');
-     mainContentDiv.classList.add('main-content-responsive-external');
+      privacyLink.classList.add('active-link');
+      mainContentDiv.classList.add('main-content-responsive-external');
    } else if (currentUrl.includes('legal-notice.html')) {
-     legalNoticeLink.classList.add('active-link');
-     mainContentDiv.classList.add('main-content-responsive-external');
+      legalNoticeLink.classList.add('active-link');
+      mainContentDiv.classList.add('main-content-responsive-external');
    }
- });
- 
- /**
-  * Loads the privacy policy content into the main content area.
-  */
- function loadPrivacyPoliceContent() {
+});
+
+/**
+ * Loads the privacy policy content into the main content area.
+ */
+function loadPrivacyPoliceContent() {
    let userHeaderPopup = document.getElementById('userHeaderPopup');
    userHeaderPopup.style.display = 'none';
    let mainContent = document.getElementById('mainContent');
@@ -27,19 +27,19 @@ document.addEventListener('DOMContentLoaded', function () {
    mainContent.innerHTML += loadPrivacyPoliceContentHTML();
    removeBackgroundLowerSidebar();
    addBackgroundPrivacyPolice();
- }
- 
- /**
-  * Generates the HTML content for the privacy policy.
-  *
-  * @returns {string} The HTML content for the privacy policy.
-  */
- function loadPrivacyPoliceContentHTML() {
+}
+
+/**
+ * Generates the HTML content for the privacy policy.
+ *
+ * @returns {string} The HTML content for the privacy policy.
+ */
+function loadPrivacyPoliceContentHTML() {
    return /*html*/ `
     <div class="content-div">
        <div class="headline-row">
           <h1>Privacy Policy</h1>
-          <img onclick="returnToPreviousContent()" src="/assets/img/privacy-legal-help/move-back-arrow.svg" alt="zurück" />
+          <img onclick="returnToPreviousContent()" src="./assets/img/privacy-legal-help/move-back-arrow.svg" alt="zurück" />
        </div>
        <h3>1. Privacy at a Glance</h3>
        <h3>General Information</h3>
@@ -94,13 +94,12 @@ document.addEventListener('DOMContentLoaded', function () {
        <p>The responsible party for data processing on this website is:</p>
     </div>;
      `;
- }
- 
- /**
-  * Adds a background to the privacy policy button to highlight it.
-  */
- function addBackgroundPrivacyPolice() {
+}
+
+/**
+ * Adds a background to the privacy policy button to highlight it.
+ */
+function addBackgroundPrivacyPolice() {
    let privacePoliceButton = document.getElementById('privacePoliceButton');
    privacePoliceButton.classList.add('active-link');
- }
- 
+}
