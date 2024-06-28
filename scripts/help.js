@@ -7,20 +7,20 @@ function loadHelpContent(params) {
    let mainContent = document.getElementById('mainContent');
    mainContent.innerHTML = '';
    mainContent.innerHTML += loadHelpContentHTML();
- }
- 
- /**
-  * Generates the HTML content for the help page.
-  *
-  * @param {Object} [params] - Optional parameters (not used in the function).
-  * @returns {string} The HTML content for the help page.
-  */
- function loadHelpContentHTML(params) {
+}
+
+/**
+ * Generates the HTML content for the help page.
+ *
+ * @param {Object} [params] - Optional parameters (not used in the function).
+ * @returns {string} The HTML content for the help page.
+ */
+function loadHelpContentHTML(params) {
    return /*html*/ `
      <div class="content-div">
        <div class="headline-row">
          <h1>Help</h1>
-         <img onclick="returnToPreviousContent()" src="/assets/img/privacy-legal-help/move-back-arrow.svg" alt="zurück" />
+         <img onclick="returnToPreviousContent()" src="./assets/img/privacy-legal-help/move-back-arrow.svg" alt="zurück" />
        </div>
        <p>
          Welcome to the help page for Join, your guide to using our kanban project management tool. Here, we'll provide an overview
@@ -96,12 +96,11 @@ function loadHelpContent(params) {
        </div>
      </div>
    `;
- }
- 
- /**
-  * Navigates back to the previous page in the browser history.
-  */
- function goBack() {
+}
+
+/**
+ * Navigates back to the previous page in the browser history.
+ */
+function goBack() {
    window.history.back();
- }
- 
+}

@@ -6,12 +6,12 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
    <link rel="preconnect" href="https://fonts.googleapis.com" />
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-   <link rel="stylesheet" href="/css/index-main.css" />
-   <link rel="stylesheet" href="/css/custom-properties.css" />
-   <link rel="stylesheet" href="/css/privacy-legal-help.css" />
-   <link rel="stylesheet" href="/css/board.css" />
+   <link rel="stylesheet" href="./css/index-main.css" />
+   <link rel="stylesheet" href="./css/custom-properties.css" />
+   <link rel="stylesheet" href="./css/privacy-legal-help.css" />
+   <link rel="stylesheet" href="./css/board.css" />
    <link rel="stylesheet" href="./css/add-task.css" />
-   <link rel="stylesheet" href="css/contact.css" />
+   <link rel="stylesheet" href="./css/contact.css" />
    <link rel="stylesheet" href="./css/add-task-edit.css" />
    <link rel="stylesheet" href="./css/media-queries-add-task.css">
    <link rel="stylesheet" href="./css/add-task-input.css">
@@ -21,32 +21,32 @@
    <script src="./scripts/add-task-html.js"></script>
    <script src="./scripts/add-task-edit.js"></script>
    <script src="./scripts/add-task.js"></script>
-   <script src="/scripts/contact.js" defer></script>
+   <script src="./scripts/contact.js" defer></script>
    <script src="./scripts/help.js" defer></script>
    <script src="./scripts/legal-notice.js" defer></script>
    <script src="./scripts/privacy.js" defer></script>
    <script src="./scripts/index-main.js" defer></script>
-   <script src="/scripts/summary.js" defer></script>
+   <script src="./scripts/summary.js" defer></script>
    <script src="./scripts/board.js" defer></script>
    <script src="./scripts/header.js" defer></script>
    <script src="./scripts/board-html.js" defer></script>
    <link rel="icon" href="./assets/img/logo-blue.svg">
-   <link rel="stylesheet" href="/css/summary.css" />
+   <link rel="stylesheet" href="./css/summary.css" />
    <title>Join - Kanban Board</title>
 </head>
 
 <body onload="init(), onloadContacts()">
    <div class="desktop-template-div">
       <header>
-         <a href="/index.html"><img class="header-logo" src="/assets/img/header-icons/join-logo.svg" alt="" /></a>
+         <a href="./index.html"><img class="header-logo" src="./assets/img/header-icons/join-logo.svg" alt="" /></a>
          <div class="header-right-side">
             <span class="header-headline">Kanban Project Management Tool</span>
-            <img onclick="loadHelpContent()" class="header-help-logo" src="/assets/img/header-icons/help-logo.svg"
+            <img onclick="loadHelpContent()" class="header-help-logo" src="./assets/img/header-icons/help-logo.svg"
                alt="" />
             <div class="sessionStorageInitials">
                <span id="logoInitials" class="logoInitials"></span>
                <img id="userLogoHeader" class="user-logo-header"
-                  src="/assets/img/header-icons/user-logo-without-initials.png" alt="" />
+                  src="./assets/img/header-icons/user-logo-without-initials.png" alt="" />
             </div>
          </div>
       </header>
@@ -257,7 +257,7 @@
          <div class="contact-dialog">
             <div class="contact-popup-header">
                <div class="contact-logo-slogan">
-                  <img class="contact-logo-white" src="/assets/img/logo-white.svg" alt="Logo">
+                  <img class="contact-logo-white" src="./assets/img/logo-white.svg" alt="Logo">
                   <h1>Add contact</h1>
                   <p>Tasks are better with a team!</p>
                </div>
@@ -273,26 +273,26 @@
 
             <main class="contact-popup-main">
                <div class="contact-icon-container">
-                  <img src="/assets/img/contact/person-white.svg" alt="Person Icon" class="contact-person-icon">
+                  <img src="./assets/img/contact/person-white.svg" alt="Person Icon" class="contact-person-icon">
                </div>
                <form onsubmit="saveContact(event)" id="addContact" class="contact-description">
                   <div class="contact-input-group">
                      <input type="text" id="name" name="name" placeholder="Name">
-                     <img src="/assets/img/contact/person.svg" class="contact-input-icon" alt="Person Icon">
+                     <img src="./assets/img/contact/person.svg" class="contact-input-icon" alt="Person Icon">
                   </div>
                   <div class="contact-input-group">
                      <input type="email" id="email" name="email" placeholder="Email">
-                     <img src="/assets/img/contact/mail.svg" class="contact-input-icon" alt="Mail Icon">
+                     <img src="./assets/img/contact/mail.svg" class="contact-input-icon" alt="Mail Icon">
                   </div>
                   <div class="contact-input-group">
                      <input type="text" id="phone" name="phone" placeholder="Phone">
-                     <img src="/assets/img/contact/call.svg" class="contact-input-icon" alt="Call Icon">
+                     <img src="./assets/img/contact/call.svg" class="contact-input-icon" alt="Call Icon">
                   </div>
                   <div class="contact-button-group">
                      <button type="button" onclick="closeContactDialog()" class="contact-cancel-btn">Cancel <img
-                           src="/assets/img/contact/iconoir_cancel.svg" alt=""></button>
+                           src="./assets/img/contact/iconoir_cancel.svg" alt=""></button>
                      <button type="submit" class="contact-create-btn">Create contact <img
-                           src="/assets/img/contact/check-btn.svg" alt=""></button>
+                           src="./assets/img/contact/check-btn.svg" alt=""></button>
                   </div>
                </form>
             </main>
