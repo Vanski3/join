@@ -126,7 +126,7 @@ function renderContacts(contacts) {
   const contactsList = document.querySelector('.contacts-list');
 
   // Sort contacts by name
-  contacts.name.sort((a, b) => a.name.localeCompare(b.name));
+  contacts.sort((a, b) => a.name.localeCompare(b.name));
 
   let currentLetter = '';
 
