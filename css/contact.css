@@ -562,7 +562,7 @@
   }
 }
 
-@media (max-height: 1000px) {
+@media (max-height: 844px) {
   .task-dialog {
     max-width: unset;
     width: 100%;
