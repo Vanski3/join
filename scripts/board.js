@@ -1,16 +1,33 @@
 let popup = document.getElementById('dialog-container');
 let taskDialog = document.querySelector('.task-dialog');
 const BASE_URL = 'https://join-2024-default-rtdb.europe-west1.firebasedatabase.app/';
-let tasks = [];
+// let tasks = [];
 // let allDataFromFirebase = [];
 
+function saveTasks() {
+   localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+function getStoredTasks() {
+   let storedTasks = localStorage.getItem('tasks');
+   if (storedTasks) {
+      return JSON.parse(storedTasks);
+   }
+   return [];
+}
+
+// Direktes Aufrufen der Funktion beim Laden des Skripts
+let tasks = getStoredTasks();
+
+// Jetzt kannst du die tasks-Variable verwenden, wie du möchtest
+console.log(tasks);
 /**
  * Initializes the application by loading task data and other necessary data from Firebase.
  *
  * @param {Object} [params] - Optional parameters (not used in the function).
  */
 function init(params) {
-   loadTasksData();
+   // loadTasksData();
    // loadallDataFromFirebase();
    welcomeTextMobile();
 }
@@ -51,15 +68,6 @@ popup.addEventListener('click', function (event) {
       closeTaskDialog();
    }
 });
-
-// /**
-//  * Loads all data from Firebase and logs it to the console.
-//  */
-// async function loadallDataFromFirebase() {
-//   let fetchData = await fetch(BASE_URL + '.json');
-//   allDataFromFirebase = await fetchData.json();
-//   console.log(allDataFromFirebase);
-// }
 
 /**
  * Loads the board content and renders the necessary components.
@@ -108,6 +116,7 @@ function renderBoardCards() {
       renderSubtasksInBoardCards(i);
    }
    checkIfTaskIsEmpty();
+   saveTasks();
 }
 
 /**
@@ -381,10 +390,10 @@ function deleteCurrentTask(i) {
  *
  * @param {string} [path='/tasks'] - The path to the tasks data in Firebase.
  */
-async function loadTasksData(path = '/tasks') {
-   let fetchTasks = await fetch(BASE_URL + path + '.json');
-   tasks = await fetchTasks.json();
-}
+// async function loadTasksData(path = '/tasks') {
+//    let fetchTasks = await fetch(BASE_URL + path + '.json');
+//    tasks = await fetchTasks.json();
+// }
 
 // /**
 //  * Loads all data from Firebase and logs it to the console.
