@@ -206,3 +206,115 @@
     width: unset;
   }
 }
+
+@media (max-height: 884px) {
+  .task-description {
+    height: 550px;
+    min-height: unset;
+  }
+}
+
+@media (max-height: 667px) {
+  .task-description {
+    height: 400px;
+    min-height: unset;
+  }
+
+  .first-row {
+    gap: unset;
+  }
+
+  .first-row div {
+    gap: unset;
+  }
+
+  #details {
+    margin-bottom: unset;
+  }
+
+  #button-container {
+    gap: 5px;
+  }
+
+  .second-row {
+    gap: unset;
+  }
+
+  .blue-btn {
+    gap: 0;
+    padding: 5px;
+    font-size: 14px;
+    height: fit-content;
+  }
+
+  .white-btn {
+    gap: 0;
+    padding: 5px;
+    font-size: 14px;
+    height: fit-content;
+  }
+
+  .buttons {
+    bottom: 80px;
+  }
+
+  .required-container {
+    bottom: 60px;
+  }
+}
+
+@media (max-height: 896px) {
+  .task-description-edit {
+    height: 700px;
+    min-height: unset;
+  }
+}
+
+@media (max-height: 667px) {
+  .task-description-edit {
+    height: 550px;
+    min-height: unset;
+  }
+
+  .first-row-edit {
+    gap: unset;
+  }
+
+  .first-row-edit div {
+    gap: unset;
+  }
+
+  #details {
+    margin-bottom: unset;
+  }
+
+  #button-container {
+    gap: 5px;
+  }
+
+  .second-row-edit {
+    gap: unset;
+  }
+
+  .blue-btn {
+    gap: 0;
+    padding: 5px;
+    font-size: 14px;
+    height: fit-content;
+  }
+
+  .white-btn {
+    gap: 0;
+    padding: 5px;
+    font-size: 14px;
+    height: fit-content;
+  }
+
+  .buttons {
+    bottom: 90px;
+  }
+
+  .required-container {
+    bottom: 60px;
+  }
+}

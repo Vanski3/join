@@ -117,6 +117,41 @@
   align-items: center;
 }
 
+.form-failed-container-task {
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.form-failed-container-task button {
+  height: auto;
+  width: 300px;
+  padding: 20px 10px;
+  border-radius: 10px;
+  font-size: 20px;
+  animation: userCreatedBtn 1s 1;
+  transition: all 1s ease-in-out;
+  justify-content: center;
+  z-index: 10000;
+}
+
+@keyframes userCreatedBtn {
+  0% {
+    transform: translateY(100vh);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
 .input-img {
   position: absolute;
   right: 10px;

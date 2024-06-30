@@ -274,3 +274,51 @@
     width: 90%;
   }
 }
+
+@media (max-width: 1000px) {
+  .dialog-edit {
+    right: 0;
+    width: 100%;
+  }
+
+  .popup-header {
+    width: 100%;
+    border-top-right-radius: unset;
+  }
+
+  .popup-header-img {
+    right: 40px;
+  }
+}
+
+@media (max-width: 450px) {
+  .contact-description {
+    padding-left: 0;
+  }
+
+  .input-group input {
+    width: 90%;
+  }
+}
+
+@media (max-height: 667px) {
+  .popup-header {
+    padding-top: 10px;
+  }
+
+  .task-edit-description {
+    margin-top: 10px;
+  }
+
+  #edit-contact {
+    margin-top: -30px;
+  }
+
+  .input-group {
+    margin: 0;
+  }
+
+  .button-group {
+    align-items: center;
+  }
+}
