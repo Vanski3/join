@@ -1,4 +1,4 @@
-let contactsData = [
+let contactsDataArray = [
    {
       initials: 'AM',
       name: 'Anton Mayer',
@@ -81,6 +81,7 @@ let contactsData = [
    },
 ];
 
+let contactsData = getStoredContacts();
 let formHasErrorEditContact = false;
 let contactsList = getStoredContacts();
 
@@ -89,8 +90,8 @@ let contactsList = getStoredContacts();
  * and renders the contacts on the page.
  */
 
-function saveContacts() {
-   localStorage.setItem('contacts', JSON.stringify(contactsData));
+function saveContactstoLocalStorage() {
+   localStorage.setItem('contacts', JSON.stringify(contactsDataArray));
    getStoredContacts();
 }
 
@@ -103,7 +104,7 @@ function getStoredContacts() {
 }
 
 async function loadContactsContent() {
-   saveContacts();
+   saveContactstoLocalStorage();
    renderContacts(contactsList);
    removeBackgroundLowerSidebar();
    removeButtonBackground();
@@ -168,7 +169,7 @@ function renderContacts(contacts) {
    if (addContactButton) {
       addContactButton.addEventListener('click', openContactDialog);
    }
-   saveContacts();
+   saveContactstoLocalStorage();
 }
 
 /**
@@ -262,7 +263,7 @@ function saveContactEdit(id) {
          contactsData[index].name = newName;
          contactsData[index].email = newMail;
          contactsData[index].phone = newPhone;
-         saveContacts();
+         saveContactstoLocalStorage();
          getStoredContacts();
          renderContacts(contactsList);
       }
