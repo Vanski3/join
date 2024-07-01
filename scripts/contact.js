@@ -91,6 +91,7 @@ let contactsList = getStoredContacts();
 
 function saveContacts() {
    localStorage.setItem('contacts', JSON.stringify(contactsData));
+   getStoredContacts();
 }
 
 function getStoredContacts() {
@@ -167,6 +168,7 @@ function renderContacts(contacts) {
    if (addContactButton) {
       addContactButton.addEventListener('click', openContactDialog);
    }
+   saveContacts();
 }
 
 /**
@@ -261,7 +263,8 @@ function saveContactEdit(id) {
          contactsData[index].email = newMail;
          contactsData[index].phone = newPhone;
          saveContacts();
-         renderContacts(contactsData);
+         getStoredContacts();
+         renderContacts(contactsList);
       }
    }
 }
@@ -334,7 +337,6 @@ function deleteContact(id) {
       renderContacts(contactsData);
       document.querySelector('.contact-detail').innerHTML = '';
    }
-   saveContacts();
 }
 
 /**
@@ -437,8 +439,9 @@ function saveContact(event) {
    };
 
    contactsData.push(newContact);
-   localStorage.setItem('contacts', JSON.stringify(contactsData)); // Save updated contactsData to local storage
    renderContacts(contactsData);
+   localStorage.setItem('contacts', JSON.stringify(contactsData)); // Save updated contactsData to local storage
+   //  renderContacts(contactsData);
    closeContactDialog();
    document.getElementById('addContact').reset(); // Reset form
 }
