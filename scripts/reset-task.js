@@ -202,6 +202,6 @@ function resetSubtaskInput() {
   let subtaskInput =
     document.getElementById('subtasks');
   subtaskInput.style.backgroundImage =
-    'url(../assets/img/add-task/plus.svg)';
+    'url(./assets/img/add-task/plus.svg)';
   subtaskInput.value = '';
 }
