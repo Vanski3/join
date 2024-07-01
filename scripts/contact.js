@@ -178,9 +178,9 @@ function renderContacts(contacts) {
  * @returns {Object|null} The contact object if found, otherwise null.
  */
 function getContact(id) {
-   for (let i = 0; i < contactsData.length; i++) {
-      if (contactsData[i].id === id.toString()) {
-         return contactsData[i];
+   for (let i = 0; i < contactsList.length; i++) {
+      if (contactsList[i].id === id.toString()) {
+         return contactsList[i];
       }
    }
    return null;
@@ -253,17 +253,16 @@ function saveContactEdit(id) {
       formHasErrorEditContact = false;
       return;
    } else {
-      let index = contactsData.findIndex((contact) => contact.id === id.toString());
+      let index = contactsList.findIndex((contact) => contact.id === id.toString());
 
       if (index !== -1) {
          let newName = document.getElementById('name-edit-contact').value;
          let newMail = document.getElementById('email-edit-contact').value;
          let newPhone = document.getElementById('phone-edit-contact').value;
-         contactsData[index].name = newName;
-         contactsData[index].email = newMail;
-         contactsData[index].phone = newPhone;
+         contactsList[index].name = newName;
+         contactsList[index].email = newMail;
+         contactsList[index].phone = newPhone;
          saveContactstoLocalStorage();
-         getStoredContacts();
          renderContacts(contactsList);
       }
    }
@@ -331,10 +330,10 @@ function renderContactDetail(contactElement, contact) {
  * @param {string} id - The ID of the contact to delete.
  */
 function deleteContact(id) {
-   const index = contactsData.findIndex((contact) => contact.id === id);
+   const index = contactsList.findIndex((contact) => contact.id === id);
    if (index !== -1) {
-      contactsData.splice(index, 1);
-      renderContacts(contactsData);
+      contactsList.splice(index, 1);
+      renderContacts(contactsList);
       document.querySelector('.contact-detail').innerHTML = '';
    }
 }
@@ -438,9 +437,9 @@ function saveContact(event) {
       color,
    };
 
-   contactsData.push(newContact);
-   renderContacts(contactsData);
-   localStorage.setItem('contacts', JSON.stringify(contactsData)); // Save updated contactsData to local storage
+   contactsList.push(newContact);
+   renderContacts(contactsList);
+   localStorage.setItem('contacts', JSON.stringify(contactsList)); // Save updated contactsData to local storage
    //  renderContacts(contactsData);
    closeContactDialog();
    document.getElementById('addContact').reset(); // Reset form
