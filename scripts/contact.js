@@ -1,4 +1,4 @@
-let contactsDataArray = [
+let contactsData = [
    {
       initials: 'AM',
       name: 'Anton Mayer',
@@ -81,7 +81,6 @@ let contactsDataArray = [
    },
 ];
 
-let contactsData = getStoredContacts();
 let formHasErrorEditContact = false;
 let contactsList = getStoredContacts();
 
@@ -91,7 +90,7 @@ let contactsList = getStoredContacts();
  */
 
 function saveContactstoLocalStorage() {
-   localStorage.setItem('contacts', JSON.stringify(contactsDataArray));
+   localStorage.setItem('contacts', JSON.stringify(contactsData));
    getStoredContacts();
 }
 
