@@ -242,7 +242,7 @@
   }
 }
 
-@media (max-height: 884px) {
+@media (max-height: 915px) {
   .login-form {
     padding-top: unset;
   }
@@ -260,7 +260,7 @@
   }
 }
 
-@media (max-height: 667px) {
+@media (max-height: 740px) {
   .login-form {
     padding-top: 0;
   }

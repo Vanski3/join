@@ -300,6 +300,7 @@ function renderContactDetail(contactElement, contact) {
         <div class="contact-name contact-name-detail">${contact.name}</div>
       </div>
       <div class="contact-actions">
+        <div class="contact-actions-btn">
         <button onclick="renderEditContact(${contact.id})" class="edit-btn">
           <img src="./assets/img/contact/edit.svg" alt="Edit" />
           Edit
@@ -308,7 +309,10 @@ function renderContactDetail(contactElement, contact) {
           <img src="./assets/img/contact/delete.svg" alt="Delete" />
           Delete
         </button>
+        </div>
+        <img class="return-img" onclick="returnToPreviousContent()" src="./assets/img/privacy-legal-help/move-back-arrow.svg" alt="zurück" />
       </div>
+
     </div>
     <div class="contact-detail-info">
       <h2>Contact Information</h2>

@@ -131,6 +131,7 @@
 .contact-actions {
   display: flex;
   gap: 10px;
+  justify-content: space-between;
   margin-top: 1rem;
 }
 
@@ -144,6 +145,14 @@
   cursor: pointer;
   padding: 5px 10px;
   transition: color 0.3s ease;
+}
+
+.contact-actions-btn {
+  display: flex;
+}
+
+.return-img {
+  cursor: pointer;
 }
 
 .contact-actions button img {
@@ -562,7 +571,7 @@
   }
 }
 
-@media (max-height: 844px) {
+@media (max-height: 932px) {
   .task-dialog {
     max-width: unset;
     width: 100%;
@@ -588,7 +597,17 @@
     margin-top: 10px;
   }
 
+  .contact-close-btn {
+    left: 360px;
+  }
+
   h1 {
     margin-top: unset;
+  }
+}
+
+@media (max-height: 740px) {
+  .contact-close-btn {
+    left: 320px;
   }
 }
