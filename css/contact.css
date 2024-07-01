@@ -405,8 +405,37 @@
 }
 
 @media (max-width: 500px) {
+  .task-dialog {
+    max-width: unset;
+    width: 100%;
+    border-top-left-radius: unset;
+    border-bottom-left-radius: unset;
+  }
+
+  .contact-logo-slogan {
+    padding: unset;
+  }
+
+  .contact-popup-header {
+    border-top-left-radius: unset;
+    height: 100px;
+  }
+
+  .contact-icon-container {
+    padding: unset;
+    margin-top: unset;
+  }
+
+  .contact-button-group {
+    margin-top: 10px;
+  }
+
   .contact-close-btn {
-    left: 455px;
+    left: 20px;
+  }
+
+  h1 {
+    margin-top: unset;
   }
 
   .contact-popup-main {
@@ -429,149 +458,23 @@
   .contact-popup-header {
     padding: 90px;
   }
-}
 
-@media (max-width: 460px) {
   .contact-input-group input {
-    width: 290px;
+    width: unset;
+  }
+
+  form {
+    margin-top: 100px;
   }
 }
 
-@media (max-width: 450px) {
-  .contact-input-group input {
-    width: 270px;
-  }
-
-  .contact-popup-header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0;
-  }
-
-  .contact-description {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-left: 64px;
-  }
-
-  .contact-logo-slogan {
-    padding-left: 60px;
-  }
-
-  .contact-icon-container {
-    padding-left: 62px;
+@media (max-height: 740px) {
+  .contact-close-btn {
+    left: 320px;
   }
 }
 
-@media (max-width: 440px) {
-  .contact-input-group input {
-    width: 250px;
-  }
-}
-
-@media (max-width: 430px) {
-  .contact-input-group input {
-    width: 230px;
-  }
-
-  .contact-description {
-    padding-left: 84px;
-  }
-
-  .contact-logo-slogan {
-    padding-left: 80px;
-  }
-
-  .contact-icon-container {
-    padding-left: 82px;
-  }
-}
-
-@media (max-width: 400px) {
-  .contact-input-group input {
-    width: 200px;
-  }
-}
-
-@media (max-width: 390px) {
-  .contact-popup-header {
-    padding: 85px;
-  }
-
-  .contact-description {
-    padding-left: 90px;
-  }
-
-  .contact-logo-slogan {
-    padding-left: 90px;
-  }
-
-  .contact-icon-container {
-    padding-left: 92px;
-  }
-}
-
-@media (max-width: 370px) {
-  .contact-popup-header {
-    padding: 80px;
-  }
-
-  .contact-description,
-  .contact-icon-container,
-  .contact-logo-slogan {
-    padding-left: 100px;
-  }
-}
-
-@media (max-width: 350px) {
-  .contact-description,
-  .contact-logo-slogan {
-    padding-left: 110px;
-  }
-
-  .contact-icon-container {
-    top: 220px;
-    padding-left: 110px;
-  }
-
-  .contact-popup-header {
-    padding: 70px;
-  }
-}
-
-@media (max-width: 340px) {
-  .contact-popup-header {
-    padding: 75px;
-  }
-
-  .contact-description,
-  .contact-icon-container,
-  .contact-logo-slogan {
-    padding-left: 145px;
-  }
-
-  .contact-popup-header h1 {
-    font-size: 2rem;
-  }
-
-  .contact-popup-header p {
-    font-size: 0.75rem;
-  }
-}
-
-@media (max-width: 330px) {
-  .contact-popup-header {
-    padding: 75px;
-  }
-
-  .contact-description,
-  .contact-icon-container,
-  .contact-logo-slogan {
-    padding-left: 130px;
-  }
-}
-
-@media (max-height: 932px) {
+@media (max-height: 600px) {
   .task-dialog {
     max-width: unset;
     width: 100%;
@@ -603,11 +506,5 @@
 
   h1 {
     margin-top: unset;
-  }
-}
-
-@media (max-height: 740px) {
-  .contact-close-btn {
-    left: 320px;
   }
 }
